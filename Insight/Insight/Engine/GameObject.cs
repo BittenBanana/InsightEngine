@@ -24,26 +24,21 @@ namespace Insight.Engine
         public Model meshModel;
         public Matrix[] boneTransformations;
 
-        float velocity = 5f;
 
         public GameObject()
         {
             components = new List<Component>();
             Transform = new Transform(this);
         }
-        public GameObject(Vector3 pos)
+        public GameObject(Vector3 position)
         {
             components = new List<Component>();
-            Transform = new Transform(this, pos);
+            Transform = new Transform(this, position);
         }
-
+        
         public void AddNewComponent<T>() where T : Component
         {
-            if (typeof(T) == typeof(Transform) && Transform == null)
-            {
-                Transform = new Transform(this);
-            }
-            else if (typeof(T) != typeof(Transform))
+            if (typeof(T) != typeof(Transform))
             {
                 T newComp = Activator.CreateInstance(typeof(T), this) as T;
                 components.Add(newComp);
@@ -66,7 +61,6 @@ namespace Insight.Engine
 
         public void LoadContent(ContentManager c)
         {
-            //Mesh.Load();
             meshModel = c.Load<Model>("GameObject/boxMat");
         }
 

@@ -11,13 +11,13 @@ namespace Insight.Engine
     public class Camera : Component
     {
         public Matrix projection;
-        public Matrix view;
-        public Vector3 camPos;
+        public Matrix view { get;  set; }
+        public Vector3 Position;
 
         public Camera(GameObject gameObject) : base (gameObject)
         {
-            camPos = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y + 7, gameObject.Transform.Position.Z - 15);
-            view = Matrix.CreateLookAt(camPos, Vector3.Forward, Vector3.Up);
+            Position = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y + 7, gameObject.Transform.Position.Z - 15);
+            view = Matrix.CreateLookAt(Position, Vector3.Forward, Vector3.Up);
         }
 
         public override void Update()

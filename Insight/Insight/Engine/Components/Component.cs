@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Insight.Engine
 {
-    public class Component
+    abstract public class Component
     {
         public string Name { get; set; }
         public GameObject gameObject { get; private set; }

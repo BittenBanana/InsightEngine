@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Insight.Engine;
+using Insight.Scripts;
 
 namespace Insight.Scenes
 {
@@ -39,6 +40,8 @@ namespace Insight.Scenes
             gameObject.GetComponent<Camera>().InitCamera(projection);
 
             mainCam = gameObject.GetComponent<Camera>();
+
+            gameObject.AddNewComponent<CameraFollowBox>();
         }
 
         public override void UnloadContent()
