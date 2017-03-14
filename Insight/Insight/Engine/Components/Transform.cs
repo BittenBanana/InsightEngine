@@ -13,9 +13,9 @@ namespace Insight.Engine
             Name = "Transform";
         }
 
-        public override void Uprade()
+        public override void Update()
         {
-            base.Uprade();
+            base.Update();
         }
     }
 }

@@ -75,8 +75,10 @@ namespace Insight.Engine
 
         public void Update()
         {
-            
-            
+            foreach (var item in components)
+            {
+                item.Update();
+            }
         }
 
         public void Draw(Camera camera)

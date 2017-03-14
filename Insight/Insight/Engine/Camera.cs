@@ -20,7 +20,7 @@ namespace Insight.Engine
             view = Matrix.CreateLookAt(camPos, Vector3.Forward, Vector3.Up);
         }
 
-        public void Update()
+        public override void Update()
         {
             KeyboardState keyState = Keyboard.GetState();
 
@@ -46,6 +46,7 @@ namespace Insight.Engine
             //camPos.X = gameObject.pos.X - 15 * (float)Math.Sin(gameObject.rotation.Y);
             //camPos.Z = gameObject.pos.Z - 15 * (float)Math.Cos(gameObject.rotation.Y);
             //view = Matrix.CreateLookAt(camPos, gameObject.pos, Vector3.Up);
+            base.Update();
         }
 
         public void InitCamera(Matrix projection)

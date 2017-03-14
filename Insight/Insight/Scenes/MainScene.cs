@@ -50,7 +50,6 @@ namespace Insight.Scenes
         {
             gameObject.Update();
             gameObject2.Update();
-            mainCam.Update();
             base.Update(gameTime);
         }
         public override void Draw()
