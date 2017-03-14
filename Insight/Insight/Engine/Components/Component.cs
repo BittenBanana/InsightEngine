@@ -11,5 +11,10 @@ namespace Insight.Engine
         {
             this.gameObject = gameObject;
         }
+
+        public virtual void Uprade()
+        {
+
+        }
     }
 }

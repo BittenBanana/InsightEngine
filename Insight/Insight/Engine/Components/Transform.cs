@@ -12,5 +12,10 @@ namespace Insight.Engine
             this.self = self;
             Name = "Transform";
         }
+
+        public override void Uprade()
+        {
+            base.Uprade();
+        }
     }
 }

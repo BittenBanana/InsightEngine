@@ -73,13 +73,13 @@ namespace Insight.Engine
             meshModel = c.Load<Model>("GameObject/boxMat");
         }
 
-        public virtual void Update()
+        public void Update()
         {
             
             
         }
 
-        public virtual void Draw(Camera camera)
+        public void Draw(Camera camera)
         {
             boneTransformations = new Matrix[meshModel.Bones.Count];
             meshModel.CopyAbsoluteBoneTransformsTo(boneTransformations);
