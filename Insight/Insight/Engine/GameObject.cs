@@ -23,21 +23,18 @@ namespace Insight.Engine
         //Temp
         public Model meshModel;
         public Matrix[] boneTransformations;
-        public Vector3 rotation, pos = Vector3.Zero;
 
         float velocity = 5f;
 
         public GameObject()
         {
             components = new List<Component>();
-            pos = Vector3.Zero;
-            rotation = Vector3.Zero;
+            Transform = new Transform(this);
         }
         public GameObject(Vector3 pos)
         {
             components = new List<Component>();
-            this.pos = pos;
-            rotation = Vector3.Zero;
+            Transform = new Transform(this, pos);
         }
 
         public void AddNewComponent<T>() where T : Component
@@ -90,7 +87,7 @@ namespace Insight.Engine
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(2f) * Matrix.CreateRotationX(rotation.X) * Matrix.CreateRotationY(rotation.Y) * Matrix.CreateRotationZ(rotation.Z) * Matrix.CreateTranslation(pos);
+                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(2f) * Matrix.CreateRotationX(Transform.Rotation.X) * Matrix.CreateRotationY(Transform.Rotation.Y) * Matrix.CreateRotationZ(Transform.Rotation.Z) * Matrix.CreateTranslation(Transform.Position);
                     effect.View = camera.view;
                     effect.Projection = camera.projection;
                     effect.EnableDefaultLighting();

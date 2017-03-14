@@ -16,7 +16,7 @@ namespace Insight.Engine
 
         public Camera(GameObject gameObject) : base (gameObject)
         {
-            camPos = new Vector3(gameObject.pos.X, gameObject.pos.Y + 7, gameObject.pos.Z - 15);
+            camPos = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y + 7, gameObject.Transform.Position.Z - 15);
             view = Matrix.CreateLookAt(camPos, Vector3.Forward, Vector3.Up);
         }
 
@@ -26,21 +26,21 @@ namespace Insight.Engine
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                gameObject.rotation.Y += .05f;
+                gameObject.Transform.Rotation.Y += .05f;
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
-                gameObject.rotation.Y -= .05f;
+                gameObject.Transform.Rotation.Y -= .05f;
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
-                gameObject.pos.X += 1f * (float)Math.Sin(gameObject.rotation.Y);
-                gameObject.pos.Z += 1f * (float)Math.Cos(gameObject.rotation.Y);
+                gameObject.Transform.Position.X += 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
+                gameObject.Transform.Position.Z += 1f * (float)Math.Cos(gameObject.Transform.Position.Y);
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
-                gameObject.pos.X -= 1f * (float)Math.Sin(gameObject.rotation.Y);
-                gameObject.pos.Z -= 1f * (float)Math.Cos(gameObject.rotation.Y);
+                gameObject.Transform.Position.X -= 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
+                gameObject.Transform.Position.Z -= 1f * (float)Math.Cos(gameObject.Transform.Rotation.Y);
             }
 
             //camPos.X = gameObject.pos.X - 15 * (float)Math.Sin(gameObject.rotation.Y);
