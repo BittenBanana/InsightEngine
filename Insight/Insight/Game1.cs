@@ -10,13 +10,12 @@ namespace Insight
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
         }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace Insight
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = (int)SceneManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)SceneManager.Instance.Dimensions.Y;
-
+            SceneManager.Instance.Initialize(graphics);
             base.Initialize();
         }
 
@@ -41,7 +40,7 @@ namespace Insight
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
 
             SceneManager.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -83,10 +82,8 @@ namespace Insight
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            SceneManager.Instance.Draw(spriteBatch);
-            // TODO: Add your drawing code here
-            spriteBatch.End();
+            SceneManager.Instance.Draw();
+
             base.Draw(gameTime);
         }
     }

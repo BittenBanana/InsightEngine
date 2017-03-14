@@ -34,6 +34,11 @@ namespace Insight
             currentScene = new MainScene();
         }
 
+        public void Initialize(GraphicsDeviceManager graphicsDevice)
+        {
+            currentScene.Initialize(graphicsDevice);
+        }
+
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
@@ -50,9 +55,9 @@ namespace Insight
             currentScene.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            currentScene.Draw(spriteBatch);
+            currentScene.Draw();
         }
     }
 }

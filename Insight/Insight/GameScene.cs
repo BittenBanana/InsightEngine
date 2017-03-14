@@ -12,6 +12,11 @@ namespace Insight
     public class GameScene
     {
         protected ContentManager content;
+        protected GraphicsDeviceManager graphics;
+        public virtual void Initialize(GraphicsDeviceManager graphicsDevice)
+        {
+            this.graphics = graphicsDevice;
+        }
 
         public virtual void LoadContent()
         {
@@ -28,7 +33,7 @@ namespace Insight
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw()
         {
 
         }
