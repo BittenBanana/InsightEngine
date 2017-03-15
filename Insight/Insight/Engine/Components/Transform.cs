@@ -20,9 +20,5 @@ namespace Insight.Engine
             Name = "Transform";
         }
 
-        public override void Update()
-        {
-            base.Update();
-        }
     }
 }

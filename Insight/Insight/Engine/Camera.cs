@@ -22,30 +22,7 @@ namespace Insight.Engine
 
         public override void Update()
         {
-            KeyboardState keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(Keys.Left))
-            {
-                gameObject.Transform.Rotation.Y += .05f;
-            }
-            if (keyState.IsKeyDown(Keys.Right))
-            {
-                gameObject.Transform.Rotation.Y -= .05f;
-            }
-            if (keyState.IsKeyDown(Keys.Up))
-            {
-                gameObject.Transform.Position.X += 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
-                gameObject.Transform.Position.Z += 1f * (float)Math.Cos(gameObject.Transform.Rotation.Y);
-            }
-            if (keyState.IsKeyDown(Keys.Down))
-            {
-                gameObject.Transform.Position.X -= 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
-                gameObject.Transform.Position.Z -= 1f * (float)Math.Cos(gameObject.Transform.Rotation.Y);
-            }
-
-            //camPos.X = gameObject.pos.X - 15 * (float)Math.Sin(gameObject.rotation.Y);
-            //camPos.Z = gameObject.pos.Z - 15 * (float)Math.Cos(gameObject.rotation.Y);
-            //view = Matrix.CreateLookAt(camPos, gameObject.pos, Vector3.Up);
             base.Update();
         }
 

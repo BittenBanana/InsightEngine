@@ -9,7 +9,6 @@ namespace Insight.Scripts
 {
     public abstract class BaseScript : Component
     {
-
         public BaseScript(GameObject gameObject) : base (gameObject)
         {
         }

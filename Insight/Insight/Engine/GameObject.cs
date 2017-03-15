@@ -17,7 +17,6 @@ namespace Insight.Engine
 
         public string Name { get; set; }
         public Transform Transform { get; set; }
-        public MeshRenderer Mesh { get; set; }
         public string Tag { get; set; }
 
         //Temp
@@ -61,7 +60,10 @@ namespace Insight.Engine
 
         public void LoadContent(ContentManager c)
         {
-            meshModel = c.Load<Model>("GameObject/boxMat");
+            if (GetComponent<MeshRenderer>() != null)
+            {
+                GetComponent<MeshRenderer>().Load(c);
+            }
         }
 
         public void Update()
@@ -74,19 +76,9 @@ namespace Insight.Engine
 
         public void Draw(Camera camera)
         {
-            boneTransformations = new Matrix[meshModel.Bones.Count];
-            meshModel.CopyAbsoluteBoneTransformsTo(boneTransformations);
-
-            foreach (ModelMesh mesh in meshModel.Meshes)
+            if(GetComponent<MeshRenderer>() != null)
             {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(2f) * Matrix.CreateRotationX(Transform.Rotation.X) * Matrix.CreateRotationY(Transform.Rotation.Y) * Matrix.CreateRotationZ(Transform.Rotation.Z) * Matrix.CreateTranslation(Transform.Position);
-                    effect.View = camera.view;
-                    effect.Projection = camera.projection;
-                    effect.EnableDefaultLighting();
-                }
-                mesh.Draw();
+                GetComponent<MeshRenderer>().Draw(camera);
             }
         }
     }

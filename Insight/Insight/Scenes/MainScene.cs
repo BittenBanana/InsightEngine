@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Insight.Engine;
 using Insight.Scripts;
+using Insight.Engine.Components;
 
 namespace Insight.Scenes
 {
@@ -25,7 +26,9 @@ namespace Insight.Scenes
             base.Initialize(graphics);
 
             gameObject = new GameObject();
+            gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(20, 0, 20));
+            gameObject2.AddNewComponent<MeshRenderer>();
 
         }
 
@@ -40,6 +43,7 @@ namespace Insight.Scenes
             gameObject.GetComponent<Camera>().InitCamera(projection);
 
             mainCam = gameObject.GetComponent<Camera>();
+            gameObject.AddNewComponent<BoxController>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
         }
