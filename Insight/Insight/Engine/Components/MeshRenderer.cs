@@ -27,6 +27,11 @@ namespace Insight.Engine.Components
             model = c.Load<Model>(path);
         }
 
+        public Model getModel()
+        {
+            return model;
+        }
+
         public void Draw(Camera camera)
         {
             boneTransformations = new Matrix[model.Bones.Count];

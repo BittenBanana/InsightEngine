@@ -27,8 +27,10 @@ namespace Insight.Scenes
 
             gameObject = new GameObject();
             gameObject.AddNewComponent<MeshRenderer>();
+            gameObject.AddNewComponent<BoxCollider>();
             gameObject2 = new GameObject(new Vector3(20, 0, 20));
             gameObject2.AddNewComponent<MeshRenderer>();
+            gameObject2.AddNewComponent<BoxCollider>();
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
 
@@ -61,6 +63,9 @@ namespace Insight.Scenes
         {
             gameObject.Draw(mainCam);
             gameObject2.Draw(mainCam);
+
+            gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
+            gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
 
             base.Draw();
         }
