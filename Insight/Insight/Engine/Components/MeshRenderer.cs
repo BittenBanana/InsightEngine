@@ -21,6 +21,12 @@ namespace Insight.Engine.Components
         {
             model = c.Load<Model>("GameObject/boxMat");
         }
+
+        public void Load(ContentManager c, string path)
+        {
+            model = c.Load<Model>(path);
+        }
+
         public void Draw(Camera camera)
         {
             boneTransformations = new Matrix[model.Bones.Count];
@@ -38,5 +44,6 @@ namespace Insight.Engine.Components
                 mesh.Draw();
             }
         }
+        
     }
 }

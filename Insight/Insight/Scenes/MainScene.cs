@@ -19,7 +19,7 @@ namespace Insight.Scenes
         GameObject gameObject2;
         Camera mainCam;
 
-        Matrix projection;
+        public static Matrix projection { get; private set; }
 
         public override void Initialize(GraphicsDeviceManager graphics)
         {
@@ -29,18 +29,16 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(20, 0, 20));
             gameObject2.AddNewComponent<MeshRenderer>();
-
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
             gameObject.AddNewComponent<Camera>();
-            gameObject.GetComponent<Camera>().InitCamera(projection);
 
             mainCam = gameObject.GetComponent<Camera>();
             gameObject.AddNewComponent<BoxController>();
