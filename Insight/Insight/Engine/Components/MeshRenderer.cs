@@ -13,9 +13,11 @@ namespace Insight.Engine.Components
     {
         Model model;
         Matrix[] boneTransformations;
+        float scale;
 
         public MeshRenderer(GameObject gameObject) : base (gameObject)
         {
+            scale = 2f;
         }
         public void Load(ContentManager c)
         {
@@ -32,6 +34,11 @@ namespace Insight.Engine.Components
             return model;
         }
 
+        public float GetScale()
+        {
+            return scale;
+        }
+
         public void Draw(Camera camera)
         {
             boneTransformations = new Matrix[model.Bones.Count];
@@ -41,7 +48,7 @@ namespace Insight.Engine.Components
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(1f) * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) * Matrix.CreateTranslation(gameObject.Transform.Position);
+                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(scale) * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) * Matrix.CreateTranslation(gameObject.Transform.Position);
                     effect.View = camera.view;
                     effect.Projection = camera.projection;
                     effect.EnableDefaultLighting();

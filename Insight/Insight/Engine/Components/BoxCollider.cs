@@ -18,6 +18,7 @@ namespace Insight.Engine.Components
         Vector3 rotation;
         List<BoundingBox> boundingBoxes;
         Matrix[] transforms;
+        float scale;
 
         public short[] bBoxIndices = {
             0, 1, 1, 2, 2, 3, 3, 0, // Front edges
@@ -51,6 +52,7 @@ namespace Insight.Engine.Components
         private BoundingBox BuildBoundingBox(ModelMesh mesh, Matrix meshTransform)
         {
             pos = gameObject.Transform.Position;
+            scale = gameObject.GetComponent<MeshRenderer>().GetScale();
 
             // Create initial variables to hold min and max xyz values for the mesh
             Vector3 meshMax = new Vector3(float.MinValue);
@@ -84,8 +86,36 @@ namespace Insight.Engine.Components
 
 
             // Create the bounding box
-            BoundingBox box = new BoundingBox(new Vector3(meshMin.X + pos.X, meshMin.Y + pos.Y, meshMin.Z + pos.Z), new Vector3(meshMax.X + pos.X, meshMax.Y + pos.Y, meshMax.Z + pos.Z));
+            BoundingBox box = new BoundingBox(new Vector3(meshMin.X * scale + pos.X, meshMin.Y * scale + pos.Y, meshMin.Z * scale + pos.Z), new Vector3(meshMax.X * scale + pos.X, meshMax.Y * scale + pos.Y, meshMax.Z * scale + pos.Z));
 
+            return box;
+        }
+
+        private BoundingBox Scale(float scale, BoundingBox b)
+        {
+            //Get delta values
+            float dx = Math.Abs(b.Max.X - b.Min.X);
+            float dy = Math.Abs(b.Max.Y - b.Min.Y);
+            float dz = Math.Abs(b.Max.Z - b.Min.Z);
+
+            //get new delta values
+            float newdx = dx * scale;
+            float newdy = dy * scale;
+            float newdz = dz * scale;
+
+            //new max vector
+            //oldvalue - removed delta, of course divided by 2(half for max and half for min).
+            Vector3 newMax = new Vector3(b.Max.X - ((dx - newdx) / 2),
+                                         b.Max.Y - ((dy - newdy) / 2),
+                                         b.Max.Z - ((dz - newdz) / 2));
+
+            //new min vector
+            //oldvalue + removed delta, of course divided by 2(half for max and half for min).
+            Vector3 newMin = new Vector3(b.Min.X + ((dx - newdx) / 2),
+                                         b.Min.Y + ((dy - newdy) / 2),
+                                         b.Min.Z + ((dz - newdz) / 2));
+
+            BoundingBox box = new BoundingBox(newMin, newMax);
             return box;
         }
 
