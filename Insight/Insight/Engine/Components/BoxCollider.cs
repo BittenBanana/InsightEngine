@@ -91,34 +91,6 @@ namespace Insight.Engine.Components
             return box;
         }
 
-        private BoundingBox Scale(float scale, BoundingBox b)
-        {
-            //Get delta values
-            float dx = Math.Abs(b.Max.X - b.Min.X);
-            float dy = Math.Abs(b.Max.Y - b.Min.Y);
-            float dz = Math.Abs(b.Max.Z - b.Min.Z);
-
-            //get new delta values
-            float newdx = dx * scale;
-            float newdy = dy * scale;
-            float newdz = dz * scale;
-
-            //new max vector
-            //oldvalue - removed delta, of course divided by 2(half for max and half for min).
-            Vector3 newMax = new Vector3(b.Max.X - ((dx - newdx) / 2),
-                                         b.Max.Y - ((dy - newdy) / 2),
-                                         b.Max.Z - ((dz - newdz) / 2));
-
-            //new min vector
-            //oldvalue + removed delta, of course divided by 2(half for max and half for min).
-            Vector3 newMin = new Vector3(b.Min.X + ((dx - newdx) / 2),
-                                         b.Min.Y + ((dy - newdy) / 2),
-                                         b.Min.Z + ((dz - newdz) / 2));
-
-            BoundingBox box = new BoundingBox(newMin, newMax);
-            return box;
-        }
-
         public override void Update()
         {
             ProcessCollisions(new BoundingBox());
