@@ -86,7 +86,7 @@ namespace Insight.Engine.Components
 
 
             // Create the bounding box
-            BoundingBox box = new BoundingBox(new Vector3(meshMin.X * scale + pos.X, meshMin.Y * scale + pos.Y, meshMin.Z * scale + pos.Z), new Vector3(meshMax.X * scale + pos.X, meshMax.Y * scale + pos.Y, meshMax.Z * scale + pos.Z));
+            BoundingBox box = new BoundingBox(new Vector3(meshMin.X * scale, meshMin.Y * scale, meshMin.Z * scale), new Vector3(meshMax.X * scale, meshMax.Y * scale, meshMax.Z * scale));
 
             return box;
         }
@@ -144,7 +144,7 @@ namespace Insight.Engine.Components
 
                 /* Set your own effect parameters here */
                 BasicEffect boxEffect = new BasicEffect(graphics.GraphicsDevice);
-                boxEffect.World = Matrix.Identity;
+                boxEffect.World = Matrix.CreateRotationX(gameObject.Transform.Rotation.X) * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) * Matrix.CreateTranslation(gameObject.Transform.Position);
                 boxEffect.View = view;
                 boxEffect.Projection = projection;
                 boxEffect.TextureEnabled = false;

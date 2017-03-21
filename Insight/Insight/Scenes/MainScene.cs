@@ -14,7 +14,7 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
-
+        List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
         Camera mainCam;
@@ -24,7 +24,7 @@ namespace Insight.Scenes
         public override void Initialize(GraphicsDeviceManager graphics)
         {
             base.Initialize(graphics);
-
+            gameObjects = new List<GameObject>();
             gameObject = new GameObject();
             gameObject.AddNewComponent<MeshRenderer>();         
             gameObject2 = new GameObject(new Vector3(20, 0, 20));
@@ -47,6 +47,9 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<BoxController>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
+
+            gameObjects.Add(gameObject);
+            gameObjects.Add(gameObject2);
         }
 
         public override void UnloadContent()
