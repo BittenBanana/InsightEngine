@@ -48,7 +48,18 @@ namespace Insight.Engine.Components
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.World = boneTransformations[mesh.ParentBone.Index] * Matrix.CreateScale(scale) * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) * Matrix.CreateTranslation(gameObject.Transform.Position);
+                    //effect.World = boneTransformations[mesh.ParentBone.Index] 
+                    //    * Matrix.CreateScale(scale) 
+                    //    * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) 
+                    //    * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) 
+                    //    * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) 
+                    //    * Matrix.CreateTranslation(gameObject.Transform.Position);
+                    effect.World = boneTransformations[mesh.ParentBone.Index]
+                        * Matrix.CreateScale(scale)
+                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                        * Matrix.CreateTranslation(gameObject.Transform.Position)
+                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+
                     effect.View = camera.view;
                     effect.Projection = camera.projection;
                     effect.EnableDefaultLighting();

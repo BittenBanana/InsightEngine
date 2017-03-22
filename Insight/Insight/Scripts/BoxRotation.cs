@@ -10,13 +10,15 @@ namespace Insight.Scripts
 {
     class BoxRotation : BaseScript
     {
+        float val = 0;
         public BoxRotation(GameObject gameObject) : base(gameObject)
         {
         }
 
         public override void Update()
         {
-            gameObject.Transform.Rotation.Y += .05f;
+            val += .05f;
+            gameObject.Transform.Rotate(Vector3.UnitY, val);
             base.Update();
         }
     }
