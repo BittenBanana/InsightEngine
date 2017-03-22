@@ -27,6 +27,7 @@ namespace Insight.Engine
 
         public void Rotate(Vector3 axis, float angle)
         {
+            //quaterion.W;
             quaterion = Quaternion.CreateFromAxisAngle(axis, angle);
         }
 

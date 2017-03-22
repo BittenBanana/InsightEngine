@@ -20,11 +20,12 @@ namespace Insight.Scripts
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                gameObject.Transform.Rotation.Y += .05f;
+                gameObject.Transform.Rotation.Y -= .05f;
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
-                gameObject.Transform.Rotation.Y -= .05f;
+                gameObject.Transform.Rotation.Y += .05f;
+                //gameObject.Transform.Rotate()
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
