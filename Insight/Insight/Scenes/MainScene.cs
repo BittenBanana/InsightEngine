@@ -47,7 +47,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<BoxController>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
-
+            gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
         }

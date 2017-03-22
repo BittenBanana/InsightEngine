@@ -18,10 +18,7 @@ namespace Insight.Engine
         public string Name { get; set; }
         public Transform Transform { get; set; }
         public string Tag { get; set; }
-
-        //Temp
-        public Model meshModel;
-        public Matrix[] boneTransformations;
+        
 
 
         public GameObject()

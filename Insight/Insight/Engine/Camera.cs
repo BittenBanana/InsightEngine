@@ -21,12 +21,7 @@ namespace Insight.Engine
             Position = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y + 7, gameObject.Transform.Position.Z - 15);
             view = Matrix.CreateLookAt(Position, Vector3.Forward, Vector3.Up);
         }
-
-        public override void Update()
-        {
-
-            base.Update();
-        }
+        
         
     }
 }
