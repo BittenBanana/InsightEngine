@@ -59,14 +59,18 @@ namespace Insight.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            gameObject.Update();
-            gameObject2.Update();
+            foreach (GameObject go in gameObjects)
+            {
+                go.Update();
+            }
             base.Update(gameTime);
         }
         public override void Draw()
         {
-            gameObject.Draw(mainCam);
-            gameObject2.Draw(mainCam);
+            foreach (GameObject go in gameObjects)
+            {
+                go.Draw(mainCam);
+            }
 
             gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
             gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
