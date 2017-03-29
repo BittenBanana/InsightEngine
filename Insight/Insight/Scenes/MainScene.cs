@@ -14,7 +14,7 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
-        List<GameObject> gameObjects;
+        private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
         Camera mainCam;
@@ -39,15 +39,15 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
+            gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<BoxCollider>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
 
             mainCam = gameObject.GetComponent<Camera>();
-            gameObject.AddNewComponent<BoxController>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
-            gameObject2.AddNewComponent<BoxRotation>();
+            //gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
         }
@@ -76,6 +76,11 @@ namespace Insight.Scenes
             gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
 
             base.Draw();
+        }
+
+        public static List<GameObject> GetGameObjects()
+        {
+            return gameObjects;
         }
     }
 }
