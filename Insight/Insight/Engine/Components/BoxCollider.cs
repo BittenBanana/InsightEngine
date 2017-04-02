@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine.Components
 {
-    class BoxCollider : Component
+    class BoxCollider : Collider
     {
         #region Fields
         VertexPositionColor[] primitiveList;
@@ -21,7 +21,6 @@ namespace Insight.Engine.Components
         BoundingBox[] boundingBoxes;
         Matrix[] transforms;
         Vector3[] lastPositionMin, lastPositionMax;
-        GameObject gameObject;
 
         public short[] bBoxIndices = {
             0, 1, 1, 2, 2, 3, 3, 0, // Front edges
@@ -36,7 +35,7 @@ namespace Insight.Engine.Components
             pos = gameObject.Transform.Position;
             model = gameObject.GetComponent<MeshRenderer>().getModel();
             rotation = gameObject.Transform.Rotation;
-            this.gameObject = gameObject;
+
             // Set up model data
             boundingBoxes = new BoundingBox[model.Meshes.Count];
 
@@ -100,55 +99,55 @@ namespace Insight.Engine.Components
 
         public override void Update()
         {
-            ProcessCollisions(MainScene.GetGameObjects());
+            //ProcessCollisions(MainScene.GetGameObjects());
+            
+            //Debug.WriteLine(boundingBoxes[0].Min);
             base.Update();
         }
 
         public bool ProcessCollisions(List<GameObject> gameObjects)
         {
-            int i = 0;
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                Matrix meshTransform = transforms[mesh.ParentBone.Index]
-                        * Matrix.CreateScale(gameObject.GetComponent<MeshRenderer>().GetScale())
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                        * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
-                boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
-                lastPositionMin[i] = boundingBoxes[i].Min;
-                lastPositionMax[i] = boundingBoxes[i].Max;
-                i++;
-            }
+            //int i = 0;
+            //foreach (ModelMesh mesh in model.Meshes)
+            //{
+            //    Matrix meshTransform = transforms[mesh.ParentBone.Index]
+            //            * Matrix.CreateScale(gameObject.GetComponent<MeshRenderer>().GetScale())
+            //            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+            //            * Matrix.CreateTranslation(gameObject.Transform.Position)
+            //            * Matrix.CreateTranslation(gameObject.Transform.origin);
+            //    boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+            //    i++;
+            //}
 
-            i = 0;
+
             
-            foreach (GameObject otherBox in gameObjects)
-            {
-                if(otherBox != this.gameObject)
-                {
-                    foreach (BoundingBox otherBoxCol in otherBox.GetComponent<BoxCollider>().boundingBoxes)
-                    {
-                        i = 0;
-                        foreach (BoundingBox box in this.boundingBoxes)
-                        {
-                            if (box.Intersects(otherBoxCol))
-                            {
-                                boundingBoxes[i].Min = lastPositionMin[i];
-                                boundingBoxes[i].Max = lastPositionMax[i];
-                                Debug.WriteLine("yuuuuuuuuuuuup");
-                                return true;
-                            }
-                            else
-                            {
-                                i++;
-                                return false;
-                            }
-                        }
+            //foreach (GameObject otherBox in gameObjects)
+            //{
+            //    if(otherBox != this.gameObject)
+            //    {
+            //        foreach (BoundingBox otherBoxCol in otherBox.GetComponent<BoxCollider>().boundingBoxes)
+            //        {
+            //            i = 0;
+            //            foreach (BoundingBox box in this.boundingBoxes)
+            //            {
+            //                if (box.Intersects(otherBoxCol))
+            //                {
+            //                    boundingBoxes[i].Min = lastPositionMin[i];
+            //                    boundingBoxes[i].Max = lastPositionMax[i];
+            //                    Debug.WriteLine("yuuuuuuuuuuuup");
+            //                    return true;
+            //                }
+            //                else
+            //                {
+            //                    i++;
+            //                    return false;
+            //                }
+            //            }
 
-                    }
-                }
+            //        }
+            //    }
                              
-            }               
+            //}               
             
             
             return false;
@@ -157,6 +156,42 @@ namespace Insight.Engine.Components
         public VertexPositionColor[] GetPrimitiveList()
         {
             return primitiveList;
+        }
+
+        public BoundingBox[] GetPreciseBoundingBoxes()
+        {
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                Matrix meshTransform = transforms[mesh.ParentBone.Index]
+                        * gameObject.GetComponent<MeshRenderer>().GetMatrix();
+                boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+                i++;
+            }
+
+            return boundingBoxes;
+        }
+
+        public static BoundingBox TransformBoundingBox(BoundingBox origBox, Matrix matrix)
+        {
+            Vector3 origCorner1 = origBox.Min;
+            Vector3 origCorner2 = origBox.Max;
+
+            Vector3 transCorner1 = Vector3.Transform(origCorner1, matrix);
+            Vector3 transCorner2 = Vector3.Transform(origCorner2, matrix);
+
+            return new BoundingBox(transCorner1, transCorner2);
+        }
+
+        public static BoundingBox CreateBoxFromSphere(BoundingSphere sphere)
+        {
+            float radius = sphere.Radius;
+            Vector3 outerPoint = new Vector3(radius, radius, radius);
+
+            Vector3 p1 = sphere.Center + outerPoint;
+            Vector3 p2 = sphere.Center - outerPoint;
+
+            return new BoundingBox(p1, p2);
         }
 
         public void Draw(Matrix projection, GraphicsDeviceManager graphics, Matrix view)

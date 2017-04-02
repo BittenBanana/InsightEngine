@@ -39,8 +39,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Engine\Camera.cs" />
+    <Compile Include="Engine\ColliderManager.cs" />
     <Compile Include="Engine\Components\BoxCollider.cs" />
+    <Compile Include="Engine\Components\Collider.cs" />
+    <Compile Include="Engine\Components\DebugDraw.cs" />
     <Compile Include="Engine\Components\MeshRenderer.cs" />
+    <Compile Include="Engine\Components\SphereCollider.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Components\Component.cs" />
     <Compile Include="Engine\Components\Transform.cs" />

@@ -18,6 +18,7 @@ namespace Insight.Scenes
         GameObject gameObject;
         GameObject gameObject2;
         Camera mainCam;
+        ColliderManager colliderManager;
 
         public static Matrix projection { get; private set; }
 
@@ -30,6 +31,7 @@ namespace Insight.Scenes
             gameObject2 = new GameObject(new Vector3(20, 0, 20));
             gameObject2.AddNewComponent<MeshRenderer>();
             
+            
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
 
@@ -40,8 +42,8 @@ namespace Insight.Scenes
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
             gameObject.AddNewComponent<BoxController>();
-            gameObject.AddNewComponent<BoxCollider>();
-            gameObject2.AddNewComponent<BoxCollider>();
+            gameObject.AddNewComponent<SphereCollider>();
+            gameObject2.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Camera>();
 
             mainCam = gameObject.GetComponent<Camera>();
@@ -50,6 +52,7 @@ namespace Insight.Scenes
             //gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
+            colliderManager = new ColliderManager(gameObjects);
         }
 
         public override void UnloadContent()
@@ -63,6 +66,7 @@ namespace Insight.Scenes
             {
                 go.Update();
             }
+            colliderManager.Update();
             base.Update(gameTime);
         }
         public override void Draw()
@@ -72,8 +76,8 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
-            gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
-            gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+           // gameObject.GetComponent<SphereCollider>().Draw( graphics, projection, gameObject.GetComponent<Camera>().view);
+           // gameObject2.GetComponent<SphereCollider>().Draw( graphics, projection, mainCam.view);
 
             base.Draw();
         }

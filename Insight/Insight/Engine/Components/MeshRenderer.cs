@@ -67,6 +67,14 @@ namespace Insight.Engine.Components
                 mesh.Draw();
             }
         }
-        
+
+        public Matrix GetMatrix()
+        {
+            return Matrix.CreateScale(scale)
+                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                        * Matrix.CreateTranslation(gameObject.Transform.Position)
+                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+        }
+
     }
 }
