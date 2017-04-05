@@ -69,15 +69,32 @@ namespace Insight.Engine
             if (OverallCollisionTest(object1, world1, object2, world2) == false)
                 return false;
 
-            BoundingSphere[] object1Spheres = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
-            BoundingSphere[] object2Spheres = object2.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
+            if (object1.GetComponent<Collider>() is SphereCollider)
+            {
+                BoundingSphere[] object1Colliders = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
+            }
+            else
+            {
+                BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            }
+
+            if (object2.GetComponent<Collider>() is SphereCollider)
+            {
+                BoundingSphere[] object2Colliders = object2.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
+            }
+            else
+            {
+                BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            }
+
+            
 
 
             bool collision = false;
 
-            for (int i = 0; i < object1Spheres.Length; i++)
-                for (int j = 0; j < object2Spheres.Length; j++)
-                    if (object1Spheres[i].Intersects(object2Spheres[j]))
+            for (int i = 0; i < object1Colliders.Length; i++)
+                for (int j = 0; j < object2Colliders.Length; j++)
+                    if (object1Colliders[i].Intersects(object2Colliders[j]))
                     {
                         Debug.WriteLine("Precise collision");
                         return true;                       

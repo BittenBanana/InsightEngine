@@ -18,7 +18,7 @@ namespace Insight.Engine.Components
         Vector3 pos;
         Model model;
         Vector3 rotation;
-        BoundingBox[] boundingBoxes;
+        public BoundingBox[] boundingBoxes;
         Matrix[] transforms;
         Vector3[] lastPositionMin, lastPositionMax;
 
@@ -99,7 +99,7 @@ namespace Insight.Engine.Components
 
         public override void Update()
         {
-            //ProcessCollisions(MainScene.GetGameObjects());
+            ProcessCollisions(MainScene.GetGameObjects());
             
             //Debug.WriteLine(boundingBoxes[0].Min);
             base.Update();
@@ -107,20 +107,23 @@ namespace Insight.Engine.Components
 
         public bool ProcessCollisions(List<GameObject> gameObjects)
         {
-            //int i = 0;
-            //foreach (ModelMesh mesh in model.Meshes)
-            //{
-            //    Matrix meshTransform = transforms[mesh.ParentBone.Index]
-            //            * Matrix.CreateScale(gameObject.GetComponent<MeshRenderer>().GetScale())
-            //            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-            //            * Matrix.CreateTranslation(gameObject.Transform.Position)
-            //            * Matrix.CreateTranslation(gameObject.Transform.origin);
-            //    boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
-            //    i++;
-            //}
-
+            int i = 0;
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                Matrix meshTransform = transforms[mesh.ParentBone.Index]
+                        * Matrix.CreateScale(gameObject.GetComponent<MeshRenderer>().GetScale())
+                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                        * Matrix.CreateTranslation(gameObject.Transform.Position)
+                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+                boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+                i++;
+            }
 
             
+                    
+
+
+
             //foreach (GameObject otherBox in gameObjects)
             //{
             //    if(otherBox != this.gameObject)
@@ -146,10 +149,10 @@ namespace Insight.Engine.Components
 
             //        }
             //    }
-                             
+
             //}               
-            
-            
+
+
             return false;
         }
 
