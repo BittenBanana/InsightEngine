@@ -46,6 +46,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<SphereCollider>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
+            gameObject2.AddNewComponent<Rigidbody>();
 
             mainCam = gameObject.GetComponent<Camera>();
 
