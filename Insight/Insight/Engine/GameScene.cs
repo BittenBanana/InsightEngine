@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Insight
+namespace Insight.Engine
 {
     public class GameScene
     {
@@ -30,7 +30,7 @@ namespace Insight
         }
         public virtual void Update(GameTime gameTime)
         {
-
+            Time.deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public virtual void Draw()

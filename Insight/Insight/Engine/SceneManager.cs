@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Insight
+namespace Insight.Engine
 {
     public class SceneManager
     {
