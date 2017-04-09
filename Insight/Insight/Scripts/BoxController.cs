@@ -29,13 +29,13 @@ namespace Insight.Scripts
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
-                gameObject.Transform.Position.X += 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
-                gameObject.Transform.Position.Z += 1f * (float)Math.Cos(gameObject.Transform.Rotation.Y);
+                gameObject.Transform.Position.X += gameObject.velocityX;
+                gameObject.Transform.Position.Z += gameObject.velocityZ;
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
-                gameObject.Transform.Position.X -= 1f * (float)Math.Sin(gameObject.Transform.Rotation.Y);
-                gameObject.Transform.Position.Z -= 1f * (float)Math.Cos(gameObject.Transform.Rotation.Y);
+                gameObject.Transform.Position.X -= gameObject.velocityX;
+                gameObject.Transform.Position.Z -= gameObject.velocityZ;
             }
             base.Update();
         }

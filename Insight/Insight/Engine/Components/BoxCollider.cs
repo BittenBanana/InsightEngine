@@ -21,6 +21,7 @@ namespace Insight.Engine.Components
         public BoundingBox[] boundingBoxes;
         Matrix[] transforms;
         Vector3[] lastPositionMin, lastPositionMax;
+        BoundingSphere completeBoundingSphere;
 
         public short[] bBoxIndices = {
             0, 1, 1, 2, 2, 3, 3, 0, // Front edges
@@ -45,13 +46,21 @@ namespace Insight.Engine.Components
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
             {
-                Matrix meshTransform = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) * Matrix.CreateTranslation(gameObject.Transform.Position);
+                Matrix meshTransform = transforms[mesh.ParentBone.Index] * gameObject.GetComponent<MeshRenderer>().GetMatrix();
                 boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
                 i++;
             }
 
             lastPositionMin = new Vector3[boundingBoxes.Length];
             lastPositionMax = new Vector3[boundingBoxes.Length];
+
+            completeBoundingSphere = new BoundingSphere();
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                BoundingSphere origMeshSphere = mesh.BoundingSphere;
+                BoundingSphere transMeshSphere = TransformBoundingSphere(origMeshSphere, transforms[mesh.ParentBone.Index]);
+                completeBoundingSphere = BoundingSphere.CreateMerged(completeBoundingSphere, transMeshSphere);
+            }
         }
         #endregion
 
@@ -97,9 +106,14 @@ namespace Insight.Engine.Components
             return box;
         }
 
+        public BoundingSphere GetCompleteBoundingSphere()
+        {
+            return completeBoundingSphere;
+        }
+
         public override void Update()
         {
-            ProcessCollisions(MainScene.GetGameObjects());
+            //ProcessCollisions(MainScene.GetGameObjects());
             
             //Debug.WriteLine(boundingBoxes[0].Min);
             base.Update();
@@ -230,6 +244,45 @@ namespace Insight.Engine.Components
 
 
             }
+        }
+
+        public void DrawSphereSpikes(BoundingSphere sphere, GraphicsDevice device, Matrix worldMatrix, Matrix viewMatrix, Matrix projectionMatrix)
+        {
+            Vector3 up = sphere.Center + sphere.Radius * Vector3.Up;
+            Vector3 down = sphere.Center + sphere.Radius * Vector3.Down;
+            Vector3 right = sphere.Center + sphere.Radius * Vector3.Right;
+            Vector3 left = sphere.Center + sphere.Radius * Vector3.Left;
+            Vector3 forward = sphere.Center + sphere.Radius * Vector3.Forward;
+            Vector3 back = sphere.Center + sphere.Radius * Vector3.Backward;
+
+            VertexPositionColor[] sphereLineVertices = new VertexPositionColor[6];
+            sphereLineVertices[0] = new VertexPositionColor(up, Color.White);
+            sphereLineVertices[1] = new VertexPositionColor(down, Color.White);
+            sphereLineVertices[2] = new VertexPositionColor(left, Color.White);
+            sphereLineVertices[3] = new VertexPositionColor(right, Color.White);
+            sphereLineVertices[4] = new VertexPositionColor(forward, Color.White);
+            sphereLineVertices[5] = new VertexPositionColor(back, Color.White);
+
+            BasicEffect basicEffect = new BasicEffect(device);
+
+            basicEffect.World = worldMatrix;
+            basicEffect.View = viewMatrix;
+            basicEffect.Projection = projectionMatrix;
+            basicEffect.VertexColorEnabled = true;
+
+            foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
+            {
+                pass.Apply();
+                device.DrawUserPrimitives(PrimitiveType.LineList, sphereLineVertices, 0, 3);
+            }
+
+            //DebugDraw debugDraw = new DebugDraw(device);
+
+            //debugDraw.Begin(viewMatrix, projectionMatrix);
+            //debugDraw.DrawWireSphere(sphere, Color.Yellow);
+            //debugDraw.End();
+
+
         }
     }
 }

@@ -26,9 +26,9 @@ namespace Insight.Scenes
         {
             base.Initialize(graphics);
             gameObjects = new List<GameObject>();
-            gameObject = new GameObject();
+            gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();         
-            gameObject2 = new GameObject(new Vector3(20, 0, 20));
+            gameObject2 = new GameObject(new Vector3(0, 0, 50), false);
             gameObject2.AddNewComponent<MeshRenderer>();
             
             
@@ -41,9 +41,10 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
+            gameObject2.GetComponent<MeshRenderer>().Load(content, "viking", 0.1f);
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
-            gameObject2.AddNewComponent<SphereCollider>();
+            gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
 
             mainCam = gameObject.GetComponent<Camera>();
@@ -53,6 +54,7 @@ namespace Insight.Scenes
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
             colliderManager = new ColliderManager(gameObjects);
+            colliderManager.ObjectColided += gameObject.OnObjectColided;
         }
 
         public override void UnloadContent()
@@ -76,8 +78,9 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
-           // gameObject.GetComponent<SphereCollider>().Draw( graphics, projection, gameObject.GetComponent<Camera>().view);
-           // gameObject2.GetComponent<SphereCollider>().Draw( graphics, projection, mainCam.view);
+           gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(),  gameObject.GetComponent<Camera>().view, projection);
+           gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics,  mainCam.view);
+           //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
 
             base.Draw();
         }

@@ -17,16 +17,17 @@ namespace Insight.Engine.Components
 
         public MeshRenderer(GameObject gameObject) : base (gameObject)
         {
-            scale = 2f;
+            scale = 0.1f;
         }
         public void Load(ContentManager c)
         {
-            model = c.Load<Model>("GameObject/boxMat");
+            model = c.Load<Model>("viking");
         }
 
-        public void Load(ContentManager c, string path)
+        public void Load(ContentManager c, string path, float scale)
         {
             model = c.Load<Model>(path);
+            this.scale = scale;
         }
 
         public Model getModel()
