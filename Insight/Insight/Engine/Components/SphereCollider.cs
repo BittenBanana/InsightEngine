@@ -44,8 +44,8 @@ namespace Insight.Engine.Components
 
         public BoundingSphere[] GetPreciseBoundingSpheres()
         {
-            transforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(transforms);
+            //transforms = new Matrix[model.Bones.Count];
+           // model.CopyAbsoluteBoneTransformsTo(transforms);
 
             BoundingSphere[] spheres = new BoundingSphere[model.Meshes.Count];
 
@@ -53,7 +53,7 @@ namespace Insight.Engine.Components
             {
                 ModelMesh mesh = model.Meshes[i];
                 BoundingSphere origSphere = mesh.BoundingSphere;
-                Matrix trans = transforms[mesh.ParentBone.Index] * gameObject.GetComponent<MeshRenderer>().GetMatrix();
+                Matrix trans = transforms[mesh.ParentBone.Index];
                 BoundingSphere transSphere = TransformBoundingSphere(origSphere, trans);
                 spheres[i] = transSphere;
             }
@@ -67,25 +67,45 @@ namespace Insight.Engine.Components
             base.Update();
         }
 
-        public static BoundingSphere TransformBoundingSphere(BoundingSphere originalBoundingSphere, Matrix transformationMatrix)
+        public void DrawSphereSpikes(BoundingSphere sphere, GraphicsDevice device, Matrix worldMatrix, Matrix viewMatrix, Matrix projectionMatrix)
         {
-            Vector3 trans;
-            Vector3 scaling;
-            Quaternion rot;
-            transformationMatrix.Decompose(out scaling, out rot, out trans);
+            Vector3 up = sphere.Center + sphere.Radius * Vector3.Up;
+            Vector3 down = sphere.Center + sphere.Radius * Vector3.Down;
+            Vector3 right = sphere.Center + sphere.Radius * Vector3.Right;
+            Vector3 left = sphere.Center + sphere.Radius * Vector3.Left;
+            Vector3 forward = sphere.Center + sphere.Radius * Vector3.Forward;
+            Vector3 back = sphere.Center + sphere.Radius * Vector3.Backward;
 
-            float maxScale = scaling.X;
-            if (maxScale < scaling.Y)
-                maxScale = scaling.Y;
-            if (maxScale < scaling.Z)
-                maxScale = scaling.Z;
+            VertexPositionColor[] sphereLineVertices = new VertexPositionColor[6];
+            sphereLineVertices[0] = new VertexPositionColor(up, Color.White);
+            sphereLineVertices[1] = new VertexPositionColor(down, Color.White);
+            sphereLineVertices[2] = new VertexPositionColor(left, Color.White);
+            sphereLineVertices[3] = new VertexPositionColor(right, Color.White);
+            sphereLineVertices[4] = new VertexPositionColor(forward, Color.White);
+            sphereLineVertices[5] = new VertexPositionColor(back, Color.White);
 
-            float transformedSphereRadius = originalBoundingSphere.Radius * maxScale;
-            Vector3 transformedSphereCenter = Vector3.Transform(originalBoundingSphere.Center, transformationMatrix);
+            BasicEffect basicEffect = new BasicEffect(device);
 
-            BoundingSphere transformedBoundingSphere = new BoundingSphere(transformedSphereCenter, transformedSphereRadius);
+            basicEffect.World = worldMatrix;
+            basicEffect.View = viewMatrix;
+            basicEffect.Projection = projectionMatrix;
+            basicEffect.VertexColorEnabled = true;
 
-            return transformedBoundingSphere;
+            foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
+            {
+                pass.Apply();
+                device.DrawUserPrimitives(PrimitiveType.LineList, sphereLineVertices, 0, 3);
+            }
+
+            //DebugDraw debugDraw = new DebugDraw(device);
+
+            //debugDraw.Begin(viewMatrix, projectionMatrix);
+            //debugDraw.DrawWireSphere(sphere, Color.Yellow);
+            //debugDraw.End();
+
+
         }
+
+
     }
 }

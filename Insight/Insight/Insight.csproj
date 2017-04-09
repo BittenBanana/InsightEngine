@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Engine\Camera.cs" />
     <Compile Include="Engine\ColliderManager.cs" />
+    <Compile Include="Engine\CollisionEventArgs.cs" />
     <Compile Include="Engine\Components\BoxCollider.cs" />
     <Compile Include="Engine\Components\Collider.cs" />
     <Compile Include="Engine\Components\DebugDraw.cs" />
