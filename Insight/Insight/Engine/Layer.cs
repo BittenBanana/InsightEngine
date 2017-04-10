@@ -9,6 +9,7 @@ namespace Insight.Engine
     public enum Layer
     {
         Default,
-        IgnoreRaycast
+        IgnoreRaycast,
+        Ground
     }
 }

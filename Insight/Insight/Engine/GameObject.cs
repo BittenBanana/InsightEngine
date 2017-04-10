@@ -99,8 +99,14 @@ namespace Insight.Engine
             collision = true;
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
-            Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
-            Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+            Debug.WriteLine(args.GameObject.physicLayer);
+            if(args.GameObject.physicLayer != Layer.Ground && this.physicLayer == Layer.Ground)
+            {
+                Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
+                Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+            }
+            
+            Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
             collision = false;
         }
 

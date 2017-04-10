@@ -43,7 +43,7 @@ namespace Insight.Engine
                     if (isCollision)
                     {
                         if (MainScene.GetGameObjects()[j].IsDynamic())
-                            OnObjectColided(lastModelPosition[j]);
+                            OnObjectColided(MainScene.GetGameObjects()[k]);
 
                         //if (MainScene.GetGameObjects()[k] != MainScene.GetGameObjects()[j])
                         //    if (MainScene.GetGameObjects()[k].IsDynamic())
@@ -127,11 +127,11 @@ namespace Insight.Engine
                 bool collision = sphere1.Intersects(sphere2);
                 if (collision)
                 {
-                    Debug.WriteLine("Overall collision");
+                    //Debug.WriteLine("Overall collision");
                 }
                 else
                 {
-                    Debug.WriteLine("nope");
+                    //Debug.WriteLine("nope");
                 }
 
                 return collision;
@@ -263,7 +263,7 @@ namespace Insight.Engine
                     for (int j = 0; j < object2Colliders.Length; j++)
                         if (model1Spheres[i].Intersects(object2Colliders[j]))
                         {
-                            Debug.WriteLine("Precise collision");
+                            //Debug.WriteLine("Precise collision");
                             return true;
                         }
 
@@ -300,10 +300,10 @@ namespace Insight.Engine
             return collision;
         }
 
-        protected virtual void OnObjectColided(Vector3 lastPosition)
+        protected virtual void OnObjectColided(GameObject gameObject)
         {
             if (ObjectColided != null)
-                ObjectColided(this, new CollisionEventArgs() { LastPosition = lastPosition });
+                ObjectColided(this, new CollisionEventArgs() { GameObject = gameObject });
         }
     }
 }

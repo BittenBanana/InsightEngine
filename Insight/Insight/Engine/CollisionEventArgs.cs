@@ -9,6 +9,6 @@ namespace Insight.Engine
 {
     public class CollisionEventArgs : EventArgs
     {
-        public Vector3 LastPosition { get; set; }
+        public GameObject GameObject { get; set; }
     }
 }

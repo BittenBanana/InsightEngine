@@ -28,7 +28,7 @@ namespace Insight.Scenes
             gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();         
-            gameObject2 = new GameObject(new Vector3(0, 0, 50), false);
+            gameObject2 = new GameObject(new Vector3(0, -20, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
             
             
@@ -41,13 +41,15 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
-            gameObject2.GetComponent<MeshRenderer>().Load(content, "viking", 0.1f);
+            gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
+            gameObject.AddNewComponent<Rigidbody>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
             gameObject2.GetComponent<Rigidbody>().useGravity = false;
+            gameObject2.physicLayer = Layer.Ground;
             gameObject.physicLayer = Layer.IgnoreRaycast;
             gameObject.AddNewComponent<RaycastTest>();
 
