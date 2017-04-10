@@ -47,6 +47,9 @@ namespace Insight.Scenes
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
+            gameObject2.GetComponent<Rigidbody>().useGravity = false;
+            gameObject.physicLayer = Layer.IgnoreRaycast;
+            gameObject.AddNewComponent<RaycastTest>();
 
             mainCam = gameObject.GetComponent<Camera>();
 
@@ -80,7 +83,7 @@ namespace Insight.Scenes
             }
 
            gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(),  gameObject.GetComponent<Camera>().view, projection);
-           gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics,  mainCam.view);
+           //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics,  mainCam.view);
            //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
 
             base.Draw();

@@ -23,6 +23,7 @@ namespace Insight.Engine
         public float velocityZ;
         bool collision;
         bool isDynamic;
+        public Layer physicLayer { get; set; }
 
         public GameObject(bool isDynamic)
         {

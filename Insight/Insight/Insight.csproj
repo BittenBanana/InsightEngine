@@ -50,6 +50,7 @@
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Components\Component.cs" />
     <Compile Include="Engine\Components\Transform.cs" />
+    <Compile Include="Engine\Layer.cs" />
     <Compile Include="Engine\Physics.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Game1.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Scripts\BoxController.cs" />
     <Compile Include="Scripts\BoxRotation.cs" />
     <Compile Include="Scripts\CameraFollowBox.cs" />
+    <Compile Include="Scripts\RaycastTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
