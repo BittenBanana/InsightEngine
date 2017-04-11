@@ -109,7 +109,7 @@ namespace Insight.Engine
                 }
                 else
                 {
-                    Debug.WriteLine("nope");
+                    //Debug.WriteLine("nope");
                 }
 
                 return collision;
@@ -170,6 +170,14 @@ namespace Insight.Engine
                 else
                 {
                     //Debug.WriteLine("nope");
+                    //if (object2.GetComponent<Collider>().IsTrigger)
+                    //{
+                    //    if (object1.GetComponent<Collider>().OnTriggerEnter)
+                    //    {
+                    //        object1.GetComponent<Collider>().OnTriggerExit = true;
+                    //        object1.GetComponent<Collider>().OnTriggerEnter = false;
+                    //    }
+                    //}
                 }
 
                 return collision;
@@ -304,6 +312,16 @@ namespace Insight.Engine
                             //Debug.WriteLine("Precise collision");
                             return true;
                         }
+
+                if (collision)
+                {
+                    Debug.WriteLine("Precise collision");
+                }
+                else
+                {
+                    
+
+                }
 
                 return collision;
             }

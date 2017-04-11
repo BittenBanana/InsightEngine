@@ -24,6 +24,9 @@ namespace Insight.Engine
         bool collision;
         bool isDynamic;
         public Layer physicLayer { get; set; }
+        public event EventHandler<CollisionEventArgs> EnterTriggerActivated;
+        public event EventHandler<CollisionEventArgs> StayTriggerActivated;
+        public event EventHandler<CollisionEventArgs> ExitTriggerActivated;
 
         //temp
         public bool isCube;
@@ -102,15 +105,34 @@ namespace Insight.Engine
             collision = true;
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
-            Debug.WriteLine(args.GameObject.physicLayer);
+            //Debug.WriteLine(args.GameObject.physicLayer);
             if (this.physicLayer == Layer.Player)
             {
-                if (args.GameObject.physicLayer != Layer.Ground)
+                if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
                 {
                     Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
                     Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
                 }
+
+                if (args.GameObject.GetComponent<Collider>().IsTrigger)
+                {
+                    if(GetComponent<Collider>().OnTriggerEnter == false)
+                    {
+                        OnTriggerEnter(args.GameObject);
+                        GetComponent<Collider>().OnTriggerEnter = true;
+                    }
+
+                    OnTriggerStay(args.GameObject);
+
+                    if(GetComponent<Collider>().OnTriggerExit)
+                    {
+                        OnTriggerExit(args.GameObject);
+                    }
+                    
+                }
             }
+
+            
 
 
             if (args.GameObject.physicLayer == Layer.Ground)
@@ -121,6 +143,24 @@ namespace Insight.Engine
         public bool IsDynamic()
         {
             return isDynamic;
+        }
+
+        protected virtual void OnTriggerEnter(GameObject gameObject)
+        {
+            if (EnterTriggerActivated != null)
+                EnterTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
+        }
+
+        protected virtual void OnTriggerStay(GameObject gameObject)
+        {
+            if (StayTriggerActivated != null)
+                StayTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
+        }
+
+        protected virtual void OnTriggerExit(GameObject gameObject)
+        {
+            if (ExitTriggerActivated != null)
+                ExitTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
         }
     }
 }

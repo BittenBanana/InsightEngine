@@ -9,8 +9,18 @@ namespace Insight.Engine.Components
 {
     class Collider : Component
     {
+        public bool IsTrigger {get; set;}
+        public bool OnTriggerEnter { get; set; }
+        public bool OnTriggerStay { get; set; }
+        public bool OnTriggerExit { get; set; }
+
         public Collider(GameObject gameObject) : base(gameObject)
         {
+            IsTrigger = false;
+            OnTriggerEnter = false;
+            OnTriggerStay = false;
+            OnTriggerExit = false;
+
         }
 
         public static BoundingSphere TransformBoundingSphere(BoundingSphere originalBoundingSphere, Matrix transformationMatrix)

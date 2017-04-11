@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Insight.Engine;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Insight.Scripts
 {
@@ -41,6 +42,21 @@ namespace Insight.Scripts
                 gameObject.Transform.Position.Z -= gameObject.velocityZ;
             }
             base.Update();
+        }
+
+        public void OnTriggerEnter(object source, CollisionEventArgs args)
+        {
+            Debug.WriteLine("On trigger enter");
+        }
+
+        public void OnTriggerStay(object source, CollisionEventArgs args)
+        {
+            Debug.WriteLine("On trigger stay");
+        }
+
+        public void OnTriggerExit(object source, CollisionEventArgs args)
+        {
+            Debug.WriteLine("On trigger exit");
         }
     }
 }
