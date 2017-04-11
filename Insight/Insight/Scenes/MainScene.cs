@@ -17,6 +17,8 @@ namespace Insight.Scenes
         private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
+        GameObject gameObject3;
+        GameObject gameObject4;
         GameObject box;
         Camera mainCam;
         ColliderManager colliderManager;
@@ -28,12 +30,16 @@ namespace Insight.Scenes
             base.Initialize(graphics);
             gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
-            gameObject.AddNewComponent<MeshRenderer>();         
+            gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(0, -20, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
-            box = new GameObject(new Vector3(0, -10, 0), false);
+            gameObject3 = new GameObject(new Vector3(0, 0, 5), true);
+            gameObject3.AddNewComponent<MeshRenderer>();
+            gameObject4 = new GameObject(new Vector3(0, -10, 50), false);
+            gameObject4.AddNewComponent<MeshRenderer>();
+            box = new GameObject(new Vector3(0, -10, 20), false);
             box.AddNewComponent<MeshRenderer>();
-            
+
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
 
@@ -43,29 +49,46 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
-            box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2.1f);
             gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
-            //gameObject.GetComponent<MeshRenderer>().LoadTexture(content, "viking2_Material _26_AlbedoTransparency");
+            gameObject3.LoadContent(content);
+            box.LoadContent(content);
+            gameObject3.GetComponent<MeshRenderer>().Load(content, "viking", 0.1f);
+            gameObject4.LoadContent(content);
+            gameObject4.GetComponent<MeshRenderer>().Load(content, "wall", 0.1f);
+            box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2f);
+            box.AddNewComponent<BoxCollider>();
+            box.AddNewComponent<Rigidbody>();
+            box.GetComponent<Rigidbody>().useGravity = false;
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Rigidbody>();
             gameObject2.AddNewComponent<BoxCollider>();
+            gameObject3.AddNewComponent<SphereCollider>();
+            gameObject4.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
+            gameObject3.AddNewComponent<Rigidbody>();
+            gameObject4.AddNewComponent<Rigidbody>();
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
             gameObject2.GetComponent<Rigidbody>().useGravity = false;
+            gameObject4.GetComponent<Rigidbody>().useGravity = false;
             gameObject2.physicLayer = Layer.Ground;
-            gameObject.physicLayer = Layer.IgnoreRaycast;
+            gameObject3.physicLayer = Layer.IgnoreRaycast;
+            gameObject.physicLayer = Layer.Player;
             gameObject.AddNewComponent<RaycastTest>();
 
             mainCam = gameObject.GetComponent<Camera>();
-            box.isCube = true;
+
             gameObject.AddNewComponent<CameraFollowBox>();
             //gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
+            gameObjects.Add(gameObject3);
+            gameObjects.Add(gameObject4);
             gameObjects.Add(box);
             colliderManager = new ColliderManager(gameObjects);
             colliderManager.ObjectColided += gameObject.OnObjectColided;
+            colliderManager.ObjectColided += gameObject3.OnObjectColided;
         }
 
         public override void UnloadContent()
@@ -89,9 +112,9 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
-           gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(),  gameObject.GetComponent<Camera>().view, projection);
-           //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics,  mainCam.view);
-           //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
+            gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
+            gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
 
             base.Draw();
         }

@@ -33,7 +33,7 @@ namespace Insight.Engine
             components = new List<Component>();
             Transform = new Transform(this);
             this.isDynamic = isDynamic;
-            
+
         }
         public GameObject(Vector3 position, bool isDynamic)
         {
@@ -41,7 +41,7 @@ namespace Insight.Engine
             Transform = new Transform(this, position);
             this.isDynamic = isDynamic;
         }
-        
+
         public void AddNewComponent<T>() where T : Component
         {
             if (typeof(T) != typeof(Transform))
@@ -75,12 +75,12 @@ namespace Insight.Engine
 
         public void Update()
         {
-            if(!collision)
+            if (!collision)
             {
                 velocityX = 1f * (float)Math.Sin(Transform.Rotation.Y);
                 velocityZ = 1f * (float)Math.Cos(Transform.Rotation.Y);
             }
-            
+
             foreach (var item in components)
             {
                 item.Update();
@@ -89,7 +89,7 @@ namespace Insight.Engine
 
         public void Draw(Camera camera)
         {
-            if(GetComponent<MeshRenderer>() != null)
+            if (GetComponent<MeshRenderer>() != null)
             {
                 GetComponent<MeshRenderer>().Draw(camera);
             }
@@ -103,13 +103,18 @@ namespace Insight.Engine
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
             Debug.WriteLine(args.GameObject.physicLayer);
-            if(args.GameObject.physicLayer != Layer.Ground && this.physicLayer == Layer.Ground)
+            if (this.physicLayer == Layer.Player)
             {
-                Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
-                Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                if (args.GameObject.physicLayer != Layer.Ground)
+                {
+                    Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
+                    Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                }
             }
-            
-            Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
+
+
+            if (args.GameObject.physicLayer == Layer.Ground)
+                Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
             collision = false;
         }
 

@@ -14,44 +14,82 @@ namespace Insight.Engine
     class ColliderManager
     {
         bool isCollision;
+        bool isCollisionDynamic;
         Vector3[] lastModelPosition;
         public event EventHandler<CollisionEventArgs> ObjectColided;
+        List<GameObject> staticObjects;
+        List<GameObject> dynamicObjects;
 
         public ColliderManager(List<GameObject> gameObjects)
         {           
             isCollision = false;
+            isCollisionDynamic = false;
             lastModelPosition = new Vector3[MainScene.GetGameObjects().Count];
+            staticObjects = new List<GameObject>();
+            dynamicObjects = new List<GameObject>();
+            foreach (GameObject gameObject in MainScene.GetGameObjects())
+            {
+                if (gameObject.IsDynamic())
+                {
+                    dynamicObjects.Add(gameObject);
+                }
+                else
+                {
+                    staticObjects.Add(gameObject);
+                }                
+            }
         }
 
         public void Update()
         {
-            int i = 0;
-            foreach(GameObject gameObject in MainScene.GetGameObjects())
+            for (int j = 0; j < dynamicObjects.Count; j++)
             {
-                lastModelPosition[i] = gameObject.Transform.Position;
-                i++;
-            }
-            
-            for(int j = 0; j < MainScene.GetGameObjects().Count; j++)
-            {
-                for(int k = j; k < MainScene.GetGameObjects().Count; k++)
+                if (j + 1 < dynamicObjects.Count)
+                    isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
+                        dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<MeshRenderer>().GetMatrix());
+
+                if (isCollisionDynamic)
                 {
-                    if(MainScene.GetGameObjects()[j] != MainScene.GetGameObjects()[k])
-                    isCollision = PreciseCollisionTest(MainScene.GetGameObjects()[j], MainScene.GetGameObjects()[j].GetComponent<MeshRenderer>().GetMatrix(),
-                    MainScene.GetGameObjects()[k], MainScene.GetGameObjects()[k].GetComponent<MeshRenderer>().GetMatrix());
+                    if (j + 1 < dynamicObjects.Count)
+                        OnObjectColided(dynamicObjects[j + 1]);
+                }
+
+
+                for (int k = j; k < staticObjects.Count; k++)
+                {
+                    isCollision = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
+                    staticObjects[k], staticObjects[k].GetComponent<MeshRenderer>().GetMatrix());
 
                     if (isCollision)
                     {
-                        if (MainScene.GetGameObjects()[j].IsDynamic())
-                            OnObjectColided(MainScene.GetGameObjects()[k]);
-
-                        //if (MainScene.GetGameObjects()[k] != MainScene.GetGameObjects()[j])
-                        //    if (MainScene.GetGameObjects()[k].IsDynamic())
-                        //        OnObjectColided(lastModelPosition[k]);
+                        OnObjectColided(staticObjects[k]);
                     }
-                        
                 }
             }
+
+            
+
+
+            //for (int j = 0; j < MainScene.GetGameObjects().Count; j++)
+            //{
+            //    for(int k = j; k < MainScene.GetGameObjects().Count; k++)
+            //    {
+            //        if((MainScene.GetGameObjects()[j] != MainScene.GetGameObjects()[k]) && MainScene.GetGameObjects()[j].IsDynamic())
+            //        isCollision = PreciseCollisionTest(MainScene.GetGameObjects()[j], MainScene.GetGameObjects()[j].GetComponent<MeshRenderer>().GetMatrix(),
+            //        MainScene.GetGameObjects()[k], MainScene.GetGameObjects()[k].GetComponent<MeshRenderer>().GetMatrix());
+
+            //        if (isCollision)
+            //        {
+            //            if (MainScene.GetGameObjects()[j].IsDynamic())
+            //                OnObjectColided(MainScene.GetGameObjects()[k]);
+
+            //            //if (MainScene.GetGameObjects()[k] != MainScene.GetGameObjects()[j])
+            //            //    if (MainScene.GetGameObjects()[k].IsDynamic())
+            //            //        OnObjectColided(lastModelPosition[k]);
+            //        }
+                        
+            //    }
+            //}
         }
 
         private bool OverallCollisionTest(GameObject object1, Matrix world1, GameObject object2, Matrix world2)
@@ -76,46 +114,46 @@ namespace Insight.Engine
 
                 return collision;
             }
-            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
-            {
-                BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
-                BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
+            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
+            //{
+            //    BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+            //    BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
 
-                BoundingSphere origSphere2 = object2.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
-                BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
+            //    BoundingSphere origSphere2 = object2.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+            //    BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
 
-                bool collision = sphere1.Intersects(sphere2);
-                if (collision)
-                {
-                    Debug.WriteLine("Overall collision");
-                }
-                else
-                {
-                    Debug.WriteLine("nope");
-                }
+            //    bool collision = sphere1.Intersects(sphere2);
+            //    if (collision)
+            //    {
+            //        Debug.WriteLine("Overall collision");
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("nope");
+            //    }
 
-                return collision;
-            }
-            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
-            {
-                BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
-                BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
+            //    return collision;
+            //}
+            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
+            //{
+            //    BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+            //    BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
 
-                BoundingSphere origSphere2 = object2.GetComponent<SphereCollider>().GetCompleteBoundingSphere();
-                BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
+            //    BoundingSphere origSphere2 = object2.GetComponent<SphereCollider>().GetCompleteBoundingSphere();
+            //    BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
 
-                bool collision = sphere1.Intersects(sphere2);
-                if (collision)
-                {
-                    Debug.WriteLine("Overall collision");
-                }
-                else
-                {
-                    Debug.WriteLine("nope");
-                }
+            //    bool collision = sphere1.Intersects(sphere2);
+            //    if (collision)
+            //    {
+            //        Debug.WriteLine("Overall collision");
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("nope");
+            //    }
 
-                return collision;
-            }
+            //    return collision;
+            //}
             else if (object1.GetComponent<Collider>() is SphereCollider && object2.GetComponent<Collider>() is BoxCollider)
             {
                 BoundingSphere origSphere1 = object1.GetComponent<SphereCollider>().GetCompleteBoundingSphere();
@@ -205,23 +243,23 @@ namespace Insight.Engine
                 return collision;
 
             }
-            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
-            {
-                BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
-                BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
+            //{
+            //    BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            //    BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
 
-                bool collision = false;
+            //    bool collision = false;
 
-                for (int i = 0; i < object1Colliders.Length; i++)
-                    for (int j = 0; j < object2Colliders.Length; j++)
-                        if (object1Colliders[i].Intersects(object2Colliders[j]))
-                        {
-                            Debug.WriteLine("Precise collision");
-                            return true;
-                        }
+            //    for (int i = 0; i < object1Colliders.Length; i++)
+            //        for (int j = 0; j < object2Colliders.Length; j++)
+            //            if (object1Colliders[i].Intersects(object2Colliders[j]))
+            //            {
+            //                Debug.WriteLine("Precise collision");
+            //                return true;
+            //            }
 
-                return collision;
-            }
+            //    return collision;
+            //}
             //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
             //{
             //    BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();

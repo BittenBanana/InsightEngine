@@ -10,6 +10,7 @@ namespace Insight.Engine
     {
         Default,
         IgnoreRaycast,
-        Ground
+        Ground,
+        Player
     }
 }

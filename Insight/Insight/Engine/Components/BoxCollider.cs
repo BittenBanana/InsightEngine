@@ -177,12 +177,16 @@ namespace Insight.Engine.Components
 
         public BoundingBox[] GetPreciseBoundingBoxes()
         {
+            transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
             int i = 0;
             foreach (ModelMesh mesh in model.Meshes)
             {
                 Matrix meshTransform = transforms[mesh.ParentBone.Index]
                         * gameObject.GetComponent<MeshRenderer>().GetMatrix();
-                boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+                //boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+                //boundingBoxes[i] = TransformBoundingBox(boundingBoxes[i], meshTransform);
                 i++;
             }
 
