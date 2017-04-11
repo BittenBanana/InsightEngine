@@ -17,6 +17,7 @@ namespace Insight.Scenes
         private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
+        GameObject box;
         Camera mainCam;
         ColliderManager colliderManager;
 
@@ -30,7 +31,8 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<MeshRenderer>();         
             gameObject2 = new GameObject(new Vector3(0, -20, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
-            
+            box = new GameObject(new Vector3(0, -10, 0), false);
+            box.AddNewComponent<MeshRenderer>();
             
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
@@ -41,7 +43,9 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
+            box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2.1f);
             gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
+            //gameObject.GetComponent<MeshRenderer>().LoadTexture(content, "viking2_Material _26_AlbedoTransparency");
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Rigidbody>();
@@ -54,11 +58,12 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<RaycastTest>();
 
             mainCam = gameObject.GetComponent<Camera>();
-
+            box.isCube = true;
             gameObject.AddNewComponent<CameraFollowBox>();
             //gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
+            gameObjects.Add(box);
             colliderManager = new ColliderManager(gameObjects);
             colliderManager.ObjectColided += gameObject.OnObjectColided;
         }

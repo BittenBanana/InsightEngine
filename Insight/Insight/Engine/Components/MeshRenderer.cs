@@ -12,6 +12,7 @@ namespace Insight.Engine.Components
     public class MeshRenderer : Component
     {
         Model model;
+        Texture2D texture;
         Matrix[] boneTransformations;
         float scale;
 
@@ -30,6 +31,11 @@ namespace Insight.Engine.Components
             this.scale = scale;
         }
 
+        public void LoadTexture(ContentManager c, string path)
+        {
+            texture = c.Load<Texture2D>(path);
+        }
+
         public Model getModel()
         {
             return model;
@@ -44,17 +50,24 @@ namespace Insight.Engine.Components
         {
             boneTransformations = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(boneTransformations);
-
+            
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
+                    //effect.Texture = texture;
+                    //if (texture != null)
+                    //    effect.TextureEnabled = true;
                     //effect.World = boneTransformations[mesh.ParentBone.Index] 
                     //    * Matrix.CreateScale(scale) 
                     //    * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) 
                     //    * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) 
                     //    * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) 
                     //    * Matrix.CreateTranslation(gameObject.Transform.Position);
+                    if(gameObject.isCube == true)
+                    {
+                        effect.TextureEnabled = true;
+                    }
                     effect.World = boneTransformations[mesh.ParentBone.Index]
                         * Matrix.CreateScale(scale)
                         * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
@@ -63,6 +76,7 @@ namespace Insight.Engine.Components
 
                     effect.View = camera.view;
                     effect.Projection = camera.projection;
+
                     effect.EnableDefaultLighting();
                 }
                 mesh.Draw();

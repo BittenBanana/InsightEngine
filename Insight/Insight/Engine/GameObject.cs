@@ -25,6 +25,9 @@ namespace Insight.Engine
         bool isDynamic;
         public Layer physicLayer { get; set; }
 
+        //temp
+        public bool isCube;
+
         public GameObject(bool isDynamic)
         {
             components = new List<Component>();
