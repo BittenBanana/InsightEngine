@@ -14,10 +14,11 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
-        List<GameObject> gameObjects;
+        private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
         Camera mainCam;
+        ColliderManager colliderManager;
 
         public static Matrix projection { get; private set; }
 
@@ -25,10 +26,11 @@ namespace Insight.Scenes
         {
             base.Initialize(graphics);
             gameObjects = new List<GameObject>();
-            gameObject = new GameObject();
+            gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();         
-            gameObject2 = new GameObject(new Vector3(20, 0, 20));
+            gameObject2 = new GameObject(new Vector3(0, -20, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
+            
             
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
@@ -39,17 +41,26 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
-            gameObject.AddNewComponent<BoxCollider>();
+            gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
+            gameObject.AddNewComponent<BoxController>();
+            gameObject.AddNewComponent<SphereCollider>();
+            gameObject.AddNewComponent<Rigidbody>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
+            gameObject2.AddNewComponent<Rigidbody>();
+            gameObject2.GetComponent<Rigidbody>().useGravity = false;
+            gameObject2.physicLayer = Layer.Ground;
+            gameObject.physicLayer = Layer.IgnoreRaycast;
+            gameObject.AddNewComponent<RaycastTest>();
 
             mainCam = gameObject.GetComponent<Camera>();
-            gameObject.AddNewComponent<BoxController>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
-            gameObject2.AddNewComponent<BoxRotation>();
+            //gameObject2.AddNewComponent<BoxRotation>();
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
+            colliderManager = new ColliderManager(gameObjects);
+            colliderManager.ObjectColided += gameObject.OnObjectColided;
         }
 
         public override void UnloadContent()
@@ -63,6 +74,7 @@ namespace Insight.Scenes
             {
                 go.Update();
             }
+            colliderManager.Update();
             base.Update(gameTime);
         }
         public override void Draw()
@@ -72,10 +84,16 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
-            gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
-            gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+           gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(),  gameObject.GetComponent<Camera>().view, projection);
+           //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics,  mainCam.view);
+           //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
 
             base.Draw();
+        }
+
+        public static List<GameObject> GetGameObjects()
+        {
+            return gameObjects;
         }
     }
 }
