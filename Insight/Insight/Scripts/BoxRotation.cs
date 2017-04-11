@@ -17,7 +17,7 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            val += .05f;
+            val = .05f;
             gameObject.Transform.Rotate(Vector3.UnitY, val);
             base.Update();
         }

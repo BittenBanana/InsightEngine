@@ -14,7 +14,7 @@ namespace Insight.Engine
         {
             Rotation = Vector3.Zero;
             Position = Vector3.Zero;
-            quaterion = new Quaternion();
+            quaterion = Quaternion.Identity;
             Name = "Transform";
         }
         public Transform(GameObject self, Vector3 pos) : base(self)
@@ -28,7 +28,7 @@ namespace Insight.Engine
         public void Rotate(Vector3 axis, float angle)
         {
             //quaterion.W;
-            quaterion = Quaternion.CreateFromAxisAngle(axis, angle);
+            quaterion *= Quaternion.CreateFromAxisAngle(axis, angle);
         }
 
     }

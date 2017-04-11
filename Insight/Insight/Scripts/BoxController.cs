@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace Insight.Scripts
 {
@@ -21,11 +22,13 @@ namespace Insight.Scripts
             if (keyState.IsKeyDown(Keys.Left))
             {
                 gameObject.Transform.Rotation.Y += .05f;
+
+                gameObject.Transform.Rotate(Vector3.UnitY, 0.05f);
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
                 gameObject.Transform.Rotation.Y -= .05f;
-                //gameObject.Transform.Rotate()
+                gameObject.Transform.Rotate(Vector3.UnitY, -0.05f);
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
