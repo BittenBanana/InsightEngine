@@ -20,6 +20,8 @@ namespace Insight.Engine
 
         public class RaycastHit
         {
+            public Vector3 origin;
+            public Vector3 point;
             public Collider collider;
             public float distance;
             public Rigidbody rigidbody;
@@ -28,7 +30,8 @@ namespace Insight.Engine
 
         public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hit)
         {
-            Ray ray = new Ray(origin, direction);
+            
+            Ray ray = new Ray(origin, Vector3.Normalize(direction));
             GameObject go = null;
             float distance = float.MaxValue;
             float? tempDistance = null;
@@ -75,6 +78,8 @@ namespace Insight.Engine
             if(go != null)
             {
                 hit = new RaycastHit();
+                hit.origin = origin;
+                hit.point = origin + Vector3.Normalize(direction) * distance;
                 hit.collider = go.GetComponent<Collider>();
                 hit.distance = distance;
                 hit.rigidbody = go.GetComponent<Rigidbody>();
@@ -87,5 +92,5 @@ namespace Insight.Engine
                 return false;
             }
         }
-    }
+    }   
 }

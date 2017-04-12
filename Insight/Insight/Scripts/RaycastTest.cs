@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Insight.Scenes;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
+using Insight.Engine.Components;
 
 namespace Insight.Scripts
 {
@@ -23,12 +24,19 @@ namespace Insight.Scripts
         {
             MouseState ms = Mouse.GetState();
            
-          
+            if(ms.LeftButton == ButtonState.Pressed)
             if(Physics.Raycast(gameObject.Transform.Position, MainScene.GetGameObjects().Find(go => go != gameObject).Transform.Position, out hit))
             {
+                
                 Debug.WriteLine("Hit!" + hit.distance);
             }
-            base.Update();
+            //base.Update();
+        }
+
+        public override void Draw(Camera cam)
+        {
+
+            base.Draw(cam);
         }
     }
 }

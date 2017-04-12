@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Insight.Engine.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,11 +12,13 @@ namespace Insight.Engine
 {
     public class GameScene
     {
+        public static DebugDraw debugDraw;
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
         public virtual void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             this.graphics = graphicsDevice;
+            debugDraw = new DebugDraw(graphics.GraphicsDevice);
         }
 
         public virtual void LoadContent()

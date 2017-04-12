@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Insight.Engine.Components
 {
@@ -16,6 +17,7 @@ namespace Insight.Engine.Components
         private Vector3 newAcceleration;
         private Vector3 lastAcceleration;
         private Vector3 avgAcceleration;
+        Physics.RaycastHit hit;
 
         public Rigidbody(GameObject gameObject) : base(gameObject)
         {
@@ -36,8 +38,26 @@ namespace Insight.Engine.Components
         {
             if (useGravity)
             {
-                velocity += Physics.Gravity * Time.deltaTime;
-                gameObject.Transform.Position += velocity * Time.deltaTime;
+                
+                Physics.Raycast(gameObject.Transform.Position, Vector3.Normalize(Physics.Gravity), out hit);
+                if (hit != null)
+                {
+                    if (hit.distance > 3)
+                    {
+                        Debug.WriteLine("Gravity working " + hit.distance);
+                        velocity += Physics.Gravity * Time.deltaTime;
+                        gameObject.Transform.Position += velocity * Time.deltaTime;
+                    }
+                    else
+                    {
+                        velocity = Vector3.Zero;
+                    }
+                }
+                else
+                {
+                    velocity += Physics.Gravity * Time.deltaTime;
+                    gameObject.Transform.Position += velocity * Time.deltaTime;
+                }
             }
             base.Update();
         }
