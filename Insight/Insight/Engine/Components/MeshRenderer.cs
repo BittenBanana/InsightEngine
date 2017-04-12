@@ -46,7 +46,7 @@ namespace Insight.Engine.Components
             return scale;
         }
 
-        public void Draw(Camera camera)
+        public override void Draw(Camera cam)
         {
             boneTransformations = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(boneTransformations);
@@ -64,18 +64,18 @@ namespace Insight.Engine.Components
                     //    * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) 
                     //    * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) 
                     //    * Matrix.CreateTranslation(gameObject.Transform.Position);
-                    if(gameObject.isCube == true)
-                    {
-                        effect.TextureEnabled = true;
-                    }
+                    //if(gameObject.isCube == true)
+                    //{
+                    //    effect.TextureEnabled = true;
+                    //}
                     effect.World = boneTransformations[mesh.ParentBone.Index]
                         * Matrix.CreateScale(scale)
                         * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
                         * Matrix.CreateTranslation(gameObject.Transform.Position)
                         * Matrix.CreateTranslation(gameObject.Transform.origin);
 
-                    effect.View = camera.view;
-                    effect.Projection = camera.projection;
+                    effect.View = cam.view;
+                    effect.Projection = cam.projection;
 
                     effect.EnableDefaultLighting();
                 }

@@ -16,5 +16,10 @@ namespace Insight.Engine
         {
 
         }
+
+        public virtual void Draw(Camera cam)
+        {
+
+        }
     }
 }

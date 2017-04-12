@@ -92,9 +92,13 @@ namespace Insight.Engine
 
         public void Draw(Camera camera)
         {
-            if (GetComponent<MeshRenderer>() != null)
+            //if (GetComponent<MeshRenderer>() != null)
+            //{
+            //    GetComponent<MeshRenderer>().Draw(camera);
+            //}
+            foreach (Component item in components)
             {
-                GetComponent<MeshRenderer>().Draw(camera);
+                item.Draw(camera);
             }
         }
 

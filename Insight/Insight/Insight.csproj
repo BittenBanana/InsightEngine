@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="GameObject\Box001DiffuseMap.tga" />
     <None Include="GameObject\Box001NormalsMap.tga" />
     <None Include="GameObject\boxMat.FBX" />
