@@ -38,7 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Engine\Camera.cs" />
+    <Compile Include="Engine\Components\Camera.cs" />
     <Compile Include="Engine\ColliderManager.cs" />
     <Compile Include="Engine\CollisionEventArgs.cs" />
     <Compile Include="Engine\Components\BoxCollider.cs" />
