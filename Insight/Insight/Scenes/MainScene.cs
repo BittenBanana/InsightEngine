@@ -91,9 +91,8 @@ namespace Insight.Scenes
             colliderManager.ObjectColided += gameObject.OnObjectColided;
             colliderManager.ObjectColided += gameObject3.OnObjectColided;
 
-            gameObject.EnterTriggerActivated += gameObject.GetComponent<BoxController>().OnTriggerEnter;
-            gameObject.StayTriggerActivated += gameObject.GetComponent<BoxController>().OnTriggerStay;
-            gameObject.ExitTriggerActivated += gameObject.GetComponent<BoxController>().OnTriggerExit;
+            
+            
         }
 
         public override void UnloadContent()

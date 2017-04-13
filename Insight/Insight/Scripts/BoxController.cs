@@ -53,17 +53,17 @@ namespace Insight.Scripts
             base.Update();
         }
 
-        public void OnTriggerEnter(object source, CollisionEventArgs args)
+        public override void OnTriggerEnter(object source, CollisionEventArgs args)
         {
             Debug.WriteLine("On trigger enter");
         }
 
-        public void OnTriggerStay(object source, CollisionEventArgs args)
+        public override void OnTriggerStay(object source, CollisionEventArgs args)
         {
             Debug.WriteLine("On trigger stay");
         }
 
-        public void OnTriggerExit(object source, CollisionEventArgs args)
+        public override void OnTriggerExit(object source, CollisionEventArgs args)
         {
             Debug.WriteLine("On trigger exit");
         }
