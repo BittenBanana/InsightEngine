@@ -18,6 +18,7 @@ namespace Insight.Engine.Components
         private Vector3 lastAcceleration;
         private Vector3 avgAcceleration;
         Physics.RaycastHit hit;
+        public bool isGrounded;
 
         public Rigidbody(GameObject gameObject) : base(gameObject)
         {
@@ -47,16 +48,19 @@ namespace Insight.Engine.Components
                         Debug.WriteLine("Gravity working " + hit.distance);
                         velocity += Physics.Gravity * Time.deltaTime;
                         gameObject.Transform.Position += velocity * Time.deltaTime;
+                        isGrounded = false;
                     }
-                    else
+                    else if(!isGrounded)
                     {
                         velocity = Vector3.Zero;
+                        isGrounded = true;
                     }
                 }
                 else
                 {
                     velocity += Physics.Gravity * Time.deltaTime;
                     gameObject.Transform.Position += velocity * Time.deltaTime;
+                    isGrounded = false;
                 }
             }
             base.Update();

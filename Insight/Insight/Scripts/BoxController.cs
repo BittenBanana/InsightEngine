@@ -7,6 +7,7 @@ using Insight.Engine;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using Insight.Engine.Components;
 
 namespace Insight.Scripts
 {
@@ -40,6 +41,10 @@ namespace Insight.Scripts
             {
                 gameObject.Transform.Position.X -= gameObject.velocityX;
                 gameObject.Transform.Position.Z -= gameObject.velocityZ;
+            }
+            if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
+            {
+                gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
             }
             base.Update();
         }
