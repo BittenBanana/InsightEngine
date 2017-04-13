@@ -31,13 +31,13 @@ namespace Insight.Scenes
             gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
-            gameObject2 = new GameObject(new Vector3(0, -20, 0), false);
+            gameObject2 = new GameObject(new Vector3(0, -13, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
             gameObject3 = new GameObject(new Vector3(0, 0, 5), true);
             gameObject3.AddNewComponent<MeshRenderer>();
-            gameObject4 = new GameObject(new Vector3(0, -10, 50), false);
+            gameObject4 = new GameObject(new Vector3(0, -3, 50), false);
             gameObject4.AddNewComponent<MeshRenderer>();
-            box = new GameObject(new Vector3(0, -10, 20), false);
+            box = new GameObject(new Vector3(0, -1, 20), false);
             box.AddNewComponent<MeshRenderer>();
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);

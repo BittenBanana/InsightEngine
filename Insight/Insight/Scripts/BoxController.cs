@@ -36,11 +36,15 @@ namespace Insight.Scripts
             {
                 gameObject.Transform.Position.X += gameObject.velocityX;
                 gameObject.Transform.Position.Z += gameObject.velocityZ;
+                gameObject.Forward = true;
+                gameObject.Backward = false;
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
                 gameObject.Transform.Position.X -= gameObject.velocityX;
                 gameObject.Transform.Position.Z -= gameObject.velocityZ;
+                gameObject.Forward = false;
+                gameObject.Backward = true;
             }
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {

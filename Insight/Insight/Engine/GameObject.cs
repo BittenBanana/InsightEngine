@@ -27,6 +27,8 @@ namespace Insight.Engine
         public event EventHandler<CollisionEventArgs> EnterTriggerActivated;
         public event EventHandler<CollisionEventArgs> StayTriggerActivated;
         public event EventHandler<CollisionEventArgs> ExitTriggerActivated;
+        public bool Forward { get; set; }
+        public bool Backward { get; set; }
 
         //temp
         public bool isCube;
@@ -114,8 +116,17 @@ namespace Insight.Engine
             {
                 if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
                 {
-                    Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
-                    Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                    if (Forward)
+                    {
+                        Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
+                        Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                    }
+
+                    if (Backward)
+                    {
+                        Transform.Position.X += 1f * (float)Math.Sin(Transform.Rotation.Y);
+                        Transform.Position.Z += 1f * (float)Math.Cos(Transform.Rotation.Y);
+                    }
                 }
 
                 if (args.GameObject.GetComponent<Collider>().IsTrigger)
