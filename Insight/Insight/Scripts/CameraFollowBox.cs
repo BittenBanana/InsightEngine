@@ -20,6 +20,7 @@ namespace Insight.Scripts
         {
             mainCam.Position.X = gameObject.Transform.Position.X - 15 * (float)Math.Sin(gameObject.Transform.Rotation.Y);
             mainCam.Position.Z = gameObject.Transform.Position.Z - 15 * (float)Math.Cos(gameObject.Transform.Rotation.Y);
+            mainCam.Position.Y = gameObject.Transform.Position.Y + 7;
             mainCam.view = Matrix.CreateLookAt(mainCam.Position, gameObject.Transform.Position, Vector3.Up);
 
             base.Update();

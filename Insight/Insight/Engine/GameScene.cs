@@ -34,6 +34,7 @@ namespace Insight.Engine
         public virtual void Update(GameTime gameTime)
         {
             Time.deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Time.gameTime = gameTime;
         }
 
         public virtual void Draw()

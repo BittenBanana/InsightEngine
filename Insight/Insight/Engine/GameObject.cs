@@ -76,6 +76,10 @@ namespace Insight.Engine
             {
                 GetComponent<MeshRenderer>().Load(c);
             }
+            else if (GetComponent<AnimationRender>() != null)
+            {
+                GetComponent<AnimationRender>().Load(c);
+            }
         }
 
         public void Update()
