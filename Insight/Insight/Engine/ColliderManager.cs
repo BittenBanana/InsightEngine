@@ -114,26 +114,26 @@ namespace Insight.Engine
 
                 return collision;
             }
-            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
-            //{
-            //    BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
-            //    BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
+            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
+            {
+                BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+                BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
 
-            //    BoundingSphere origSphere2 = object2.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
-            //    BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
+                BoundingSphere origSphere2 = object2.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+                BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world2);
 
-            //    bool collision = sphere1.Intersects(sphere2);
-            //    if (collision)
-            //    {
-            //        Debug.WriteLine("Overall collision");
-            //    }
-            //    else
-            //    {
-            //        Debug.WriteLine("nope");
-            //    }
+                bool collision = sphere1.Intersects(sphere2);
+                if (collision)
+                {
+                    Debug.WriteLine("Overall collision");
+                }
+                else
+                {
+                    Debug.WriteLine("nope");
+                }
 
-            //    return collision;
-            //}
+                return collision;
+            }
             //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
             //{
             //    BoundingSphere origSphere1 = object1.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
@@ -182,6 +182,35 @@ namespace Insight.Engine
 
                 return collision;
             }
+            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
+            {
+                BoundingSphere origSphere1 = object1.GetComponent<SphereCollider>().GetCompleteBoundingSphere();
+                BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world2);
+
+                BoundingSphere origSphere2 = object2.GetComponent<BoxCollider>().GetCompleteBoundingSphere();
+                BoundingSphere sphere2 = Collider.TransformBoundingSphere(origSphere2, world1);
+
+                bool collision = sphere1.Intersects(sphere2);
+                if (collision)
+                {
+                    //Debug.WriteLine("Overall collision");
+                }
+                else
+                {
+                    //Debug.WriteLine("nope");
+                    //if (object2.GetComponent<Collider>().IsTrigger)
+                    //{
+                    //    if (object1.GetComponent<Collider>().OnTriggerEnter)
+                    //    {
+                    //        object1.GetComponent<Collider>().OnTriggerExit = true;
+                    //        object1.GetComponent<Collider>().OnTriggerEnter = false;
+                    //    }
+                    //}
+                }
+
+                return collision;
+            }
+
 
             return false;
 
@@ -251,23 +280,23 @@ namespace Insight.Engine
                 return collision;
 
             }
-            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
-            //{
-            //    BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
-            //    BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is BoxCollider)
+            {
+                BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+                BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
 
-            //    bool collision = false;
+                bool collision = true;
 
-            //    for (int i = 0; i < object1Colliders.Length; i++)
-            //        for (int j = 0; j < object2Colliders.Length; j++)
-            //            if (object1Colliders[i].Intersects(object2Colliders[j]))
-            //            {
-            //                Debug.WriteLine("Precise collision");
-            //                return true;
-            //            }
+                for (int i = 0; i < object1Colliders.Length; i++)
+                    for (int j = 0; j < object2Colliders.Length; j++)
+                        if (object1Colliders[i].Intersects(object2Colliders[j]))
+                        {
+                            Debug.WriteLine("Precise collision");
+                            return true;
+                        }
 
-            //    return collision;
-            //}
+                return collision;
+            }
             //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
             //{
             //    BoundingBox[] object1Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
@@ -302,6 +331,20 @@ namespace Insight.Engine
                 }
 
                 BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+                //BoundingBox[] object2Colliders;
+                //Matrix[] model2Transforms;
+                //ModelMesh mesh2;
+
+                //BoundingBox[] boundingBoxes = object2.GetComponent<BoxCollider>().GetBoundingBoxes();
+                //model2Transforms = new Matrix[object2.GetComponent<MeshRenderer>().getModel().Bones.Count];
+                //object2.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model2Transforms);
+                //object2Colliders = new BoundingBox[object2.GetComponent<MeshRenderer>().getModel().Meshes.Count];
+                //for (int i = 0; i < object2.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+                //{
+                //    mesh2 = object2.GetComponent<MeshRenderer>().getModel().Meshes[i];
+                //    Matrix trans = model2Transforms[mesh2.ParentBone.Index] * world1;
+                //    object2Colliders[i] = BoxCollider.TransformBoundingBox(boundingBoxes[i], trans);
+                //}
 
                 bool collision = false;
 
@@ -325,6 +368,60 @@ namespace Insight.Engine
 
                 return collision;
             }
+            //else if (object1.GetComponent<Collider>() is BoxCollider && object2.GetComponent<Collider>() is SphereCollider)
+            //{
+            //    //BoundingSphere[] object1Colliders = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
+
+            //    Matrix[] model1Transforms = new Matrix[object2.GetComponent<MeshRenderer>().getModel().Bones.Count];
+            //    object2.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
+            //    BoundingSphere[] model1Spheres = new BoundingSphere[object2.GetComponent<MeshRenderer>().getModel().Meshes.Count];
+            //    for (int i = 0; i < object2.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+            //    {
+            //        ModelMesh mesh = object2.GetComponent<MeshRenderer>().getModel().Meshes[i];
+            //        BoundingSphere origSphere = mesh.BoundingSphere;
+            //        Matrix trans = model1Transforms[mesh.ParentBone.Index] * world2;
+            //        BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
+            //        model1Spheres[i] = transSphere;
+            //    }
+
+            //    BoundingBox[] object2Colliders = object1.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+            //    //BoundingBox[] object2Colliders;
+            //    //Matrix[] model2Transforms;
+            //    //ModelMesh mesh2;
+
+            //    //BoundingBox[] boundingBoxes = object2.GetComponent<BoxCollider>().GetBoundingBoxes();
+            //    //model2Transforms = new Matrix[object2.GetComponent<MeshRenderer>().getModel().Bones.Count];
+            //    //object2.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model2Transforms);
+            //    //object2Colliders = new BoundingBox[object2.GetComponent<MeshRenderer>().getModel().Meshes.Count];
+            //    //for (int i = 0; i < object2.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+            //    //{
+            //    //    mesh2 = object2.GetComponent<MeshRenderer>().getModel().Meshes[i];
+            //    //    Matrix trans = model2Transforms[mesh2.ParentBone.Index] * world1;
+            //    //    object2Colliders[i] = BoxCollider.TransformBoundingBox(boundingBoxes[i], trans);
+            //    //}
+
+            //    bool collision = false;
+
+            //    for (int i = 0; i < model1Spheres.Length; i++)
+            //        for (int j = 0; j < object2Colliders.Length; j++)
+            //            if (model1Spheres[i].Intersects(object2Colliders[j]))
+            //            {
+            //                //Debug.WriteLine("Precise collision");
+            //                return true;
+            //            }
+
+            //    if (collision)
+            //    {
+            //        Debug.WriteLine("Precise collision");
+            //    }
+            //    else
+            //    {
+
+
+            //    }
+
+            //    return collision;
+            //}
 
             //BoundingSphere[] object1Colliders = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
             //BoundingSphere[] object2Colliders = object2.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();

@@ -64,6 +64,10 @@ namespace Insight.Engine.Components
         }
         #endregion
 
+        public BoundingBox[] GetBoundingBoxes()
+        {
+            return boundingBoxes;
+        }
 
         private BoundingBox BuildBoundingBox(ModelMesh mesh, Matrix meshTransform)
         {
@@ -185,7 +189,7 @@ namespace Insight.Engine.Components
             {
                 Matrix meshTransform = transforms[mesh.ParentBone.Index]
                         * gameObject.GetComponent<MeshRenderer>().GetMatrix();
-                //boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
+                boundingBoxes[i] = BuildBoundingBox(mesh, meshTransform);
                 //boundingBoxes[i] = TransformBoundingBox(boundingBoxes[i], meshTransform);
                 i++;
             }

@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\AudioManager.cs" />
     <Compile Include="Engine\Banana Scripting\BananaScript.cs" />
     <Compile Include="Engine\Components\AnimationRender.cs" />
     <Compile Include="Engine\Components\Camera.cs" />

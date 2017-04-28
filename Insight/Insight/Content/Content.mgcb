@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\..\Visual Studio 2015\Projects\AnimationPipeline\AnimationPipeline\bin\Debug\AnimationPipeline.dll
+/reference:..\..\AnimationPipeline\bin\Debug\AnimationPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -132,4 +132,28 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:viking.FBX
+
+#begin dj.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:dj.mp3
+
+#begin tomek.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:tomek.wav
+
+#begin tomek2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:tomek2.wav
+
+#begin sandman.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sandman.wav
 
