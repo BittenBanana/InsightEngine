@@ -60,7 +60,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerStay(object source, CollisionEventArgs args)
         {
-            Debug.WriteLine("On trigger stay");
+            //Debug.WriteLine("On trigger stay");
         }
 
         public override void OnTriggerExit(object source, CollisionEventArgs args)

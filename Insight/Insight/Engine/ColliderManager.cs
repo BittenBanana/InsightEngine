@@ -362,8 +362,16 @@ namespace Insight.Engine
                 }
                 else
                 {
-                    
-
+                    if (object2.GetComponent<Collider>().IsTrigger)
+                    {
+                        if (object1.GetComponent<Collider>().OnTriggerEnter)
+                        {
+                            object1.GetComponent<Collider>().OnTriggerExit = true;
+                            object1.OnTriggerExit(object2);
+                            object1.GetComponent<Collider>().OnTriggerEnter = false;
+                            object1.GetComponent<Collider>().OnTriggerExit = false;
+                        }
+                    }
                 }
 
                 return collision;

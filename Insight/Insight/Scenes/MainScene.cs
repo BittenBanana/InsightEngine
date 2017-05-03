@@ -27,6 +27,12 @@ namespace Insight.Scenes
         Camera mainCam;
         ColliderManager colliderManager;
         AudioManager audioManager;
+        Texture2D rocket;
+        Texture2D piggyBank;
+        Texture2D screen;
+        Texture2D blood;
+        SpriteBatch spriteBatch;
+        float bloodLevel;
 
 
         public static Matrix projection { get; private set; }
@@ -45,6 +51,7 @@ namespace Insight.Scenes
             gameObject4.AddNewComponent<MeshRenderer>();
             box = new GameObject(new Vector3(0, -1, 20), false);
             box.AddNewComponent<MeshRenderer>();
+            bloodLevel = 0;
             
             
 
@@ -109,11 +116,16 @@ namespace Insight.Scenes
             audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
             audioManager.SetSoundEffectLooped(0, true);
             audioManager.SetSoundEffectLooped(1, true);
-            audioManager.PlaySoundEffect(0);
-            audioManager.PlaySoundEffect(1);
+            //audioManager.PlaySoundEffect(0);
+            //audioManager.PlaySoundEffect(1);
             audioManager.AddSong("dj");
             audioManager.PlaySong(0);
             audioManager.StopCurrentSong();
+            rocket = content.Load<Texture2D>("rakieta");
+            piggyBank = content.Load<Texture2D>("skarbonka");
+            screen = content.Load<Texture2D>("monitor");
+            blood = content.Load<Texture2D>("blood");
+            spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
         }
 
         public override void UnloadContent()
@@ -132,9 +144,19 @@ namespace Insight.Scenes
             colliderManager.Update();
             audioManager.Update();
             animationTest.Update();
+
+            KeyboardState keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.LeftControl))
+            {
+                bloodLevel += 0.09f;
+            }
         }
         public override void Draw()
         {
+            graphics.GraphicsDevice.Clear(Color.LightBlue);
+            
+
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(mainCam);
@@ -147,6 +169,18 @@ namespace Insight.Scenes
             //gameObject3.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject3.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject3.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
+
+
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
+            spriteBatch.Draw(rocket, new Vector2(30, 410), Color.White);
+            spriteBatch.Draw(piggyBank, new Vector2(90, 412), Color.White);
+            spriteBatch.Draw(screen, new Vector2(150, 415), Color.White);
+            spriteBatch.Draw(blood, new Vector2(0, 0), Color.White * bloodLevel);
+            spriteBatch.End();
+
+            graphics.GraphicsDevice.BlendState = BlendState.Opaque;
+            graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
             base.Draw();
         }

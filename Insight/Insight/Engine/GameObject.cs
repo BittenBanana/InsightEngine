@@ -145,7 +145,7 @@ namespace Insight.Engine
 
                     if(GetComponent<Collider>().OnTriggerExit)
                     {
-                        OnTriggerExit(args.GameObject);
+                        //OnTriggerExit(args.GameObject);
                     }
                     
                 }
@@ -176,7 +176,7 @@ namespace Insight.Engine
                 StayTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
         }
 
-        protected virtual void OnTriggerExit(GameObject gameObject)
+        public virtual void OnTriggerExit(GameObject gameObject)
         {
             if (ExitTriggerActivated != null)
                 ExitTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
