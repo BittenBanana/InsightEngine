@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Insight.Engine
 {
@@ -29,6 +30,7 @@ namespace Insight.Engine
         public event EventHandler<CollisionEventArgs> ExitTriggerActivated;
         public bool Forward { get; set; }
         public bool Backward { get; set; }
+        public bool IsMoving { get; set; }
 
         //temp
         public bool isCube;
@@ -38,13 +40,14 @@ namespace Insight.Engine
             components = new List<Component>();
             Transform = new Transform(this);
             this.isDynamic = isDynamic;
-
         }
         public GameObject(Vector3 position, bool isDynamic)
         {
             components = new List<Component>();
             Transform = new Transform(this, position);
             this.isDynamic = isDynamic;
+
+
         }
 
         public void AddNewComponent<T>() where T : Component
@@ -120,16 +123,22 @@ namespace Insight.Engine
             {
                 if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
                 {
-                    if (Forward)
+                    if (args.GameObject.physicLayer != Layer.Stairs)
                     {
-                        Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
-                        Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
-                    }
+                        if (Forward)
+                        {
+                            Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
+                            Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                        }   
+                    
+                    
 
-                    if (Backward)
-                    {
-                        Transform.Position.X += 1f * (float)Math.Sin(Transform.Rotation.Y);
-                        Transform.Position.Z += 1f * (float)Math.Cos(Transform.Rotation.Y);
+                        if (Backward)
+                        {
+                            Transform.Position.X += 1f * (float)Math.Sin(Transform.Rotation.Y);
+                            Transform.Position.Z += 1f * (float)Math.Cos(Transform.Rotation.Y);
+                        }
+
                     }
                 }
 
@@ -149,7 +158,29 @@ namespace Insight.Engine
                     }
                     
                 }
-            }
+
+                if(args.GameObject.physicLayer == Layer.Stairs)
+                {
+                    if(this.IsMoving)
+                    {
+                        Debug.WriteLine("stairsssssss");
+                        this.Transform.Position.Y += 0.8f;
+                        //GetComponent<Rigidbody>().useGravity = false;
+                    }
+                    else
+                    {
+                        Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
+                    }
+                    
+                }
+                
+        
+                
+
+
+
+
+    }
 
             
 
@@ -180,6 +211,11 @@ namespace Insight.Engine
         {
             if (ExitTriggerActivated != null)
                 ExitTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
+        }
+
+        private void myEvent(object source, ElapsedEventArgs e)
+        {
+            GetComponent<Rigidbody>().useGravity = true;
         }
     }
 }

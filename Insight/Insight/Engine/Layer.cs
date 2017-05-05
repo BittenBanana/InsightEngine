@@ -11,6 +11,7 @@ namespace Insight.Engine
         Default,
         IgnoreRaycast,
         Ground,
+        Stairs,
         Player
     }
 }

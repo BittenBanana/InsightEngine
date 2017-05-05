@@ -19,6 +19,7 @@ namespace Insight.Scripts
 
         public override void Update()
         {
+            gameObject.IsMoving = false;
             KeyboardState keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.Left))
@@ -38,6 +39,7 @@ namespace Insight.Scripts
                 gameObject.Transform.Position.Z += gameObject.velocityZ;
                 gameObject.Forward = true;
                 gameObject.Backward = false;
+                gameObject.IsMoving = true;
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
@@ -45,6 +47,7 @@ namespace Insight.Scripts
                 gameObject.Transform.Position.Z -= gameObject.velocityZ;
                 gameObject.Forward = false;
                 gameObject.Backward = true;
+                gameObject.IsMoving = true;
             }
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {
