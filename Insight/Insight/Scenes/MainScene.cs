@@ -23,6 +23,7 @@ namespace Insight.Scenes
         GameObject gameObject3;
         GameObject gameObject4;
         GameObject gameObject5;
+        //GameObject gameObject6;
         GameObject box;
         GameObject animationTest;
         Camera mainCam;
@@ -44,13 +45,15 @@ namespace Insight.Scenes
             gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
-            gameObject2 = new GameObject(new Vector3(0, -13, 0), false);
+            gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
-            gameObject3 = new GameObject(new Vector3(0, 0, 10), false);
+            gameObject3 = new GameObject(new Vector3(0, -3, 7), false);
             gameObject3.AddNewComponent<MeshRenderer>();
-            gameObject4 = new GameObject(new Vector3(0, -3, 40), false);
+            //gameObject6 = new GameObject(new Vector3(0, -3, 10), false);
+            //gameObject6.AddNewComponent<MeshRenderer>();
+            gameObject4 = new GameObject(new Vector3(0, -5, 40), false);
             gameObject4.AddNewComponent<MeshRenderer>();
-            gameObject5 = new GameObject(new Vector3(18, 0.5f, 30), false);
+            gameObject5 = new GameObject(new Vector3(18, -1.5f, 30), false);
             gameObject5.AddNewComponent<MeshRenderer>();
             box = new GameObject(new Vector3(0, -1, 20), false);
             box.AddNewComponent<MeshRenderer>();
@@ -71,8 +74,10 @@ namespace Insight.Scenes
             gameObject2.LoadContent(content);
             gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
             gameObject3.LoadContent(content);
+            //gameObject6.LoadContent(content);
             box.LoadContent(content);
-            gameObject3.GetComponent<MeshRenderer>().Load(content, "viking", 0.1f);
+            gameObject3.GetComponent<MeshRenderer>().Load(content, "straight", 2f);
+            //gameObject6.GetComponent<MeshRenderer>().Load(content, "corridor-straight", 2f);
             gameObject4.LoadContent(content);
             gameObject4.GetComponent<MeshRenderer>().Load(content, "stairs", 0.1f);
             gameObject5.LoadContent(content);
@@ -91,12 +96,14 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
             gameObject3.AddNewComponent<Rigidbody>();
+            //gameObject6.AddNewComponent<Rigidbody>();
             gameObject4.AddNewComponent<Rigidbody>();
             gameObject5.AddNewComponent<Rigidbody>();
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             gameObject2.GetComponent<Rigidbody>().useGravity = false;
             gameObject4.GetComponent<Rigidbody>().useGravity = false;
             gameObject5.GetComponent<Rigidbody>().useGravity = false;
+            gameObject3.GetComponent<Rigidbody>().useGravity = false;
             gameObject2.physicLayer = Layer.Ground;
             gameObject3.physicLayer = Layer.IgnoreRaycast;
             gameObject.physicLayer = Layer.Player;
@@ -114,6 +121,7 @@ namespace Insight.Scenes
             gameObjects.Add(gameObject3);
             gameObjects.Add(gameObject4);
             gameObjects.Add(gameObject5);
+            //gameObjects.Add(gameObject6);
             gameObjects.Add(box);
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
@@ -127,7 +135,7 @@ namespace Insight.Scenes
             audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
             audioManager.SetSoundEffectLooped(0, true);
             audioManager.SetSoundEffectLooped(1, true);
-            audioManager.PlaySoundEffect(0);
+            //audioManager.PlaySoundEffect(0);
             //audioManager.PlaySoundEffect(1);
             audioManager.AddSong("dj");
             audioManager.PlaySong(0);
@@ -170,13 +178,14 @@ namespace Insight.Scenes
 
             foreach (GameObject go in gameObjects)
             {
+                //if(go != gameObject3)
                 go.Draw(mainCam);
             }
 
             animationTest.GetComponent<AnimationRender>().Draw(mainCam);
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
             //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
-            //gameObject4.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject3.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject3.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject3.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);

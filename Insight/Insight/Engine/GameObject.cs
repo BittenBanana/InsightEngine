@@ -22,6 +22,7 @@ namespace Insight.Engine
         public string Tag { get; set; }
         public float velocityX;
         public float velocityZ;
+        public float rotationSpeed;
         bool collision;
         bool isDynamic;
         public Layer physicLayer { get; set; }
@@ -40,6 +41,7 @@ namespace Insight.Engine
             components = new List<Component>();
             Transform = new Transform(this);
             this.isDynamic = isDynamic;
+            rotationSpeed = .05f;
         }
         public GameObject(Vector3 position, bool isDynamic)
         {
@@ -129,6 +131,7 @@ namespace Insight.Engine
                         {
                             Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
                             Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                            rotationSpeed = 0;
                         }   
                     
                     
@@ -137,6 +140,7 @@ namespace Insight.Engine
                         {
                             Transform.Position.X += 1f * (float)Math.Sin(Transform.Rotation.Y);
                             Transform.Position.Z += 1f * (float)Math.Cos(Transform.Rotation.Y);
+                            rotationSpeed = 0;
                         }
 
                     }

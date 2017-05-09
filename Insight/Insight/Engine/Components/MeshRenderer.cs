@@ -15,10 +15,12 @@ namespace Insight.Engine.Components
         Texture2D texture;
         Matrix[] boneTransformations;
         float scale;
+        public bool IsVisible {get; set;}
 
         public MeshRenderer(GameObject gameObject) : base (gameObject)
         {
             scale = 0.1f;
+            IsVisible = true;
         }
         public void Load(ContentManager c)
         {
@@ -48,39 +50,43 @@ namespace Insight.Engine.Components
 
         public override void Draw(Camera cam)
         {
-            boneTransformations = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(boneTransformations);
-            
-            foreach (ModelMesh mesh in model.Meshes)
+            if(IsVisible)
             {
-                foreach (BasicEffect effect in mesh.Effects)
+                boneTransformations = new Matrix[model.Bones.Count];
+                model.CopyAbsoluteBoneTransformsTo(boneTransformations);
+
+                foreach (ModelMesh mesh in model.Meshes)
                 {
-                    //effect.Texture = texture;
-                    //if (texture != null)
-                    //    effect.TextureEnabled = true;
-                    //effect.World = boneTransformations[mesh.ParentBone.Index] 
-                    //    * Matrix.CreateScale(scale) 
-                    //    * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) 
-                    //    * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) 
-                    //    * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) 
-                    //    * Matrix.CreateTranslation(gameObject.Transform.Position);
-                    //if(gameObject.isCube == true)
-                    //{
-                    //    effect.TextureEnabled = true;
-                    //}
-                    effect.World = boneTransformations[mesh.ParentBone.Index]
-                        * Matrix.CreateScale(scale)
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                        * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        //effect.Texture = texture;
+                        //if (texture != null)
+                        //    effect.TextureEnabled = true;
+                        //effect.World = boneTransformations[mesh.ParentBone.Index] 
+                        //    * Matrix.CreateScale(scale) 
+                        //    * Matrix.CreateRotationX(gameObject.Transform.Rotation.X) 
+                        //    * Matrix.CreateRotationY(gameObject.Transform.Rotation.Y) 
+                        //    * Matrix.CreateRotationZ(gameObject.Transform.Rotation.Z) 
+                        //    * Matrix.CreateTranslation(gameObject.Transform.Position);
+                        //if(gameObject.isCube == true)
+                        //{
+                        //    effect.TextureEnabled = true;
+                        //}
+                        effect.World = boneTransformations[mesh.ParentBone.Index]
+                            * Matrix.CreateScale(scale)
+                            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                            * Matrix.CreateTranslation(gameObject.Transform.Position)
+                            * Matrix.CreateTranslation(gameObject.Transform.origin);
 
-                    effect.View = cam.view;
-                    effect.Projection = cam.projection;
+                        effect.View = cam.view;
+                        effect.Projection = cam.projection;
 
-                    effect.EnableDefaultLighting();
+                        effect.EnableDefaultLighting();
+                    }
+                    mesh.Draw();
                 }
-                mesh.Draw();
             }
+            
         }
 
         public Matrix GetMatrix()

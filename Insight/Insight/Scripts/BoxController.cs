@@ -24,14 +24,14 @@ namespace Insight.Scripts
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                gameObject.Transform.Rotation.Y += .05f;
+                gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
 
-                gameObject.Transform.Rotate(Vector3.UnitY, 0.05f);
+                gameObject.Transform.Rotate(Vector3.UnitY, gameObject.rotationSpeed);
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
-                gameObject.Transform.Rotation.Y -= .05f;
-                gameObject.Transform.Rotate(Vector3.UnitY, -0.05f);
+                gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
+                gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
@@ -53,6 +53,8 @@ namespace Insight.Scripts
             {
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
             }
+
+            gameObject.rotationSpeed = .05f;
             base.Update();
         }
 
