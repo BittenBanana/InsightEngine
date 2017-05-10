@@ -35,6 +35,10 @@ namespace Insight.Scenes
         Texture2D blood;
         SpriteBatch spriteBatch;
         float bloodLevel;
+        SpriteFont _spr_font;
+        int _total_frames = 0;
+        float _elapsed_time = 0.0f;
+        int _fps = 0;
 
 
         public static Matrix projection { get; private set; }
@@ -47,7 +51,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
-            gameObject3 = new GameObject(new Vector3(0, -3, 7), false);
+            gameObject3 = new GameObject(new Vector3(0, -3.2f, 7), false);
             gameObject3.AddNewComponent<MeshRenderer>();
             //gameObject6 = new GameObject(new Vector3(0, -3, 10), false);
             //gameObject6.AddNewComponent<MeshRenderer>();
@@ -135,7 +139,7 @@ namespace Insight.Scenes
             audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
             audioManager.SetSoundEffectLooped(0, true);
             audioManager.SetSoundEffectLooped(1, true);
-            //audioManager.PlaySoundEffect(0);
+            audioManager.PlaySoundEffect(0);
             //audioManager.PlaySoundEffect(1);
             audioManager.AddSong("dj");
             audioManager.PlaySong(0);
@@ -145,6 +149,7 @@ namespace Insight.Scenes
             screen = content.Load<Texture2D>("monitor");
             blood = content.Load<Texture2D>("blood");
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+            _spr_font = content.Load<SpriteFont>("gamefont");
         }
 
         public override void UnloadContent()
@@ -170,6 +175,17 @@ namespace Insight.Scenes
             {
                 bloodLevel += 0.09f;
             }
+
+            // Update
+            _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // 1 Second has passed
+            if (_elapsed_time >= 1000.0f)
+            {
+                _fps = _total_frames;
+                _total_frames = 0;
+                _elapsed_time = 0;
+            }
         }
         public override void Draw()
         {
@@ -189,13 +205,16 @@ namespace Insight.Scenes
             //gameObject3.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject3.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject3.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
-
+            // Only update total frames when drawing
+            _total_frames++;
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
             spriteBatch.Draw(rocket, new Vector2(30, 410), Color.White);
             spriteBatch.Draw(piggyBank, new Vector2(90, 412), Color.White);
             spriteBatch.Draw(screen, new Vector2(150, 415), Color.White);
             spriteBatch.Draw(blood, new Vector2(0, 0), Color.White * bloodLevel);
+            spriteBatch.DrawString(_spr_font, string.Format("FPS={0}", _fps),
+                new Vector2(10.0f, 20.0f), Color.White);
             spriteBatch.End();
 
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
