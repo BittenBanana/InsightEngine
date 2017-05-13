@@ -82,14 +82,14 @@ namespace Insight.Engine.Components
                         //}
                         p.Effect = effect;
                         Material.SetParameters();
-                        effect.Parameters["World"].SetValue(boneTransformations[mesh.ParentBone.Index]
+                        effect.Parameters["World"]?.SetValue(boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
                                                             * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
                                                             * Matrix.CreateTranslation(gameObject.Transform.Position)
                                                             * Matrix.CreateTranslation(gameObject.Transform.origin));
-                        effect.Parameters["View"].SetValue(cam.view);
-                        effect.Parameters["Projection"].SetValue(cam.projection);
-                        effect.Parameters["CamPosition"].SetValue(cam.Position);
+                        effect.Parameters["View"]?.SetValue(cam.view);
+                        effect.Parameters["Projection"]?.SetValue(cam.projection);
+                        effect.Parameters["CamPosition"]?.SetValue(cam.Position);
                         
                         
                         //effect.CurrentTechnique = effect.Techniques["Blinn"];

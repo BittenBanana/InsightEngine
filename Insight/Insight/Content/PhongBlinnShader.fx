@@ -10,7 +10,6 @@
 float4x4 World;
 float4x4 View;
 float4x4 Projection;
-float4x4 lightViewProjection;
 
 float4 AmbientColor = float4(1, 1, 0, 1);
 float AmbientIntensity = 0.2;
@@ -31,22 +30,12 @@ struct VertexShaderInput
 	float3 View : TEXCOORD0;
 };
 
-struct CreateShadowVertexInput 
-{
-	float4 Position : POSITION;
-};
 
 struct VertexShaderOutput
 {
 	float4 Position : POSITION;
 	float3 Normal : NORMAL;
 	float3 View : TEXCOORD0;
-};
-
-struct CreateShadowVertexOutput
-{
-	float4 Position : POSITION;
-	float2 Depth :TEXCOORD0;
 };
 
 //			Blinn
@@ -74,24 +63,6 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
 	return AmbientColor * AmbientIntensity + DiffuseIntensity * DiffuseColor * diffuse + SpecularIntensity*SpecularColor*specular;
 }
 
-//			ShadowMap
-CreateShadowVertexOutput ShadowMapVS(in CreateShadowVertexInput i)
-{
-	CreateShadowVertexOutput o = (CreateShadowVertexOutput)0;
-	o.Position = mul(i.Position, mul(World, lightViewProjection));
-	o.Depth = o.Position.zw;
-
-	return o;
-}
-
-float4 ShadowMapPS(in CreateShadowVertexOutput i) : COLOR0
-{
-	return i.Depth.x / i.Depth.y;
-}
-
-//
-
-
 technique Blinn
 {
 	pass P0
@@ -105,13 +76,4 @@ technique Blinn
 		VertexShader = compile VS_SHADERMODEL ShadowMapVS();
 		PixelShader = compile PS_SHADERMODEL ShadowMapPS();
 	}*/
-};
-
-technique CreateShadow 
-{
-	pass P0
-	{
-		VertexShader = compile VS_SHADERMODEL ShadowMapVS();
-		PixelShader = compile PS_SHADERMODEL ShadowMapPS();
-	}
 };
