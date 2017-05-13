@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Insight.Scenes;
 
 namespace Insight.Engine.Components
 {
     public class MeshRenderer : Component
     {
         Model model;
+        private Effect effect;
+        public Material Material { get; set; }
         Texture2D texture;
         Matrix[] boneTransformations;
+
+
         float scale;
         public bool IsVisible {get; set;}
 
@@ -24,12 +29,15 @@ namespace Insight.Engine.Components
         }
         public void Load(ContentManager c)
         {
-            model = c.Load<Model>("viking");
+            model = c.Load<Model>("bohater (2)");
+            scale = 0.01f;
+            effect = Material.GetEffect();
         }
 
         public void Load(ContentManager c, string path, float scale)
         {
             model = c.Load<Model>(path);
+            effect = Material.GetEffect();
             this.scale = scale;
         }
 
@@ -57,7 +65,7 @@ namespace Insight.Engine.Components
 
                 foreach (ModelMesh mesh in model.Meshes)
                 {
-                    foreach (BasicEffect effect in mesh.Effects)
+                    foreach (ModelMeshPart p in mesh.MeshParts)
                     {
                         //effect.Texture = texture;
                         //if (texture != null)
@@ -72,16 +80,22 @@ namespace Insight.Engine.Components
                         //{
                         //    effect.TextureEnabled = true;
                         //}
-                        effect.World = boneTransformations[mesh.ParentBone.Index]
-                            * Matrix.CreateScale(scale)
-                            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                            * Matrix.CreateTranslation(gameObject.Transform.Position)
-                            * Matrix.CreateTranslation(gameObject.Transform.origin);
+                        p.Effect = effect;
+                        Material.SetParameters();
+                        effect.Parameters["World"].SetValue(boneTransformations[mesh.ParentBone.Index]
+                                                            * Matrix.CreateScale(scale)
+                                                            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                                                            * Matrix.CreateTranslation(gameObject.Transform.Position)
+                                                            * Matrix.CreateTranslation(gameObject.Transform.origin));
+                        effect.Parameters["View"].SetValue(cam.view);
+                        effect.Parameters["Projection"].SetValue(cam.projection);
+                        effect.Parameters["CamPosition"].SetValue(cam.Position);
+                        
+                        
+                        //effect.CurrentTechnique = effect.Techniques["Blinn"];
 
-                        effect.View = cam.view;
-                        effect.Projection = cam.projection;
+                        //effect.EnableDefaultLighting();
 
-                        effect.EnableDefaultLighting();
                     }
                     mesh.Draw();
                 }

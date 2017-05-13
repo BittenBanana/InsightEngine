@@ -15,6 +15,12 @@ namespace Insight.Engine
         public static DebugDraw debugDraw;
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
+
+        public GraphicsDevice GetGraphicsDevice()
+        {
+            return graphics.GraphicsDevice;
+        }
+
         public virtual void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             this.graphics = graphicsDevice;

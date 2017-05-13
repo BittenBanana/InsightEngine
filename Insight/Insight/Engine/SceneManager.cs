@@ -16,7 +16,7 @@ namespace Insight.Engine
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
 
-        GameScene currentScene;
+        public GameScene currentScene { get; set; }
 
         public static SceneManager Instance
         {

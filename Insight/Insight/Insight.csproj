@@ -47,6 +47,7 @@
     <Compile Include="Engine\Components\BoxCollider.cs" />
     <Compile Include="Engine\Components\Collider.cs" />
     <Compile Include="Engine\Components\DebugDraw.cs" />
+    <Compile Include="Engine\Components\Light.cs" />
     <Compile Include="Engine\Components\MeshRenderer.cs" />
     <Compile Include="Engine\Components\Rigidbody.cs" />
     <Compile Include="Engine\Components\SphereCollider.cs" />
@@ -54,10 +55,12 @@
     <Compile Include="Engine\Components\Component.cs" />
     <Compile Include="Engine\Components\Transform.cs" />
     <Compile Include="Engine\Layer.cs" />
+    <Compile Include="Engine\Material.cs" />
     <Compile Include="Engine\Physics.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\GameScene.cs" />
+    <Compile Include="Materials\DefaultMaterial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\SceneManager.cs" />
@@ -102,6 +105,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnimationPipeline\AnimationPipeline.csproj">
+      <Project>{f0deab11-29b5-4ce6-a2ab-eddbae9dd150}</Project>
+      <Name>AnimationPipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SkinnedModel\SkinnedModel.csproj">
       <Project>{4EFE3832-7C17-46DD-A67C-87186CE254C0}</Project>
       <Name>SkinnedModel</Name>

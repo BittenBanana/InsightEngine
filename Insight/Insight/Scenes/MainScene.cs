@@ -12,6 +12,7 @@ using Insight.Engine.Components;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
+using Insight.Materials;
 
 namespace Insight.Scenes
 {
@@ -24,7 +25,7 @@ namespace Insight.Scenes
         GameObject gameObject4;
         GameObject gameObject5;
         //GameObject gameObject6;
-        GameObject box;
+        //GameObject box;
         GameObject animationTest;
         Camera mainCam;
         ColliderManager colliderManager;
@@ -36,6 +37,7 @@ namespace Insight.Scenes
         SpriteBatch spriteBatch;
         float bloodLevel;
 
+        Material defaultMaterial;
 
         public static Matrix projection { get; private set; }
 
@@ -55,11 +57,15 @@ namespace Insight.Scenes
             gameObject4.AddNewComponent<MeshRenderer>();
             gameObject5 = new GameObject(new Vector3(18, -1.5f, 30), false);
             gameObject5.AddNewComponent<MeshRenderer>();
-            box = new GameObject(new Vector3(0, -1, 20), false);
-            box.AddNewComponent<MeshRenderer>();
+            //box = new GameObject(new Vector3(0, -1, 20), false);
+            //box.AddNewComponent<MeshRenderer>();
             bloodLevel = 0;
-            
-            
+
+            gameObjects.Add(gameObject);
+            gameObjects.Add(gameObject2);
+            gameObjects.Add(gameObject3);
+            gameObjects.Add(gameObject4);
+            gameObjects.Add(gameObject5);
 
             animationTest = new GameObject(new Vector3(0, -5, 40), true);
             animationTest.AddNewComponent<AnimationRender>();
@@ -70,22 +76,36 @@ namespace Insight.Scenes
         public override void LoadContent()
         {
             base.LoadContent();
+
+            #region Effects 
+
+            Effect effect = content.Load<Effect>("PhongBlinnShader");
+            defaultMaterial = new DefaultMaterial(effect);
+
+            #endregion
+
+            foreach (var o in gameObjects)
+            {
+                if (o.GetComponent<MeshRenderer>() != null)
+                    o.GetComponent<MeshRenderer>().Material = defaultMaterial;
+            }
+
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
             gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
             gameObject3.LoadContent(content);
             //gameObject6.LoadContent(content);
-            box.LoadContent(content);
+            //box.LoadContent(content);
             gameObject3.GetComponent<MeshRenderer>().Load(content, "straight", 2f);
             //gameObject6.GetComponent<MeshRenderer>().Load(content, "corridor-straight", 2f);
             gameObject4.LoadContent(content);
             gameObject4.GetComponent<MeshRenderer>().Load(content, "stairs", 0.1f);
             gameObject5.LoadContent(content);
             gameObject5.GetComponent<MeshRenderer>().Load(content, "floor", 0.1f);
-            box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2f);
-            box.AddNewComponent<BoxCollider>();
-            box.AddNewComponent<Rigidbody>();
-            box.GetComponent<Rigidbody>().useGravity = false;
+            //box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2f);
+            //box.AddNewComponent<BoxCollider>();
+            //box.AddNewComponent<Rigidbody>();
+            //box.GetComponent<Rigidbody>().useGravity = false;
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Rigidbody>();
@@ -110,19 +130,15 @@ namespace Insight.Scenes
             gameObject4.physicLayer = Layer.Stairs;
             gameObject5.physicLayer = Layer.Ground;
             gameObject.AddNewComponent<RaycastTest>();
-            box.GetComponent<BoxCollider>().IsTrigger = true;
+            //box.GetComponent<BoxCollider>().IsTrigger = true;
 
             mainCam = gameObject.GetComponent<Camera>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
             //gameObject2.AddNewComponent<BoxRotation>();
-            gameObjects.Add(gameObject);
-            gameObjects.Add(gameObject2);
-            gameObjects.Add(gameObject3);
-            gameObjects.Add(gameObject4);
-            gameObjects.Add(gameObject5);
+            
             //gameObjects.Add(gameObject6);
-            gameObjects.Add(box);
+            //gameObjects.Add(box);
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
 
@@ -145,6 +161,7 @@ namespace Insight.Scenes
             screen = content.Load<Texture2D>("monitor");
             blood = content.Load<Texture2D>("blood");
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+
         }
 
         public override void UnloadContent()
