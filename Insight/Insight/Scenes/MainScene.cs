@@ -24,7 +24,10 @@ namespace Insight.Scenes
         GameObject gameObject3;
         GameObject gameObject4;
         GameObject gameObject5;
-        //GameObject gameObject6;
+        GameObject gameObject6;
+        GameObject gameObject7;
+        GameObject gameObject8;
+        GameObject gameObject9;
         //GameObject box;
         GameObject animationTest;
         Camera mainCam;
@@ -36,6 +39,10 @@ namespace Insight.Scenes
         Texture2D blood;
         SpriteBatch spriteBatch;
         float bloodLevel;
+        SpriteFont _spr_font;
+        int _total_frames = 0;
+        float _elapsed_time = 0.0f;
+        int _fps = 0;
 
         Material defaultMaterial;
 
@@ -49,10 +56,16 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
-            gameObject3 = new GameObject(new Vector3(0, -3, 7), false);
+            gameObject3 = new GameObject(new Vector3(0, -3.2f, 0), false);
             gameObject3.AddNewComponent<MeshRenderer>();
-            //gameObject6 = new GameObject(new Vector3(0, -3, 10), false);
-            //gameObject6.AddNewComponent<MeshRenderer>();
+            gameObject6 = new GameObject(new Vector3(0, -3, 10), false);
+            gameObject6.AddNewComponent<MeshRenderer>();
+            gameObject7 = new GameObject(new Vector3(0, -3, 10), false);
+            gameObject7.AddNewComponent<MeshRenderer>();
+            gameObject8 = new GameObject(new Vector3(12, -3, 14), false);
+            gameObject8.AddNewComponent<MeshRenderer>();
+            gameObject9 = new GameObject(new Vector3(0, -3, -3), false);
+            gameObject9.AddNewComponent<MeshRenderer>();
             gameObject4 = new GameObject(new Vector3(0, -5, 40), false);
             gameObject4.AddNewComponent<MeshRenderer>();
             gameObject5 = new GameObject(new Vector3(18, -1.5f, 30), false);
@@ -66,6 +79,10 @@ namespace Insight.Scenes
             gameObjects.Add(gameObject3);
             gameObjects.Add(gameObject4);
             gameObjects.Add(gameObject5);
+            gameObjects.Add(gameObject6);
+            gameObjects.Add(gameObject7);
+            gameObjects.Add(gameObject8);
+            gameObjects.Add(gameObject9);
 
             animationTest = new GameObject(new Vector3(0, -5, 40), true);
             animationTest.AddNewComponent<AnimationRender>();
@@ -94,10 +111,16 @@ namespace Insight.Scenes
             gameObject2.LoadContent(content);
             gameObject2.GetComponent<MeshRenderer>().Load(content, "ground", 0.1f);
             gameObject3.LoadContent(content);
-            //gameObject6.LoadContent(content);
+            gameObject6.LoadContent(content);
+            gameObject7.LoadContent(content);
+            gameObject8.LoadContent(content);
+            gameObject9.LoadContent(content);
             //box.LoadContent(content);
             gameObject3.GetComponent<MeshRenderer>().Load(content, "straight", 2f);
-            //gameObject6.GetComponent<MeshRenderer>().Load(content, "corridor-straight", 2f);
+            gameObject6.GetComponent<MeshRenderer>().Load(content, "corridor-corner-colliders", 2f);
+            gameObject7.GetComponent<MeshRenderer>().Load(content, "corner", 2f);
+            gameObject8.GetComponent<MeshRenderer>().Load(content, "straight-rotated", 2f);
+            gameObject9.GetComponent<MeshRenderer>().Load(content, "wall5x5withDoor", 2f);
             gameObject4.LoadContent(content);
             gameObject4.GetComponent<MeshRenderer>().Load(content, "stairs", 0.1f);
             gameObject5.LoadContent(content);
@@ -113,6 +136,9 @@ namespace Insight.Scenes
             gameObject3.AddNewComponent<BoxCollider>();
             gameObject4.AddNewComponent<BoxCollider>();
             gameObject5.AddNewComponent<BoxCollider>();
+            gameObject6.AddNewComponent<BoxCollider>();
+            gameObject8.AddNewComponent<BoxCollider>();
+            gameObject9.AddNewComponent<BoxCollider>();
             gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
             gameObject3.AddNewComponent<Rigidbody>();
@@ -131,14 +157,13 @@ namespace Insight.Scenes
             gameObject5.physicLayer = Layer.Ground;
             gameObject.AddNewComponent<RaycastTest>();
             //box.GetComponent<BoxCollider>().IsTrigger = true;
+            gameObject6.GetComponent<MeshRenderer>().IsVisible = false;
 
             mainCam = gameObject.GetComponent<Camera>();
 
             gameObject.AddNewComponent<CameraFollowBox>();
             //gameObject2.AddNewComponent<BoxRotation>();
             
-            //gameObjects.Add(gameObject6);
-            //gameObjects.Add(box);
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
 
@@ -151,7 +176,7 @@ namespace Insight.Scenes
             audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
             audioManager.SetSoundEffectLooped(0, true);
             audioManager.SetSoundEffectLooped(1, true);
-            //audioManager.PlaySoundEffect(0);
+            audioManager.PlaySoundEffect(0);
             //audioManager.PlaySoundEffect(1);
             audioManager.AddSong("dj");
             audioManager.PlaySong(0);
@@ -161,7 +186,7 @@ namespace Insight.Scenes
             screen = content.Load<Texture2D>("monitor");
             blood = content.Load<Texture2D>("blood");
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-
+            _spr_font = content.Load<SpriteFont>("gamefont");
         }
 
         public override void UnloadContent()
@@ -187,6 +212,17 @@ namespace Insight.Scenes
             {
                 bloodLevel += 0.09f;
             }
+
+            // Update
+            _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // 1 Second has passed
+            if (_elapsed_time >= 1000.0f)
+            {
+                _fps = _total_frames;
+                _total_frames = 0;
+                _elapsed_time = 0;
+            }
         }
         public override void Draw()
         {
@@ -202,17 +238,20 @@ namespace Insight.Scenes
             animationTest.GetComponent<AnimationRender>().Draw(mainCam);
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
             //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
-            gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject3.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject3.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject3.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
-
+            // Only update total frames when drawing
+            _total_frames++;
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
             spriteBatch.Draw(rocket, new Vector2(30, 410), Color.White);
             spriteBatch.Draw(piggyBank, new Vector2(90, 412), Color.White);
             spriteBatch.Draw(screen, new Vector2(150, 415), Color.White);
             spriteBatch.Draw(blood, new Vector2(0, 0), Color.White * bloodLevel);
+            spriteBatch.DrawString(_spr_font, string.Format("FPS={0}", _fps),
+                new Vector2(10.0f, 20.0f), Color.White);
             spriteBatch.End();
 
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
