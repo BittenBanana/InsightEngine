@@ -121,7 +121,7 @@ namespace Insight.Engine
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
             //Debug.WriteLine(args.GameObject.physicLayer);
-            if (this.physicLayer == Layer.Player)
+            if (this.physicLayer == Layer.Player && args.GameObject.GetComponent<Collider>() != null)
             {
                 if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
                 {

@@ -28,6 +28,8 @@ namespace Insight.Scenes
         GameObject gameObject7;
         GameObject gameObject8;
         GameObject gameObject9;
+
+        private GameObject directionalLight;
         //GameObject box;
         GameObject animationTest;
         Camera mainCam;
@@ -74,6 +76,12 @@ namespace Insight.Scenes
             //box.AddNewComponent<MeshRenderer>();
             bloodLevel = 0;
 
+            directionalLight = new GameObject(new Vector3(-5,5,0), false);
+            directionalLight.AddNewComponent<Light>();
+            directionalLight.GetComponent<Light>().Direction = new Vector3(3,-5,0);
+            directionalLight.GetComponent<Light>().Color = Color.Red;
+
+            gameObjects.Add(directionalLight);
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
             gameObjects.Add(gameObject3);
@@ -98,7 +106,9 @@ namespace Insight.Scenes
 
             Effect effect = content.Load<Effect>("PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);
-
+            ((DefaultMaterial) defaultMaterial).LightDirection = directionalLight.GetComponent<Light>().Direction;
+            ((DefaultMaterial) defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
+            ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             #endregion
 
             foreach (var o in gameObjects)
@@ -228,6 +238,7 @@ namespace Insight.Scenes
         {
             graphics.GraphicsDevice.Clear(Color.LightBlue);
             
+
 
             foreach (GameObject go in gameObjects)
             {

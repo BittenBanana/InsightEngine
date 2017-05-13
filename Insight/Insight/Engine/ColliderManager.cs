@@ -21,7 +21,7 @@ namespace Insight.Engine
         List<GameObject> dynamicObjects;
 
         public ColliderManager(List<GameObject> gameObjects)
-        {           
+        {
             isCollision = false;
             isCollisionDynamic = false;
             lastModelPosition = new Vector3[MainScene.GetGameObjects().Count];
@@ -36,7 +36,7 @@ namespace Insight.Engine
                 else
                 {
                     staticObjects.Add(gameObject);
-                }                
+                }
             }
         }
 
@@ -57,9 +57,12 @@ namespace Insight.Engine
 
                 for (int k = j; k < staticObjects.Count; k++)
                 {
-                    isCollision = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
-                    staticObjects[k], staticObjects[k].GetComponent<MeshRenderer>().GetMatrix());
-
+                    if (staticObjects[k].GetComponent<MeshRenderer>() != null)
+                    {
+                        isCollision = PreciseCollisionTest(dynamicObjects[j],
+                            dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
+                            staticObjects[k], staticObjects[k].GetComponent<MeshRenderer>().GetMatrix());
+                    }
                     if (isCollision)
                     {
                         OnObjectColided(staticObjects[k]);
@@ -67,7 +70,7 @@ namespace Insight.Engine
                 }
             }
 
-            
+
 
 
             //for (int j = 0; j < MainScene.GetGameObjects().Count; j++)
@@ -87,7 +90,7 @@ namespace Insight.Engine
             //            //    if (MainScene.GetGameObjects()[k].IsDynamic())
             //            //        OnObjectColided(lastModelPosition[k]);
             //        }
-                        
+
             //    }
             //}
         }
@@ -245,7 +248,7 @@ namespace Insight.Engine
                 Matrix[] model1Transforms = new Matrix[object1.GetComponent<MeshRenderer>().getModel().Bones.Count];
                 object1.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
                 BoundingSphere[] model1Spheres = new BoundingSphere[object1.GetComponent<MeshRenderer>().getModel().Meshes.Count];
-                for(int i=0; i< object1.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+                for (int i = 0; i < object1.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
                 {
                     ModelMesh mesh = object1.GetComponent<MeshRenderer>().getModel().Meshes[i];
                     BoundingSphere origSphere = mesh.BoundingSphere;
@@ -314,7 +317,7 @@ namespace Insight.Engine
 
             //    return collision;
             //}
-            else if(object1.GetComponent<Collider>() is SphereCollider && object2.GetComponent<Collider>() is BoxCollider)
+            else if (object1.GetComponent<Collider>() is SphereCollider && object2.GetComponent<Collider>() is BoxCollider)
             {
                 //BoundingSphere[] object1Colliders = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
 
@@ -438,7 +441,7 @@ namespace Insight.Engine
             //BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
 
 
-            return false;       
+            return false;
         }
 
         private bool RayCollisionTest(GameObject gameobject, Matrix world, Vector3 lastPosition, Vector3 currectPosition)
