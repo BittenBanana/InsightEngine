@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Insight.Engine.Components;
+using Microsoft.Xna.Framework.Graphics;
+using Insight.Materials;
+using Insight.Scripts;
 
 namespace Insight.Scenes
 {
@@ -13,22 +16,61 @@ namespace Insight.Scenes
     {
         static String floorPrefab = "floor5x5";
         GameObject floor1;
-
+        GameObject player;
+        Camera mainCam;
+        Material defaultMaterial;
+        GameObject directionalLight;
         public static Matrix projection { get; private set; }
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
 
-            floor1 = new GameObject(new Vector3(0, 0, 0), false);
+            player = new GameObject(new Vector3(0, 0, 2), true);
+            player.AddNewComponent<MeshRenderer>();
+            player.AddNewComponent<Camera>();
+            //player.AddNewComponent<Rigidbody>();
+            player.AddNewComponent<CameraFollowBox>();
+
+            floor1 = new GameObject(new Vector3(18, -1.5f, 30), false);
             floor1.AddNewComponent<MeshRenderer>();
 
+            directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
+            directionalLight.AddNewComponent<Light>();
+            directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
+            directionalLight.GetComponent<Light>().Color = Color.Red;
+
+            gameObjects.Add(player);
             gameObjects.Add(floor1);
+            gameObjects.Add(directionalLight);
+
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
+
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
+            #region Effects 
+
+            Effect effect = content.Load<Effect>("PhongBlinnShader");
+            defaultMaterial = new DefaultMaterial(effect);
+            ((DefaultMaterial)defaultMaterial).LightDirection = directionalLight.GetComponent<Light>().Direction;
+            ((DefaultMaterial)defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
+            ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
+            #endregion
+
+            foreach (var o in gameObjects)
+            {
+                if (o.GetComponent<MeshRenderer>() != null)
+                    o.GetComponent<MeshRenderer>().Material = defaultMaterial;
+            }
+            foreach (var item in gameObjects)
+            {
+                item.LoadContent(content);
+            }
+
+            floor1.GetComponent<MeshRenderer>().Load(content, "floor", 0.1f);
+            mainCam = player.GetComponent<Camera>();
         }
 
         public override void UnloadContent()
@@ -40,11 +82,23 @@ namespace Insight.Scenes
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            foreach (GameObject go in gameObjects)
+            {
+                go.Update();
+            }
         }
 
         public override void Draw()
         {
-            base.Draw();
+            graphics.GraphicsDevice.Clear(Color.LightBlue);
+            foreach (GameObject go in gameObjects)
+            {
+                go.Draw(mainCam);
+            }
+
+            graphics.GraphicsDevice.BlendState = BlendState.Opaque;
+            graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
         }
     }
 }
