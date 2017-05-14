@@ -25,7 +25,7 @@ namespace Insight.Scripts
             MouseState ms = Mouse.GetState();
            
             if(ms.LeftButton == ButtonState.Pressed)
-            if(Physics.Raycast(gameObject.Transform.Position, MainScene.GetGameObjects().Find(go => go != gameObject).Transform.Position, out hit))
+            if(Physics.Raycast(gameObject.Transform.Position, SceneManager.Instance.GetGameObjectsFromCurrentScene().Find(go => go != gameObject).Transform.Position, out hit))
             {
                 
                 Debug.WriteLine("Hit!" + hit.distance);

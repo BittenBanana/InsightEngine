@@ -18,7 +18,6 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
-        private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
         GameObject gameObject3;
@@ -53,7 +52,6 @@ namespace Insight.Scenes
         public override void Initialize(GraphicsDeviceManager graphics)
         {
             base.Initialize(graphics);
-            gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
             gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
@@ -177,7 +175,7 @@ namespace Insight.Scenes
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
 
-            colliderManager = new ColliderManager(gameObjects);
+            colliderManager = new ColliderManager();
             colliderManager.ObjectColided += gameObject.OnObjectColided;
             colliderManager.ObjectColided += gameObject3.OnObjectColided;
 
@@ -247,6 +245,10 @@ namespace Insight.Scenes
             }
 
             animationTest.GetComponent<AnimationRender>().Draw(mainCam);
+            
+            
+            //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
+            
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
             //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
             //gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
@@ -270,11 +272,6 @@ namespace Insight.Scenes
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
             base.Draw();
-        }
-
-        public static List<GameObject> GetGameObjects()
-        {
-            return gameObjects;
         }
     }
 }

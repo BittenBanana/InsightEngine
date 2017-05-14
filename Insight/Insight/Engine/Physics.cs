@@ -35,7 +35,7 @@ namespace Insight.Engine
             GameObject go = null;
             float distance = float.MaxValue;
             float? tempDistance = null;
-            foreach (var item in MainScene.GetGameObjects())
+            foreach (var item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
                 if (item.physicLayer != Layer.IgnoreRaycast)
                 {

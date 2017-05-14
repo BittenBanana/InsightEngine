@@ -15,6 +15,7 @@ namespace Insight.Engine
         public static DebugDraw debugDraw;
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
+        protected List<GameObject> gameObjects;
 
         public GraphicsDevice GetGraphicsDevice()
         {
@@ -25,6 +26,7 @@ namespace Insight.Engine
         {
             this.graphics = graphicsDevice;
             debugDraw = new DebugDraw(graphics.GraphicsDevice);
+            gameObjects = new List<GameObject>();
         }
 
         public virtual void LoadContent()
@@ -46,6 +48,11 @@ namespace Insight.Engine
         public virtual void Draw()
         {
 
+        }
+
+        public List<GameObject> GetGameObjectsFromScene()
+        {
+            return gameObjects;
         }
     }
 }
