@@ -24,16 +24,16 @@ namespace Insight.Scripts
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
+                //gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
 
                // gameObject.Transform.Rotate(Vector3.UnitY, 0.5f);
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
-                gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
+                //gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
                 //gameObject.Transform.Rotate(Vector3.UnitY, -0.5f);
             }
-            if (keyState.IsKeyDown(Keys.Up))
+            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
                 gameObject.Transform.Position.X += gameObject.velocityX;
                 gameObject.Transform.Position.Z += gameObject.velocityZ;
@@ -41,7 +41,7 @@ namespace Insight.Scripts
                 gameObject.Backward = false;
                 gameObject.IsMoving = true;
             }
-            if (keyState.IsKeyDown(Keys.Down))
+            if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
             {
                 gameObject.Transform.Position.X -= gameObject.velocityX;
                 gameObject.Transform.Position.Z -= gameObject.velocityZ;

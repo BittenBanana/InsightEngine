@@ -16,7 +16,7 @@ namespace Insight.Engine
         private static SceneManager instance;
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
-
+        public GraphicsDeviceManager device { private set; get; }
         public GameScene currentScene { get; set; }
 
         private MainScene mainS;
@@ -42,6 +42,7 @@ namespace Insight.Engine
 
         public void Initialize(GraphicsDeviceManager graphicsDevice)
         {
+            device = graphicsDevice;
             currentScene.Initialize(graphicsDevice);
             mainS.Initialize(graphicsDevice);
         }

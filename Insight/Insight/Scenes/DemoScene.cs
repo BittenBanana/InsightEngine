@@ -70,6 +70,7 @@ namespace Insight.Scenes
             floor1.GetComponent<MeshRenderer>().Load(content, "floor", 0.1f);
             player.AddNewComponent<Camera>();
             player.AddNewComponent<BoxController>();
+            player.AddNewComponent<ThirdPersonCamera>();
             player.AddNewComponent<CameraFollowBox>();
             mainCam = player.GetComponent<Camera>();
         }
