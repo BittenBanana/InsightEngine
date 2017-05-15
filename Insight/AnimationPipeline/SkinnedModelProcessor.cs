@@ -40,7 +40,6 @@ namespace SkinnedModelPipeline
 
             // Find the skeleton.
             BoneContent skeleton = MeshHelper.FindSkeleton(input);
-
             if (skeleton == null)
                 throw new InvalidContentException("Input skeleton not found.");
 
@@ -138,6 +137,11 @@ namespace SkinnedModelPipeline
             {
                 // Look up what bone this channel is controlling.
                 int boneIndex;
+
+                if (!channel.Key.StartsWith("Base"))
+                {
+                    continue;
+                }
 
                 if (!boneMap.TryGetValue(channel.Key, out boneIndex))
                 {

@@ -59,5 +59,10 @@ namespace Insight.Engine
         {
             currentScene.Draw();
         }
+
+        public List<GameObject> GetGameObjectsFromCurrentScene()
+        {
+            return currentScene.GetGameObjectsFromScene();
+        }
     }
 }

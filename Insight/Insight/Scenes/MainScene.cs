@@ -18,8 +18,8 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
+
         private PrelightingRenderer lightRenderer;
-        private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
         GameObject gameObject3;
@@ -38,7 +38,7 @@ namespace Insight.Scenes
         GameObject animationTest;
         Camera mainCam;
         ColliderManager colliderManager;
-        AudioManager audioManager;
+        //AudioManager audioManager;
         Texture2D rocket;
         Texture2D piggyBank;
         Texture2D screen;
@@ -57,7 +57,6 @@ namespace Insight.Scenes
         public override void Initialize(GraphicsDeviceManager graphics)
         {
             base.Initialize(graphics);
-            gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
             
@@ -222,20 +221,20 @@ namespace Insight.Scenes
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
 
-            colliderManager = new ColliderManager(gameObjects);
+            colliderManager = new ColliderManager();
             colliderManager.ObjectColided += gameObject.OnObjectColided;
             colliderManager.ObjectColided += gameObject3.OnObjectColided;
 
-            audioManager = new AudioManager(gameObject, content);
-            audioManager.AddSoundEffectWithEmitter("tomek2", gameObject3);
-            audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
-            audioManager.SetSoundEffectLooped(0, true);
-            audioManager.SetSoundEffectLooped(1, true);
-            audioManager.PlaySoundEffect(0);
-            //audioManager.PlaySoundEffect(1);
-            audioManager.AddSong("dj");
-            audioManager.PlaySong(0);
-            audioManager.StopCurrentSong();
+            //audioManager = new AudioManager(gameObject, content);
+            //audioManager.AddSoundEffectWithEmitter("tomek2", gameObject3);
+            //audioManager.AddSoundEffectWithEmitter("sandman", gameObject4);
+            //audioManager.SetSoundEffectLooped(0, true);
+            //audioManager.SetSoundEffectLooped(1, true);
+            //audioManager.PlaySoundEffect(0);
+            ////audioManager.PlaySoundEffect(1);
+            //audioManager.AddSong("dj");
+            //audioManager.PlaySong(0);
+            //audioManager.StopCurrentSong();
             rocket = content.Load<Texture2D>("rakieta");
             piggyBank = content.Load<Texture2D>("skarbonka");
             screen = content.Load<Texture2D>("monitor");
@@ -262,7 +261,7 @@ namespace Insight.Scenes
                 go.Update();
             }
             colliderManager.Update();
-            audioManager.Update();
+            //audioManager.Update();
             animationTest.Update();
 
             KeyboardState keyState = Keyboard.GetState();
@@ -291,11 +290,14 @@ namespace Insight.Scenes
 
             foreach (GameObject go in gameObjects)
             {
-                //if(go != gameObject3)
                 go.Draw(mainCam);
             }
 
             animationTest.GetComponent<AnimationRender>().Draw(mainCam);
+            
+            
+            //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
+            
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
             //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
             //gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
@@ -321,11 +323,6 @@ namespace Insight.Scenes
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
             base.Draw();
-        }
-
-        public static List<GameObject> GetGameObjects()
-        {
-            return gameObjects;
         }
     }
 }
