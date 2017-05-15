@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Insight.Engine
 
         public GameScene currentScene { get; set; }
 
+        private MainScene mainS;
+        private DemoScene demoS;
+
         public static SceneManager Instance
         {
             get
@@ -31,18 +35,22 @@ namespace Insight.Engine
         public SceneManager()
         {
             Dimensions = new Vector2(720, 1280);
-            currentScene = new MainScene();
+            mainS = new MainScene();
+            demoS = new DemoScene();
+            LoadDemoScene();
         }
 
         public void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             currentScene.Initialize(graphicsDevice);
+            mainS.Initialize(graphicsDevice);
         }
 
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
             currentScene.LoadContent();
+            mainS.LoadContent();
         }
 
         public void UnloadContent()
@@ -53,6 +61,13 @@ namespace Insight.Engine
         public void Update(GameTime gameTime)
         {
             currentScene.Update(gameTime);
+
+            KeyboardState keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.F1))
+                LoadDemoScene();
+            if (keyState.IsKeyDown(Keys.F2))
+                LoadMainScene();
         }
 
         public void Draw()
@@ -63,6 +78,16 @@ namespace Insight.Engine
         public List<GameObject> GetGameObjectsFromCurrentScene()
         {
             return currentScene.GetGameObjectsFromScene();
+        }
+
+        public void LoadMainScene()
+        {
+            currentScene = mainS;
+        }
+
+        public void LoadDemoScene()
+        {
+            currentScene = demoS;
         }
     }
 }
