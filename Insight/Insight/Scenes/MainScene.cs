@@ -219,7 +219,7 @@ namespace Insight.Scenes
             gameObject3.Transform.Rotation.Y = 50f;
             animationTest.LoadContent(content);
 
-            colliderManager = new ColliderManager();
+            colliderManager = new ColliderManager(gameObjects);
             colliderManager.ObjectColided += gameObject.OnObjectColided;
             colliderManager.ObjectColided += gameObject3.OnObjectColided;
 
