@@ -20,14 +20,14 @@ namespace Insight.Engine
         List<GameObject> staticObjects;
         List<GameObject> dynamicObjects;
 
-        public ColliderManager()
+        public ColliderManager(List<GameObject> gameObjects)
         {
             isCollision = false;
             isCollisionDynamic = false;
-            lastModelPosition = new Vector3[SceneManager.Instance.GetGameObjectsFromCurrentScene().Count];
+            lastModelPosition = new Vector3[gameObjects.Count];
             staticObjects = new List<GameObject>();
             dynamicObjects = new List<GameObject>();
-            foreach (GameObject gameObject in SceneManager.Instance.GetGameObjectsFromCurrentScene())
+            foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject.IsDynamic())
                 {
