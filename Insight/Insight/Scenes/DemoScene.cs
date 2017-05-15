@@ -20,24 +20,22 @@ namespace Insight.Scenes
         Camera mainCam;
         Material defaultMaterial;
         GameObject directionalLight;
-        public static Matrix projection { get; private set; }
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
 
             player = new GameObject(new Vector3(0, 0, 2), true);
             player.AddNewComponent<MeshRenderer>();
-            player.AddNewComponent<Camera>();
             //player.AddNewComponent<Rigidbody>();
-            player.AddNewComponent<CameraFollowBox>();
+            //player.AddNewComponent<Rigidbody>();
 
-            floor1 = new GameObject(new Vector3(18, -1.5f, 30), false);
+            floor1 = new GameObject(new Vector3(0, 0, 0), false);
             floor1.AddNewComponent<MeshRenderer>();
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
-            directionalLight.GetComponent<Light>().Color = Color.Red;
+            directionalLight.GetComponent<Light>().Color = Color.White;
 
             gameObjects.Add(player);
             gameObjects.Add(floor1);
@@ -70,6 +68,9 @@ namespace Insight.Scenes
             }
 
             floor1.GetComponent<MeshRenderer>().Load(content, "floor", 0.1f);
+            player.AddNewComponent<Camera>();
+            player.AddNewComponent<BoxController>();
+            player.AddNewComponent<CameraFollowBox>();
             mainCam = player.GetComponent<Camera>();
         }
 

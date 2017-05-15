@@ -1,5 +1,6 @@
 ﻿using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Insight.Engine
 {
@@ -21,7 +22,7 @@ namespace Insight.Engine
         {
             Rotation = Vector3.Zero;
             Position = pos;
-            quaterion = new Quaternion();
+            quaterion = Quaternion.Identity;
             Name = "Transform";
         }
 
@@ -29,6 +30,8 @@ namespace Insight.Engine
         {
             //quaterion.W;
             quaterion *= Quaternion.CreateFromAxisAngle(axis, angle);
+            //Rotation =
+            Debug.WriteLine(quaterion);
         }
 
     }

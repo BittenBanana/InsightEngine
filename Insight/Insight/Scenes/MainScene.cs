@@ -51,9 +51,7 @@ namespace Insight.Scenes
         int _fps = 0;
 
         Material defaultMaterial;
-
-        public static Matrix projection { get; private set; }
-
+        
         public override void Initialize(GraphicsDeviceManager graphics)
         {
             base.Initialize(graphics);

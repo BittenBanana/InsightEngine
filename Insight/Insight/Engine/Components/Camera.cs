@@ -17,7 +17,7 @@ namespace Insight.Engine
 
         public Camera(GameObject gameObject) : base (gameObject)
         {
-            projection = MainScene.projection;
+            projection = SceneManager.Instance.currentScene.GetProjectionMatrix();
             Position = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y, gameObject.Transform.Position.Z);
             view = Matrix.CreateFromQuaternion(gameObject.Transform.quaterion);
         }

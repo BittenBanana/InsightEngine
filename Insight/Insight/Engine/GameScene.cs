@@ -17,6 +17,8 @@ namespace Insight.Engine
         protected GraphicsDeviceManager graphics;
         protected List<GameObject> gameObjects;
 
+        protected Matrix projection { get; set; }
+
         public GraphicsDevice GetGraphicsDevice()
         {
             return graphics.GraphicsDevice;
@@ -53,6 +55,11 @@ namespace Insight.Engine
         public List<GameObject> GetGameObjectsFromScene()
         {
             return gameObjects;
+        }
+
+        public Matrix GetProjectionMatrix()
+        {
+            return projection;
         }
     }
 }

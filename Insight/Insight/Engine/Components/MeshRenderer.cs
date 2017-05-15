@@ -133,7 +133,9 @@ namespace Insight.Engine.Components
                         Material.SetParameters();
                         effect.Parameters["World"]?.SetValue(boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
-                                                            * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                                                            * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
+                                                            * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
+                                                            * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
                                                             * Matrix.CreateTranslation(gameObject.Transform.Position)
                                                             * Matrix.CreateTranslation(gameObject.Transform.origin));
                         effect.Parameters["View"]?.SetValue(cam.view);
