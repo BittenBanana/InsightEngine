@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Insight.Engine
 {
-    public class Material
+    public class Material : ICloneable
     {
         protected Effect effect;
 
@@ -24,6 +24,11 @@ namespace Insight.Engine
 
         public virtual void SetParameters()
         {
+        }
+
+        public virtual object Clone()
+        {
+            return new Material(effect);
         }
     }
 }

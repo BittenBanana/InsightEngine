@@ -18,6 +18,7 @@ namespace Insight.Scenes
 {
     class MainScene : GameScene
     {
+        private PrelightingRenderer lightRenderer;
         private static List<GameObject> gameObjects;
         GameObject gameObject;
         GameObject gameObject2;
@@ -29,7 +30,10 @@ namespace Insight.Scenes
         GameObject gameObject8;
         GameObject gameObject9;
 
-        private GameObject directionalLight;
+        private GameObject pointLight1;
+        private GameObject pointLight2;
+        private GameObject pointLight3;
+        private GameObject pointLight4;
         //GameObject box;
         GameObject animationTest;
         Camera mainCam;
@@ -56,6 +60,8 @@ namespace Insight.Scenes
             gameObjects = new List<GameObject>();
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
+            
+
             gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
             gameObject3 = new GameObject(new Vector3(0, -3.2f, 0), false);
@@ -76,12 +82,30 @@ namespace Insight.Scenes
             //box.AddNewComponent<MeshRenderer>();
             bloodLevel = 0;
 
-            directionalLight = new GameObject(new Vector3(-5,5,0), false);
-            directionalLight.AddNewComponent<Light>();
-            directionalLight.GetComponent<Light>().Direction = new Vector3(3,-5,0);
-            directionalLight.GetComponent<Light>().Color = Color.Red;
+            pointLight1 = new GameObject(new Vector3(-20, 1f, -20), false);
+            pointLight1.AddNewComponent<Light>();
+            pointLight1.GetComponent<Light>().Color = Color.Cyan;
+            pointLight1.GetComponent<Light>().Attenuation = 20;
 
-            gameObjects.Add(directionalLight);
+            pointLight2 = new GameObject(new Vector3(20f, 1f, 20), false);
+            pointLight2.AddNewComponent<Light>();
+            pointLight2.GetComponent<Light>().Color = Color.Magenta;
+            pointLight2.GetComponent<Light>().Attenuation = 20;
+
+            pointLight3 = new GameObject(new Vector3(20, 1f, -20), false);
+            pointLight3.AddNewComponent<Light>();
+            pointLight3.GetComponent<Light>().Color = Color.Yellow;
+            pointLight3.GetComponent<Light>().Attenuation = 20;
+                      
+            pointLight4 = new GameObject(new Vector3(-20, 1f, 20), false);
+            pointLight4.AddNewComponent<Light>();
+            pointLight4.GetComponent<Light>().Color = Color.Black;
+            pointLight4.GetComponent<Light>().Attenuation = 20;
+
+            gameObjects.Add(pointLight1);
+            gameObjects.Add(pointLight2);
+            gameObjects.Add(pointLight3);
+            gameObjects.Add(pointLight4);
             gameObjects.Add(gameObject);
             gameObjects.Add(gameObject2);
             gameObjects.Add(gameObject3);
@@ -95,6 +119,8 @@ namespace Insight.Scenes
             animationTest = new GameObject(new Vector3(0, -5, 40), true);
             animationTest.AddNewComponent<AnimationRender>();
 
+           
+
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
 
@@ -105,17 +131,34 @@ namespace Insight.Scenes
             #region Effects 
 
             Effect effect = content.Load<Effect>("PhongBlinnShader");
+            Effect pointLight = content.Load<Effect>("PointLight");
+            Effect spotLight = content.Load<Effect>("SpotLight");
             defaultMaterial = new DefaultMaterial(effect);
-            ((DefaultMaterial) defaultMaterial).LightDirection = directionalLight.GetComponent<Light>().Direction;
-            ((DefaultMaterial) defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
-            ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
+            //((DefaultMaterial) defaultMaterial).LightColor = pointLight1.GetComponent<Light>().Color.ToVector3();
+            //((DefaultMaterial) defaultMaterial).LightDirection = pointLight1.GetComponent<Light>().Direction;
+            //((DefaultMaterial)defaultMaterial).SpecularColor = pointLight1.GetComponent<Light>().Color.ToVector3();
             #endregion
+
+            List<MeshRenderer> models = new List<MeshRenderer>();
+            List<Light> lights = new List<Light>();
 
             foreach (var o in gameObjects)
             {
                 if (o.GetComponent<MeshRenderer>() != null)
+                {
+                    models.Add(o.GetComponent<MeshRenderer>());
                     o.GetComponent<MeshRenderer>().Material = defaultMaterial;
+                }
+                if (o.GetComponent<Light>() != null)
+                {
+                    lights.Add(o.GetComponent<Light>());
+                }
             }
+            lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
+
+            //lightRenderer.Camera = mainCam;
+            //lightRenderer.Models = models;
+            //lightRenderer.Lights = lights;
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
@@ -142,6 +185,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Rigidbody>();
+            gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject3.AddNewComponent<BoxCollider>();
             gameObject4.AddNewComponent<BoxCollider>();
@@ -168,6 +212,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<RaycastTest>();
             //box.GetComponent<BoxCollider>().IsTrigger = true;
             gameObject6.GetComponent<MeshRenderer>().IsVisible = false;
+            
 
             mainCam = gameObject.GetComponent<Camera>();
 
@@ -197,6 +242,10 @@ namespace Insight.Scenes
             blood = content.Load<Texture2D>("blood");
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
             _spr_font = content.Load<SpriteFont>("gamefont");
+
+            lightRenderer.Camera = mainCam;
+            lightRenderer.Lights = lights;
+            lightRenderer.Models = models;
         }
 
         public override void UnloadContent()
@@ -236,9 +285,9 @@ namespace Insight.Scenes
         }
         public override void Draw()
         {
-            graphics.GraphicsDevice.Clear(Color.LightBlue);
-            
+            lightRenderer.Draw();
 
+            graphics.GraphicsDevice.Clear(Color.LightBlue);
 
             foreach (GameObject go in gameObjects)
             {
@@ -257,6 +306,8 @@ namespace Insight.Scenes
             _total_frames++;
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
+            //spriteBatch.Draw(lightRenderer.lightTarg, new Vector2(0, 0), null, Color.White, 0, new Vector2(0, 0), 0.3f,
+            //    SpriteEffects.None, 1);
             spriteBatch.Draw(rocket, new Vector2(30, 410), Color.White);
             spriteBatch.Draw(piggyBank, new Vector2(90, 412), Color.White);
             spriteBatch.Draw(screen, new Vector2(150, 415), Color.White);

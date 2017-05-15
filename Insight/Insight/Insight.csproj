@@ -56,7 +56,9 @@
     <Compile Include="Engine\Components\Transform.cs" />
     <Compile Include="Engine\Layer.cs" />
     <Compile Include="Engine\Material.cs" />
+    <Compile Include="Engine\MeshTag.cs" />
     <Compile Include="Engine\Physics.cs" />
+    <Compile Include="Engine\PrelightingRenderer.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\GameScene.cs" />

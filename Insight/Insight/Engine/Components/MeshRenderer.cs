@@ -20,9 +20,9 @@ namespace Insight.Engine.Components
 
 
         float scale;
-        public bool IsVisible {get; set;}
+        public bool IsVisible { get; set; }
 
-        public MeshRenderer(GameObject gameObject) : base (gameObject)
+        public MeshRenderer(GameObject gameObject) : base(gameObject)
         {
             scale = 0.1f;
             IsVisible = true;
@@ -30,6 +30,7 @@ namespace Insight.Engine.Components
         public void Load(ContentManager c)
         {
             model = c.Load<Model>("bohater (2)");
+            generateTags();
             scale = 0.01f;
             effect = Material.GetEffect();
         }
@@ -37,6 +38,7 @@ namespace Insight.Engine.Components
         public void Load(ContentManager c, string path, float scale)
         {
             model = c.Load<Model>(path);
+            generateTags();
             effect = Material.GetEffect();
             this.scale = scale;
         }
@@ -56,9 +58,56 @@ namespace Insight.Engine.Components
             return scale;
         }
 
+        // Store references to all of the model's current effects
+        public void CacheEffects()
+        {
+
+            foreach (ModelMesh mesh in model.Meshes)
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                    ((MeshTag)part.Tag).CachedEffect = part.Effect;
+        }
+
+        public void RestoreEffects()
+        {
+            foreach (ModelMesh mesh in model.Meshes)
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                    if (((MeshTag)part.Tag).CachedEffect != null)
+                        part.Effect = ((MeshTag)part.Tag).CachedEffect;
+        }
+
+        public void SetModelMaterial(Material material, bool CopyEffect)
+        {
+            this.Material = material;
+            effect = material.GetEffect();
+            //foreach (ModelMesh mesh in model.Meshes)
+            //    foreach (ModelMeshPart part in mesh.MeshParts)
+            //    {
+            //        Effect toSet = material.GetEffect();
+            //        // Copy the effect if necessary
+            //        if (CopyEffect)
+            //            toSet = effect.Clone();
+            //        MeshTag tag = ((MeshTag)part.Tag);
+            //        // If this ModelMeshPart has a texture, set it to the effect
+            //        //material.SetParameters();
+            //        this.effect = toSet;
+            //    }
+        }
+
+        private void generateTags()
+        {
+            foreach (ModelMesh mesh in model.Meshes)
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                    if (part.Effect is Effect)
+                    {
+                        Effect effect = (Effect)part.Effect;
+                        MeshTag tag = new MeshTag(effect);
+                        part.Tag = tag;
+                    }
+        }
+
         public override void Draw(Camera cam)
         {
-            if(IsVisible)
+            if (IsVisible)
             {
                 boneTransformations = new Matrix[model.Bones.Count];
                 model.CopyAbsoluteBoneTransformsTo(boneTransformations);
@@ -90,8 +139,8 @@ namespace Insight.Engine.Components
                         effect.Parameters["View"]?.SetValue(cam.view);
                         effect.Parameters["Projection"]?.SetValue(cam.projection);
                         effect.Parameters["CamPosition"]?.SetValue(cam.Position);
-                        
-                        
+
+
                         //effect.CurrentTechnique = effect.Techniques["Blinn"];
 
                         //effect.EnableDefaultLighting();
@@ -100,7 +149,7 @@ namespace Insight.Engine.Components
                     mesh.Draw();
                 }
             }
-            
+
         }
 
         public Matrix GetMatrix()
