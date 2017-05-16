@@ -23,7 +23,7 @@ namespace Insight.Engine.Components
 
         public void Load(ContentManager c)
         {
-            model = c.Load<Model>("badassRunIdle");
+            model = c.Load<Model>("DemoScene/GameObjects/badassRunIdle");
 
             SkinningData skinningData = model.Tag as SkinningData;
 

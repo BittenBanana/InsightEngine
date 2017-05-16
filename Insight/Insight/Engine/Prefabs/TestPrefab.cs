@@ -41,10 +41,10 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
-            floor2.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
-            floor3.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
-            floor4.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
+            floor1.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/floor5x5", 1.0f);
+            floor2.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/floor5x5", 1.0f);
+            floor3.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/floor5x5", 1.0f);
+            floor4.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/floor5x5", 1.0f);
         }
 
 
