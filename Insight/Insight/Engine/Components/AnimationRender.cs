@@ -18,12 +18,12 @@ namespace Insight.Engine.Components
         public AnimationRender(GameObject gameObject) : base(gameObject)
         {
 
-            scale = 0.1f;
+            scale = 1.0f;
         }
 
         public void Load(ContentManager c)
         {
-            model = c.Load<Model>("worek");
+            model = c.Load<Model>("badassRunIdle");
 
             SkinningData skinningData = model.Tag as SkinningData;
 
@@ -70,10 +70,11 @@ namespace Insight.Engine.Components
                 foreach (SkinnedEffect effect in mesh.Effects)
                 {
                     effect.World = boneTransformations[mesh.ParentBone.Index]
-                        * Matrix.CreateScale(scale)
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+                        * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
+                        * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
+                        * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
                         * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+                        * Matrix.CreateScale(scale);
 
 
                     effect.SetBoneTransforms(bones);

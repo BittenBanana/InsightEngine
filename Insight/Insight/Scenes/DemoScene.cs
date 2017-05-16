@@ -9,13 +9,15 @@ using Insight.Engine.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Insight.Materials;
 using Insight.Scripts;
+using Insight.Engine.Prefabs;
 
 namespace Insight.Scenes
 {
     class DemoScene : GameScene
     {
         static String floorPrefab = "floor5x5";
-        GameObject floor1;
+        //GameObject floor1;
+        TestPrefab testPrefab;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -26,11 +28,11 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(0, 0, 2), true);
             player.AddNewComponent<MeshRenderer>();
-            //player.AddNewComponent<Rigidbody>();
-            //player.AddNewComponent<Rigidbody>();
 
-            floor1 = new GameObject(new Vector3(0, 0, 0), false);
-            floor1.AddNewComponent<MeshRenderer>();
+            //floor1 = new GameObject(new Vector3(0, 0, 0), false);
+            //floor1.AddNewComponent<MeshRenderer>();
+            testPrefab = new TestPrefab();
+            testPrefab.Initialize();
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -38,7 +40,6 @@ namespace Insight.Scenes
             directionalLight.GetComponent<Light>().Color = Color.White;
 
             gameObjects.Add(player);
-            gameObjects.Add(floor1);
             gameObjects.Add(directionalLight);
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
@@ -67,18 +68,21 @@ namespace Insight.Scenes
                 item.LoadContent(content);
             }
 
-            floor1.GetComponent<MeshRenderer>().Load(content, "floor", 0.1f);
+            //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
+            testPrefab.LoadContent(content);
+            player.GetComponent<MeshRenderer>().Load(content, "badass1_8m", 0.01f);
             player.AddNewComponent<Camera>();
             player.AddNewComponent<BoxController>();
-            player.AddNewComponent<ThirdPersonCamera>();
+            //player.AddNewComponent<ThirdPersonCamera>();
             player.AddNewComponent<CameraFollowBox>();
             mainCam = player.GetComponent<Camera>();
+
+          
         }
 
         public override void UnloadContent()
         {
             base.UnloadContent();
-
         }
 
         public override void Update(GameTime gameTime)

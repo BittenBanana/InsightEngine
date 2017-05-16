@@ -58,6 +58,8 @@
     <Compile Include="Engine\Material.cs" />
     <Compile Include="Engine\MeshTag.cs" />
     <Compile Include="Engine\Physics.cs" />
+    <Compile Include="Engine\Prefabs\Prefab.cs" />
+    <Compile Include="Engine\Prefabs\TestPrefab.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Game1.cs" />
@@ -103,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Content\badass1_8m.FBX" />
+    <None Include="Content\badassRunIdle.FBX" />
     <None Include="Content\bohater %282%29.FBX" />
     <None Include="Content\worek.FBX" />
     <None Include="GameObject\Box001DiffuseMap.tga" />

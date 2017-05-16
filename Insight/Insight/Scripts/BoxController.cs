@@ -24,14 +24,14 @@ namespace Insight.Scripts
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                //gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
+               gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
 
-               // gameObject.Transform.Rotate(Vector3.UnitY, 0.5f);
+               gameObject.Transform.Rotate(Vector3.UnitY, 0.5f);
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
-                //gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
-                //gameObject.Transform.Rotate(Vector3.UnitY, -0.5f);
+                gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
+                gameObject.Transform.Rotate(Vector3.UnitY, -0.5f);
             }
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
