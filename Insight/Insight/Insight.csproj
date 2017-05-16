@@ -37,6 +37,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Insight.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Engine\AudioManager.cs" />
     <Compile Include="Engine\Banana Scripting\BananaScript.cs" />
