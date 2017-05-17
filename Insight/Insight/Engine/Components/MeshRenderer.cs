@@ -24,14 +24,14 @@ namespace Insight.Engine.Components
 
         public MeshRenderer(GameObject gameObject) : base(gameObject)
         {
-            scale = 1f;
+            scale = 0.01f;
             IsVisible = true;
         }
         public void Load(ContentManager c)
         {
             model = c.Load<Model>("DemoScene/GameObjects/badass1_8m");
             generateTags();
-            scale = 1f;
+            scale = 0.01f;
             effect = Material.GetEffect();
         }
 
