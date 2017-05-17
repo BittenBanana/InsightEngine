@@ -29,7 +29,7 @@ namespace Insight.Engine.Components
         }
         public void Load(ContentManager c)
         {
-            model = c.Load<Model>("DemoScene/GameObjects/badass1_8m");
+            model = c.Load<Model>("Models/Konrads/Character/badass1_8m");
             generateTags();
             scale = 0.01f;
             effect = Material.GetEffect();

@@ -50,16 +50,16 @@ namespace Insight.Engine
                 viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
             // Load effects
-            depthNormalEffect = content.Load<Effect>("Shared/Shaders/PPDepthNormal");
+            depthNormalEffect = content.Load<Effect>("Shaders/PPDepthNormal");
             depthNorMaterial = new Material(depthNormalEffect);
-            lightingEffect = content.Load<Effect>("Shared/Shaders/LightMap");
+            lightingEffect = content.Load<Effect>("Shaders/LightMap");
 
             // Set effect parameters to light mapping effect
             lightingEffect.Parameters["viewportWidth"].SetValue((float)viewWidth);
             lightingEffect.Parameters["viewportHeight"].SetValue((float)viewHeight);
 
             // Load point light mesh and set light mapping effect to it
-            lightMesh = content.Load<Model>("Shared/GameObjects/ball");
+            lightMesh = content.Load<Model>("Models/ball");
             
             this.graphicsDevice = graphicsDevice;
         }
