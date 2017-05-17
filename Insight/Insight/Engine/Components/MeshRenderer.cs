@@ -131,17 +131,23 @@ namespace Insight.Engine.Components
                         //}
                         p.Effect = effect;
                         Material.SetParameters();
-                        effect.Parameters["World"]?.SetValue(boneTransformations[mesh.ParentBone.Index]
+                        Matrix World = boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
                                                             * Matrix.CreateTranslation(gameObject.Transform.Position)
-                                                            * Matrix.CreateTranslation(gameObject.Transform.origin));
+                                                            * Matrix.CreateTranslation(gameObject.Transform.origin);
+                        effect.Parameters["World"]?.SetValue(World);
                         effect.Parameters["View"]?.SetValue(cam.view);
                         effect.Parameters["Projection"]?.SetValue(cam.projection);
                         effect.Parameters["CamPosition"]?.SetValue(cam.Position);
-
+                        effect.Parameters["WorldInverseTranspose"]?.SetValue(Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * World)));
+                        effect.Parameters["ViewVector"]?.SetValue(Vector3.Transform(Vector3.Forward,
+                            Matrix.CreateFromAxisAngle(Vector3.UnitX, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.X)
+                            * Matrix.CreateFromAxisAngle(Vector3.UnitY, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Y)
+                            * Matrix.CreateFromAxisAngle(Vector3.UnitZ, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Z)
+                            ));
 
                         //effect.CurrentTechnique = effect.Techniques["Blinn"];
 

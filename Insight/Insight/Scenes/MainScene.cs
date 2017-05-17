@@ -36,7 +36,6 @@ namespace Insight.Scenes
         private GameObject pointLight4;
         //GameObject box;
         GameObject animationTest;
-        Camera mainCam;
         ColliderManager colliderManager;
         AudioManager audioManager;
         Texture2D rocket;
@@ -51,6 +50,8 @@ namespace Insight.Scenes
         int _fps = 0;
 
         Material defaultMaterial;
+        Material transparencyMaterial;
+        
         
         public override void Initialize(GraphicsDeviceManager graphics)
         {
@@ -130,7 +131,10 @@ namespace Insight.Scenes
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             Effect pointLight = content.Load<Effect>("Shaders/PointLight");
             Effect spotLight = content.Load<Effect>("Shaders/SpotLight");
+            Effect transparency = content.Load<Effect>("Shaders/glass");
             defaultMaterial = new DefaultMaterial(effect);
+            transparencyMaterial = new TransparencyMaterial(transparency);
+            ((TransparencyMaterial)transparencyMaterial).DiffuseLightDirection = ((DefaultMaterial)defaultMaterial).LightDirection;
             //((DefaultMaterial) defaultMaterial).LightColor = pointLight1.GetComponent<Light>().Color.ToVector3();
             //((DefaultMaterial) defaultMaterial).LightDirection = pointLight1.GetComponent<Light>().Direction;
             //((DefaultMaterial)defaultMaterial).SpecularColor = pointLight1.GetComponent<Light>().Color.ToVector3();
@@ -151,6 +155,8 @@ namespace Insight.Scenes
                     lights.Add(o.GetComponent<Light>());
                 }
             }
+
+            gameObject9.GetComponent<MeshRenderer>().Material = transparencyMaterial;
             lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
 
             //lightRenderer.Camera = mainCam;

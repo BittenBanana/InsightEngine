@@ -447,3 +447,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/ball.fbx
 
+#begin Shaders/glass.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/glass.fx
+
