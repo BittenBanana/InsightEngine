@@ -35,7 +35,7 @@ namespace Insight.Scenes
         private GameObject pointLight3;
         private GameObject pointLight4;
         //GameObject box;
-        GameObject animationTest;
+        //GameObject animationTest;
         Camera mainCam;
         ColliderManager colliderManager;
         AudioManager audioManager;
@@ -113,7 +113,7 @@ namespace Insight.Scenes
             gameObjects.Add(gameObject8);
             gameObjects.Add(gameObject9);
 
-            animationTest = new GameObject(new Vector3(0, -5, 40), true);
+            //animationTest = new GameObject(new Vector3(0, -5, 40), true);
             //animationTest.AddNewComponent<AnimationRender>();
 
            
@@ -167,6 +167,7 @@ namespace Insight.Scenes
             gameObject9.LoadContent(content);
             //box.LoadContent(content);
             gameObject3.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/straight", 2f);
+            gameObject3.GetComponent<MeshRenderer>().LoadTexture(content, "Shared/Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
             gameObject6.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/corridor-corner-colliders", 2f);
             gameObject7.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/corner", 2f);
             gameObject8.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/straight-rotated", 2f);
@@ -217,7 +218,7 @@ namespace Insight.Scenes
             //gameObject2.AddNewComponent<BoxRotation>();
             
             gameObject3.Transform.Rotation.Y = 50f;
-            animationTest.LoadContent(content);
+            //animationTest.LoadContent(content);
 
             colliderManager = new ColliderManager(gameObjects);
             colliderManager.ObjectColided += gameObject.OnObjectColided;
@@ -260,7 +261,7 @@ namespace Insight.Scenes
             }
             colliderManager.Update();
             //audioManager.Update();
-            animationTest.Update();
+            //animationTest.Update();
 
             KeyboardState keyState = Keyboard.GetState();
 
@@ -291,7 +292,7 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
-            animationTest.GetComponent<AnimationRender>().Draw(mainCam);
+            //animationTest.GetComponent<AnimationRender>().Draw(mainCam);
             
             
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
