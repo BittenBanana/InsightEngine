@@ -16,6 +16,7 @@ namespace Insight.Engine.Components
         private Effect effect;
         public Material Material { get; set; }
         Texture2D texture;
+        private Texture2D normal;
         Matrix[] boneTransformations;
 
 
@@ -46,6 +47,11 @@ namespace Insight.Engine.Components
         public void LoadTexture(ContentManager c, string path)
         {
             texture = c.Load<Texture2D>(path);
+        }
+
+        public void LoadNormalMap(ContentManager c, string path)
+        {
+            normal = c.Load<Texture2D>(path);
         }
 
         public Model getModel()
@@ -140,6 +146,17 @@ namespace Insight.Engine.Components
                         {
                             effect.Parameters["TextureEnabled"]?.SetValue(false);
                         }
+
+                        if (normal != null)
+                        {
+                            effect.Parameters["NormalTexture"]?.SetValue(normal);
+                            effect.Parameters["NormalEnabled"]?.SetValue(true);
+                        }
+                        else
+                        {
+                            effect.Parameters["NormalEnabled"]?.SetValue(false);
+                        }
+                        
 
                         Matrix World = boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)

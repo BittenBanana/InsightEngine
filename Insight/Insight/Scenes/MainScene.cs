@@ -178,6 +178,7 @@ namespace Insight.Scenes
 
             gameObject3.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/straight", 2f);
             gameObject3.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
+            gameObject3.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
             gameObject6.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/corridor-corner-colliders", 2f);
             gameObject7.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/corner", 2f);
             gameObject8.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/straight-rotated", 2f);

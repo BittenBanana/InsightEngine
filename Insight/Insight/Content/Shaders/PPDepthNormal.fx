@@ -11,17 +11,31 @@ float4x4 World;
 float4x4 View;
 float4x4 Projection;
 
+texture2D NormalTexture;
+sampler2D normalSampler = sampler_state
+{
+    Texture = <NormalTexture>;
+    Minfilter = linear;
+    MagFilter = linear;
+    MipFilter = linear;
+    AddressU = Wrap;
+    AddressV = Wrap;
+};
+bool NormalEnabled = false;
+
 struct VertexShaderInput
 {
 	float4 Position : POSITION0;
 	float3 Normal : NORMAL0;
+    float2 UV : TEXCOORD0;
 };
 
 struct VertexShaderOutput
 {
 	float4 Position : POSITION0;
-	float2 Depth : TEXCOORD0;
-	float3 Normal : TEXCOORD1;
+    float2 UV : TEXCOORD0;
+	float2 Depth : TEXCOORD1;
+	float3 Normal : TEXCOORD2;
 };
 
 struct PixelShaderOutput
@@ -38,6 +52,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 	float4x4 worldViewProjection = mul(World, viewProjection);
 
 	output.Position = mul(input.Position, worldViewProjection);
+    output.UV = input.UV;
 	output.Normal = mul(input.Normal, World);
 	output.Depth.xy = output.Position.zw;
 
@@ -51,7 +66,14 @@ PixelShaderOutput MainPS(VertexShaderOutput input)
 	float4 color;
 
 	color = input.Depth.x / input.Depth.y;
-	output.Normal.xyz = (normalize(input.Normal).xyz / 2) + .5;
+
+    float3 normal = tex2D(normalSampler, input.UV).rgb;
+    normal = normal * 2 - 1;
+
+    if (!NormalEnabled)
+        normal = float3(1, 1, 1);
+
+	output.Normal.xyz = (normalize(input.Normal * normal).xyz / 2) + .5;
 
 	color.a = 1;
 	output.Normal.a = 1;
