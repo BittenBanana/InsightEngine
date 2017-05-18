@@ -54,6 +54,7 @@
     <Compile Include="Engine\Components\MeshRenderer.cs" />
     <Compile Include="Engine\Components\Rigidbody.cs" />
     <Compile Include="Engine\Components\SphereCollider.cs" />
+    <Compile Include="Engine\Components\UserInterface.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Components\Component.cs" />
     <Compile Include="Engine\Components\Transform.cs" />
