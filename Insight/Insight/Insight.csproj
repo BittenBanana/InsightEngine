@@ -70,6 +70,7 @@
     <Compile Include="Materials\DefaultMaterial.cs" />
     <Compile Include="Materials\PointLightMaterial.cs" />
     <Compile Include="Materials\SpotLightMaterial.cs" />
+    <Compile Include="Materials\TransparencyMaterial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\SceneManager.cs" />

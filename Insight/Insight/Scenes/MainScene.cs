@@ -35,8 +35,9 @@ namespace Insight.Scenes
         private GameObject pointLight3;
         private GameObject pointLight4;
         //GameObject box;
+
         //GameObject animationTest;
-        Camera mainCam;
+
         ColliderManager colliderManager;
         AudioManager audioManager;
         Texture2D rocket;
@@ -51,6 +52,8 @@ namespace Insight.Scenes
         int _fps = 0;
 
         Material defaultMaterial;
+        Material transparencyMaterial;
+        
         
         public override void Initialize(GraphicsDeviceManager graphics)
         {
@@ -127,10 +130,13 @@ namespace Insight.Scenes
 
             #region Effects 
 
-            Effect effect = content.Load<Effect>("Shared/Shaders/PhongBlinnShader");
-            Effect pointLight = content.Load<Effect>("Shared/Shaders/PointLight");
-            Effect spotLight = content.Load<Effect>("Shared/Shaders/SpotLight");
+            Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
+            Effect pointLight = content.Load<Effect>("Shaders/PointLight");
+            Effect spotLight = content.Load<Effect>("Shaders/SpotLight");
+            Effect transparency = content.Load<Effect>("Shaders/glass");
             defaultMaterial = new DefaultMaterial(effect);
+            transparencyMaterial = new TransparencyMaterial(transparency);
+            ((TransparencyMaterial)transparencyMaterial).DiffuseLightDirection = ((DefaultMaterial)defaultMaterial).LightDirection;
             //((DefaultMaterial) defaultMaterial).LightColor = pointLight1.GetComponent<Light>().Color.ToVector3();
             //((DefaultMaterial) defaultMaterial).LightDirection = pointLight1.GetComponent<Light>().Direction;
             //((DefaultMaterial)defaultMaterial).SpecularColor = pointLight1.GetComponent<Light>().Color.ToVector3();
@@ -151,6 +157,8 @@ namespace Insight.Scenes
                     lights.Add(o.GetComponent<Light>());
                 }
             }
+
+            gameObject9.GetComponent<MeshRenderer>().Material = transparencyMaterial;
             lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
 
             //lightRenderer.Camera = mainCam;
@@ -159,23 +167,25 @@ namespace Insight.Scenes
 
             gameObject.LoadContent(content);
             gameObject2.LoadContent(content);
-            gameObject2.GetComponent<MeshRenderer>().Load(content, "MainScene/GameObjects/ground", 0.1f);
+            gameObject2.GetComponent<MeshRenderer>().Load(content, "Models/ground", 0.1f);
             gameObject3.LoadContent(content);
             gameObject6.LoadContent(content);
             gameObject7.LoadContent(content);
             gameObject8.LoadContent(content);
             gameObject9.LoadContent(content);
             //box.LoadContent(content);
+
             gameObject3.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/straight", 2f);
             gameObject3.GetComponent<MeshRenderer>().LoadTexture(content, "Shared/Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
             gameObject6.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/corridor-corner-colliders", 2f);
             gameObject7.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/corner", 2f);
             gameObject8.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/straight-rotated", 2f);
             gameObject9.GetComponent<MeshRenderer>().Load(content, "Shared/GameObjects/wall5x5withDoor", 2f);
+
             gameObject4.LoadContent(content);
-            gameObject4.GetComponent<MeshRenderer>().Load(content, "MainScene/GameObjects/stairs", 0.1f);
+            gameObject4.GetComponent<MeshRenderer>().Load(content, "Models/stairs", 0.1f);
             gameObject5.LoadContent(content);
-            gameObject5.GetComponent<MeshRenderer>().Load(content, "MainScene/GameObjects/floor", 0.1f);
+            gameObject5.GetComponent<MeshRenderer>().Load(content, "Models/floor", 0.1f);
             //box.GetComponent<MeshRenderer>().Load(content, "GameObject/boxMat", 2f);
             //box.AddNewComponent<BoxCollider>();
             //box.AddNewComponent<Rigidbody>();
@@ -225,21 +235,21 @@ namespace Insight.Scenes
             colliderManager.ObjectColided += gameObject3.OnObjectColided;
 
             audioManager = new AudioManager(gameObject, content);
-            audioManager.AddSoundEffectWithEmitter("MainScene/Sounds/tomek2", gameObject3);
-            audioManager.AddSoundEffectWithEmitter("MainScene/Sounds/sandman", gameObject4);
+            audioManager.AddSoundEffectWithEmitter("Audio/tomek2", gameObject3);
+            audioManager.AddSoundEffectWithEmitter("Audio/sandman", gameObject4);
             audioManager.SetSoundEffectLooped(0, true);
             audioManager.SetSoundEffectLooped(1, true);
             //audioManager.PlaySoundEffect(0);
             //audioManager.PlaySoundEffect(1);
-            audioManager.AddSong("MainScene/Sounds/dj");
+            audioManager.AddSong("Audio/dj");
             audioManager.PlaySong(0);
             audioManager.StopCurrentSong();
-            rocket = content.Load<Texture2D>("MainScene/Images/rakieta");
-            piggyBank = content.Load<Texture2D>("MainScene/Images/skarbonka");
-            screen = content.Load<Texture2D>("MainScene/Images/monitor");
-            blood = content.Load<Texture2D>("MainScene/Images/blood");
+            rocket = content.Load<Texture2D>("Sprites/rakieta");
+            piggyBank = content.Load<Texture2D>("Sprites/skarbonka");
+            screen = content.Load<Texture2D>("Sprites/monitor");
+            blood = content.Load<Texture2D>("Sprites/blood");
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-            _spr_font = content.Load<SpriteFont>("Shared/Fonts/gamefont");
+            _spr_font = content.Load<SpriteFont>("Fonts/gamefont");
 
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;

@@ -51,7 +51,7 @@ namespace Insight.Scenes
             base.LoadContent();
             #region Effects 
 
-            Effect effect = content.Load<Effect>("Shared/Shaders/PhongBlinnShader");
+            Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);
             ((DefaultMaterial)defaultMaterial).LightDirection = directionalLight.GetComponent<Light>().Direction;
             ((DefaultMaterial)defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
@@ -70,7 +70,7 @@ namespace Insight.Scenes
 
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             testPrefab.LoadContent(content);
-            player.GetComponent<MeshRenderer>().Load(content, "DemoScene/GameObjects/badass1_8m", 0.01f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/badass1_8m", 0.01f);
             player.AddNewComponent<Camera>();
             player.AddNewComponent<BoxController>();
             //player.AddNewComponent<ThirdPersonCamera>();

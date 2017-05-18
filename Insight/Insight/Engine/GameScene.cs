@@ -16,6 +16,7 @@ namespace Insight.Engine
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
         protected List<GameObject> gameObjects;
+        protected Camera mainCam;
 
         protected Matrix projection { get; set; }
 
@@ -50,6 +51,11 @@ namespace Insight.Engine
         public virtual void Draw()
         {
 
+        }
+
+        public Camera GetMainCamera()
+        {
+            return mainCam;
         }
 
         public List<GameObject> GetGameObjectsFromScene()
