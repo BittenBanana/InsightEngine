@@ -97,9 +97,9 @@ namespace Insight.Scenes
             pointLight3.GetComponent<Light>().Color = Color.Yellow;
             pointLight3.GetComponent<Light>().Attenuation = 20;
                       
-            pointLight4 = new GameObject(new Vector3(-20, 1f, 20), false);
+            pointLight4 = new GameObject(new Vector3(0, 0f, 0), false);
             pointLight4.AddNewComponent<Light>();
-            pointLight4.GetComponent<Light>().Color = Color.Black;
+            pointLight4.GetComponent<Light>().Color = Color.White;
             pointLight4.GetComponent<Light>().Attenuation = 20;
 
             gameObjects.Add(pointLight1);
@@ -179,6 +179,7 @@ namespace Insight.Scenes
             gameObject3.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/straight", 2f);
             gameObject3.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
             gameObject3.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
+            gameObject3.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             gameObject6.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/corridor-corner-colliders", 2f);
             gameObject7.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/corner", 2f);
             gameObject8.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/straight-rotated", 2f);

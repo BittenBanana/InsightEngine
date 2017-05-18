@@ -17,6 +17,7 @@ namespace Insight.Engine.Components
         public Material Material { get; set; }
         Texture2D texture;
         private Texture2D normal;
+        private Texture2D ao;
         Matrix[] boneTransformations;
 
 
@@ -52,6 +53,11 @@ namespace Insight.Engine.Components
         public void LoadNormalMap(ContentManager c, string path)
         {
             normal = c.Load<Texture2D>(path);
+        }
+
+        public void LoadAmbientOcclusionMap(ContentManager c, string path)
+        {
+            ao = c.Load<Texture2D>(path);
         }
 
         public Model getModel()
@@ -156,7 +162,16 @@ namespace Insight.Engine.Components
                         {
                             effect.Parameters["NormalEnabled"]?.SetValue(false);
                         }
-                        
+
+                        if (ao != null)
+                        {
+                            effect.Parameters["AOTexture"]?.SetValue(ao);
+                            effect.Parameters["AOEnabled"]?.SetValue(true);
+                        }
+                        else
+                        {
+                            effect.Parameters["AOEnabled"]?.SetValue(false);
+                        }
 
                         Matrix World = boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
