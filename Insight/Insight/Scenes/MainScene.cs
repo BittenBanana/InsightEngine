@@ -50,6 +50,7 @@ namespace Insight.Scenes
         int _total_frames = 0;
         float _elapsed_time = 0.0f;
         int _fps = 0;
+        UserInterface ui;
 
         Material defaultMaterial;
         Material transparencyMaterial;
@@ -248,12 +249,13 @@ namespace Insight.Scenes
             audioManager.AddSong("Audio/dj");
             audioManager.PlaySong(0);
             audioManager.StopCurrentSong();
-            rocket = content.Load<Texture2D>("Sprites/rakieta");
-            piggyBank = content.Load<Texture2D>("Sprites/skarbonka");
-            screen = content.Load<Texture2D>("Sprites/monitor");
-            blood = content.Load<Texture2D>("Sprites/blood");
-            spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-            _spr_font = content.Load<SpriteFont>("Fonts/gamefont");
+            ui = new UserInterface(gameObject, graphics.GraphicsDevice, content);
+            ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, 410), Color.White, 1);
+            ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, 412), Color.White, 1);
+            ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, 415), Color.White, 1);
+            ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
+            //ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
 
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;
@@ -281,8 +283,10 @@ namespace Insight.Scenes
 
             if (keyState.IsKeyDown(Keys.LeftControl))
             {
-                bloodLevel += 0.09f;
+                ui.ChangeSpriteOpacity("blood", 0.05f);
             }
+
+            ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
             // Update
             _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -306,11 +310,13 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
 
+            ui.Draw();
+
             //animationTest.GetComponent<AnimationRender>().Draw(mainCam);
-            
-            
+
+
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
-            
+
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
             //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
             //gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
@@ -319,17 +325,6 @@ namespace Insight.Scenes
             //gameObject2.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject2.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject2.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             // Only update total frames when drawing
             _total_frames++;
-
-            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
-            //spriteBatch.Draw(lightRenderer.lightTarg, new Vector2(0, 0), null, Color.White, 0, new Vector2(0, 0), 0.3f,
-            //    SpriteEffects.None, 1);
-            spriteBatch.Draw(rocket, new Vector2(30, 410), Color.White);
-            spriteBatch.Draw(piggyBank, new Vector2(90, 412), Color.White);
-            spriteBatch.Draw(screen, new Vector2(150, 415), Color.White);
-            spriteBatch.Draw(blood, new Vector2(0, 0), Color.White * bloodLevel);
-            spriteBatch.DrawString(_spr_font, string.Format("FPS={0}", _fps),
-                new Vector2(10.0f, 20.0f), Color.White);
-            spriteBatch.End();
 
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
