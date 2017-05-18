@@ -30,6 +30,7 @@ namespace Insight
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = (int)SceneManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)SceneManager.Instance.Dimensions.Y;
+            graphics.ApplyChanges();
             SceneManager.Instance.Initialize(graphics);
             base.Initialize();
         }

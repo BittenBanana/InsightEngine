@@ -18,6 +18,7 @@ namespace Insight.Engine.Components
         Texture2D texture;
         private Texture2D normal;
         private Texture2D ao;
+        private Texture2D metalness;
         Matrix[] boneTransformations;
 
 
@@ -58,6 +59,11 @@ namespace Insight.Engine.Components
         public void LoadAmbientOcclusionMap(ContentManager c, string path)
         {
             ao = c.Load<Texture2D>(path);
+        }
+
+        public void LoadMetalnessMap(ContentManager c, string path)
+        {
+            metalness = c.Load<Texture2D>(path);
         }
 
         public Model getModel()
@@ -171,6 +177,16 @@ namespace Insight.Engine.Components
                         else
                         {
                             effect.Parameters["AOEnabled"]?.SetValue(false);
+                        }
+
+                        if (metalness != null)
+                        {
+                            effect.Parameters["MetalnessTexture"]?.SetValue(metalness);
+                            effect.Parameters["MetalnessEnabled"]?.SetValue(true);
+                        }
+                        else
+                        {
+                            effect.Parameters["MetalnessEnabled"]?.SetValue(false);
                         }
 
                         Matrix World = boneTransformations[mesh.ParentBone.Index]
