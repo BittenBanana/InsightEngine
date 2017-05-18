@@ -29,6 +29,8 @@ namespace Insight.Engine
         public event EventHandler<CollisionEventArgs> EnterTriggerActivated;
         public event EventHandler<CollisionEventArgs> StayTriggerActivated;
         public event EventHandler<CollisionEventArgs> ExitTriggerActivated;
+        public event EventHandler<CollisionEventArgs> EnterCollisionActivated;
+        public event EventHandler<CollisionEventArgs> ExitCollisionActivated;
         public bool Forward { get; set; }
         public bool Backward { get; set; }
         public bool IsMoving { get; set; }
@@ -177,16 +179,13 @@ namespace Insight.Engine
                     }
                     
                 }
-                
-        
-                
+            }
 
-
-
-
-    }
-
-            
+            //if (GetComponent<Collider>().OnCollisionEnter == false)
+            //{
+            //    OnCollisionEnter(args.GameObject);
+            //    GetComponent<Collider>().OnCollisionEnter = true;
+            //}
 
 
             if (args.GameObject.physicLayer == Layer.Ground)
@@ -215,6 +214,18 @@ namespace Insight.Engine
         {
             if (ExitTriggerActivated != null)
                 ExitTriggerActivated(this, new CollisionEventArgs() { GameObject = gameObject });
+        }
+
+        protected virtual void OnCollisionEnter(GameObject gameObject)
+        {
+            if (EnterCollisionActivated != null)
+                EnterCollisionActivated(this, new CollisionEventArgs() { GameObject = gameObject });
+        }
+
+        public virtual void OnCollisionExit(GameObject gameObject)
+        {
+            if (ExitCollisionActivated != null)
+                ExitCollisionActivated(this, new CollisionEventArgs() { GameObject = gameObject });
         }
 
         private void myEvent(object source, ElapsedEventArgs e)

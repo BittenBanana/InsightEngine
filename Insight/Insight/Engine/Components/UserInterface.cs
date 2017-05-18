@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine.Components
 {
-    class UserInterface
+    public class UserInterface
     {
         private SpriteBatch spriteBatch;
         private Dictionary<string, Sprite>  sprites;
@@ -72,7 +72,7 @@ namespace Insight.Engine.Components
             if(sprites[spriteName].opacity <= 1)
             {
                 Sprite sprite = sprites[spriteName];
-                sprite.opacity += opacity;
+                sprite.opacity = opacity;
                 sprites[spriteName] = sprite;
             }
         }

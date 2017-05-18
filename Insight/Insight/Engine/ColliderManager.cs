@@ -375,6 +375,14 @@ namespace Insight.Engine
                             object1.GetComponent<Collider>().OnTriggerExit = false;
                         }
                     }
+
+                    //if (object1.GetComponent<Collider>().OnCollisionEnter)
+                    //{
+                    //    object1.GetComponent<Collider>().OnCollisionExit = true;
+                    //    object1.OnCollisionExit(object2);
+                    //    object1.GetComponent<Collider>().OnCollisionEnter = false;
+                    //    object1.GetComponent<Collider>().OnCollisionExit = false;
+                    //}
                 }
 
                 return collision;

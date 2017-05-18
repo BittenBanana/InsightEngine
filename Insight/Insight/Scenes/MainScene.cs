@@ -29,6 +29,9 @@ namespace Insight.Scenes
         GameObject gameObject7;
         GameObject gameObject8;
         GameObject gameObject9;
+        GameObject triggerObject;
+        GameObject bulletDispenser;
+        GameObject dispenserTrigger;
 
         private GameObject pointLight1;
         private GameObject pointLight2;
@@ -50,7 +53,7 @@ namespace Insight.Scenes
         int _total_frames = 0;
         float _elapsed_time = 0.0f;
         int _fps = 0;
-        UserInterface ui;
+        //UserInterface ui;
 
         Material defaultMaterial;
         Material transparencyMaterial;
@@ -75,6 +78,12 @@ namespace Insight.Scenes
             gameObject8.AddNewComponent<MeshRenderer>();
             gameObject9 = new GameObject(new Vector3(0, -3, -3), false);
             gameObject9.AddNewComponent<MeshRenderer>();
+            triggerObject = new GameObject(new Vector3(0, -2, -6), false);
+            triggerObject.AddNewComponent<MeshRenderer>();
+            bulletDispenser = new GameObject(new Vector3(0, -2, -25), false);
+            bulletDispenser.AddNewComponent<MeshRenderer>();
+            dispenserTrigger = new GameObject(new Vector3(3, -2, -25), false);
+            dispenserTrigger.AddNewComponent<MeshRenderer>();
             gameObject4 = new GameObject(new Vector3(0, -5, 40), false);
             gameObject4.AddNewComponent<MeshRenderer>();
             gameObject5 = new GameObject(new Vector3(18, -1.5f, 30), false);
@@ -116,11 +125,14 @@ namespace Insight.Scenes
             gameObjects.Add(gameObject7);
             gameObjects.Add(gameObject8);
             gameObjects.Add(gameObject9);
+            gameObjects.Add(triggerObject);
+            gameObjects.Add(bulletDispenser);
+            gameObjects.Add(dispenserTrigger);
 
             //animationTest = new GameObject(new Vector3(0, -5, 40), true);
             //animationTest.AddNewComponent<AnimationRender>();
 
-           
+
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
         }
@@ -174,6 +186,9 @@ namespace Insight.Scenes
             gameObject7.LoadContent(content);
             gameObject8.LoadContent(content);
             gameObject9.LoadContent(content);
+            triggerObject.LoadContent(content);
+            bulletDispenser.LoadContent(content);
+            dispenserTrigger.LoadContent(content);
             //box.LoadContent(content);
 
 
@@ -185,6 +200,9 @@ namespace Insight.Scenes
             gameObject7.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/corner", 2f);
             gameObject8.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/straight-rotated", 2f);
             gameObject9.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/wall5x5withDoor", 2f);
+            triggerObject.GetComponent<MeshRenderer>().Load(content, "Models/triggerbox", 1f);
+            bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
+            dispenserTrigger.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 1f);
 
             gameObject4.LoadContent(content);
             gameObject4.GetComponent<MeshRenderer>().Load(content, "Models/stairs", 0.1f);
@@ -205,6 +223,15 @@ namespace Insight.Scenes
             gameObject6.AddNewComponent<BoxCollider>();
             gameObject8.AddNewComponent<BoxCollider>();
             gameObject9.AddNewComponent<BoxCollider>();
+            triggerObject.AddNewComponent<BoxCollider>();
+            triggerObject.GetComponent<BoxCollider>().IsTrigger = true;
+            triggerObject.GetComponent<MeshRenderer>().IsVisible = false;
+            triggerObject.physicLayer = Layer.DoorTrigger;
+            bulletDispenser.AddNewComponent<BoxCollider>();
+            dispenserTrigger.AddNewComponent<BoxCollider>();
+            dispenserTrigger.GetComponent<BoxCollider>().IsTrigger = true;
+            dispenserTrigger.GetComponent<MeshRenderer>().IsVisible = false;
+            dispenserTrigger.physicLayer = Layer.DispenserTrigger;
             //gameObject.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<Rigidbody>();
             gameObject3.AddNewComponent<Rigidbody>();
@@ -236,7 +263,7 @@ namespace Insight.Scenes
 
             colliderManager = new ColliderManager(gameObjects);
             colliderManager.ObjectColided += gameObject.OnObjectColided;
-            colliderManager.ObjectColided += gameObject3.OnObjectColided;
+            colliderManager.ObjectColided += triggerObject.OnObjectColided;
 
             audioManager = new AudioManager(gameObject, content);
             audioManager.AddSoundEffectWithEmitter("Audio/tomek2", gameObject3);
@@ -253,8 +280,10 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, 412), Color.White, 1);
             ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, 415), Color.White, 1);
             ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(380, 30), Color.White, 0);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
-            //ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(320, 80), Color.White, 0);
 
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;
@@ -317,7 +346,7 @@ namespace Insight.Scenes
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
 
             //gameObject.GetComponent<SphereCollider>().DrawSphereSpikes(gameObject.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[0], graphics.GraphicsDevice, gameObject.GetComponent<MeshRenderer>().GetMatrix(), gameObject.GetComponent<Camera>().view, projection);
-            //gameObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
+            //triggerObject.GetComponent<BoxCollider>().Draw(projection, graphics, gameObject.GetComponent<Camera>().view);
             //gameObject3.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //gameObject3.GetComponent<BoxCollider>().DrawSphereSpikes(gameObject3.GetComponent<BoxCollider>().GetCompleteBoundingSphere(), graphics.GraphicsDevice, gameObject3.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
             //gameObject2.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);

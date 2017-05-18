@@ -17,6 +17,7 @@ namespace Insight.Engine
         protected GraphicsDeviceManager graphics;
         protected List<GameObject> gameObjects;
         protected Camera mainCam;
+        public UserInterface ui;
 
         protected Matrix projection { get; set; }
 

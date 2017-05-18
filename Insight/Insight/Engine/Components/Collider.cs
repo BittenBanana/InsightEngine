@@ -13,6 +13,8 @@ namespace Insight.Engine.Components
         public bool OnTriggerEnter { get; set; }
         public bool OnTriggerStay { get; set; }
         public bool OnTriggerExit { get; set; }
+        public bool OnCollisionEnter { get; set; }
+        public bool OnCollisionExit { get; set; }
 
         public Collider(GameObject gameObject) : base(gameObject)
         {
@@ -20,7 +22,8 @@ namespace Insight.Engine.Components
             OnTriggerEnter = false;
             OnTriggerStay = false;
             OnTriggerExit = false;
-
+            OnCollisionEnter = false;
+            OnCollisionExit = false;
         }
 
         public static BoundingSphere TransformBoundingSphere(BoundingSphere originalBoundingSphere, Matrix transformationMatrix)

@@ -12,6 +12,8 @@ namespace Insight.Engine
         IgnoreRaycast,
         Ground,
         Stairs,
+        DoorTrigger,
+        DispenserTrigger,
         Player
     }
 }
