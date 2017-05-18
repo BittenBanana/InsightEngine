@@ -24,7 +24,7 @@ sampler2D basicTextureSampler = sampler_state
 bool TextureEnabled = false;
 
 texture2D AOTexture;
-sampler AOSampler = sampler_state
+sampler2D AOSampler = sampler_state
 {
     texture = <AOTexture>;
     addressU = wrap;
@@ -34,6 +34,18 @@ sampler AOSampler = sampler_state
     mipfilter = linear;
 };
 bool AOEnabled = false;
+
+texture2D MetalnessTexture;
+sampler2D metalnessSampler = sampler_state
+{
+    texture = <MetalnessTexture>;
+    addressU = wrap;
+    addressV = wrap;
+    minfilter = anisotropic;
+    magfilter = anisotropic;
+    mipfilter = linear;
+};
+bool MetalnessEnabled = false;
 
 texture2D LightTexture;
 sampler2D LightTextureSampler = sampler_state
@@ -101,11 +113,16 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
 
     float3 ao = tex2D(AOSampler, input.UV);
 
+    float3 metalness = tex2D(metalnessSampler, input.UV);
+
 	if (!TextureEnabled)
 		basicTexture = float4(1, 1, 1, 1);
 
     if(!AOEnabled)
         ao = float3(1, 1, 1);
+
+    if(!MetalnessEnabled)
+        metalness = float3(1, 1, 1);
 
 	// Extract lighting value from light map
 	float2 texCoord = postProjToScreen(input.PositionCopy) +
@@ -113,13 +130,13 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
 	float3 light = tex2D(LightTextureSampler, texCoord);
 
 	float4 normal = float4(input.Normal, 1.0);
-	float4 diffuse = saturate(dot(-LightDirection,normal));
+	float4 diffuse = saturate(dot(-LightDirection,normal.rgb));
 	float4 reflect = normalize(2 * diffuse*normal - float4(LightDirection, 1.0));
-	float4 specular = pow(saturate(dot(reflect, input.View)),15 );
+	float4 specular = pow(saturate(dot(reflect.rgb, input.View)),15 );
 
 	light += AmbientColor.rgb * AmbientIntensity * ao;
 
-	float4 BlinnColor = DiffuseIntensity * DiffuseColor * diffuse + SpecularIntensity*SpecularColor*specular;
+    float3 BlinnColor = (AmbientColor.rgb * AmbientIntensity * ao +DiffuseIntensity * DiffuseColor.rgb * diffuse.rgb + metalness * SpecularIntensity * SpecularColor.rgb * specular.rgb).rgb;
 
 	return float4(basicTexture * BlinnColor.rgb * light, 1);
 }

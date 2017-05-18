@@ -80,12 +80,12 @@ float4 MainPS(VertexShaderOutput input) : COLOR
 	float4 normal = (tex2D(normalSampler, texCoord) - .5) * 2;
 
 	// Perform the lighting calculations for a point light
-	float3 lightDirection = normalize(LightPosition - position);
-	float lighting = clamp(dot(normal, lightDirection), 0, 1);
+	float3 lightDirection = normalize(LightPosition - position.xyz);
+	float lighting = clamp(dot(normal.rgb, lightDirection), 0, 1);
 
 	// Attenuate the light to simulate a point light
-	float d = distance(LightPosition, position);
-	float att = 1 - pow(d / LightAttenuation, 6);
+	float d = distance(LightPosition, position.xyz);
+	float att = 1 - pow(d / LightAttenuation, 2);
 
 	return float4(LightColor * lighting * att, 1);
 }
