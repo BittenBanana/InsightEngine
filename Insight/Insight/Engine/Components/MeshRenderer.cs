@@ -31,7 +31,7 @@ namespace Insight.Engine.Components
         {
             model = c.Load<Model>("DemoScene/GameObjects/badass1_8m");
             generateTags();
-            scale = 1f;
+            scale = 0.01f;
             effect = Material.GetEffect();
         }
 
@@ -131,6 +131,15 @@ namespace Insight.Engine.Components
                         //}
                         p.Effect = effect;
                         Material.SetParameters();
+                        if (texture != null)
+                        {
+                            effect.Parameters["BasicTexture"]?.SetValue(texture);
+                            effect.Parameters["TextureEnabled"]?.SetValue(true);
+                        }
+                        else
+                        {
+                            effect.Parameters["TextureEnabled"]?.SetValue(false);
+                        }
                         effect.Parameters["World"]?.SetValue(boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
