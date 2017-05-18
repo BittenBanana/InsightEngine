@@ -179,6 +179,9 @@ namespace Insight.Engine
                     }
                     
                 }
+
+                if (args.GameObject.physicLayer == Layer.Ground)
+                    Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
             }
 
             //if (GetComponent<Collider>().OnCollisionEnter == false)
@@ -188,8 +191,7 @@ namespace Insight.Engine
             //}
 
 
-            if (args.GameObject.physicLayer == Layer.Ground)
-                Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
+            
             collision = false;
         }
 
