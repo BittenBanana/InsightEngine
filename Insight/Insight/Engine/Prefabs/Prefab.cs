@@ -13,10 +13,11 @@ namespace Insight.Engine.Prefabs
     {
 
         protected List<GameObject> prefabGameObjects = new List<GameObject>();
-        public virtual void Initialize()
+        public virtual void Initialize(Vector3 position)
         {
             foreach (GameObject go in prefabGameObjects)
             {
+                go.Transform.Position += position;
                 SceneManager.Instance.currentScene.GetGameObjectsFromScene().Add(go);
             }
         }

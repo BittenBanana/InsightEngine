@@ -15,7 +15,7 @@ namespace Insight.Engine.Prefabs
         GameObject floor2;
         GameObject floor3;
         GameObject floor4;
-        public override void Initialize()
+        public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
 
@@ -35,7 +35,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(floor2);
             prefabGameObjects.Add(floor3);
             prefabGameObjects.Add(floor4);
-            base.Initialize();
+            base.Initialize(position);
         }
 
         public override void LoadContent(ContentManager content)

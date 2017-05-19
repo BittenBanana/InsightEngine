@@ -32,7 +32,7 @@ namespace Insight.Scenes
             //floor1 = new GameObject(new Vector3(0, 0, 0), false);
             //floor1.AddNewComponent<MeshRenderer>();
             testPrefab = new TestPrefab();
-            testPrefab.Initialize();
+            testPrefab.Initialize(new Vector3(2, 0, 2));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
