@@ -21,30 +21,41 @@ namespace Insight.Engine.Prefabs
 
             floor1 = new GameObject(new Vector3(0, 0, 0), false);
             floor2 = new GameObject(new Vector3(0, 0, 5), false);
-            floor3 = new GameObject(new Vector3(5, 0, 0), false);
+            floor3 = new GameObject(new Vector3(0, 0, 10), false);
             floor4 = new GameObject(new Vector3(5, 0, 5), false);
 
 
             floor1.AddNewComponent<MeshRenderer>();
             floor2.AddNewComponent<MeshRenderer>();
             floor3.AddNewComponent<MeshRenderer>();
-            floor4.AddNewComponent<MeshRenderer>();
+            //floor4.AddNewComponent<MeshRenderer>();
+
+            
 
 
             prefabGameObjects.Add(floor1);
             prefabGameObjects.Add(floor2);
             prefabGameObjects.Add(floor3);
-            prefabGameObjects.Add(floor4);
+            //prefabGameObjects.Add(floor4);
             base.Initialize(position);
         }
 
         public override void LoadContent(ContentManager content)
         {
 
-            floor1.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floor5x5", 1.0f);
-            floor2.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floor5x5", 1.0f);
-            floor3.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floor5x5", 1.0f);
-            floor4.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floor5x5", 1.0f);
+            floor1.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-str-rt-g", 1.0f);
+            floor2.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-str-rt-g", 1.0f);
+            floor3.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-corn-rt", 1.0f);
+            //floor4.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floor5x5", 1.0f);
+
+            floor1.AddNewComponent<BoxCollider>();
+            floor1.physicLayer = Layer.Ground;
+            //floor2.AddNewComponent<BoxCollider>();
+            //floor2.physicLayer = Layer.Ground;
+            //floor3.AddNewComponent<BoxCollider>();
+            //floor3.physicLayer = Layer.Ground;
+            //floor4.AddNewComponent<BoxCollider>();
+            //floor4.physicLayer = Layer.Ground;
         }
 
 

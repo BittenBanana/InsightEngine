@@ -26,8 +26,9 @@ namespace Insight.Scenes
         {
             base.Initialize(graphicsDevice);
 
-            player = new GameObject(new Vector3(0, 0, 2), true);
+            player = new GameObject(new Vector3(0, 5, 2), true);
             player.AddNewComponent<MeshRenderer>();
+            //player.AddNewComponent<Rigidbody>();
 
             //floor1 = new GameObject(new Vector3(0, 0, 0), false);
             //floor1.AddNewComponent<MeshRenderer>();
