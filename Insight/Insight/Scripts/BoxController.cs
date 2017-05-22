@@ -26,12 +26,12 @@ namespace Insight.Scripts
             {
                gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
 
-               gameObject.Transform.Rotate(Vector3.UnitY, 0.5f);
+               gameObject.Transform.Rotate(Vector3.UnitY, gameObject.rotationSpeed);
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
                 gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
-                gameObject.Transform.Rotate(Vector3.UnitY, -0.5f);
+                gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
             }
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
