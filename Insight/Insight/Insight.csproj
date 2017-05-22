@@ -83,6 +83,7 @@
     <Compile Include="Scripts\BoxController.cs" />
     <Compile Include="Scripts\BoxRotation.cs" />
     <Compile Include="Scripts\CameraFollowBox.cs" />
+    <Compile Include="Scripts\CameraPivotFollow.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
     <Compile Include="Scripts\ThirdPersonCamera.cs" />
   </ItemGroup>

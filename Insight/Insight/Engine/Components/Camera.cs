@@ -19,7 +19,9 @@ namespace Insight.Engine
         {
             projection = SceneManager.Instance.currentScene.GetProjectionMatrix();
             Position = new Vector3(gameObject.Transform.Position.X, gameObject.Transform.Position.Y, gameObject.Transform.Position.Z);
-            view = Matrix.CreateFromQuaternion(gameObject.Transform.quaterion);
+            view = Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
+                * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
+                * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z);
         }
         
         

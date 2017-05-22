@@ -13,22 +13,27 @@ namespace Insight.Scripts
 {
     class BoxController : BaseScript
     {
+        private MouseState s;
+        private Vector2 lastMousePos;
         public BoxController(GameObject gameObject) : base(gameObject)
         {
+            
+            lastMousePos = s.Position.ToVector2();
         }
 
         public override void Update()
         {
             gameObject.IsMoving = false;
             KeyboardState keyState = Keyboard.GetState();
+            s = Mouse.GetState();
 
-            if (keyState.IsKeyDown(Keys.Left))
+            if (s.Position.ToVector2().X < lastMousePos.X)
             {
                gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
 
                gameObject.Transform.Rotate(Vector3.UnitY, gameObject.rotationSpeed);
             }
-            if (keyState.IsKeyDown(Keys.Right))
+            if (s.Position.ToVector2().X > lastMousePos.X)
             {
                 gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
                 gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
@@ -53,7 +58,7 @@ namespace Insight.Scripts
             {
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
             }
-
+            lastMousePos = s.Position.ToVector2();
             gameObject.rotationSpeed = .05f;
             base.Update();
         }

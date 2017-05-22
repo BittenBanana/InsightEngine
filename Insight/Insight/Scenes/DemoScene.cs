@@ -27,15 +27,21 @@ namespace Insight.Scenes
         GameObject directionalLight;
         ColliderManager colliderManager;
 
+        private GameObject cameraPivot;
+
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
+
+            
 
             player = new GameObject(new Vector3(2, 1, 2), true);
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
             
             player.AddNewComponent<Rigidbody>();
+
+            cameraPivot = new GameObject(player.Transform.Position, false);
 
             //floor1 = new GameObject(new Vector3(0, 0, 0), false);
             //floor1.AddNewComponent<MeshRenderer>();
@@ -55,6 +61,7 @@ namespace Insight.Scenes
 
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
+            gameObjects.Add(cameraPivot);
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
@@ -87,11 +94,13 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
             
             player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
-            player.AddNewComponent<Camera>();
+            cameraPivot.AddNewComponent<Camera>();
+            cameraPivot.AddNewComponent<CameraPivotFollow>();
+            cameraPivot.GetComponent<CameraPivotFollow>().player = player;
             player.AddNewComponent<BoxController>();
-            //player.AddNewComponent<ThirdPersonCamera>();
-            player.AddNewComponent<CameraFollowBox>();
-            mainCam = player.GetComponent<Camera>();
+            cameraPivot.AddNewComponent<CameraFollowBox>();
+            cameraPivot.GetComponent<CameraFollowBox>().player = player;
+            mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
             corridor.LoadContent(content);
             cornerLeft.LoadContent(content);
