@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Insight.Materials;
 using Insight.Scripts;
 using Insight.Engine.Prefabs;
+using System.Diagnostics;
 
 namespace Insight.Scenes
 {
@@ -18,22 +19,34 @@ namespace Insight.Scenes
         static String floorPrefab = "floor5x5";
         //GameObject floor1;
         TestPrefab testPrefab;
+        Corridor corridor;
+        CornerLeft cornerLeft;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
         GameObject directionalLight;
+        ColliderManager colliderManager;
+
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
 
-            player = new GameObject(new Vector3(0, 5, 2), true);
+            player = new GameObject(new Vector3(2, 1, 2), true);
             player.AddNewComponent<MeshRenderer>();
-            //player.AddNewComponent<Rigidbody>();
+            player.physicLayer = Layer.Player;
+            
+            player.AddNewComponent<Rigidbody>();
 
             //floor1 = new GameObject(new Vector3(0, 0, 0), false);
             //floor1.AddNewComponent<MeshRenderer>();
-            testPrefab = new TestPrefab();
-            testPrefab.Initialize(new Vector3(2, 0, 2));
+            //testPrefab = new TestPrefab();
+            //testPrefab.Initialize(new Vector3(0, 0, 2));
+
+            corridor = new Corridor();
+            corridor.Initialize(new Vector3(0));
+
+            cornerLeft = new CornerLeft();
+            cornerLeft.Initialize(new Vector3(0, 0, 5));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -44,7 +57,7 @@ namespace Insight.Scenes
             gameObjects.Add(directionalLight);
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
-
+            colliderManager = new ColliderManager(gameObjects);
         }
 
         public override void LoadContent()
@@ -69,16 +82,21 @@ namespace Insight.Scenes
                 item.LoadContent(content);
             }
 
+            
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
-            testPrefab.LoadContent(content);
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/badass1_8m", 0.01f);
+            //testPrefab.LoadContent(content);
+            
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/badass1_8m", 1f);
             player.AddNewComponent<Camera>();
             player.AddNewComponent<BoxController>();
             //player.AddNewComponent<ThirdPersonCamera>();
             player.AddNewComponent<CameraFollowBox>();
             mainCam = player.GetComponent<Camera>();
-
-          
+            player.AddNewComponent<SphereCollider>();
+            corridor.LoadContent(content);
+            cornerLeft.LoadContent(content);
+            colliderManager.ObjectColided += player.OnObjectColided;
+            Debug.WriteLine(gameObjects.Count + "=============================");
         }
 
         public override void UnloadContent()
@@ -93,6 +111,7 @@ namespace Insight.Scenes
             {
                 go.Update();
             }
+            colliderManager.Update();
         }
 
         public override void Draw()
@@ -102,7 +121,12 @@ namespace Insight.Scenes
             {
                 go.Draw(mainCam);
             }
-
+            //gameObjects[0].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //for(int i=0; i<player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
+            //{
+            //    player.GetComponent<SphereCollider>().DrawSphereSpikes(player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, player.GetComponent<MeshRenderer>().GetMatrix(), player.GetComponent<Camera>().view, projection);
+            //}
+            
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;

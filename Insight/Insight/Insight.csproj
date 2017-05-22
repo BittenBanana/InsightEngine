@@ -62,6 +62,8 @@
     <Compile Include="Engine\Material.cs" />
     <Compile Include="Engine\MeshTag.cs" />
     <Compile Include="Engine\Physics.cs" />
+    <Compile Include="Engine\Prefabs\CornerLeft.cs" />
+    <Compile Include="Engine\Prefabs\Corridor.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />
