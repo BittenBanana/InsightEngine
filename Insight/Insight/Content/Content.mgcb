@@ -890,7 +890,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Enviroment/cor-str-rt-g.FBX
 
-#begin Models/Konrads/Enviroment/f-5x5-box.FBX
+#begin Models/Konrads/Character/superBoxHero.FBX
 /importer:FbxImporter
 /processor:ModelProcessor
 /processorParam:ColorKeyColor=0,0,0,0
@@ -907,5 +907,5 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/Konrads/Enviroment/f-5x5-box.FBX
+/build:Models/Konrads/Character/superBoxHero.FBX
 

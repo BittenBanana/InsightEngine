@@ -88,6 +88,13 @@ namespace Insight.Engine
                 GetComponent<AnimationRender>().Load(c);
             }
         }
+        public void LoadContent(ContentManager c, String path, float scale)
+        {
+            if (GetComponent<MeshRenderer>() != null)
+            {
+                GetComponent<MeshRenderer>().Load(c, path, scale);
+            }
+        }
 
         public void Update()
         {
