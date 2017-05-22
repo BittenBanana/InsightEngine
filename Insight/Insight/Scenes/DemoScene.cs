@@ -21,6 +21,8 @@ namespace Insight.Scenes
         TestPrefab testPrefab;
         Corridor corridor;
         CornerLeft cornerLeft;
+        CorridorRotated corridorRotated;
+        Corridor3Way corridor3Way;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -39,7 +41,7 @@ namespace Insight.Scenes
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
             
-            player.AddNewComponent<Rigidbody>();
+            //player.AddNewComponent<Rigidbody>();
 
             cameraPivot = new GameObject(player.Transform.Position, false);
 
@@ -53,6 +55,12 @@ namespace Insight.Scenes
 
             cornerLeft = new CornerLeft();
             cornerLeft.Initialize(new Vector3(0, 0, 5));
+
+            //corridorRotated = new CorridorRotated();
+            //corridorRotated.Initialize(new Vector3(6, 0, 6));
+
+            corridor3Way = new Corridor3Way();
+            corridor3Way.Initialize(new Vector3(6, 0, 6));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -104,6 +112,8 @@ namespace Insight.Scenes
             player.AddNewComponent<SphereCollider>();
             corridor.LoadContent(content);
             cornerLeft.LoadContent(content);
+            //corridorRotated.LoadContent(content);
+            corridor3Way.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
             Debug.WriteLine(gameObjects.Count + "=============================");
         }
@@ -130,12 +140,12 @@ namespace Insight.Scenes
             {
                 go.Draw(mainCam);
             }
-            //gameObjects[0].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
-            //for(int i=0; i<player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
+            //gameObjects[5].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
             //{
             //    player.GetComponent<SphereCollider>().DrawSphereSpikes(player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, player.GetComponent<MeshRenderer>().GetMatrix(), player.GetComponent<Camera>().view, projection);
             //}
-            
+
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
