@@ -86,7 +86,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
             
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/badass1_8m", 1f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
             player.AddNewComponent<Camera>();
             player.AddNewComponent<BoxController>();
             //player.AddNewComponent<ThirdPersonCamera>();
