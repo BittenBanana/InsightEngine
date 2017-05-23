@@ -20,9 +20,17 @@ namespace Insight.Scenes
         //GameObject floor1;
         TestPrefab testPrefab;
         Corridor corridor;
+        Corridor corridor2;
+        Corridor corridor3;
+        Corridor corridor4;
         CornerLeft cornerLeft;
         CorridorRotated corridorRotated;
+        CorridorRotated corridorRotated2;
+        CorridorRotated corridorRotated3;
+        CorridorRotated corridorRotated4;
         Corridor3Way corridor3Way;
+        Column column;
+        ColumnRotated columnRotated;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -53,14 +61,38 @@ namespace Insight.Scenes
             corridor = new Corridor();
             corridor.Initialize(new Vector3(0));
 
-            cornerLeft = new CornerLeft();
-            cornerLeft.Initialize(new Vector3(0, 0, 5));
+            corridor2 = new Corridor();
+            corridor2.Initialize(new Vector3(0, 0, 5));
 
-            //corridorRotated = new CorridorRotated();
-            //corridorRotated.Initialize(new Vector3(6, 0, 6));
+            cornerLeft = new CornerLeft();
+            cornerLeft.Initialize(new Vector3(0, 0, 10));
+
+            corridorRotated = new CorridorRotated();
+            corridorRotated.Initialize(new Vector3(6, 0, 11));
+
+            corridorRotated2 = new CorridorRotated();
+            corridorRotated2.Initialize(new Vector3(11, 0, 11));
+
+            corridorRotated3 = new CorridorRotated();
+            corridorRotated3.Initialize(new Vector3(21, 0, 11));
+
+            corridorRotated4 = new CorridorRotated();
+            corridorRotated4.Initialize(new Vector3(26, 0, 11));
 
             corridor3Way = new Corridor3Way();
-            corridor3Way.Initialize(new Vector3(6, 0, 6));
+            corridor3Way.Initialize(new Vector3(16, 0, 11));
+
+            corridor3 = new Corridor();
+            corridor3.Initialize(new Vector3(16, 0, 1));
+
+            corridor4 = new Corridor();
+            corridor4.Initialize(new Vector3(16, 0, 6));
+
+            column = new Column();
+            column.Initialize(new Vector3(16, 0, 11));
+
+            columnRotated = new ColumnRotated();
+            columnRotated.Initialize(new Vector3(21, 0, 11));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -113,9 +145,17 @@ namespace Insight.Scenes
             mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
             corridor.LoadContent(content);
+            corridor2.LoadContent(content);
+            corridor3.LoadContent(content);
+            corridor4.LoadContent(content);
             cornerLeft.LoadContent(content);
-            //corridorRotated.LoadContent(content);
+            corridorRotated.LoadContent(content);
+            corridorRotated2.LoadContent(content);
+            corridorRotated3.LoadContent(content);
+            corridorRotated4.LoadContent(content);
             corridor3Way.LoadContent(content);
+            column.LoadContent(content);
+            columnRotated.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
             Debug.WriteLine(gameObjects.Count + "=============================");
         }
