@@ -31,7 +31,7 @@ namespace Insight.Engine
             //quaterion.W;
             quaterion *= Quaternion.CreateFromAxisAngle(axis, angle);
             //Rotation =
-            Debug.WriteLine(quaterion);
+            //Debug.WriteLine(quaterion);
         }
 
     }

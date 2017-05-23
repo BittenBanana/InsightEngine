@@ -30,13 +30,11 @@ namespace Insight.Scripts
 
             if (s.Position.ToVector2().Y < lastMousePos.Y && gameObject.Transform.Rotation.X <= 0.99f)
             {
-                Debug.WriteLine("+ rotation x");
                 gameObject.Transform.Rotation.X += gameObject.rotationSpeed * Math.Abs(s.Position.Y - lastMousePos.Y);
             }
 
             if (s.Position.ToVector2().Y > lastMousePos.Y && gameObject.Transform.Rotation.X >= -0.99f)
             {
-                Debug.WriteLine("- rotation x");
                 gameObject.Transform.Rotation.X -= gameObject.rotationSpeed * Math.Abs(s.Position.Y - lastMousePos.Y);
             }
             gameObject.rotationSpeed = .005f;

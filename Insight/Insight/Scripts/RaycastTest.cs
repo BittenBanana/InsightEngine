@@ -23,12 +23,19 @@ namespace Insight.Scripts
         public override void Update()
         {
             MouseState ms = Mouse.GetState();
-           
-            if(ms.LeftButton == ButtonState.Pressed)
-            if(Physics.Raycast(gameObject.Transform.Position, SceneManager.Instance.GetGameObjectsFromCurrentScene().Find(go => go != gameObject).Transform.Position, out hit))
+
+            Quaternion rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X) *
+                Quaternion.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y) *
+                Quaternion.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z);
+
+            Vector3 direction = Vector3.Transform(Vector3.Backward, rotation);
+
+
+            if (ms.LeftButton == ButtonState.Pressed)
+            if(Physics.Raycast(gameObject.Transform.Position, direction, out hit))
             {
                 
-                Debug.WriteLine("Hit!" + hit.distance);
+                Debug.WriteLine("Hit!" + " " + hit.collider.gameObject + " " + hit.distance);
             }
             //base.Update();
         }

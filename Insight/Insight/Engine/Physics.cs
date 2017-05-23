@@ -31,7 +31,7 @@ namespace Insight.Engine
         public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hit)
         {
             
-            Ray ray = new Ray(origin, Vector3.Normalize(direction));
+            Ray ray = new Ray(origin, direction);
             GameObject go = null;
             float distance = float.MaxValue;
             float? tempDistance = null;

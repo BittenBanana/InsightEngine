@@ -20,7 +20,6 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            Debug.WriteLine(gameObject.Transform.Rotation);
             mainCam.Position.X = gameObject.Transform.Position.X - 10 * (float)Math.Sin(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
             mainCam.Position.Z = gameObject.Transform.Position.Z - 10 * (float)Math.Cos(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
             mainCam.Position.Y = gameObject.Transform.Position.Y - 10 * (float)Math.Sin(gameObject.Transform.Rotation.X);
