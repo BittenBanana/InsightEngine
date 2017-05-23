@@ -37,6 +37,8 @@ namespace Insight.Scenes
         GameObject directionalLight;
         ColliderManager colliderManager;
 
+        GameObject enemy;
+
         private GameObject cameraPivot;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
@@ -48,6 +50,9 @@ namespace Insight.Scenes
             player = new GameObject(new Vector3(2, 1, 2), true);
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
+
+            enemy = new GameObject(new Vector3(17, 0, 0), true);
+            enemy.AddNewComponent<MeshRenderer>();
             
             //player.AddNewComponent<Rigidbody>();
 
@@ -102,6 +107,7 @@ namespace Insight.Scenes
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
+            gameObjects.Add(enemy);
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
@@ -134,6 +140,7 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
             
             player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
+            enemy.LoadContent(content, "Models/Konrads/Character/superBoxHero", 1f);
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
@@ -144,6 +151,7 @@ namespace Insight.Scenes
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
+            enemy.AddNewComponent<BasicAI>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
             corridor3.LoadContent(content);
