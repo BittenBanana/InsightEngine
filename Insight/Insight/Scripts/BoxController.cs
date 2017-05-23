@@ -29,13 +29,13 @@ namespace Insight.Scripts
 
             if (s.Position.ToVector2().X < lastMousePos.X)
             {
-               gameObject.Transform.Rotation.Y += gameObject.rotationSpeed;
+               gameObject.Transform.Rotation.Y += gameObject.rotationSpeed * Math.Abs(s.Position.X - lastMousePos.X);
 
                gameObject.Transform.Rotate(Vector3.UnitY, gameObject.rotationSpeed);
             }
             if (s.Position.ToVector2().X > lastMousePos.X)
             {
-                gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed;
+                gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed * Math.Abs(s.Position.X - lastMousePos.X);
                 gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
             }
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
@@ -59,7 +59,7 @@ namespace Insight.Scripts
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
             }
             lastMousePos = s.Position.ToVector2();
-            gameObject.rotationSpeed = .05f;
+            gameObject.rotationSpeed = .005f;
             base.Update();
         }
 
