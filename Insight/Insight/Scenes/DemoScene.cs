@@ -24,6 +24,7 @@ namespace Insight.Scenes
         Corridor corridor2;
         Corridor corridor3;
         Corridor corridor4;
+        Corridor corridor5;
         CornerLeft cornerLeft;
         CornerRightRotated cornerRight;
         CorridorRotated corridorRotated;
@@ -33,6 +34,7 @@ namespace Insight.Scenes
         Corridor3Way corridor3Way;
         Column column;
         ColumnRotated columnRotated;
+        Door door;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -103,13 +105,19 @@ namespace Insight.Scenes
             corridor3.Initialize(new Vector3(16, 0, 1));
 
             corridor4 = new Corridor();
-            corridor4.Initialize(new Vector3(16, 0, 6));           
+            corridor4.Initialize(new Vector3(16, 0, 6));
+
+            door = new Door();
+            door.Initialize(new Vector3(19.17f, 0, 1));         
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
 
             columnRotated = new ColumnRotated();
             columnRotated.Initialize(new Vector3(21, 0, 11));
+
+            corridor5 = new Corridor();
+            corridor5.Initialize(new Vector3(32, 0, 17));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -175,6 +183,7 @@ namespace Insight.Scenes
             corridor2.LoadContent(content);
             corridor3.LoadContent(content);
             corridor4.LoadContent(content);
+            corridor5.LoadContent(content);
             cornerLeft.LoadContent(content);
             cornerRight.LoadContent(content);
             corridorRotated.LoadContent(content);
@@ -184,6 +193,7 @@ namespace Insight.Scenes
             corridor3Way.LoadContent(content);
             column.LoadContent(content);
             columnRotated.LoadContent(content);
+            door.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
 
             bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
