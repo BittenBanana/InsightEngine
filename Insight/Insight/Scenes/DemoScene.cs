@@ -25,6 +25,7 @@ namespace Insight.Scenes
         Corridor corridor3;
         Corridor corridor4;
         CornerLeft cornerLeft;
+        CornerRightRotated cornerRight;
         CorridorRotated corridorRotated;
         CorridorRotated corridorRotated2;
         CorridorRotated corridorRotated3;
@@ -92,6 +93,9 @@ namespace Insight.Scenes
             corridorRotated4 = new CorridorRotated();
             corridorRotated4.Initialize(new Vector3(26, 0, 11));
 
+            cornerRight = new CornerRightRotated();
+            cornerRight.Initialize(new Vector3(31, 0, 11));
+
             corridor3Way = new Corridor3Way();
             corridor3Way.Initialize(new Vector3(16, 0, 11));
 
@@ -99,7 +103,7 @@ namespace Insight.Scenes
             corridor3.Initialize(new Vector3(16, 0, 1));
 
             corridor4 = new Corridor();
-            corridor4.Initialize(new Vector3(16, 0, 6));
+            corridor4.Initialize(new Vector3(16, 0, 6));           
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
@@ -172,6 +176,7 @@ namespace Insight.Scenes
             corridor3.LoadContent(content);
             corridor4.LoadContent(content);
             cornerLeft.LoadContent(content);
+            cornerRight.LoadContent(content);
             corridorRotated.LoadContent(content);
             corridorRotated2.LoadContent(content);
             corridorRotated3.LoadContent(content);

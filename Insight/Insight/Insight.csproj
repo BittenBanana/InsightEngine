@@ -65,6 +65,7 @@
     <Compile Include="Engine\Prefabs\Column.cs" />
     <Compile Include="Engine\Prefabs\ColumnRotated.cs" />
     <Compile Include="Engine\Prefabs\CornerLeft.cs" />
+    <Compile Include="Engine\Prefabs\CornerRightRotated.cs" />
     <Compile Include="Engine\Prefabs\Corridor.cs" />
     <Compile Include="Engine\Prefabs\Corridor3Way.cs" />
     <Compile Include="Engine\Prefabs\CorridorRotated.cs" />
