@@ -20,6 +20,9 @@ namespace Insight.Scenes
     {
 
         private PrelightingRenderer lightRenderer;
+
+        private GameObject cameraPivot;
+
         GameObject gameObject;
         GameObject gameObject2;
         GameObject gameObject3;
@@ -65,6 +68,7 @@ namespace Insight.Scenes
             gameObject = new GameObject(true);
             gameObject.AddNewComponent<MeshRenderer>();
             
+            cameraPivot = new GameObject(gameObject.Transform.Position, false);
 
             gameObject2 = new GameObject(new Vector3(0, -14, 0), false);
             gameObject2.AddNewComponent<MeshRenderer>();
@@ -111,6 +115,8 @@ namespace Insight.Scenes
             pointLight4.AddNewComponent<Light>();
             pointLight4.GetComponent<Light>().Color = Color.White;
             pointLight4.GetComponent<Light>().Attenuation = 20;
+
+            gameObjects.Add(cameraPivot);
 
             gameObjects.Add(pointLight1);
             gameObjects.Add(pointLight2);
@@ -216,7 +222,7 @@ namespace Insight.Scenes
             gameObject.AddNewComponent<BoxController>();
             gameObject.AddNewComponent<SphereCollider>();
             gameObject.AddNewComponent<Rigidbody>();
-            gameObject.AddNewComponent<Camera>();
+            cameraPivot.AddNewComponent<Camera>();
             gameObject2.AddNewComponent<BoxCollider>();
             gameObject3.AddNewComponent<BoxCollider>();
             gameObject4.AddNewComponent<BoxCollider>();
@@ -249,14 +255,16 @@ namespace Insight.Scenes
             gameObject.physicLayer = Layer.Player;
             gameObject4.physicLayer = Layer.Stairs;
             gameObject5.physicLayer = Layer.Ground;
-            gameObject.AddNewComponent<RaycastTest>();
+            cameraPivot.AddNewComponent<RaycastTest>();
             //box.GetComponent<BoxCollider>().IsTrigger = true;
             gameObject6.GetComponent<MeshRenderer>().IsVisible = false;
-            
+            cameraPivot.AddNewComponent<CameraPivotFollow>();
+            cameraPivot.GetComponent<CameraPivotFollow>().player = gameObject;
 
-            mainCam = gameObject.GetComponent<Camera>();
+            mainCam = cameraPivot.GetComponent<Camera>();
 
-            gameObject.AddNewComponent<CameraFollowBox>();
+            cameraPivot.AddNewComponent<CameraFollowBox>();
+            cameraPivot.GetComponent<CameraFollowBox>().player = gameObject;
             //gameObject2.AddNewComponent<BoxRotation>();
             
             gameObject3.Transform.Rotation.Y = 50f;
