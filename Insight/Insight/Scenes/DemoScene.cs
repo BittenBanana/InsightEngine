@@ -11,6 +11,7 @@ using Insight.Materials;
 using Insight.Scripts;
 using Insight.Engine.Prefabs;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Insight.Scenes
 {
@@ -38,6 +39,13 @@ namespace Insight.Scenes
         ColliderManager colliderManager;
 
         GameObject enemy;
+
+        GameObject bulletDispenser;
+        GameObject dispenserTrigger;
+
+        int _total_frames = 0;
+        float _elapsed_time = 0.0f;
+        int _fps = 0;
 
         private GameObject cameraPivot;
 
@@ -103,11 +111,18 @@ namespace Insight.Scenes
             directionalLight.AddNewComponent<Light>();
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
             directionalLight.GetComponent<Light>().Color = Color.White;
+            
+            bulletDispenser = new GameObject(new Vector3(20, 0, -5), false);
+            bulletDispenser.AddNewComponent<MeshRenderer>();
+            dispenserTrigger = new GameObject(new Vector3(22, 0, -5), false);
+            dispenserTrigger.AddNewComponent<MeshRenderer>();
 
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
             gameObjects.Add(enemy);
+            gameObjects.Add(bulletDispenser);
+            gameObjects.Add(dispenserTrigger);
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
@@ -165,6 +180,28 @@ namespace Insight.Scenes
             column.LoadContent(content);
             columnRotated.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
+
+            bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
+            dispenserTrigger.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 1f);
+
+            bulletDispenser.AddNewComponent<BoxCollider>();
+            dispenserTrigger.AddNewComponent<BoxCollider>();
+            dispenserTrigger.GetComponent<BoxCollider>().IsTrigger = true;
+            dispenserTrigger.GetComponent<MeshRenderer>().IsVisible = false;
+            dispenserTrigger.physicLayer = Layer.DispenserTrigger;
+
+
+            ui = new UserInterface(player, graphics.GraphicsDevice, content);
+            ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, 410), Color.White, 1);
+            ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, 412), Color.White, 1);
+            ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, 415), Color.White, 1);
+            ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(380, 30), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
+            ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(320, 80), Color.White, 0);
+
+
             Debug.WriteLine(gameObjects.Count + "=============================");
         }
 
@@ -181,6 +218,26 @@ namespace Insight.Scenes
                 go.Update();
             }
             colliderManager.Update();
+
+            KeyboardState keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.LeftControl))
+            {
+                ui.ChangeSpriteOpacity("blood", 0.05f);
+            }
+
+            ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
+
+            // Update
+            _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // 1 Second has passed
+            if (_elapsed_time >= 1000.0f)
+            {
+                _fps = _total_frames;
+                _total_frames = 0;
+                _elapsed_time = 0;
+            }
         }
 
         public override void Draw()
@@ -190,12 +247,13 @@ namespace Insight.Scenes
             {
                 go.Draw(mainCam);
             }
+            ui.Draw();
             //gameObjects[5].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
             //{
             //    player.GetComponent<SphereCollider>().DrawSphereSpikes(player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, player.GetComponent<MeshRenderer>().GetMatrix(), player.GetComponent<Camera>().view, projection);
             //}
-
+            _total_frames++;
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;

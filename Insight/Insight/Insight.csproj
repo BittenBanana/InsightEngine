@@ -72,6 +72,7 @@
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />
     <Compile Include="Engine\Time.cs" />
+    <Compile Include="Engine\VectorHelper.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\GameScene.cs" />
     <Compile Include="Materials\DefaultMaterial.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Scenes\DemoScene.cs" />
     <Compile Include="Scenes\MainScene.cs" />
     <Compile Include="Scripts\BaseScript.cs" />
+    <Compile Include="Scripts\BasicAI.cs" />
     <Compile Include="Scripts\BoxController.cs" />
     <Compile Include="Scripts\BoxRotation.cs" />
     <Compile Include="Scripts\CameraFollowBox.cs" />
