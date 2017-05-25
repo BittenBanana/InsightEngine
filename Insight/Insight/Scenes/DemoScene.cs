@@ -35,6 +35,16 @@ namespace Insight.Scenes
         Column column;
         ColumnRotated columnRotated;
         Door door;
+        RoomFloor roomFloor;
+        RoomFloor roomFloor2;
+        RoomFloor roomFloor3;
+        RoomFloor roomFloor4;
+        RoomFloor roomFloor5;
+        RoomFloor roomFloor6;
+        RoomFloor roomFloor7;
+        RoomFloor roomFloor8;
+        RoomFloor roomFloor9;
+        RoomFloorSmallerRotated roomFloor10;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -62,7 +72,7 @@ namespace Insight.Scenes
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
 
-            enemy = new GameObject(new Vector3(17, 0, 0), true);
+            enemy = new GameObject(new Vector3(17, 0, 0), false);
             enemy.AddNewComponent<MeshRenderer>();
             
             //player.AddNewComponent<Rigidbody>();
@@ -118,6 +128,36 @@ namespace Insight.Scenes
 
             corridor5 = new Corridor();
             corridor5.Initialize(new Vector3(32, 0, 17));
+
+            roomFloor = new RoomFloor();
+            roomFloor.Initialize(new Vector3(32, 0, 22));
+
+            roomFloor2 = new RoomFloor();
+            roomFloor2.Initialize(new Vector3(32, 0, 27));
+
+            roomFloor3 = new RoomFloor();
+            roomFloor3.Initialize(new Vector3(32, 0, 32));
+
+            roomFloor4 = new RoomFloor();
+            roomFloor4.Initialize(new Vector3(27, 0, 22));
+
+            roomFloor5 = new RoomFloor();
+            roomFloor5.Initialize(new Vector3(27, 0, 27));
+
+            roomFloor6 = new RoomFloor();
+            roomFloor6.Initialize(new Vector3(27, 0, 32));
+
+            roomFloor7 = new RoomFloor();
+            roomFloor7.Initialize(new Vector3(37, 0, 22));
+
+            roomFloor8 = new RoomFloor();
+            roomFloor8.Initialize(new Vector3(37, 0, 27));
+
+            roomFloor9 = new RoomFloor();
+            roomFloor9.Initialize(new Vector3(37, 0, 32));
+
+            roomFloor10 = new RoomFloorSmallerRotated();
+            roomFloor10.Initialize(new Vector3(42, 0, 27));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -179,6 +219,7 @@ namespace Insight.Scenes
             mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
             enemy.AddNewComponent<BasicAI>();
+            enemy.AddNewComponent<SphereCollider>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
             corridor3.LoadContent(content);
@@ -194,6 +235,16 @@ namespace Insight.Scenes
             column.LoadContent(content);
             columnRotated.LoadContent(content);
             door.LoadContent(content);
+            roomFloor.LoadContent(content);
+            roomFloor2.LoadContent(content);
+            roomFloor3.LoadContent(content);
+            roomFloor4.LoadContent(content);
+            roomFloor5.LoadContent(content);
+            roomFloor6.LoadContent(content);
+            roomFloor7.LoadContent(content);
+            roomFloor8.LoadContent(content);
+            roomFloor9.LoadContent(content);
+            roomFloor10.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
 
             bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
