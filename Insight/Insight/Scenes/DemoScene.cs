@@ -253,6 +253,26 @@ namespace Insight.Scenes
                 _total_frames = 0;
                 _elapsed_time = 0;
             }
+
+            if (Mouse.GetState().Position.X >= graphics.GraphicsDevice.Viewport.Width)
+            {
+                Mouse.SetPosition(0,Mouse.GetState().Position.Y);
+            }
+
+            else if (Mouse.GetState().Position.X <= 0)
+            {
+                Mouse.SetPosition(graphics.GraphicsDevice.Viewport.Width, Mouse.GetState().Position.Y);
+            }
+
+            //if (Mouse.GetState().Position.Y <= graphics.GraphicsDevice.Viewport.Height)
+            //{
+            //    Mouse.SetPosition(Mouse.GetState().Position.X, 0);
+            //}
+
+            //else if (Mouse.GetState().Position.X >= 0)
+            //{
+            //    Mouse.SetPosition(Mouse.GetState().Position.X, graphics.GraphicsDevice.Viewport.Height);
+            //}
         }
 
         public override void Draw()
