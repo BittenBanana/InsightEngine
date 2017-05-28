@@ -74,6 +74,8 @@
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
     <Compile Include="Engine\Prefabs\RoomFloorSmallerRotated.cs" />
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
+    <Compile Include="Engine\Prefabs\Wall.cs" />
+    <Compile Include="Engine\Prefabs\WallRotated.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Engine\VectorHelper.cs" />

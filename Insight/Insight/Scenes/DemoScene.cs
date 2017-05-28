@@ -35,6 +35,7 @@ namespace Insight.Scenes
         Column column;
         ColumnRotated columnRotated;
         Door door;
+        Door door2;
         RoomFloor roomFloor;
         RoomFloor roomFloor2;
         RoomFloor roomFloor3;
@@ -45,6 +46,12 @@ namespace Insight.Scenes
         RoomFloor roomFloor8;
         RoomFloor roomFloor9;
         RoomFloorSmallerRotated roomFloor10;
+        Wall wall;
+        Wall wall2;
+        Wall wall3;
+        Wall wall4;
+        Wall wall5;
+        Wall wall6;
         GameObject player;
         Camera mainCam;
         Material defaultMaterial;
@@ -94,22 +101,22 @@ namespace Insight.Scenes
             cornerLeft.Initialize(new Vector3(0, 0, 10));
 
             corridorRotated = new CorridorRotated();
-            corridorRotated.Initialize(new Vector3(6, 0, 11));
+            corridorRotated.Initialize(new Vector3(6, 0, 16), new Vector3(0, 1.571f, 0));
 
             corridorRotated2 = new CorridorRotated();
-            corridorRotated2.Initialize(new Vector3(11, 0, 11));
+            corridorRotated2.Initialize(new Vector3(11, 0, 16), new Vector3(0, 1.571f, 0));
 
             corridorRotated3 = new CorridorRotated();
-            corridorRotated3.Initialize(new Vector3(21, 0, 11));
+            corridorRotated3.Initialize(new Vector3(21, 0, 16), new Vector3(0, 1.571f, 0));
 
             corridorRotated4 = new CorridorRotated();
-            corridorRotated4.Initialize(new Vector3(26, 0, 11));
+            corridorRotated4.Initialize(new Vector3(26, 0, 16), new Vector3(0, 1.571f, 0));
 
             cornerRight = new CornerRightRotated();
-            cornerRight.Initialize(new Vector3(31, 0, 11));
+            cornerRight.Initialize(new Vector3(37, 0, 17), new Vector3(0, 3.142f, 0));
 
             corridor3Way = new Corridor3Way();
-            corridor3Way.Initialize(new Vector3(16, 0, 11));
+            corridor3Way.Initialize(new Vector3(16, 0, 16), new Vector3(0, 1.571f, 0));
 
             corridor3 = new Corridor();
             corridor3.Initialize(new Vector3(16, 0, 1));
@@ -158,6 +165,15 @@ namespace Insight.Scenes
 
             roomFloor10 = new RoomFloorSmallerRotated();
             roomFloor10.Initialize(new Vector3(42, 0, 27));
+
+            door2 = new Door();
+            door2.Initialize(new Vector3(35.15f, 0, 22));
+
+            wall = new Wall();
+            wall.Initialize(new Vector3(37, 0, 22));
+
+            wall2 = new Wall();
+            wall2.Initialize(new Vector3(27, 0, 22));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -245,6 +261,9 @@ namespace Insight.Scenes
             roomFloor8.LoadContent(content);
             roomFloor9.LoadContent(content);
             roomFloor10.LoadContent(content);
+            door2.LoadContent(content);
+            wall.LoadContent(content);
+            wall2.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
 
             bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
@@ -292,6 +311,11 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("blood", 0.05f);
             }
 
+            if (keyState.IsKeyDown(Keys.N))
+            {
+                ui.ChangeSpriteOpacity("blood", 0.05f);
+            }
+
             ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
             // Update
@@ -334,7 +358,7 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
             ui.Draw();
-            //gameObjects[5].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //gameObjects[16].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
             //{
             //    player.GetComponent<SphereCollider>().DrawSphereSpikes(player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, player.GetComponent<MeshRenderer>().GetMatrix(), player.GetComponent<Camera>().view, projection);

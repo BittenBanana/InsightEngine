@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,11 +40,9 @@ namespace Insight.Engine.Prefabs
 
             corridorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-str-rt-g", 1.0f);
             floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
-
             corridorModel.AddNewComponent<BoxCollider>();
             floor.AddNewComponent<BoxCollider>();
             floor.physicLayer = Layer.Ground;
-
         }
     }
 }
