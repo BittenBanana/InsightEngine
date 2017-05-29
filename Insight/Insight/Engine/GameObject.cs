@@ -100,8 +100,8 @@ namespace Insight.Engine
         {
             if (!collision)
             {
-                velocityX = 1f * (float)Math.Sin(Transform.Rotation.Y);
-                velocityZ = 1f * (float)Math.Cos(Transform.Rotation.Y);
+                velocityX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                velocityZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
             }
 
             foreach (var item in components)
@@ -138,8 +138,8 @@ namespace Insight.Engine
                     {
                         if (Forward)
                         {
-                            Transform.Position.X -= 1f * (float)Math.Sin(Transform.Rotation.Y);
-                            Transform.Position.Z -= 1f * (float)Math.Cos(Transform.Rotation.Y);
+                            Transform.Position.X -= 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                            Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             rotationSpeed = 0;
                         }   
                     
@@ -147,8 +147,8 @@ namespace Insight.Engine
 
                         if (Backward)
                         {
-                            Transform.Position.X += 1f * (float)Math.Sin(Transform.Rotation.Y);
-                            Transform.Position.Z += 1f * (float)Math.Cos(Transform.Rotation.Y);
+                            Transform.Position.X += 0.05f * (float)Math.Sin(Transform.Rotation.Y);
+                            Transform.Position.Z += 0.05f * (float)Math.Cos(Transform.Rotation.Y);
                             rotationSpeed = 0;
                         }
 
