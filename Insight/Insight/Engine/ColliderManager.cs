@@ -108,7 +108,7 @@ namespace Insight.Engine
                 bool collision = sphere1.Intersects(sphere2);
                 if (collision)
                 {
-                    Debug.WriteLine("Overall collision");
+                    //Debug.WriteLine("Overall collision");
                 }
                 else
                 {
@@ -128,11 +128,11 @@ namespace Insight.Engine
                 bool collision = sphere1.Intersects(sphere2);
                 if (collision)
                 {
-                    Debug.WriteLine("Overall collision");
+                    //Debug.WriteLine("Overall collision");
                 }
                 else
                 {
-                    Debug.WriteLine("nope");
+                    //Debug.WriteLine("nope");
                 }
 
                 return collision;
@@ -276,7 +276,7 @@ namespace Insight.Engine
                     for (int j = 0; j < model2Spheres.Length; j++)
                         if (model1Spheres[i].Intersects(model2Spheres[j]))
                         {
-                            Debug.WriteLine("Precise collision");
+                            //Debug.WriteLine("Precise collision");
                             return true;
                         }
 
@@ -294,7 +294,7 @@ namespace Insight.Engine
                     for (int j = 0; j < object2Colliders.Length; j++)
                         if (object1Colliders[i].Intersects(object2Colliders[j]))
                         {
-                            Debug.WriteLine("Precise collision");
+                            //Debug.WriteLine("Precise collision");
                             return true;
                         }
 
@@ -361,7 +361,7 @@ namespace Insight.Engine
 
                 if (collision)
                 {
-                    Debug.WriteLine("Precise collision");
+                    //Debug.WriteLine("Precise collision");
                 }
                 else
                 {

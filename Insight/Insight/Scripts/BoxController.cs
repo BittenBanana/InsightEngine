@@ -65,7 +65,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerEnter(object source, CollisionEventArgs args)
         {
-            Debug.WriteLine("On trigger enter");
+            //Debug.WriteLine("On trigger enter");
             if(args.GameObject.physicLayer == Layer.DoorTrigger)
             {
                 Debug.WriteLine("doors");
