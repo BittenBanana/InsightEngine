@@ -10,19 +10,19 @@ using Insight.Scenes;
 
 namespace Insight.Engine.Components
 {
-    public class MeshRenderer : Component
+    public class MeshRenderer : Renderer
     {
-        Model model;
+        //Model model;
         private Effect effect;
         public Material Material { get; set; }
         Texture2D texture;
         private Texture2D normal;
         private Texture2D ao;
         private Texture2D metalness;
-        Matrix[] boneTransformations;
+        //Matrix[] boneTransformations;
 
 
-        float scale;
+        //float scale;
         public bool IsVisible { get; set; }
 
         public MeshRenderer(GameObject gameObject) : base(gameObject)
@@ -30,7 +30,7 @@ namespace Insight.Engine.Components
             scale = 1f;
             IsVisible = true;
         }
-        public void Load(ContentManager c)
+        public override void Load(ContentManager c)
         {
             model = c.Load<Model>("Models/Konrads/Character/badass1_8m");
             generateTags();
@@ -66,15 +66,15 @@ namespace Insight.Engine.Components
             metalness = c.Load<Texture2D>(path);
         }
 
-        public Model getModel()
-        {
-            return model;
-        }
+        //public Model getModel()
+        //{
+        //    return model;
+        //}
 
-        public float GetScale()
-        {
-            return scale;
-        }
+        //public float GetScale()
+        //{
+        //    return scale;
+        //}
 
         // Store references to all of the model's current effects
         public void CacheEffects()
@@ -218,13 +218,13 @@ namespace Insight.Engine.Components
 
         }
 
-        public Matrix GetMatrix()
-        {
-            return Matrix.CreateScale(scale)
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                        * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
-        }
+        //public Matrix GetMatrix()
+        //{
+        //    return Matrix.CreateScale(scale)
+        //                * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+        //                * Matrix.CreateTranslation(gameObject.Transform.Position)
+        //                * Matrix.CreateTranslation(gameObject.Transform.origin);
+        //}
 
     }
 }

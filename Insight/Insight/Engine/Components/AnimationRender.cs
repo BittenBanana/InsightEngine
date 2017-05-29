@@ -6,14 +6,14 @@ using System;
 
 namespace Insight.Engine.Components
 {
-    class AnimationRender : Component
+    class AnimationRender : Renderer
     {
-        Model model;
+        //Model model;
         Texture2D texture;
-        Matrix[] boneTransformations;
+        //Matrix[] boneTransformations;
 
         AnimationPlayer animationPlayer;
-        float scale;
+        //float scale;
 
         public AnimationRender(GameObject gameObject) : base(gameObject)
         {
@@ -21,7 +21,7 @@ namespace Insight.Engine.Components
             scale = 1.0f;
         }
 
-        public void Load(ContentManager c)
+        public override void Load(ContentManager c)
         {
             model = c.Load<Model>("Models/Konrads/Character/badassRunIdle");
 
@@ -92,14 +92,14 @@ namespace Insight.Engine.Components
             }
         }
 
-        public Matrix GetMatrix()
-        {
-            return Matrix.CreateScale(scale)
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                        * Matrix.CreateScale(scale)
-                        * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
-        }
+        //public Matrix GetMatrix()
+        //{
+        //    return Matrix.CreateScale(scale)
+        //                * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
+        //                * Matrix.CreateScale(scale)
+        //                * Matrix.CreateTranslation(gameObject.Transform.Position)
+        //                * Matrix.CreateTranslation(gameObject.Transform.origin);
+        //}
 
     }
 }

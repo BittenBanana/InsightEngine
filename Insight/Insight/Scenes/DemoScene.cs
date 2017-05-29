@@ -126,7 +126,7 @@ namespace Insight.Scenes
             player.physicLayer = Layer.Player;
 
             enemy = new GameObject(new Vector3(17, 0, 0), false);
-            enemy.AddNewComponent<MeshRenderer>();
+            enemy.AddNewComponent<AnimationRender>();
             
             //player.AddNewComponent<Rigidbody>();
 
@@ -424,7 +424,7 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
             
             player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
-            enemy.LoadContent(content, "Models/Konrads/Character/superBoxHero", 1f);
+            enemy.LoadContent(content);
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;

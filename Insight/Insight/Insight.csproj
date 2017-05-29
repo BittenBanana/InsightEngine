@@ -52,6 +52,7 @@
     <Compile Include="Engine\Components\DebugDraw.cs" />
     <Compile Include="Engine\Components\Light.cs" />
     <Compile Include="Engine\Components\MeshRenderer.cs" />
+    <Compile Include="Engine\Components\Renderer.cs" />
     <Compile Include="Engine\Components\Rigidbody.cs" />
     <Compile Include="Engine\Components\SphereCollider.cs" />
     <Compile Include="Engine\Components\UserInterface.cs" />

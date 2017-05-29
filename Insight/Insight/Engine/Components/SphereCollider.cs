@@ -20,7 +20,7 @@ namespace Insight.Engine.Components
 
         public SphereCollider(GameObject gameObject) :base(gameObject)
         {
-            model = gameObject.GetComponent<MeshRenderer>().getModel();
+            model = gameObject.GetComponent<Renderer>().getModel();
             rotation = gameObject.Transform.Rotation;
             pos = gameObject.Transform.Position;
             boundingSpheres = new List<BoundingSphere>();
