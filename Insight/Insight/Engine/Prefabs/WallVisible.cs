@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine.Prefabs
 {
-    class Door : Prefab
+    class WallVisible : Prefab
     {
-        GameObject doorModel;
+        GameObject wallModel;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
             prefabGameObjects = new List<GameObject>();
 
-            doorModel = new GameObject(new Vector3(0, 0, 0), false);
+            wallModel = new GameObject(new Vector3(0, 0, 0), false);
 
-            doorModel.AddNewComponent<MeshRenderer>();
+            wallModel.AddNewComponent<MeshRenderer>();
 
 
 
-            prefabGameObjects.Add(doorModel);
+            prefabGameObjects.Add(wallModel);
             base.Initialize(position, rotation);
         }
 
         public override void LoadContent(ContentManager content)
         {
 
-            doorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/wall5x5withDoor", 1.0f);
+            wallModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/w-5x5-visible", 1.0f);
 
-            doorModel.AddNewComponent<BoxCollider>();
+            wallModel.AddNewComponent<BoxCollider>();
 
         }
     }
