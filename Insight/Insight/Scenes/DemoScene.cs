@@ -105,6 +105,7 @@ namespace Insight.Scenes
         ColliderManager colliderManager;
 
         GameObject enemy;
+        private EnemyPrefab enemy1;
 
         GameObject bulletDispenser;
         GameObject dispenserTrigger;
@@ -125,8 +126,8 @@ namespace Insight.Scenes
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
 
-            enemy = new GameObject(new Vector3(17, 0, 0), false);
-            enemy.AddNewComponent<AnimationRender>();
+            enemy1 = new EnemyPrefab();
+            enemy1.Initialize(new Vector3(17, 0, 0));
             
             //player.AddNewComponent<Rigidbody>();
 
@@ -389,7 +390,6 @@ namespace Insight.Scenes
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
-            gameObjects.Add(enemy);
             gameObjects.Add(bulletDispenser);
             gameObjects.Add(dispenserTrigger);
 
@@ -420,11 +420,12 @@ namespace Insight.Scenes
             }
 
             
+            
+
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
             
             player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
-            enemy.LoadContent(content);
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
@@ -435,8 +436,6 @@ namespace Insight.Scenes
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
-            enemy.AddNewComponent<BasicAI>();
-            enemy.AddNewComponent<SphereCollider>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
             corridor3.LoadContent(content);
@@ -526,6 +525,7 @@ namespace Insight.Scenes
             dispenserTrigger.GetComponent<MeshRenderer>().IsVisible = false;
             dispenserTrigger.physicLayer = Layer.DispenserTrigger;
 
+            enemy1.LoadContent(content);
 
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, 410), Color.White, 1);

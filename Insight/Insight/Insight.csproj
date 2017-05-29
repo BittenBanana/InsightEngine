@@ -71,6 +71,7 @@
     <Compile Include="Engine\Prefabs\Corridor3Way.cs" />
     <Compile Include="Engine\Prefabs\CorridorRotated.cs" />
     <Compile Include="Engine\Prefabs\Door.cs" />
+    <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
     <Compile Include="Engine\Prefabs\RoomFloorSmallerRotated.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Scripts\BoxRotation.cs" />
     <Compile Include="Scripts\CameraFollowBox.cs" />
     <Compile Include="Scripts\CameraPivotFollow.cs" />
+    <Compile Include="Scripts\EnemySight.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
     <Compile Include="Scripts\ThirdPersonCamera.cs" />
   </ItemGroup>
