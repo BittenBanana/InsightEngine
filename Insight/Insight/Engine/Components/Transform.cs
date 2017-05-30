@@ -7,6 +7,7 @@ namespace Insight.Engine
     public class Transform : Component
     {
         public Vector3 Position;
+        public Vector3 prevPosition { get; private set; }
         public Vector3 Rotation;
         public Quaternion quaterion;
         public Vector3 origin;
@@ -32,6 +33,23 @@ namespace Insight.Engine
             quaterion *= Quaternion.CreateFromAxisAngle(axis, angle);
             //Rotation =
             //Debug.WriteLine(quaterion);
+        }
+
+        public void Move(Vector3 axis, float speed)
+        {
+            prevPosition = Position;
+            if(axis == Vector3.UnitX)
+            {
+                Position.X += speed;
+            }
+            if(axis == Vector3.UnitY)
+            {
+                Position.Y += speed;
+            }
+            if(axis == Vector3.UnitZ)
+            {
+                Position.Z += speed;
+            }
         }
 
     }

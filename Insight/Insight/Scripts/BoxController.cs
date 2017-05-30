@@ -40,16 +40,20 @@ namespace Insight.Scripts
             }
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
-                gameObject.Transform.Position.X += gameObject.velocityX;
-                gameObject.Transform.Position.Z += gameObject.velocityZ;
+                //gameObject.Transform.Position.X += gameObject.velocityX;
+                //gameObject.Transform.Position.Z += gameObject.velocityZ;
+                gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityX);
+                gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityZ);
                 gameObject.Forward = true;
                 gameObject.Backward = false;
                 gameObject.IsMoving = true;
             }
             if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
             {
-                gameObject.Transform.Position.X -= gameObject.velocityX;
-                gameObject.Transform.Position.Z -= gameObject.velocityZ;
+                //gameObject.Transform.Position.X -= gameObject.velocityX;
+                //gameObject.Transform.Position.Z -= gameObject.velocityZ;
+                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityX);
+                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityZ);
                 gameObject.Forward = false;
                 gameObject.Backward = true;
                 gameObject.IsMoving = true;
