@@ -15,7 +15,7 @@ namespace Insight.Engine.Prefabs
         GameObject corridorModel;
         GameObject floor;
 
-        public override void Initialize(Vector3 position)
+        public override void Initialize(Vector3 position, Vector3 rotation)
         {
             prefabGameObjects = new List<GameObject>();
 
@@ -32,13 +32,17 @@ namespace Insight.Engine.Prefabs
 
             prefabGameObjects.Add(corridorModel);
             prefabGameObjects.Add(floor);
-            base.Initialize(position);
+            base.Initialize(position, rotation);
         }
 
         public override void LoadContent(ContentManager content)
         {
 
             corridorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-str-rt-g", 1.0f);
+            corridorModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
+            corridorModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
+            corridorModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
+            corridorModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
             floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
             corridorModel.AddNewComponent<BoxCollider>();
             floor.AddNewComponent<BoxCollider>();

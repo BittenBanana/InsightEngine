@@ -82,6 +82,7 @@
     <Compile Include="Engine\Prefabs\WallShorter.cs" />
     <Compile Include="Engine\Prefabs\WallSmaller.cs" />
     <Compile Include="Engine\Prefabs\WallVisible.cs" />
+    <Compile Include="Engine\Prefabs\WallVisibleSmaller.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />
     <Compile Include="Engine\Time.cs" />
     <Compile Include="Engine\VectorHelper.cs" />

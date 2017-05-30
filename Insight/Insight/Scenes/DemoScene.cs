@@ -34,11 +34,11 @@ namespace Insight.Scenes
         CornerRightRotated cornerRight;
         CornerRightRotated cornerRight2;
         CornerRightRotated cornerRight3;
-        CorridorRotated corridorRotated;
-        CorridorRotated corridorRotated2;
-        CorridorRotated corridorRotated3;
-        CorridorRotated corridorRotated4;
-        CorridorRotated corridorRotated5;
+        Corridor corridorRotated;
+        Corridor corridorRotated2;
+        Corridor corridorRotated3;
+        Corridor corridorRotated4;
+        Corridor corridorRotated5;
         Corridor3Way corridor3Way;
         Corridor3Way corridor3Way2;
         Column column;
@@ -97,6 +97,7 @@ namespace Insight.Scenes
         WallVisible wall20;
         WallShorter wall21;
         WallShorter wall22;
+        WallVisibleSmaller wall23;
         Stairs stairs;
         GameObject player;
         Camera mainCam;
@@ -139,24 +140,24 @@ namespace Insight.Scenes
             //testPrefab.Initialize(new Vector3(0, 0, 2));
 
             corridor = new Corridor();
-            corridor.Initialize(new Vector3(0));
+            corridor.Initialize(new Vector3(0), new Vector3(0));
 
             corridor2 = new Corridor();
-            corridor2.Initialize(new Vector3(0, 0, 5));
+            corridor2.Initialize(new Vector3(0, 0, 5), new Vector3(0));
 
             cornerLeft = new CornerLeft();
             cornerLeft.Initialize(new Vector3(0, 0, 10));
 
-            corridorRotated = new CorridorRotated();
+            corridorRotated = new Corridor();
             corridorRotated.Initialize(new Vector3(6, 0, 16), new Vector3(0, 1.571f, 0));
 
-            corridorRotated2 = new CorridorRotated();
+            corridorRotated2 = new Corridor();
             corridorRotated2.Initialize(new Vector3(11, 0, 16), new Vector3(0, 1.571f, 0));
 
-            corridorRotated3 = new CorridorRotated();
+            corridorRotated3 = new Corridor();
             corridorRotated3.Initialize(new Vector3(21, 0, 16), new Vector3(0, 1.571f, 0));
 
-            corridorRotated4 = new CorridorRotated();
+            corridorRotated4 = new Corridor();
             corridorRotated4.Initialize(new Vector3(26, 0, 16), new Vector3(0, 1.571f, 0));
 
             cornerRight = new CornerRightRotated();
@@ -166,10 +167,10 @@ namespace Insight.Scenes
             corridor3Way.Initialize(new Vector3(16, 0, 16), new Vector3(0, 1.571f, 0));
 
             corridor3 = new Corridor();
-            corridor3.Initialize(new Vector3(16, 0, 1));
+            corridor3.Initialize(new Vector3(16, 0, 1), new Vector3(0));
 
             corridor4 = new Corridor();
-            corridor4.Initialize(new Vector3(16, 0, 6));
+            corridor4.Initialize(new Vector3(16, 0, 6), new Vector3(0));
 
             door = new Door();
             door.Initialize(new Vector3(19.17f, 0, 1), new Vector3(0));         
@@ -181,7 +182,7 @@ namespace Insight.Scenes
             columnRotated.Initialize(new Vector3(21, 0, 11));
 
             corridor5 = new Corridor();
-            corridor5.Initialize(new Vector3(32, 0, 17));
+            corridor5.Initialize(new Vector3(32, 0, 17), new Vector3(0));
 
             roomFloor = new RoomFloor();
             roomFloor.Initialize(new Vector3(32, 0, 22));
@@ -256,10 +257,10 @@ namespace Insight.Scenes
             door3.Initialize(new Vector3(30.17f, 0, 37), new Vector3(0));
 
             corridor6 = new Corridor();
-            corridor6.Initialize(new Vector3(27, 0, 37));
+            corridor6.Initialize(new Vector3(27, 0, 37), new Vector3(0));
 
             corridor7 = new Corridor();
-            corridor7.Initialize(new Vector3(27, 0, 42));
+            corridor7.Initialize(new Vector3(27, 0, 42), new Vector3(0));
 
             corridor3Way2 = new Corridor3Way();
             corridor3Way2.Initialize(new Vector3(27, 0, 52), new Vector3(0, 1.571f, 0));
@@ -270,14 +271,14 @@ namespace Insight.Scenes
             columnRotated2 = new ColumnRotated();
             columnRotated2.Initialize(new Vector3(32, 0, 47));
 
-            corridorRotated5 = new CorridorRotated();
+            corridorRotated5 = new Corridor();
             corridorRotated5.Initialize(new Vector3(22, 0, 52), new Vector3(0, 1.571f, 0));
 
             cornerRight2 = new CornerRightRotated();
             cornerRight2.Initialize(new Vector3(22, 0, 47), new Vector3(0, 4.713f, 0));
 
             corridor8 = new Corridor();
-            corridor8.Initialize(new Vector3(16, 0, 53));
+            corridor8.Initialize(new Vector3(16, 0, 53), new Vector3(0));
 
             roomFloor11 = new RoomFloor();
             roomFloor11.Initialize(new Vector3(16, 0, 58));
@@ -307,7 +308,7 @@ namespace Insight.Scenes
             cornerRight3.Initialize(new Vector3(38, 0, 53), new Vector3(0, 3.142f, 0));
 
             corridor9 = new Corridor();
-            corridor9.Initialize(new Vector3(33, 0, 53));
+            corridor9.Initialize(new Vector3(33, 0, 53), new Vector3(0));
 
             cornerLeft2 = new CornerLeft();
             cornerLeft2.Initialize(new Vector3(33, 0, 58));
@@ -375,6 +376,9 @@ namespace Insight.Scenes
             //stairs = new Stairs();
             //stairs.Initialize(new Vector3(39, 0, 64));
 
+            wall23 = new WallVisibleSmaller();
+            wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
+
 
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
@@ -425,7 +429,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
             
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 0.5f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
@@ -511,6 +515,7 @@ namespace Insight.Scenes
             wall20.LoadContent(content);
             wall21.LoadContent(content);
             wall22.LoadContent(content);
+            wall23.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
