@@ -136,7 +136,6 @@
     <None Include="Content\badass1_8m.FBX" />
     <None Include="Content\badassRunIdle.FBX" />
     <None Include="Content\bohater %282%29.FBX" />
-    <None Include="Content\worek.FBX" />
     <None Include="GameObject\Box001DiffuseMap.tga" />
     <None Include="GameObject\Box001NormalsMap.tga" />
     <None Include="GameObject\boxMat.FBX" />

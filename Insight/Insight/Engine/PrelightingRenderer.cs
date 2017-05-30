@@ -28,7 +28,7 @@ namespace Insight.Engine
         private Model lightMesh;
 
         // List of models, lights, and the camera
-        public List<MeshRenderer> Models { get; set; }
+        public List<Renderer> Models { get; set; }
         public List<Light> Lights { get; set; }
         public Camera Camera { get; set; }
 
@@ -79,7 +79,7 @@ namespace Insight.Engine
             graphicsDevice.Clear(Color.White);
 
             // Draw each model with the PPDepthNormal effect
-            foreach (MeshRenderer model in Models)
+            foreach (Renderer model in Models)
             {
                 // model.CacheEffects();
                 Material mat = (Material)model.Material.Clone();
@@ -156,7 +156,7 @@ namespace Insight.Engine
 
         void prepareMainPass()
         {
-            foreach (MeshRenderer model in Models)
+            foreach (Renderer model in Models)
             {
                 // Set the light map and viewport parameters to each model's
                 //effect

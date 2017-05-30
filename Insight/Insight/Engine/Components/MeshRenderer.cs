@@ -13,12 +13,7 @@ namespace Insight.Engine.Components
     public class MeshRenderer : Renderer
     {
         //Model model;
-        private Effect effect;
-        public Material Material { get; set; }
-        Texture2D texture;
-        private Texture2D normal;
-        private Texture2D ao;
-        private Texture2D metalness;
+        
         //Matrix[] boneTransformations;
 
 
@@ -46,25 +41,7 @@ namespace Insight.Engine.Components
             this.scale = scale;
         }
 
-        public void LoadTexture(ContentManager c, string path)
-        {
-            texture = c.Load<Texture2D>(path);
-        }
-
-        public void LoadNormalMap(ContentManager c, string path)
-        {
-            normal = c.Load<Texture2D>(path);
-        }
-
-        public void LoadAmbientOcclusionMap(ContentManager c, string path)
-        {
-            ao = c.Load<Texture2D>(path);
-        }
-
-        public void LoadMetalnessMap(ContentManager c, string path)
-        {
-            metalness = c.Load<Texture2D>(path);
-        }
+        
 
         //public Model getModel()
         //{
@@ -93,23 +70,7 @@ namespace Insight.Engine.Components
                         part.Effect = ((MeshTag)part.Tag).CachedEffect;
         }
 
-        public void SetModelMaterial(Material material, bool CopyEffect)
-        {
-            this.Material = material;
-            effect = material.GetEffect();
-            //foreach (ModelMesh mesh in model.Meshes)
-            //    foreach (ModelMeshPart part in mesh.MeshParts)
-            //    {
-            //        Effect toSet = material.GetEffect();
-            //        // Copy the effect if necessary
-            //        if (CopyEffect)
-            //            toSet = effect.Clone();
-            //        MeshTag tag = ((MeshTag)part.Tag);
-            //        // If this ModelMeshPart has a texture, set it to the effect
-            //        //material.SetParameters();
-            //        this.effect = toSet;
-            //    }
-        }
+        
 
         private void generateTags()
         {
@@ -194,8 +155,7 @@ namespace Insight.Engine.Components
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
-                                                            * Matrix.CreateTranslation(gameObject.Transform.Position)
-                                                            * Matrix.CreateTranslation(gameObject.Transform.origin);
+                                                            * Matrix.CreateTranslation(gameObject.Transform.Position);
                         effect.Parameters["World"]?.SetValue(World);
                         effect.Parameters["View"]?.SetValue(cam.view);
                         effect.Parameters["Projection"]?.SetValue(cam.projection);
@@ -207,7 +167,8 @@ namespace Insight.Engine.Components
                             * Matrix.CreateFromAxisAngle(Vector3.UnitZ, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Z)
                             ));
 
-                        //effect.CurrentTechnique = effect.Techniques["Blinn"];
+                        if(effect.Name == "PhongBlinnShader")
+                            effect.CurrentTechnique = effect.Techniques["Basic"];
 
                         //effect.EnableDefaultLighting();
 

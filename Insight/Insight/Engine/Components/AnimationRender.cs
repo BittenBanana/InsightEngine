@@ -9,7 +9,6 @@ namespace Insight.Engine.Components
     class AnimationRender : Renderer
     {
         //Model model;
-        Texture2D texture;
         //Matrix[] boneTransformations;
 
         AnimationPlayer animationPlayer;
@@ -24,7 +23,7 @@ namespace Insight.Engine.Components
         public override void Load(ContentManager c)
         {
             model = c.Load<Model>("Models/Konrads/Character/badassRunIdle");
-
+            effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
             if (skinningData == null)
@@ -37,7 +36,7 @@ namespace Insight.Engine.Components
 
             animationPlayer.StartClip(clip);
         }
-        
+
 
         public Model getModel()
         {
@@ -57,8 +56,6 @@ namespace Insight.Engine.Components
         }
         public override void Draw(Camera cam)
         {
-            
-
             Matrix[] bones = animationPlayer.GetSkinTransforms();
             boneTransformations = new Matrix[model.Bones.Count];
 
@@ -67,25 +64,72 @@ namespace Insight.Engine.Components
             // Render the skinned mesh.
             foreach (ModelMesh mesh in model.Meshes)
             {
-                foreach (SkinnedEffect effect in mesh.Effects)
+                foreach (ModelMeshPart p in mesh.MeshParts)
                 {
-                    effect.World = boneTransformations[mesh.ParentBone.Index]
+                    p.Effect = effect;
+                    Material.SetParameters();
+                    if (texture != null)
+                    {
+                        effect.Parameters["BasicTexture"]?.SetValue(texture);
+                        effect.Parameters["TextureEnabled"]?.SetValue(true);
+                    }
+                    else
+                    {
+                        effect.Parameters["TextureEnabled"]?.SetValue(false);
+                    }
+
+                    if (normal != null)
+                    {
+                        effect.Parameters["NormalTexture"]?.SetValue(normal);
+                        effect.Parameters["NormalEnabled"]?.SetValue(true);
+                    }
+                    else
+                    {
+                        effect.Parameters["NormalEnabled"]?.SetValue(false);
+                    }
+
+                    if (ao != null)
+                    {
+                        effect.Parameters["AOTexture"]?.SetValue(ao);
+                        effect.Parameters["AOEnabled"]?.SetValue(true);
+                    }
+                    else
+                    {
+                        effect.Parameters["AOEnabled"]?.SetValue(false);
+                    }
+
+                    if (metalness != null)
+                    {
+                        effect.Parameters["MetalnessTexture"]?.SetValue(metalness);
+                        effect.Parameters["MetalnessEnabled"]?.SetValue(true);
+                    }
+                    else
+                    {
+                        effect.Parameters["MetalnessEnabled"]?.SetValue(false);
+                    }
+
+                    Matrix World = boneTransformations[mesh.ParentBone.Index]
                         * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
                         * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
                         * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
                         * Matrix.CreateTranslation(gameObject.Transform.Position)
                         * Matrix.CreateScale(scale);
 
+                    effect.Parameters["Bones"]?.SetValue(bones);
+                    effect.Parameters["BoneCount"]?.SetValue(bones.Length);
 
-                    effect.SetBoneTransforms(bones);
-                    
-                    effect.View = cam.view;
-                    effect.Projection = cam.projection;
-
-                    effect.EnableDefaultLighting();
-
-                    effect.SpecularColor = new Vector3(0.25f);
-                    effect.SpecularPower = 16;
+                    effect.Parameters["World"]?.SetValue(World);
+                    effect.Parameters["View"]?.SetValue(cam.view);
+                    effect.Parameters["Projection"]?.SetValue(cam.projection);
+                    effect.Parameters["CamPosition"]?.SetValue(cam.Position);
+                    effect.Parameters["WorldInverseTranspose"]?.SetValue(Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * World)));
+                    effect.Parameters["ViewVector"]?.SetValue(Vector3.Transform(Vector3.Forward,
+                        Matrix.CreateFromAxisAngle(Vector3.UnitX, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.X)
+                        * Matrix.CreateFromAxisAngle(Vector3.UnitY, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Y)
+                        * Matrix.CreateFromAxisAngle(Vector3.UnitZ, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Z)
+                        ));
+                    if (effect.Name == "PhongBlinnShader")
+                        effect.CurrentTechnique = effect.Techniques["Skinned"];
                 }
 
                 mesh.Draw();

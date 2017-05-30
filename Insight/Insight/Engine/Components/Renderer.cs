@@ -15,6 +15,13 @@ namespace Insight.Engine.Components
         protected Matrix[] boneTransformations;
         protected float scale;
 
+        protected Effect effect;
+        public Material Material { get; set; }
+        protected Texture2D texture;
+        protected Texture2D normal;
+        protected Texture2D ao;
+        protected Texture2D metalness;
+
         public Renderer(GameObject gameObject) : base(gameObject)
         {
         }
@@ -22,6 +29,32 @@ namespace Insight.Engine.Components
         public virtual void Load(ContentManager c)
         {
 
+        }
+
+        public void SetModelMaterial(Material material, bool CopyEffect)
+        {
+            this.Material = material;
+            effect = material.GetEffect();
+        }
+
+        public void LoadTexture(ContentManager c, string path)
+        {
+            texture = c.Load<Texture2D>(path);
+        }
+
+        public void LoadNormalMap(ContentManager c, string path)
+        {
+            normal = c.Load<Texture2D>(path);
+        }
+
+        public void LoadAmbientOcclusionMap(ContentManager c, string path)
+        {
+            ao = c.Load<Texture2D>(path);
+        }
+
+        public void LoadMetalnessMap(ContentManager c, string path)
+        {
+            metalness = c.Load<Texture2D>(path);
         }
 
         public virtual Model getModel()

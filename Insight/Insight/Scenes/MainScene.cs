@@ -161,15 +161,15 @@ namespace Insight.Scenes
             //((DefaultMaterial)defaultMaterial).SpecularColor = pointLight1.GetComponent<Light>().Color.ToVector3();
             #endregion
 
-            List<MeshRenderer> models = new List<MeshRenderer>();
+            List<Renderer> models = new List<Renderer>();
             List<Light> lights = new List<Light>();
 
             foreach (var o in gameObjects)
             {
-                if (o.GetComponent<MeshRenderer>() != null)
+                if (o.GetComponent<Renderer>() != null)
                 {
-                    models.Add(o.GetComponent<MeshRenderer>());
-                    o.GetComponent<MeshRenderer>().Material = defaultMaterial;
+                    models.Add(o.GetComponent<Renderer>());
+                    o.GetComponent<Renderer>().Material = defaultMaterial;
                 }
                 if (o.GetComponent<Light>() != null)
                 {

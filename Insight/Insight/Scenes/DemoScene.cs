@@ -17,6 +17,8 @@ namespace Insight.Scenes
 {
     class DemoScene : GameScene
     {
+        private PrelightingRenderer lightRenderer;
+
         static String floorPrefab = "floor5x5";
         //GameObject floor1;
         TestPrefab testPrefab;
@@ -107,6 +109,7 @@ namespace Insight.Scenes
 
         GameObject enemy;
         private EnemyPrefab enemy1;
+        private GameObject pointLight1;
 
         GameObject bulletDispenser;
         GameObject dispenserTrigger;
@@ -121,7 +124,10 @@ namespace Insight.Scenes
         {
             base.Initialize(graphicsDevice);
 
-            
+            pointLight1 = new GameObject(new Vector3(17, 3f, 5), false);
+            pointLight1.AddNewComponent<Light>();
+            pointLight1.GetComponent<Light>().Color = Color.Cyan;
+            pointLight1.GetComponent<Light>().Attenuation = 10;
 
             player = new GameObject(new Vector3(2, 1, 2), true);
             player.AddNewComponent<MeshRenderer>();
@@ -391,6 +397,7 @@ namespace Insight.Scenes
             dispenserTrigger = new GameObject(new Vector3(22, 0, -5), false);
             dispenserTrigger.AddNewComponent<MeshRenderer>();
 
+            gameObjects.Add(pointLight1);
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
@@ -413,23 +420,33 @@ namespace Insight.Scenes
             ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             #endregion
 
+            List<Renderer> models = new List<Renderer>();
+            List<Light> lights = new List<Light>();
+
             foreach (var o in gameObjects)
             {
-                if (o.GetComponent<MeshRenderer>() != null)
-                    o.GetComponent<MeshRenderer>().Material = defaultMaterial;
+                if (o.GetComponent<Renderer>() != null)
+                {
+                    models.Add(o.GetComponent<Renderer>());
+                    o.GetComponent<Renderer>().Material = defaultMaterial;
+                }
+                if (o.GetComponent<Light>() != null)
+                {
+                    lights.Add(o.GetComponent<Light>());
+                }
             }
             foreach (var item in gameObjects)
             {
                 item.LoadContent(content);
             }
 
-            
-            
+            lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
+
 
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
-            
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
+
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 0.5f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
@@ -543,6 +560,9 @@ namespace Insight.Scenes
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(320, 80), Color.White, 0);
 
+            lightRenderer.Camera = mainCam;
+            lightRenderer.Lights = lights;
+            lightRenderer.Models = models;
 
             Debug.WriteLine(gameObjects.Count + "=============================");
         }
@@ -609,6 +629,8 @@ namespace Insight.Scenes
 
         public override void Draw()
         {
+            lightRenderer.Draw();
+
             graphics.GraphicsDevice.Clear(Color.LightBlue);
             foreach (GameObject go in gameObjects)
             {

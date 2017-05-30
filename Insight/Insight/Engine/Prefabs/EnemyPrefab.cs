@@ -21,9 +21,11 @@ namespace Insight.Engine.Prefabs
             enemy = new GameObject(position, false);
             enemy.AddNewComponent<AnimationRender>();
 
+            
+
             enemySightTrigger = new GameObject(new Vector3(17,0,0), false);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
-            //enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
+            enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
             
             prefabGameObjects.Add(enemy);
             prefabGameObjects.Add(enemySightTrigger);
@@ -33,6 +35,10 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
             enemy.LoadContent(content);
+            enemy.GetComponent<Renderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
+            enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
+            enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
+            enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
             enemy.AddNewComponent<BasicAI>();
             enemy.AddNewComponent<SphereCollider>();
 

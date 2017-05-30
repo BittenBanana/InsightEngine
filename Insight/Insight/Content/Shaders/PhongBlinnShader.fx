@@ -106,6 +106,25 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 	return output;
 }
 
+VertexShaderOutput SkinnedVS(in GameSkinnedInput input)
+{
+    Skin(input, BoneCount);
+
+    VertexShaderOutput output = (VertexShaderOutput) 0;
+
+    float4 worldPosition = mul(input.Position, World);
+    float4 viewPosition = mul(worldPosition, View);
+    output.Position = mul(viewPosition, Projection);
+    float3 normal = normalize(mul(input.Normal, World));
+    output.Normal = normal;
+    output.View = normalize(float4(CamPosition, 1.0) - worldPosition);
+
+    output.PositionCopy = output.Position;
+    output.UV = input.UV;
+
+    return output;
+}
+
 float4 MainPS(VertexShaderOutput input) : COLOR0
 {
 	// Sample model's texture
@@ -141,7 +160,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
 	return float4(basicTexture * BlinnColor.rgb * light, 1);
 }
 
-technique Blinn
+technique Basic
 {
 	pass P0
 	{
@@ -154,4 +173,14 @@ technique Blinn
 		VertexShader = compile VS_SHADERMODEL ShadowMapVS();
 		PixelShader = compile PS_SHADERMODEL ShadowMapPS();
 	}*/
+};
+
+technique Skinned
+{
+    pass P0
+    {
+        VertexShader = compile VS_SHADERMODEL SkinnedVS();
+        PixelShader = compile PS_SHADERMODEL MainPS();
+    }
+
 };
