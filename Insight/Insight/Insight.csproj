@@ -71,6 +71,7 @@
     <Compile Include="Engine\Prefabs\Corridor3Way.cs" />
     <Compile Include="Engine\Prefabs\CorridorRotated.cs" />
     <Compile Include="Engine\Prefabs\Door.cs" />
+    <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Engine\Prefabs\WallRotated.cs" />
     <Compile Include="Engine\Prefabs\WallShorter.cs" />
     <Compile Include="Engine\Prefabs\WallSmaller.cs" />
+    <Compile Include="Engine\Prefabs\WallSmallerShorter.cs" />
     <Compile Include="Engine\Prefabs\WallVisible.cs" />
     <Compile Include="Engine\Prefabs\WallVisibleSmaller.cs" />
     <Compile Include="Engine\PrelightingRenderer.cs" />

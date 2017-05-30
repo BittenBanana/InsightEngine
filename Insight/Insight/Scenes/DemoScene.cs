@@ -31,16 +31,20 @@ namespace Insight.Scenes
         Corridor corridor7;
         Corridor corridor8;
         Corridor corridor9;
+        Corridor corridor10;
         CornerLeft cornerLeft;
         CornerLeft cornerLeft2;
         CornerRightRotated cornerRight;
         CornerRightRotated cornerRight2;
         CornerRightRotated cornerRight3;
+        CornerRightRotated cornerRight4;
         Corridor corridorRotated;
         Corridor corridorRotated2;
         Corridor corridorRotated3;
         Corridor corridorRotated4;
         Corridor corridorRotated5;
+        Corridor corridorRotated6;
+        Corridor corridorRotated7;
         Corridor3Way corridor3Way;
         Corridor3Way corridor3Way2;
         Column column;
@@ -52,6 +56,8 @@ namespace Insight.Scenes
         Door door3;
         Door door4;
         Door door5;
+        DoorSmaller door6;
+        Door door7;
         RoomFloor roomFloor;
         RoomFloor roomFloor2;
         RoomFloor roomFloor3;
@@ -77,6 +83,10 @@ namespace Insight.Scenes
         RoomFloor roomFloor23;
         RoomFloor roomFloor24;
         RoomFloorSmallerRotated roomFloor25;
+        RoomFloor roomFloor26;
+        RoomFloor roomFloor27;
+        RoomFloor roomFloor28;
+        RoomFloor roomFloor29;
         Wall wall;
         Wall wall2;
         WallRotated wall3;
@@ -100,6 +110,37 @@ namespace Insight.Scenes
         WallShorter wall21;
         WallShorter wall22;
         WallVisibleSmaller wall23;
+        WallVisibleSmaller wall24;
+        WallVisibleSmaller wall25;
+        WallVisibleSmaller wall26;
+        WallVisibleSmaller wall27;
+        WallVisibleSmaller wall28;
+        WallVisibleSmaller wall29;
+        WallVisibleSmaller wall30;
+        WallVisibleSmaller wall31;
+        WallVisibleSmaller wall32;
+        WallVisibleSmaller wall33;
+        WallSmallerShorter wall34;
+        WallSmallerShorter wall35;
+        WallVisible wall36;
+        WallRotated wall37;
+        WallRotated wall38;
+        WallRotated wall39;
+        WallRotated wall40;
+        WallVisible wall41;
+        WallVisible wall42;
+        WallVisible wall43;
+        WallVisible wall44;
+        WallVisible wall45;
+        WallVisible wall46;
+        WallVisible wall47;
+        WallVisible wall48;
+        WallVisible wall49;
+        WallVisible wall50;
+        WallVisible wall51;
+        WallVisible wall52;
+        WallVisible wall53;
+        WallVisible wall54;
         Stairs stairs;
         GameObject player;
         Camera mainCam;
@@ -379,11 +420,136 @@ namespace Insight.Scenes
             roomFloor25 = new RoomFloorSmallerRotated();
             roomFloor25.Initialize(new Vector3(49, -4, 79));
 
-            //stairs = new Stairs();
-            //stairs.Initialize(new Vector3(39, 0, 64));
+            stairs = new Stairs();
+            stairs.Initialize(new Vector3(39, 0, 64));
 
             wall23 = new WallVisibleSmaller();
             wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
+
+            wall24 = new WallVisibleSmaller();
+            wall24.Initialize(new Vector3(49, -4, 69), new Vector3(0, 4.713f, 0));
+
+            wall25 = new WallVisibleSmaller();
+            wall25.Initialize(new Vector3(49, -4, 74), new Vector3(0, 4.713f, 0));
+
+            wall26 = new WallVisibleSmaller();
+            wall26.Initialize(new Vector3(52, -4, 79), new Vector3(0, 4.713f, 0));
+
+            wall27 = new WallVisibleSmaller();
+            wall27.Initialize(new Vector3(49, -4, 84), new Vector3(0, 4.713f, 0));
+
+            wall28 = new WallVisibleSmaller();
+            wall28.Initialize(new Vector3(39, -4, 64), new Vector3(0, 4.713f, 0));
+
+            wall29 = new WallVisibleSmaller();
+            wall29.Initialize(new Vector3(39, -4, 69), new Vector3(0, 4.713f, 0));
+
+            wall30 = new WallVisibleSmaller();
+            wall30.Initialize(new Vector3(39, -4, 74), new Vector3(0, 4.713f, 0));
+
+            wall31 = new WallVisibleSmaller();
+            wall31.Initialize(new Vector3(39, -4, 84), new Vector3(0, 4.713f, 0));
+
+            wall32 = new WallVisibleSmaller();
+            wall32.Initialize(new Vector3(39, -4, 89), new Vector3(0));
+
+            wall33 = new WallVisibleSmaller();
+            wall33.Initialize(new Vector3(44, -4, 89), new Vector3(0));
+
+            wall34 = new WallSmallerShorter();
+            wall34.Initialize(new Vector3(49, -4, 84), new Vector3(0));
+
+            wall35 = new WallSmallerShorter();
+            wall35.Initialize(new Vector3(49, -4, 79), new Vector3(0));
+
+            door6 = new DoorSmaller();
+            door6.Initialize(new Vector3(39, -4, 79), new Vector3(0, 4.713f, 0));
+
+            wall36 = new WallVisible();
+            wall36.Initialize(new Vector3(49, 0, 64), new Vector3(0, 4.713f, 0));
+
+            wall37 = new WallRotated();
+            wall37.Initialize(new Vector3(49, 0, 69), new Vector3(0, 4.713f, 0));
+
+            wall38 = new WallRotated();
+            wall38.Initialize(new Vector3(49, 0, 74), new Vector3(0, 4.713f, 0));
+
+            wall39 = new WallRotated();
+            wall39.Initialize(new Vector3(49, 0, 79), new Vector3(0, 4.713f, 0));
+
+            wall40 = new WallRotated();
+            wall40.Initialize(new Vector3(49, 0, 84), new Vector3(0, 4.713f, 0));
+
+            wall41 = new WallVisible();
+            wall41.Initialize(new Vector3(39, 0, 64), new Vector3(0, 4.713f, 0));
+
+            wall42 = new WallVisible();
+            wall42.Initialize(new Vector3(39, 0, 69), new Vector3(0, 4.713f, 0));
+
+            wall43 = new WallVisible();
+            wall43.Initialize(new Vector3(39, 0, 74), new Vector3(0, 4.713f, 0));
+
+            wall44 = new WallVisible();
+            wall44.Initialize(new Vector3(39, 0, 79), new Vector3(0, 4.713f, 0));
+
+            wall45 = new WallVisible();
+            wall45.Initialize(new Vector3(39, 0, 84), new Vector3(0, 4.713f, 0));
+
+            wall46 = new WallVisible();
+            wall46.Initialize(new Vector3(39, 0, 89), new Vector3(0));
+
+            wall47 = new WallVisible();
+            wall47.Initialize(new Vector3(44, 0, 89), new Vector3(0));
+
+            corridorRotated6 = new Corridor();
+            corridorRotated6.Initialize(new Vector3(34, -4, 84), new Vector3(0, 1.571f, 0));
+
+            corridorRotated7 = new Corridor();
+            corridorRotated7.Initialize(new Vector3(29, -4, 84), new Vector3(0, 1.571f, 0));
+
+            cornerRight4 = new CornerRightRotated();
+            cornerRight4.Initialize(new Vector3(29, -4, 79), new Vector3(0, 4.713f, 0));
+
+            corridor10 = new Corridor();
+            corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
+
+            door7 = new Door();
+            door7.Initialize(new Vector3(26.18f, -4, 90), new Vector3(0));
+
+            roomFloor26 = new RoomFloor();
+            roomFloor26.Initialize(new Vector3(23, -4, 90));
+
+            roomFloor27 = new RoomFloor();
+            roomFloor27.Initialize(new Vector3(23, -4, 95));
+
+            roomFloor28 = new RoomFloor();
+            roomFloor28.Initialize(new Vector3(28, -4, 90));
+
+            roomFloor29 = new RoomFloor();
+            roomFloor29.Initialize(new Vector3(28, -4, 95));
+
+            wall48 = new WallVisible();
+            wall48.Initialize(new Vector3(28, -4, 90), new Vector3(0));
+
+            wall49 = new WallVisible();
+            wall49.Initialize(new Vector3(28, -4, 100), new Vector3(0));
+
+            wall50 = new WallVisible();
+            wall50.Initialize(new Vector3(23, -4, 100), new Vector3(0));
+
+            wall51 = new WallVisible();
+            wall51.Initialize(new Vector3(33, -4, 90), new Vector3(0, 4.713f, 0));
+
+            wall52 = new WallVisible();
+            wall52.Initialize(new Vector3(33, -4, 95), new Vector3(0, 4.713f, 0));
+
+            wall53 = new WallVisible();
+            wall53.Initialize(new Vector3(23, -4, 90), new Vector3(0, 4.713f, 0));
+
+            wall54 = new WallVisible();
+            wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
+
+
 
 
 
@@ -467,16 +633,20 @@ namespace Insight.Scenes
             corridor7.LoadContent(content);
             corridor8.LoadContent(content);
             corridor9.LoadContent(content);
+            corridor10.LoadContent(content);
             cornerLeft.LoadContent(content);
             cornerLeft2.LoadContent(content);
             cornerRight.LoadContent(content);
             cornerRight2.LoadContent(content);
             cornerRight3.LoadContent(content);
+            cornerRight4.LoadContent(content);
             corridorRotated.LoadContent(content);
             corridorRotated2.LoadContent(content);
             corridorRotated3.LoadContent(content);
             corridorRotated4.LoadContent(content);
             corridorRotated5.LoadContent(content);
+            corridorRotated6.LoadContent(content);
+            corridorRotated7.LoadContent(content);
             corridor3Way.LoadContent(content);
             corridor3Way2.LoadContent(content);
             column.LoadContent(content);
@@ -509,6 +679,10 @@ namespace Insight.Scenes
             roomFloor23.LoadContent(content);
             roomFloor24.LoadContent(content);
             roomFloor25.LoadContent(content);
+            roomFloor26.LoadContent(content);
+            roomFloor27.LoadContent(content);
+            roomFloor28.LoadContent(content);
+            roomFloor29.LoadContent(content);
             door2.LoadContent(content);
             wall.LoadContent(content);
             wall2.LoadContent(content);
@@ -533,10 +707,43 @@ namespace Insight.Scenes
             wall21.LoadContent(content);
             wall22.LoadContent(content);
             wall23.LoadContent(content);
+            wall24.LoadContent(content);
+            wall25.LoadContent(content);
+            wall26.LoadContent(content);
+            wall27.LoadContent(content);
+            wall28.LoadContent(content);
+            wall29.LoadContent(content);
+            wall30.LoadContent(content);
+            wall31.LoadContent(content);
+            wall32.LoadContent(content);
+            wall33.LoadContent(content);
+            wall34.LoadContent(content);
+            wall35.LoadContent(content);
+            wall36.LoadContent(content);
+            wall37.LoadContent(content);
+            wall38.LoadContent(content);
+            wall39.LoadContent(content);
+            wall40.LoadContent(content);
+            wall41.LoadContent(content);
+            wall42.LoadContent(content);
+            wall43.LoadContent(content);
+            wall44.LoadContent(content);
+            wall45.LoadContent(content);
+            wall46.LoadContent(content);
+            wall47.LoadContent(content);
+            wall48.LoadContent(content);
+            wall49.LoadContent(content);
+            wall50.LoadContent(content);
+            wall51.LoadContent(content);
+            wall52.LoadContent(content);
+            wall53.LoadContent(content);
+            wall54.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
-            //stairs.LoadContent(content);
+            door6.LoadContent(content);
+            door7.LoadContent(content);
+            stairs.LoadContent(content);
             colliderManager.ObjectColided += player.OnObjectColided;
 
             bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
