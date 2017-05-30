@@ -161,10 +161,14 @@ namespace Insight.Scenes
 
         private GameObject cameraPivot;
 
+        private float windowWidth;
+        private float windowHeight;
+
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
-
+            windowWidth = SceneManager.Instance.Dimensions.X;
+            windowHeight = SceneManager.Instance.Dimensions.Y;
             pointLight1 = new GameObject(new Vector3(17, 3f, 5), false);
             pointLight1.AddNewComponent<Light>();
             pointLight1.GetComponent<Light>().Color = Color.Cyan;
@@ -756,16 +760,18 @@ namespace Insight.Scenes
             dispenserTrigger.physicLayer = Layer.DispenserTrigger;
 
             enemy1.LoadContent(content);
-
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
-            ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, 410), Color.White, 1);
-            ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, 412), Color.White, 1);
-            ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, 415), Color.White, 1);
-            ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
-            ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(380, 30), Color.White, 0);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
-            ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(350, 200), Color.White, 0);
-            ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(320, 80), Color.White, 0);
+
+            ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, windowHeight - 70), Color.White, 1);
+            ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, windowHeight - 68), Color.White, 1);
+            ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, windowHeight - 66), Color.White, 1);
+
+            ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+
+            ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;
