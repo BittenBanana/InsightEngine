@@ -143,7 +143,6 @@ namespace Insight.Scenes
         WallVisible wall54;
         Stairs stairs;
         GameObject player;
-        Camera mainCam;
         Material defaultMaterial;
         GameObject directionalLight;
         ColliderManager colliderManager;
