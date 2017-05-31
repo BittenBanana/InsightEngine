@@ -38,7 +38,7 @@ namespace Insight.Scripts
             {
                 gameObject.Transform.Rotation.X -= gameObject.rotationSpeed * Math.Abs(s.Position.Y - lastMousePos.Y);
             }
-            gameObject.rotationSpeed = .005f;
+            gameObject.rotationSpeed = .01f;
             lastMousePos = s.Position.ToVector2();
 
             Mouse.SetPosition(s.Position.X, SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2);

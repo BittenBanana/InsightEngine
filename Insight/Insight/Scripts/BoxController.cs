@@ -27,13 +27,13 @@ namespace Insight.Scripts
             KeyboardState keyState = Keyboard.GetState();
             s = Mouse.GetState();
 
-            if (s.Position.ToVector2().X < lastMousePos.X)
+            if (s.Position.ToVector2().X < SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2)
             {
                 gameObject.Transform.Rotation.Y += gameObject.rotationSpeed * Math.Abs(s.Position.X - lastMousePos.X);
 
                 gameObject.Transform.Rotate(Vector3.UnitY, gameObject.rotationSpeed);
             }
-            if (s.Position.ToVector2().X > lastMousePos.X)
+            if (s.Position.ToVector2().X > SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2)
             {
                 gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed * Math.Abs(s.Position.X - lastMousePos.X);
                 gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
@@ -63,7 +63,9 @@ namespace Insight.Scripts
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
             }
             lastMousePos = s.Position.ToVector2();
-            gameObject.rotationSpeed = .005f;
+            gameObject.rotationSpeed = .01f;
+
+            Mouse.SetPosition(SceneManager.Instance.device.GraphicsDevice.Viewport.Width /2, s.Position.Y);
             base.Update();
         }
 
