@@ -167,8 +167,7 @@ namespace Insight.Engine.Components
                             * Matrix.CreateFromAxisAngle(Vector3.UnitZ, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Z)
                             ));
 
-                        if(effect.Name == "PhongBlinnShader")
-                            effect.CurrentTechnique = effect.Techniques["Basic"];
+                        effect.CurrentTechnique = effect.Techniques["Basic"];
 
                         //effect.EnableDefaultLighting();
 

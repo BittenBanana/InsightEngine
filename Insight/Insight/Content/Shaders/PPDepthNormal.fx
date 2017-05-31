@@ -23,6 +23,8 @@ sampler2D normalSampler = sampler_state
 };
 bool NormalEnabled = false;
 
+#include "PPShared.fxh"
+
 struct VertexShaderInput
 {
 	float4 Position : POSITION0;
@@ -59,6 +61,23 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 	return output;
 }
 
+VertexShaderOutput SkinnedVS(in GameSkinnedInput input)
+{
+    Skin(input, BoneCount);
+
+    VertexShaderOutput output = (VertexShaderOutput) 0;
+
+    float4x4 viewProjection = mul(View, Projection);
+    float4x4 worldViewProjection = mul(World, viewProjection);
+
+    output.Position = mul(input.Position, worldViewProjection);
+    output.UV = input.UV;
+    output.Normal = mul(input.Normal, World);
+    output.Depth.xy = output.Position.zw;
+
+    return output;
+}
+
 PixelShaderOutput MainPS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
@@ -83,11 +102,20 @@ PixelShaderOutput MainPS(VertexShaderOutput input)
 	return output;
 }
 
-technique DepthNormal
+technique Basic
 {
 	pass P0
 	{
 		VertexShader = compile VS_SHADERMODEL MainVS();
 		PixelShader = compile PS_SHADERMODEL MainPS();
 	}
+};
+
+technique Skinned
+{
+    pass P0
+    {
+        VertexShader = compile VS_SHADERMODEL SkinnedVS();
+        PixelShader = compile PS_SHADERMODEL MainPS();
+    }
 };

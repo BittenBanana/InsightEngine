@@ -128,8 +128,8 @@ namespace Insight.Engine.Components
                         * Matrix.CreateFromAxisAngle(Vector3.UnitY, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Y)
                         * Matrix.CreateFromAxisAngle(Vector3.UnitZ, SceneManager.Instance.currentScene.GetMainCamera().gameObject.Transform.Rotation.Z)
                         ));
-                    if (effect.Name == "PhongBlinnShader")
-                        effect.CurrentTechnique = effect.Techniques["Skinned"];
+
+                    effect.CurrentTechnique = effect.Techniques["Skinned"];
                 }
 
                 mesh.Draw();
