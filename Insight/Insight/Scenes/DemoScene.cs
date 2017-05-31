@@ -51,7 +51,7 @@ namespace Insight.Scenes
         ColumnRotated columnRotated;
         Column column2;
         ColumnRotated columnRotated2;
-        Door door;
+        AnimatedDoor door;
         Door door2;
         Door door3;
         Door door4;
@@ -222,8 +222,8 @@ namespace Insight.Scenes
             corridor4 = new Corridor();
             corridor4.Initialize(new Vector3(16, 0, 6), new Vector3(0));
 
-            door = new Door();
-            door.Initialize(new Vector3(19.17f, 0, 1), new Vector3(0));         
+            door = new AnimatedDoor();
+            door.Initialize(new Vector3(16, 0, 1));         
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
