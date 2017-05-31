@@ -628,6 +628,7 @@ namespace Insight.Scenes
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
             player.AddNewComponent<SphereCollider>();
+            player.AddNewComponent<PlayerBullets>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
             corridor3.LoadContent(content);
@@ -763,9 +764,9 @@ namespace Insight.Scenes
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
-            ui.AddSprite("Sprites/rakieta", "rakieta", new Vector2(30, windowHeight - 70), Color.White, 1);
-            ui.AddSprite("Sprites/skarbonka", "skarbonka", new Vector2(90, windowHeight - 68), Color.White, 1);
-            ui.AddSprite("Sprites/monitor", "monitor", new Vector2(150, windowHeight - 66), Color.White, 1);
+            ui.AddSprite("Sprites/rakieta", "aggresive", new Vector2(30, windowHeight - 70), Color.White, 1);
+            ui.AddSprite("Sprites/skarbonka", "transmitter", new Vector2(90, windowHeight - 68), Color.White, 1);
+            ui.AddSprite("Sprites/monitor", "sight", new Vector2(150, windowHeight - 66), Color.White, 1);
 
             ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
 
@@ -840,6 +841,20 @@ namespace Insight.Scenes
             //{
             //    Mouse.SetPosition(Mouse.GetState().Position.X, graphics.GraphicsDevice.Viewport.Height);
             //}
+            if (player.GetComponent<PlayerBullets>().aggresiveBullet)
+                ui.ChangeSpriteOpacity("aggresive", 1);
+            else
+                ui.ChangeSpriteOpacity("aggresive", 0);
+
+            if (player.GetComponent<PlayerBullets>().transmitterBullet)
+                ui.ChangeSpriteOpacity("transmitter", 1);
+            else
+                ui.ChangeSpriteOpacity("transmitter", 0);
+
+            if (player.GetComponent<PlayerBullets>().enemySightBullet)
+                ui.ChangeSpriteOpacity("sight", 1);
+            else
+                ui.ChangeSpriteOpacity("sight", 0);
         }
 
         public override void Draw()
