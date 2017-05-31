@@ -45,8 +45,8 @@ namespace Insight.Engine
             for (int j = 0; j < dynamicObjects.Count; j++)
             {
                 if (j + 1 < dynamicObjects.Count)
-                    isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
-                        dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<MeshRenderer>().GetMatrix());
+                    isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<Renderer>().GetMatrix(),
+                        dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<Renderer>().GetMatrix());
 
                 if (isCollisionDynamic)
                 {
@@ -57,11 +57,11 @@ namespace Insight.Engine
 
                 for (int k = j; k < staticObjects.Count; k++)
                 {
-                    if (staticObjects[k].GetComponent<MeshRenderer>() != null)
+                    if (staticObjects[k].GetComponent<Renderer>() != null)
                     {
                         isCollision = PreciseCollisionTest(dynamicObjects[j],
-                            dynamicObjects[j].GetComponent<MeshRenderer>().GetMatrix(),
-                            staticObjects[k], staticObjects[k].GetComponent<MeshRenderer>().GetMatrix());
+                            dynamicObjects[j].GetComponent<Renderer>().GetMatrix(),
+                            staticObjects[k], staticObjects[k].GetComponent<Renderer>().GetMatrix());
                     }
                     if (isCollision)
                     {
@@ -245,12 +245,12 @@ namespace Insight.Engine
 
                 //return collision;
 
-                Matrix[] model1Transforms = new Matrix[object1.GetComponent<MeshRenderer>().getModel().Bones.Count];
-                object1.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
-                BoundingSphere[] model1Spheres = new BoundingSphere[object1.GetComponent<MeshRenderer>().getModel().Meshes.Count];
-                for (int i = 0; i < object1.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+                Matrix[] model1Transforms = new Matrix[object1.GetComponent<Renderer>().getModel().Bones.Count];
+                object1.GetComponent<Renderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
+                BoundingSphere[] model1Spheres = new BoundingSphere[object1.GetComponent<Renderer>().getModel().Meshes.Count];
+                for (int i = 0; i < object1.GetComponent<Renderer>().getModel().Meshes.Count; i++)
                 {
-                    ModelMesh mesh = object1.GetComponent<MeshRenderer>().getModel().Meshes[i];
+                    ModelMesh mesh = object1.GetComponent<Renderer>().getModel().Meshes[i];
                     BoundingSphere origSphere = mesh.BoundingSphere;
                     Matrix trans = model1Transforms[mesh.ParentBone.Index] * world1;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
@@ -258,12 +258,12 @@ namespace Insight.Engine
                 }
 
 
-                Matrix[] model2Transforms = new Matrix[object2.GetComponent<MeshRenderer>().getModel().Bones.Count];
-                object2.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model2Transforms);
-                BoundingSphere[] model2Spheres = new BoundingSphere[object2.GetComponent<MeshRenderer>().getModel().Meshes.Count];
-                for (int i = 0; i < object2.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+                Matrix[] model2Transforms = new Matrix[object2.GetComponent<Renderer>().getModel().Bones.Count];
+                object2.GetComponent<Renderer>().getModel().CopyAbsoluteBoneTransformsTo(model2Transforms);
+                BoundingSphere[] model2Spheres = new BoundingSphere[object2.GetComponent<Renderer>().getModel().Meshes.Count];
+                for (int i = 0; i < object2.GetComponent<Renderer>().getModel().Meshes.Count; i++)
                 {
-                    ModelMesh mesh = object2.GetComponent<MeshRenderer>().getModel().Meshes[i];
+                    ModelMesh mesh = object2.GetComponent<Renderer>().getModel().Meshes[i];
                     BoundingSphere origSphere = mesh.BoundingSphere;
                     Matrix trans = model2Transforms[mesh.ParentBone.Index] * world2;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
@@ -321,12 +321,12 @@ namespace Insight.Engine
             {
                 //BoundingSphere[] object1Colliders = object1.GetComponent<SphereCollider>().GetPreciseBoundingSpheres();
 
-                Matrix[] model1Transforms = new Matrix[object1.GetComponent<MeshRenderer>().getModel().Bones.Count];
-                object1.GetComponent<MeshRenderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
-                BoundingSphere[] model1Spheres = new BoundingSphere[object1.GetComponent<MeshRenderer>().getModel().Meshes.Count];
-                for (int i = 0; i < object1.GetComponent<MeshRenderer>().getModel().Meshes.Count; i++)
+                Matrix[] model1Transforms = new Matrix[object1.GetComponent<Renderer>().getModel().Bones.Count];
+                object1.GetComponent<Renderer>().getModel().CopyAbsoluteBoneTransformsTo(model1Transforms);
+                BoundingSphere[] model1Spheres = new BoundingSphere[object1.GetComponent<Renderer>().getModel().Meshes.Count];
+                for (int i = 0; i < object1.GetComponent<Renderer>().getModel().Meshes.Count; i++)
                 {
-                    ModelMesh mesh = object1.GetComponent<MeshRenderer>().getModel().Meshes[i];
+                    ModelMesh mesh = object1.GetComponent<Renderer>().getModel().Meshes[i];
                     BoundingSphere origSphere = mesh.BoundingSphere;
                     Matrix trans = model1Transforms[mesh.ParentBone.Index] * world1;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);

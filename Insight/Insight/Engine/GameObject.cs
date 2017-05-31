@@ -187,7 +187,7 @@ namespace Insight.Engine
                     
                 }
 
-                if (args.GameObject.physicLayer == Layer.Ground)
+                if (args.GameObject.physicLayer == Layer.Ground && GetComponent<Rigidbody>() != null)
                     Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
             }
 
