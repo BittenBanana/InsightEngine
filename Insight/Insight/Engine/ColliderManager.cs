@@ -13,7 +13,7 @@ namespace Insight.Engine
 {
     class ColliderManager
     {
-        bool isCollision;
+        public bool isCollision;
         bool isCollisionDynamic;
         Vector3[] lastModelPosition;
         public event EventHandler<CollisionEventArgs> ObjectColided;
@@ -51,7 +51,14 @@ namespace Insight.Engine
                 if (isCollisionDynamic)
                 {
                     if (j + 1 < dynamicObjects.Count)
+                    {
+                        ObjectColided += dynamicObjects[j].OnObjectColided;
+                        ObjectColided += dynamicObjects[j+1].OnObjectColided;
                         OnObjectColided(dynamicObjects[j + 1]);
+                        ObjectColided -= dynamicObjects[j].OnObjectColided;
+                        ObjectColided -= dynamicObjects[j+1].OnObjectColided;
+                    }
+                        
                 }
 
 
@@ -65,7 +72,9 @@ namespace Insight.Engine
                     }
                     if (isCollision)
                     {
+                        ObjectColided += dynamicObjects[j].OnObjectColided;
                         OnObjectColided(staticObjects[k]);
+                        ObjectColided -= dynamicObjects[j].OnObjectColided;
                     }
                 }
             }
