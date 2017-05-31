@@ -69,49 +69,49 @@ namespace Insight.Scripts
             base.Update();
         }
 
-        public override void OnTriggerEnter(object source, CollisionEventArgs args)
-        {
-            //Debug.WriteLine("On trigger enter");
-            if (args.GameObject.physicLayer == Layer.DoorTrigger)
-            {
-                Debug.WriteLine("doors");
-                SceneManager.Instance.currentScene.ui.ChangeTextOpacity("hint", 1);
-            }
+        //public override void OnTriggerEnter(object source, CollisionEventArgs args)
+        //{
+        //    //Debug.WriteLine("On trigger enter");
+        //    if (args.GameObject.physicLayer == Layer.DoorTrigger)
+        //    {
+        //        Debug.WriteLine("doors");
+        //        SceneManager.Instance.currentScene.ui.ChangeTextOpacity("hint", 1);
+        //    }
 
-            if (args.GameObject.physicLayer == Layer.DispenserTrigger)
-            {
-                Debug.WriteLine("dispenser");
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 1);
-                SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 1);
-            }
-        }
+        //    if (args.GameObject.physicLayer == Layer.DispenserTrigger)
+        //    {
+        //        Debug.WriteLine("dispenser");
+        //        SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 1);
+        //        SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 1);
+        //    }
+        //}
 
-        public override void OnTriggerStay(object source, CollisionEventArgs args)
-        {
-            //Debug.WriteLine("On trigger stay");
-            if (args.GameObject.physicLayer == Layer.DispenserTrigger)
-            {
-                KeyboardState keyState = Keyboard.GetState();
-                if (keyState.IsKeyDown(Keys.E))
-                {
-                    this.gameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
-                }
-            }
+        //public override void OnTriggerStay(object source, CollisionEventArgs args)
+        //{
+        //    //Debug.WriteLine("On trigger stay");
+        //    if (args.GameObject.physicLayer == Layer.DispenserTrigger)
+        //    {
+        //        KeyboardState keyState = Keyboard.GetState();
+        //        if (keyState.IsKeyDown(Keys.E))
+        //        {
+        //            this.gameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+        //        }
+        //    }
 
 
-        }
+        //}
 
-        public override void OnTriggerExit(object source, CollisionEventArgs args)
-        {
-            Debug.WriteLine("On trigger exit");
-            if (args.GameObject.physicLayer == Layer.DoorTrigger)
-                SceneManager.Instance.currentScene.ui.ChangeTextOpacity("hint", 0);
-            if (args.GameObject.physicLayer == Layer.DispenserTrigger)
-            {
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 0);
-                SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
-            }
+        //public override void OnTriggerExit(object source, CollisionEventArgs args)
+        //{
+        //    Debug.WriteLine("On trigger exit");
+        //    if (args.GameObject.physicLayer == Layer.DoorTrigger)
+        //        SceneManager.Instance.currentScene.ui.ChangeTextOpacity("hint", 0);
+        //    if (args.GameObject.physicLayer == Layer.DispenserTrigger)
+        //    {
+        //        SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 0);
+        //        SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
+        //    }
 
-        }
+        //}
     }
 }

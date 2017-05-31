@@ -41,7 +41,7 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
             enemy.AddNewComponent<BasicAI>();
             enemy.AddNewComponent<SphereCollider>();
-
+            enemy.physicLayer = Layer.Enemy;
             enemySightTrigger.LoadContent(content, "Models/ball", 1f);
             enemySightTrigger.AddNewComponent<SphereCollider>();
             enemySightTrigger.GetComponent<SphereCollider>().IsTrigger = true;
