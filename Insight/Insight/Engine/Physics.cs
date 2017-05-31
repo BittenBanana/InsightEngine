@@ -37,7 +37,7 @@ namespace Insight.Engine
             float? tempDistance = null;
             foreach (var item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if (item.physicLayer != Layer.IgnoreRaycast)
+                if (item.physicLayer != Layer.Player)
                 {
                     BoxCollider bc = item.GetComponent<BoxCollider>();
                     SphereCollider sc = item.GetComponent<SphereCollider>();
@@ -79,7 +79,7 @@ namespace Insight.Engine
             {
                 hit = new RaycastHit();
                 hit.origin = origin;
-                hit.point = origin + Vector3.Normalize(direction) * distance;
+                hit.point = origin + direction * distance;
                 hit.collider = go.GetComponent<Collider>();
                 hit.distance = distance;
                 hit.rigidbody = go.GetComponent<Rigidbody>();

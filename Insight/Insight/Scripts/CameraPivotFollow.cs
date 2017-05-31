@@ -28,20 +28,20 @@ namespace Insight.Scripts
 
             s = Mouse.GetState();
 
-            if (s.Position.ToVector2().Y < lastMousePos.Y && gameObject.Transform.Rotation.X <= 0.99f)
+            if (s.Position.ToVector2().Y < SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2  && gameObject.Transform.Rotation.X <= 0.99f)
             {
                 gameObject.Transform.Rotation.X += gameObject.rotationSpeed * Math.Abs(s.Position.Y - lastMousePos.Y);
                 
             }
 
-            if (s.Position.ToVector2().Y > lastMousePos.Y && gameObject.Transform.Rotation.X >= -0.99f)
+            if (s.Position.ToVector2().Y > SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2 && gameObject.Transform.Rotation.X >= -0.99f)
             {
                 gameObject.Transform.Rotation.X -= gameObject.rotationSpeed * Math.Abs(s.Position.Y - lastMousePos.Y);
             }
             gameObject.rotationSpeed = .005f;
             lastMousePos = s.Position.ToVector2();
 
-            
+            Mouse.SetPosition(s.Position.X, SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2);
 
             base.Update();
         }
