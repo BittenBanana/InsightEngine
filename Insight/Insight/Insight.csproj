@@ -106,6 +106,7 @@
     <Compile Include="Scripts\BoxRotation.cs" />
     <Compile Include="Scripts\CameraFollowBox.cs" />
     <Compile Include="Scripts\CameraPivotFollow.cs" />
+    <Compile Include="Scripts\DoorAnimation.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />

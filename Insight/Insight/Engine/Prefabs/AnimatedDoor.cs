@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Insight.Engine.Components;
+using Insight.Scripts;
 
 namespace Insight.Engine.Prefabs
 {
@@ -30,6 +31,10 @@ namespace Insight.Engine.Prefabs
             rightDoorModel.AddNewComponent<MeshRenderer>();
             frame.AddNewComponent<MeshRenderer>();
 
+
+            wallModel.AddNewComponent<DoorAnimation>();
+            wallModel.GetComponent<DoorAnimation>().leftDoor = leftDoorModel;
+            wallModel.GetComponent<DoorAnimation>().rightDoor = rightDoorModel;
             prefabGameObjects.Add(wallModel);
             prefabGameObjects.Add(leftDoorModel);
             prefabGameObjects.Add(rightDoorModel);
@@ -39,12 +44,16 @@ namespace Insight.Engine.Prefabs
 
         public override void LoadContent(ContentManager content)
         {
-           
-
             wallModel.LoadContent(content, "Models/Konrads/Enviroment/Door/wall-5x4", 1.0f);
             leftDoorModel.LoadContent(content, "Models/Konrads/Enviroment/Door/l-wing", 1.0f);
             rightDoorModel.LoadContent(content, "Models/Konrads/Enviroment/Door/r-wing", 1.0f);
             frame.LoadContent(content, "Models/Konrads/Enviroment/Door/frame", 1.0f);
+
+            wallModel.AddNewComponent<BoxCollider>();
+            leftDoorModel.AddNewComponent<BoxCollider>();
+            rightDoorModel.AddNewComponent<BoxCollider>();
+            //frame.AddNewComponent<BoxCollider>();
+
             base.LoadContent(content);
         }
     }
