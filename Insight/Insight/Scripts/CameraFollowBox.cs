@@ -20,10 +20,10 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            mainCam.Position.X = gameObject.Transform.Position.X - 10 * (float)Math.Sin(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
-            mainCam.Position.Z = gameObject.Transform.Position.Z - 10 * (float)Math.Cos(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
-            mainCam.Position.Y = gameObject.Transform.Position.Y - 10 * (float)Math.Sin(gameObject.Transform.Rotation.X);
-            mainCam.view = Matrix.CreateLookAt(mainCam.Position, player.Transform.Position, Vector3.Up);
+            mainCam.Position.X = gameObject.Transform.Position.X - 5 * (float)Math.Sin(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
+            mainCam.Position.Z = gameObject.Transform.Position.Z - 5 * (float)Math.Cos(gameObject.Transform.Rotation.Y) * (float)Math.Cos(gameObject.Transform.Rotation.X);
+            mainCam.Position.Y = gameObject.Transform.Position.Y - 5 * (float)Math.Sin(gameObject.Transform.Rotation.X);
+            mainCam.view = Matrix.CreateLookAt(mainCam.Position, new Vector3(player.Transform.Position.X, player.Transform.Position.Y + (float)Math.Sin(gameObject.Transform.Rotation.X), player.Transform.Position.Z), Vector3.Up);
 
             base.Update();
         }
