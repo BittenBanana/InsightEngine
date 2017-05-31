@@ -423,8 +423,8 @@ namespace Insight.Scenes
             roomFloor25 = new RoomFloorSmallerRotated();
             roomFloor25.Initialize(new Vector3(49, -4, 79));
 
-            stairs = new Stairs();
-            stairs.Initialize(new Vector3(39, 0, 64));
+            //stairs = new Stairs();
+            //stairs.Initialize(new Vector3(39, 0, 64));
 
             wall23 = new WallVisibleSmaller();
             wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
@@ -615,7 +615,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
 
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 0.5f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
@@ -747,8 +747,8 @@ namespace Insight.Scenes
             door5.LoadContent(content);
             door6.LoadContent(content);
             door7.LoadContent(content);
-            stairs.LoadContent(content);
-            colliderManager.ObjectColided += player.OnObjectColided;
+            //stairs.LoadContent(content);
+            //colliderManager.ObjectColided += player.OnObjectColided;
 
             bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
             dispenserTrigger.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 1f);
@@ -854,6 +854,8 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("sight", 1);
             else
                 ui.ChangeSpriteOpacity("sight", 0);
+
+            Debug.WriteLine(mainCam.Position);
         }
 
         public override void Draw()
