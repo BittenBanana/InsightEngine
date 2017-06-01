@@ -19,7 +19,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects = new List<GameObject>();
 
             corridorModel = new GameObject(new Vector3(0, 0, 0), false);
-            floor = new GameObject(new Vector3(0, -3, 0), false);
+            floor = new GameObject(new Vector3(0, 0, 0), false);
 
 
 
@@ -39,7 +39,6 @@ namespace Insight.Engine.Prefabs
 
             corridorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/f-3x5-rotated", 1.0f);
             floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
-
             floor.AddNewComponent<BoxCollider>();
             floor.physicLayer = Layer.Ground;
         }
