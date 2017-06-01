@@ -19,7 +19,7 @@ namespace Insight.Engine.Prefabs
         public override void Initialize(Vector3 position)
         {
             enemy = new GameObject(position, true);
-            enemy.AddNewComponent<MeshRenderer>();
+            enemy.AddNewComponent<AnimationRender>();
 
             
 

@@ -21,7 +21,7 @@ namespace Insight.Engine.Prefabs
 
             cornerModel = new GameObject(new Vector3(0, 0, 0), false);
             cornerCollider = new GameObject(new Vector3(0, 0, 0), false);
-            floor = new GameObject(new Vector3(0, -3, 0), false);
+            floor = new GameObject(new Vector3(0, 0, 0), false);
 
 
 

@@ -146,13 +146,13 @@ namespace Insight.Scenes
         Material defaultMaterial;
         GameObject directionalLight;
         ColliderManager colliderManager;
+        AmmoPC ammoPC;
+        AmmoPC ammoPC2;
+        Corridor wall55;
 
         GameObject enemy;
         private EnemyPrefab enemy1;
         private GameObject pointLight1;
-
-        GameObject bulletDispenser;
-        GameObject dispenserTrigger;
 
         int _total_frames = 0;
         float _elapsed_time = 0.0f;
@@ -552,8 +552,14 @@ namespace Insight.Scenes
             wall54 = new WallVisible();
             wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
 
+            ammoPC = new AmmoPC();
+            ammoPC.Initialize(new Vector3(0.5f, 0, 8), new Vector3(0, 1.571f, 0));
 
+            ammoPC2 = new AmmoPC();
+            ammoPC2.Initialize(new Vector3(36.5f, 0, 19), new Vector3(0, 4.713f, 0));
 
+            wall55 = new Corridor();
+            wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
 
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
@@ -561,17 +567,13 @@ namespace Insight.Scenes
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
             directionalLight.GetComponent<Light>().Color = Color.White;
             
-            bulletDispenser = new GameObject(new Vector3(20, 0, -5), false);
-            bulletDispenser.AddNewComponent<MeshRenderer>();
-            dispenserTrigger = new GameObject(new Vector3(22, 0, -5), false);
-            dispenserTrigger.AddNewComponent<MeshRenderer>();
+
 
             gameObjects.Add(pointLight1);
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
-            gameObjects.Add(bulletDispenser);
-            gameObjects.Add(dispenserTrigger);
+
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
@@ -742,24 +744,18 @@ namespace Insight.Scenes
             wall52.LoadContent(content);
             wall53.LoadContent(content);
             wall54.LoadContent(content);
+            wall55.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
             door6.LoadContent(content);
             door7.LoadContent(content);
+            ammoPC.LoadContent(content);
+            ammoPC2.LoadContent(content);
             //stairs.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
-            bulletDispenser.GetComponent<MeshRenderer>().Load(content, "Models/bulletdispenser", 1f);
-            dispenserTrigger.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 1f);
-
-            bulletDispenser.AddNewComponent<BoxCollider>();
-            dispenserTrigger.AddNewComponent<BoxCollider>();
-            dispenserTrigger.GetComponent<BoxCollider>().IsTrigger = true;
-            dispenserTrigger.GetComponent<MeshRenderer>().IsVisible = false;
-            dispenserTrigger.physicLayer = Layer.DispenserTrigger;
-
-            enemy1.LoadContent(content);
+            //enemy1.LoadContent(content);
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
@@ -868,7 +864,7 @@ namespace Insight.Scenes
                 go.Draw(mainCam);
             }
             ui.Draw();
-            //gameObjects[16].GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
+            //dispenserTrigger.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
             //{
             //    player.GetComponent<SphereCollider>().DrawSphereSpikes(player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, player.GetComponent<MeshRenderer>().GetMatrix(), player.GetComponent<Camera>().view, projection);

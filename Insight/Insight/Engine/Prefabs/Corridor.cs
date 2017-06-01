@@ -20,7 +20,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects = new List<GameObject>();
 
             corridorModel = new GameObject(new Vector3(0, 0, 0), false);
-            floor = new GameObject(new Vector3(0, -3, 0), false);
+            floor = new GameObject(new Vector3(0, 0, 0), false);
 
 
 
