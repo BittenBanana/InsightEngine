@@ -100,6 +100,7 @@ namespace Insight.Engine
         {
             if (!collision)
             {
+                
                 velocityX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
                 velocityZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
             }
@@ -127,6 +128,7 @@ namespace Insight.Engine
             velocityX = 0;
             velocityZ = 0;
             collision = true;
+            Rigidbody rb = GetComponent<Rigidbody>();
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
             //Debug.WriteLine(args.GameObject.physicLayer);
@@ -134,6 +136,10 @@ namespace Insight.Engine
             {
                 if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
                 {
+                    if (rb != null)
+                    {
+                        rb.isGrounded = false;
+                    }
                     if (args.GameObject.physicLayer != Layer.Stairs)
                     {
                         if (Forward)
@@ -155,8 +161,6 @@ namespace Insight.Engine
                     }
                 }
 
-                
-
                 if(args.GameObject.physicLayer == Layer.Stairs)
                 {
                     if(this.IsMoving)
@@ -172,8 +176,14 @@ namespace Insight.Engine
                     
                 }
 
-                if (args.GameObject.physicLayer == Layer.Ground && GetComponent<Rigidbody>() != null)
-                    Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
+                
+                if (rb != null)
+                {
+                    if (args.GameObject.physicLayer == Layer.Ground && !rb.isGrounded)
+                    {
+                        rb.isGrounded = true;
+                    }
+                }
             }
 
             if (args.GameObject.physicLayer != Layer.Enemy && this.physicLayer != Layer.Enemy)

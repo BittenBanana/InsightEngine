@@ -32,36 +32,20 @@ namespace Insight.Engine.Components
             gameObject.Transform.Position += velocity * Time.deltaTime;
             newAcceleration = force / mass;
             avgAcceleration = (lastAcceleration + newAcceleration) / 2;
-            velocity += avgAcceleration * Time.deltaTime;          
+            velocity += avgAcceleration * Time.deltaTime;
         }
 
         public override void Update()
         {
+
             if (useGravity)
             {
-                
-                Physics.Raycast(gameObject.Transform.Position, Vector3.Normalize(Physics.Gravity), out hit);
-                if (hit != null)
+                velocity += Physics.Gravity * Time.deltaTime;
+                if (isGrounded)
                 {
-                    if (hit.distance > 3)
-                    {
-                        Debug.WriteLine("Gravity working " + hit.distance);
-                        velocity += Physics.Gravity * Time.deltaTime;
-                        gameObject.Transform.Position += velocity * Time.deltaTime;
-                        isGrounded = false;
-                    }
-                    else if(!isGrounded)
-                    {
-                        velocity = Vector3.Zero;
-                        isGrounded = true;
-                    }
+                    velocity = Vector3.Zero;
                 }
-                else
-                {
-                    velocity += Physics.Gravity * Time.deltaTime;
-                    gameObject.Transform.Position += velocity * Time.deltaTime;
-                    isGrounded = false;
-                }
+                gameObject.Transform.Position += velocity * Time.deltaTime;
             }
             base.Update();
         }

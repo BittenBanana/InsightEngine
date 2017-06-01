@@ -48,6 +48,12 @@ namespace Insight.Engine
                     isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<Renderer>().GetMatrix(),
                         dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<Renderer>().GetMatrix());
 
+                Rigidbody rb = dynamicObjects[j].GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isGrounded = false;
+                }
+
                 if (isCollisionDynamic)
                 {
                     if (j + 1 < dynamicObjects.Count)

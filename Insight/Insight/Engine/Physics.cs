@@ -43,7 +43,7 @@ namespace Insight.Engine
                     SphereCollider sc = item.GetComponent<SphereCollider>();
                     if (bc != null)
                     {
-                        if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
+                        //if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
                             foreach (var boundingBox in bc.GetPreciseBoundingBoxes())
                             {
                                 tempDistance = ray.Intersects(boundingBox);
@@ -60,7 +60,7 @@ namespace Insight.Engine
                     }
                     if (sc != null)
                     {
-                        if (ray.Intersects(sc.GetCompleteBoundingSphere()) != null)
+                        //if (ray.Intersects(sc.GetCompleteBoundingSphere()) != null)
                             foreach (var boundingSphere in sc.GetPreciseBoundingSpheres())
                             {
                                 tempDistance = ray.Intersects(boundingSphere);
