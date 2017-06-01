@@ -14,6 +14,7 @@ namespace Insight.Engine
         Stairs,
         DoorTrigger,
         DispenserTrigger,
+        Enemy,
         Player
     }
 }

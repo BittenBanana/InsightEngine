@@ -51,7 +51,7 @@ namespace Insight.Scenes
         ColumnRotated columnRotated;
         Column column2;
         ColumnRotated columnRotated2;
-        Door door;
+        AnimatedDoor door;
         Door door2;
         Door door3;
         Door door4;
@@ -173,7 +173,7 @@ namespace Insight.Scenes
             pointLight1.GetComponent<Light>().Color = Color.Cyan;
             pointLight1.GetComponent<Light>().Attenuation = 10;
 
-            player = new GameObject(new Vector3(2, 1, 2), true);
+            player = new GameObject(new Vector3(2, 1.0f, 2), true);
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
 
@@ -222,8 +222,8 @@ namespace Insight.Scenes
             corridor4 = new Corridor();
             corridor4.Initialize(new Vector3(16, 0, 6), new Vector3(0));
 
-            door = new Door();
-            door.Initialize(new Vector3(19.17f, 0, 1), new Vector3(0));         
+            door = new AnimatedDoor();
+            door.Initialize(new Vector3(16, 0, 1));         
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
@@ -615,7 +615,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
 
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 0.5f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();

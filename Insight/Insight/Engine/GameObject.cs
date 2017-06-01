@@ -140,7 +140,7 @@ namespace Insight.Engine
                         {
                             Transform.Position.X -= 0.1f * (float)Math.Sin(Transform.Rotation.Y);
                             Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
-                            rotationSpeed = 0;
+                            //rotationSpeed = 0;
                         }   
                     
                     
@@ -149,28 +149,13 @@ namespace Insight.Engine
                         {
                             Transform.Position.X += 0.05f * (float)Math.Sin(Transform.Rotation.Y);
                             Transform.Position.Z += 0.05f * (float)Math.Cos(Transform.Rotation.Y);
-                            rotationSpeed = 0;
+                            //rotationSpeed = 0;
                         }
 
                     }
                 }
 
-                if (args.GameObject.GetComponent<Collider>().IsTrigger)
-                {
-                    if(GetComponent<Collider>().OnTriggerEnter == false)
-                    {
-                        OnTriggerEnter(args.GameObject);
-                        GetComponent<Collider>().OnTriggerEnter = true;
-                    }
-
-                    OnTriggerStay(args.GameObject);
-
-                    if(GetComponent<Collider>().OnTriggerExit)
-                    {
-                        //OnTriggerExit(args.GameObject);
-                    }
-                    
-                }
+                
 
                 if(args.GameObject.physicLayer == Layer.Stairs)
                 {
@@ -191,6 +176,28 @@ namespace Insight.Engine
                     Transform.Position.Y -= GetComponent<Rigidbody>().velocity.Y * Time.deltaTime;
             }
 
+            if (args.GameObject.physicLayer != Layer.Enemy && this.physicLayer != Layer.Enemy)
+            {
+                if (args.GameObject.GetComponent<Collider>().IsTrigger || this.GetComponent<Collider>().IsTrigger)
+                {
+
+                    if (GetComponent<Collider>().OnTriggerEnter == false)
+                    {
+                        OnTriggerEnter(args.GameObject);
+                        GetComponent<Collider>().OnTriggerEnter = true;
+                    }
+
+                    OnTriggerStay(args.GameObject);
+
+                    if (GetComponent<Collider>().OnTriggerExit)
+                    {
+                        //OnTriggerExit(args.GameObject);
+                    }
+
+                }
+            }
+            
+
             //if (GetComponent<Collider>().OnCollisionEnter == false)
             //{
             //    OnCollisionEnter(args.GameObject);
@@ -198,7 +205,7 @@ namespace Insight.Engine
             //}
 
 
-            
+
             collision = false;
         }
 

@@ -72,9 +72,21 @@ namespace Insight.Engine
                     }
                     if (isCollision)
                     {
-                        ObjectColided += dynamicObjects[j].OnObjectColided;
-                        OnObjectColided(staticObjects[k]);
-                        ObjectColided -= dynamicObjects[j].OnObjectColided;
+                        
+                        if(staticObjects[k].GetComponent<Collider>().IsTrigger && dynamicObjects[j].physicLayer != Layer.Enemy)
+                        {
+                            ObjectColided += staticObjects[k].OnObjectColided;
+                            OnObjectColided(dynamicObjects[j]);
+                            ObjectColided -= staticObjects[k].OnObjectColided;
+                        }
+                        else
+                        {
+                            ObjectColided += dynamicObjects[j].OnObjectColided;
+                            OnObjectColided(staticObjects[k]);
+                            ObjectColided -= dynamicObjects[j].OnObjectColided;
+                        }
+                        
+                        
                     }
                 }
             }
@@ -376,12 +388,12 @@ namespace Insight.Engine
                 {
                     if (object2.GetComponent<Collider>().IsTrigger)
                     {
-                        if (object1.GetComponent<Collider>().OnTriggerEnter)
+                        if (object2.GetComponent<Collider>().OnTriggerEnter)
                         {
-                            object1.GetComponent<Collider>().OnTriggerExit = true;
-                            object1.OnTriggerExit(object2);
-                            object1.GetComponent<Collider>().OnTriggerEnter = false;
-                            object1.GetComponent<Collider>().OnTriggerExit = false;
+                            object2.GetComponent<Collider>().OnTriggerExit = true;
+                            object2.OnTriggerExit(object1);
+                            object2.GetComponent<Collider>().OnTriggerEnter = false;
+                            object2.GetComponent<Collider>().OnTriggerExit = false;
                         }
                     }
 
