@@ -30,52 +30,54 @@ namespace Insight.Engine
 
         public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hit)
         {
-            
+
             Ray ray = new Ray(origin, direction);
             GameObject go = null;
             float distance = float.MaxValue;
             float? tempDistance = null;
             foreach (var item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if (item.physicLayer != Layer.Player)
+                if (true)
                 {
                     BoxCollider bc = item.GetComponent<BoxCollider>();
                     SphereCollider sc = item.GetComponent<SphereCollider>();
                     if (bc != null)
                     {
-                        foreach (var boundingBox in bc.GetPreciseBoundingBoxes())
-                        {
-                            tempDistance = ray.Intersects(boundingBox);
-                            if (tempDistance != null)
+                        if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
+                            foreach (var boundingBox in bc.GetPreciseBoundingBoxes())
                             {
-                                if (tempDistance < distance)
+                                tempDistance = ray.Intersects(boundingBox);
+                                if (tempDistance != null)
                                 {
-                                    distance = (float)tempDistance;
-                                    go = item;
-                                    break;
+                                    if (tempDistance < distance)
+                                    {
+                                        distance = (float)tempDistance;
+                                        go = item;
+                                        break;
+                                    }
                                 }
                             }
-                        }
                     }
                     if (sc != null)
                     {
-                        foreach (var boundingSphere in sc.GetPreciseBoundingSpheres())
-                        {
-                            tempDistance = ray.Intersects(boundingSphere);
-                            if (tempDistance != null)
+                        if (ray.Intersects(sc.GetCompleteBoundingSphere()) != null)
+                            foreach (var boundingSphere in sc.GetPreciseBoundingSpheres())
                             {
-                                if (tempDistance < distance)
+                                tempDistance = ray.Intersects(boundingSphere);
+                                if (tempDistance != null)
                                 {
-                                    distance = (float)tempDistance;
-                                    go = item;
-                                    break;
+                                    if (tempDistance < distance)
+                                    {
+                                        distance = (float)tempDistance;
+                                        go = item;
+                                        break;
+                                    }
                                 }
                             }
-                        }
                     }
                 }
             }
-            if(go != null)
+            if (go != null)
             {
                 hit = new RaycastHit();
                 hit.origin = origin;
@@ -92,5 +94,5 @@ namespace Insight.Engine
                 return false;
             }
         }
-    }   
+    }
 }
