@@ -42,6 +42,7 @@ namespace Insight.Engine
         {
             components = new List<Component>();
             Transform = new Transform(this);
+            components.Add(Transform);
             this.isDynamic = isDynamic;
             rotationSpeed = .05f;
         }
@@ -49,6 +50,7 @@ namespace Insight.Engine
         {
             components = new List<Component>();
             Transform = new Transform(this, position);
+            components.Add(Transform);
             this.isDynamic = isDynamic;
 
 

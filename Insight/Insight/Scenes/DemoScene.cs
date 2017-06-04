@@ -150,7 +150,7 @@ namespace Insight.Scenes
         AmmoPC ammoPC2;
         Corridor wall55;
 
-        GameObject enemy;
+        //GameObject enemy;
         private EnemyPrefab enemy1;
         private GameObject pointLight1;
 
@@ -617,7 +617,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
 
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 0.5f);
+            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
@@ -755,7 +755,7 @@ namespace Insight.Scenes
             //stairs.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
-            //enemy1.LoadContent(content);
+            enemy1.LoadContent(content);
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
@@ -851,7 +851,7 @@ namespace Insight.Scenes
             else
                 ui.ChangeSpriteOpacity("sight", 0);
 
-            Debug.WriteLine(mainCam.Position);
+            //Debug.WriteLine(mainCam.Position);
         }
 
         public override void Draw()
@@ -862,6 +862,8 @@ namespace Insight.Scenes
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(mainCam);
+                //if(go.GetComponent<BoxCollider>() != null)
+                //go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
             }
             ui.Draw();
             //dispenserTrigger.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);

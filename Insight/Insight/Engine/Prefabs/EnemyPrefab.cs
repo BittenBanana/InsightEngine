@@ -23,7 +23,7 @@ namespace Insight.Engine.Prefabs
 
             
 
-            enemySightTrigger = new GameObject(new Vector3(17,0,0), false);
+            enemySightTrigger = new GameObject(new Vector3(17,0,0), true);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
             

@@ -60,7 +60,7 @@ namespace Insight.Scripts
             }
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {
-                gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 75, 0));
+                gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
             }
             lastMousePos = s.Position.ToVector2();
             gameObject.rotationSpeed = .01f;

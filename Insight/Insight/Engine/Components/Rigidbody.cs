@@ -19,10 +19,12 @@ namespace Insight.Engine.Components
         private Vector3 avgAcceleration;
         Physics.RaycastHit hit;
         public bool isGrounded;
+        private bool isVelocityReset;
 
         public Rigidbody(GameObject gameObject) : base(gameObject)
         {
             useGravity = true;
+            isVelocityReset = false;
             mass = 1.0f;
         }
 
@@ -37,15 +39,20 @@ namespace Insight.Engine.Components
 
         public override void Update()
         {
-
+            
             if (useGravity)
             {
-                velocity += Physics.Gravity * Time.deltaTime;
-                if (isGrounded)
+                if (!isGrounded)
+                {
+                    velocity += Physics.Gravity * Time.deltaTime;
+                    gameObject.Transform.Position += velocity * Time.deltaTime;
+                    isVelocityReset = false;
+                }
+                else if(!isVelocityReset)
                 {
                     velocity = Vector3.Zero;
+                    isVelocityReset = true;
                 }
-                gameObject.Transform.Position += velocity * Time.deltaTime;
             }
             base.Update();
         }

@@ -37,7 +37,7 @@ namespace Insight.Engine
             float? tempDistance = null;
             foreach (var item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if (true)
+                if (item.physicLayer != Layer.Player)
                 {
                     BoxCollider bc = item.GetComponent<BoxCollider>();
                     SphereCollider sc = item.GetComponent<SphereCollider>();
