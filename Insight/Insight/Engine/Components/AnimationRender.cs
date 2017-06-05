@@ -108,7 +108,7 @@ namespace Insight.Engine.Components
                         effect.Parameters["MetalnessEnabled"]?.SetValue(false);
                     }
 
-                    Matrix World = boneTransformations[mesh.ParentBone.Index]
+                    World = boneTransformations[mesh.ParentBone.Index]
                         * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
                         * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
                         * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)

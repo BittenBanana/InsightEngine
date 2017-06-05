@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Insight.Engine
 {
@@ -43,7 +44,9 @@ namespace Insight.Engine
                     SphereCollider sc = item.GetComponent<SphereCollider>();
                     if (bc != null)
                     {
-                        //if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
+                        if (!bc.IsTrigger)
+                        {
+                            //if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
                             foreach (var boundingBox in bc.GetPreciseBoundingBoxes())
                             {
                                 tempDistance = ray.Intersects(boundingBox);
@@ -57,11 +60,30 @@ namespace Insight.Engine
                                     }
                                 }
                             }
+                        }
                     }
                     if (sc != null)
                     {
-                        //if (ray.Intersects(sc.GetCompleteBoundingSphere()) != null)
-                            foreach (var boundingSphere in sc.GetPreciseBoundingSpheres())
+                        if (!sc.IsTrigger)
+                        {
+                            Matrix[] model1Transforms =
+                                new Matrix[sc.gameObject.GetComponent<Renderer>().getModel().Bones.Count];
+                            sc.gameObject.GetComponent<Renderer>().getModel()
+                                .CopyAbsoluteBoneTransformsTo(model1Transforms);
+                            BoundingSphere[] model1Spheres =
+                                new BoundingSphere[sc.gameObject.GetComponent<Renderer>().getModel().Meshes.Count];
+                            for (int i = 0; i < sc.gameObject.GetComponent<Renderer>().getModel().Meshes.Count; i++)
+                            {
+                                ModelMesh mesh = sc.gameObject.GetComponent<Renderer>().getModel().Meshes[i];
+                                BoundingSphere origSphere = mesh.BoundingSphere;
+                                Matrix trans = model1Transforms[mesh.ParentBone.Index] *
+                                               sc.gameObject.GetComponent<Renderer>().GetMatrix();
+                                BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
+                                model1Spheres[i] = transSphere;
+                            }
+
+                            //if (ray.Intersects(sc.GetCompleteBoundingSphere()) != null)
+                            foreach (var boundingSphere in model1Spheres)
                             {
                                 tempDistance = ray.Intersects(boundingSphere);
                                 if (tempDistance != null)
@@ -74,6 +96,7 @@ namespace Insight.Engine
                                     }
                                 }
                             }
+                        }
                     }
                 }
             }

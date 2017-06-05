@@ -28,7 +28,7 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            MouseState ms = Mouse.GetState();    
+            MouseState ms = Mouse.GetState();
 
             if (ms.LeftButton == ButtonState.Pressed && !isPressed)
             {
@@ -50,18 +50,24 @@ namespace Insight.Scripts
 
                 Vector3 direction = maxPoint - minPoint;
 
-                direction.Normalize();  
+                direction.Normalize();
 
                 Debug.WriteLine(direction);
                 if (Physics.Raycast(minPoint, direction, out hit))
                 {
                     isPressed = true;
+                    while (Vector3.Distance(minPoint, hit.point) < Vector3.Distance(minPoint, gameObject.Transform.Position))
+                    {
+                        Physics.Raycast(hit.point + direction, direction, out hit);
+                    }
+
                     test = new GameObject(hit.point, false);
                     test.AddNewComponent<MeshRenderer>();
 
                     Effect e = SceneManager.Instance.Content.Load<Effect>("Shaders/PhongBlinnShader");
                     test.GetComponent<MeshRenderer>().Material = new DefaultMaterial(e);
                     test.GetComponent<MeshRenderer>().Load(SceneManager.Instance.Content);
+
 
                     Debug.WriteLine("Hit!" + " " + hit.collider.gameObject + " " + hit.distance);
                 }

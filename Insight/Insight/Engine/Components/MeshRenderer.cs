@@ -13,7 +13,7 @@ namespace Insight.Engine.Components
     public class MeshRenderer : Renderer
     {
         //Model model;
-        
+
         //Matrix[] boneTransformations;
 
 
@@ -41,7 +41,7 @@ namespace Insight.Engine.Components
             this.scale = scale;
         }
 
-        
+
 
         //public Model getModel()
         //{
@@ -70,7 +70,7 @@ namespace Insight.Engine.Components
                         part.Effect = ((MeshTag)part.Tag).CachedEffect;
         }
 
-        
+
 
         private void generateTags()
         {
@@ -150,7 +150,7 @@ namespace Insight.Engine.Components
                             effect.Parameters["MetalnessEnabled"]?.SetValue(false);
                         }
 
-                        Matrix World = boneTransformations[mesh.ParentBone.Index]
+                        World = boneTransformations[mesh.ParentBone.Index]
                                                             * Matrix.CreateScale(scale)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
                                                             * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)

@@ -22,6 +22,8 @@ namespace Insight.Engine.Components
         protected Texture2D ao;
         protected Texture2D metalness;
 
+        protected Matrix World;
+
         public Renderer(GameObject gameObject) : base(gameObject)
         {
         }
@@ -70,10 +72,10 @@ namespace Insight.Engine.Components
         public Matrix GetMatrix()
         {
             return Matrix.CreateScale(scale)
-                        * Matrix.CreateFromQuaternion(gameObject.Transform.quaterion)
-                        * Matrix.CreateScale(scale)
-                        * Matrix.CreateTranslation(gameObject.Transform.Position)
-                        * Matrix.CreateTranslation(gameObject.Transform.origin);
+                   * Matrix.CreateFromAxisAngle(Vector3.UnitX, gameObject.Transform.Rotation.X)
+                   * Matrix.CreateFromAxisAngle(Vector3.UnitY, gameObject.Transform.Rotation.Y)
+                   * Matrix.CreateFromAxisAngle(Vector3.UnitZ, gameObject.Transform.Rotation.Z)
+                   * Matrix.CreateTranslation(gameObject.Transform.Position);
         }
     }
 }

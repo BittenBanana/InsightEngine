@@ -622,7 +622,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
-            cameraPivot.AddNewComponent<RaycastTest>();
+            player.AddNewComponent<RaycastTest>();
 
             player.AddNewComponent<BoxController>();
             cameraPivot.AddNewComponent<CameraFollowBox>();
