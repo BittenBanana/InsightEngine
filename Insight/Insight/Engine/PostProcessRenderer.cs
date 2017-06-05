@@ -10,29 +10,28 @@ namespace Insight.Engine
 {
     class PostProcessRenderer
     {
-        public RenderTarget2D SceneRenderTarget2D { get; private set; }
-
         public Effect PostEffect { get; set; }
 
         private GraphicsDevice device;
 
         private SpriteBatch spriteBatch;
 
-        public PostProcessRenderer(GraphicsDevice device, Effect postEffect, RenderTarget2D sceneRenderTarget2D)
+        public PostProcessRenderer(GraphicsDevice device, Effect postEffect)
         {
             this.device = device;
             PostEffect = postEffect;
-            SceneRenderTarget2D = sceneRenderTarget2D;
-            spriteBatch = new SpriteBatch(this.device);
+            spriteBatch = new SpriteBatch(device);
         }
 
-        public void Draw()
+        public void Draw(Texture2D sceneTexture2D)
         {
+            device.SetRenderTarget(null);
+
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 SamplerState.LinearClamp, DepthStencilState.Default,
                 RasterizerState.CullNone, PostEffect);
 
-            spriteBatch.Draw(SceneRenderTarget2D, device.Viewport.Bounds, Color.White);
+            spriteBatch.Draw(sceneTexture2D, device.Viewport.Bounds, Color.White);
 
             spriteBatch.End();
         }

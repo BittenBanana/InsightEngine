@@ -19,6 +19,8 @@ namespace Insight.Scenes
     {
         private PrelightingRenderer lightRenderer;
 
+        private PostProcessRenderer postProcessRenderer;
+
         static String floorPrefab = "floor5x5";
         //GameObject floor1;
         TestPrefab testPrefab;
@@ -617,6 +619,9 @@ namespace Insight.Scenes
 
             lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
 
+            if(postEffect != null)
+                postProcessRenderer = new PostProcessRenderer(graphics.GraphicsDevice, postEffect);
+
 
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
@@ -862,6 +867,12 @@ namespace Insight.Scenes
         {
             lightRenderer.Draw();
 
+
+            RenderTarget2D sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
+
+            if (postEffect != null)
+                graphics.GraphicsDevice.SetRenderTarget(sceneRenderTarget2D);
             graphics.GraphicsDevice.Clear(Color.LightBlue);
             foreach (GameObject go in gameObjects)
             {
@@ -869,6 +880,10 @@ namespace Insight.Scenes
                 //if(go.GetComponent<BoxCollider>() != null)
                 //go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
             }
+
+            if (postEffect != null)
+                postProcessRenderer.Draw(sceneRenderTarget2D);
+            
             ui.Draw();
             //dispenserTrigger.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
