@@ -17,6 +17,7 @@ namespace Insight.Engine.Prefabs
         GameObject rightDoorModel;
         GameObject frame;
 
+        GameObject triggerModel;
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
@@ -25,11 +26,15 @@ namespace Insight.Engine.Prefabs
             leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             frame = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(0, 0, 0), false);
+
 
             wallModel.AddNewComponent<MeshRenderer>();
             leftDoorModel.AddNewComponent<MeshRenderer>();
             rightDoorModel.AddNewComponent<MeshRenderer>();
             frame.AddNewComponent<MeshRenderer>();
+            triggerModel.AddNewComponent<MeshRenderer>();
+            triggerModel.GetComponent<MeshRenderer>().IsVisible = false;
 
 
             wallModel.AddNewComponent<DoorAnimation>();
@@ -39,6 +44,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(leftDoorModel);
             prefabGameObjects.Add(rightDoorModel);
             prefabGameObjects.Add(frame);
+            prefabGameObjects.Add(triggerModel);
             base.Initialize(position);
         }
 
@@ -50,11 +56,15 @@ namespace Insight.Engine.Prefabs
             leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             frame = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(0, 0, 0), false);
+
 
             wallModel.AddNewComponent<MeshRenderer>();
             leftDoorModel.AddNewComponent<MeshRenderer>();
             rightDoorModel.AddNewComponent<MeshRenderer>();
             frame.AddNewComponent<MeshRenderer>();
+            triggerModel.AddNewComponent<MeshRenderer>();
+            triggerModel.GetComponent<MeshRenderer>().IsVisible = false;
 
 
             wallModel.AddNewComponent<DoorAnimation>();
@@ -64,6 +74,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(leftDoorModel);
             prefabGameObjects.Add(rightDoorModel);
             prefabGameObjects.Add(frame);
+            prefabGameObjects.Add(triggerModel);
             base.Initialize(position);
         }
 
@@ -79,6 +90,12 @@ namespace Insight.Engine.Prefabs
             rightDoorModel.AddNewComponent<BoxCollider>();
             //frame.AddNewComponent<BoxCollider>();
 
+            triggerModel.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 5.0f);
+            triggerModel.AddNewComponent<BoxCollider>();
+            triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
+            triggerModel.Transform.Rotation = new Vector3(0);
+            triggerModel.AddNewComponent<DoorTrigger>();
+            triggerModel.GetComponent<DoorTrigger>().targetAnimation = wallModel.GetComponent<DoorAnimation>();
             base.LoadContent(content);
         }
     }
