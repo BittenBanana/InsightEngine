@@ -292,6 +292,7 @@ namespace Insight.Engine
                 {
                     ModelMesh mesh = object2.GetComponent<Renderer>().getModel().Meshes[i];
                     BoundingSphere origSphere = mesh.BoundingSphere;
+                    origSphere.Radius -= .1f;
                     Matrix trans = model2Transforms[mesh.ParentBone.Index] * world2;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
                     model2Spheres[i] = transSphere;
@@ -305,7 +306,45 @@ namespace Insight.Engine
                         {
                             //Debug.WriteLine("Precise collision");
                             return true;
+                            //collision = true;
                         }
+
+                if (collision)
+                {
+                    //Debug.WriteLine("Precise collision");
+                }
+                else
+                {
+                    if (object2.GetComponent<Collider>().IsTrigger)
+                    {
+                        if (object2.GetComponent<Collider>().OnTriggerEnter)
+                        {
+                            object2.GetComponent<Collider>().OnTriggerExit = true;
+                            object2.OnTriggerExit(object1);
+                            object2.GetComponent<Collider>().OnTriggerEnter = false;
+                            object2.GetComponent<Collider>().OnTriggerExit = false;
+                        }
+                    }
+
+                    if (object1.GetComponent<Collider>().IsTrigger)
+                    {
+                        if (object1.GetComponent<Collider>().OnTriggerEnter)
+                        {
+                            object1.GetComponent<Collider>().OnTriggerExit = true;
+                            object1.OnTriggerExit(object1);
+                            object1.GetComponent<Collider>().OnTriggerEnter = false;
+                            object1.GetComponent<Collider>().OnTriggerExit = false;
+                        }
+                    }
+
+                    //if (object1.GetComponent<Collider>().OnCollisionEnter)
+                    //{
+                    //    object1.GetComponent<Collider>().OnCollisionExit = true;
+                    //    object1.OnCollisionExit(object2);
+                    //    object1.GetComponent<Collider>().OnCollisionEnter = false;
+                    //    object1.GetComponent<Collider>().OnCollisionExit = false;
+                    //}
+                }
 
                 return collision;
 
