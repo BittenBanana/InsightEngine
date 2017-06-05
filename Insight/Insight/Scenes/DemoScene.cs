@@ -162,6 +162,9 @@ namespace Insight.Scenes
         private float windowWidth;
         private float windowHeight;
 
+        private Effect postEffect;
+
+
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
@@ -582,6 +585,8 @@ namespace Insight.Scenes
         {
             base.LoadContent();
             #region Effects 
+
+            postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
 
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);

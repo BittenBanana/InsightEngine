@@ -64,6 +64,7 @@
     <Compile Include="Engine\Material.cs" />
     <Compile Include="Engine\MeshTag.cs" />
     <Compile Include="Engine\Physics.cs" />
+    <Compile Include="Engine\PostProcessRenderer.cs" />
     <Compile Include="Engine\Prefabs\AmmoPC.cs" />
     <Compile Include="Engine\Prefabs\AnimatedDoor.cs" />
     <Compile Include="Engine\Prefabs\Column.cs" />
