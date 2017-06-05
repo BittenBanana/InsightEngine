@@ -111,6 +111,7 @@
     <Compile Include="Scripts\CameraPivotFollow.cs" />
     <Compile Include="Scripts\DispenserTriggerController.cs" />
     <Compile Include="Scripts\DoorAnimation.cs" />
+    <Compile Include="Scripts\DoorTrigger.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
