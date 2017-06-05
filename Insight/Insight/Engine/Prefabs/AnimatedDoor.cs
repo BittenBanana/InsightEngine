@@ -42,6 +42,31 @@ namespace Insight.Engine.Prefabs
             base.Initialize(position);
         }
 
+        public override void Initialize(Vector3 position, Vector3 rot)
+        {
+            prefabGameObjects = new List<GameObject>();
+
+            wallModel = new GameObject(new Vector3(0, 0, 0), false);
+            leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
+            rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
+            frame = new GameObject(new Vector3(0, 0, 0), false);
+
+            wallModel.AddNewComponent<MeshRenderer>();
+            leftDoorModel.AddNewComponent<MeshRenderer>();
+            rightDoorModel.AddNewComponent<MeshRenderer>();
+            frame.AddNewComponent<MeshRenderer>();
+
+
+            wallModel.AddNewComponent<DoorAnimation>();
+            wallModel.GetComponent<DoorAnimation>().leftDoor = leftDoorModel;
+            wallModel.GetComponent<DoorAnimation>().rightDoor = rightDoorModel;
+            prefabGameObjects.Add(wallModel);
+            prefabGameObjects.Add(leftDoorModel);
+            prefabGameObjects.Add(rightDoorModel);
+            prefabGameObjects.Add(frame);
+            base.Initialize(position);
+        }
+
         public override void LoadContent(ContentManager content)
         {
             wallModel.LoadContent(content, "Models/Konrads/Enviroment/Door/wall-5x4", 1.0f);

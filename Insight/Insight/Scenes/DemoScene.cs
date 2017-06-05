@@ -52,12 +52,12 @@ namespace Insight.Scenes
         Column column2;
         ColumnRotated columnRotated2;
         AnimatedDoor door;
-        Door door2;
-        Door door3;
-        Door door4;
-        Door door5;
+        AnimatedDoor door2;
+        AnimatedDoor door3;
+        AnimatedDoor door4;
+        AnimatedDoor door5;
         DoorSmaller door6;
-        Door door7;
+        AnimatedDoor door7;
         RoomFloor roomFloor;
         RoomFloor roomFloor2;
         RoomFloor roomFloor3;
@@ -142,7 +142,6 @@ namespace Insight.Scenes
         WallVisible wall53;
         WallVisible wall54;
         Stairs stairs;
-        GameObject player;
         Material defaultMaterial;
         GameObject directionalLight;
         ColliderManager colliderManager;
@@ -181,7 +180,7 @@ namespace Insight.Scenes
             player.physicLayer = Layer.Player;
 
             enemy1 = new EnemyPrefab();
-            enemy1.Initialize(new Vector3(20, 0, -5));
+            enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
             
             //player.AddNewComponent<Rigidbody>();
 
@@ -267,8 +266,8 @@ namespace Insight.Scenes
             roomFloor10 = new RoomFloorSmallerRotated();
             roomFloor10.Initialize(new Vector3(42, 0, 27));
 
-            door2 = new Door();
-            door2.Initialize(new Vector3(35.17f, 0, 22), new Vector3(0));
+            door2 = new AnimatedDoor();
+            door2.Initialize(new Vector3(32f, 0, 22));
 
             wall = new Wall();
             wall.Initialize(new Vector3(37, 0, 22));
@@ -306,8 +305,8 @@ namespace Insight.Scenes
             wall11 = new WallVisible();
             wall11.Initialize(new Vector3(27, 0, 32), new Vector3(0, 4.713f, 0));
 
-            door3 = new Door();
-            door3.Initialize(new Vector3(30.17f, 0, 37), new Vector3(0));
+            door3 = new AnimatedDoor();
+            door3.Initialize(new Vector3(27f, 0, 37));
 
             corridor6 = new Corridor();
             corridor6.Initialize(new Vector3(27, 0, 37), new Vector3(0));
@@ -339,8 +338,8 @@ namespace Insight.Scenes
             roomFloor12 = new RoomFloor();
             roomFloor12.Initialize(new Vector3(11, 0, 58));
 
-            door4 = new Door();
-            door4.Initialize(new Vector3(19.17f, 0, 58), new Vector3(0));
+            door4 = new AnimatedDoor();
+            door4.Initialize(new Vector3(16f, 0, 58));
 
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
@@ -366,8 +365,8 @@ namespace Insight.Scenes
             cornerLeft2 = new CornerLeft();
             cornerLeft2.Initialize(new Vector3(33, 0, 58));
 
-            door5 = new Door();
-            door5.Initialize(new Vector3(38.9f, 0, 62.15f), new Vector3(0, 4.713f, 0));
+            door5 = new AnimatedDoor();
+            door5.Initialize(new Vector3(35f, 0, 62.15f), new Vector3(0, 4.713f, 0));
 
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
@@ -519,8 +518,8 @@ namespace Insight.Scenes
             corridor10 = new Corridor();
             corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
 
-            door7 = new Door();
-            door7.Initialize(new Vector3(26.18f, -4, 90), new Vector3(0));
+            door7 = new AnimatedDoor();
+            door7.Initialize(new Vector3(23f, -4, 90));
 
             roomFloor26 = new RoomFloor();
             roomFloor26.Initialize(new Vector3(23, -4, 90));
@@ -633,7 +632,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
-            player.AddNewComponent<SphereCollider>();
+            //player.AddNewComponent<SphereCollider>();
             player.AddNewComponent<PlayerBullets>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
