@@ -136,7 +136,7 @@ namespace Insight.Engine
             //Debug.WriteLine(args.GameObject.physicLayer);
             if (this.physicLayer == Layer.Player && args.GameObject.GetComponent<Collider>() != null)
             {
-                if (args.GameObject.physicLayer != Layer.Ground && args.GameObject.GetComponent<Collider>().IsTrigger == false)
+                if (args.GameObject.physicLayer != Layer.Ground && !args.GameObject.GetComponent<Collider>().IsTrigger)
                 {
                     if (rb != null)
                     {

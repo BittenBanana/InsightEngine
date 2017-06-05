@@ -19,7 +19,7 @@ namespace Insight.Engine
             Rotation = Vector3.Zero;
             Position = Vector3.Zero;
             quaterion = Quaternion.Identity;
-            forward = Vector3.Transform(Vector3.Forward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
+            forward = Vector3.Transform(Vector3.Backward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
             Name = "Transform";
         }
         public Transform(GameObject self, Vector3 pos) : base(self)
@@ -27,13 +27,13 @@ namespace Insight.Engine
             Rotation = Vector3.Zero;
             Position = pos;
             quaterion = Quaternion.Identity;
-            forward = Vector3.Transform(Vector3.Forward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
+            forward = Vector3.Transform(Vector3.Backward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
             Name = "Transform";
         }
 
         public override void Update()
         {
-            forward = Vector3.Transform(Vector3.Forward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
+            forward = Vector3.Transform(Vector3.Backward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
             base.Update();
         }
 

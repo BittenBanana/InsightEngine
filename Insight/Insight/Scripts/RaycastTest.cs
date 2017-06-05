@@ -56,20 +56,28 @@ namespace Insight.Scripts
                 if (Physics.Raycast(minPoint, direction, out hit))
                 {
                     isPressed = true;
-                    while (Vector3.Distance(minPoint, hit.point) < Vector3.Distance(minPoint, gameObject.Transform.Position))
+                    Physics.RaycastHit tempHit = hit;
+                    while (Vector3.Distance(minPoint, tempHit.point) < Vector3.Distance(minPoint, gameObject.Transform.Position + direction) && hit != null)
                     {
-                        Physics.Raycast(hit.point + direction, direction, out hit);
+
+                        if (Physics.Raycast(tempHit.point + direction, direction, out hit))
+                        {
+                            tempHit = hit;
+                        }
+
                     }
+                    if (hit != null)
+                    {
+                        test = new GameObject(hit.point, false);
+                        test.AddNewComponent<MeshRenderer>();
 
-                    test = new GameObject(hit.point, false);
-                    test.AddNewComponent<MeshRenderer>();
-
-                    Effect e = SceneManager.Instance.Content.Load<Effect>("Shaders/PhongBlinnShader");
-                    test.GetComponent<MeshRenderer>().Material = new DefaultMaterial(e);
-                    test.GetComponent<MeshRenderer>().Load(SceneManager.Instance.Content);
+                        Effect e = SceneManager.Instance.Content.Load<Effect>("Shaders/PhongBlinnShader");
+                        test.GetComponent<MeshRenderer>().Material = new DefaultMaterial(e);
+                        test.GetComponent<MeshRenderer>().Load(SceneManager.Instance.Content);
 
 
-                    Debug.WriteLine("Hit!" + " " + hit.collider.gameObject + " " + hit.distance);
+                        Debug.WriteLine("Hit!" + " " + hit.collider.gameObject + " " + hit.distance);
+                    }
                 }
                 isPressed = true;
             }

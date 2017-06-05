@@ -21,7 +21,7 @@ namespace Insight.Scripts
         Vector3 point1, point2;
         public BasicAI(GameObject gameObject) : base(gameObject)
         {
-            point1 = new Vector3(18, 0, 10);
+            point1 = new Vector3(18, 0, 5);
             point2 = gameObject.Transform.Position;
             state = AiState.WalkingToFirstPoint;
         }

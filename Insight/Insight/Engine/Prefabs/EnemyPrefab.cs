@@ -18,12 +18,12 @@ namespace Insight.Engine.Prefabs
 
         public override void Initialize(Vector3 position)
         {
-            enemy = new GameObject(position, true);
+            enemy = new GameObject(new Vector3(0, 0, 0), true);
             enemy.AddNewComponent<AnimationRender>();
 
             
 
-            enemySightTrigger = new GameObject(new Vector3(17,0,0), true);
+            enemySightTrigger = new GameObject(enemy.Transform.Position, true);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
             
@@ -39,7 +39,7 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
             enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
-            enemy.AddNewComponent<BasicAI>();
+           // enemy.AddNewComponent<BasicAI>();
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
             enemySightTrigger.LoadContent(content, "Models/ball", 1f);

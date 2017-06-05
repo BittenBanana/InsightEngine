@@ -173,12 +173,12 @@ namespace Insight.Scenes
             pointLight1.GetComponent<Light>().Color = Color.Cyan;
             pointLight1.GetComponent<Light>().Attenuation = 10;
 
-            player = new GameObject(new Vector3(2, 1.0f, 2), true);
+            player = new GameObject(new Vector3(2, 1.0f, 7), true);
             player.AddNewComponent<MeshRenderer>();
             player.physicLayer = Layer.Player;
 
             enemy1 = new EnemyPrefab();
-            enemy1.Initialize(new Vector3(17, 0, 0));
+            enemy1.Initialize(new Vector3(20, 0, -5));
             
             //player.AddNewComponent<Rigidbody>();
 

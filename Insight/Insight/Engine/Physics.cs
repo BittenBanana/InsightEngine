@@ -38,8 +38,8 @@ namespace Insight.Engine
             float? tempDistance = null;
             foreach (var item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if (item.physicLayer != Layer.Player)
-                {
+                //if (item.physicLayer != Layer.Player)
+                //{
                     BoxCollider bc = item.GetComponent<BoxCollider>();
                     SphereCollider sc = item.GetComponent<SphereCollider>();
                     if (bc != null)
@@ -98,7 +98,7 @@ namespace Insight.Engine
                             }
                         }
                     }
-                }
+                //}
             }
             if (go != null)
             {

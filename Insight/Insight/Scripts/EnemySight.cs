@@ -43,7 +43,7 @@ namespace Insight.Scripts
                     if (timer >= reactionTime)
                     {
                         Physics.RaycastHit hit;
-                        if (Physics.Raycast(gameObject.Transform.Position, direction, out hit))
+                        if (Physics.Raycast(gameObject.Transform.Position + direction, direction, out hit))
                         {
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
