@@ -66,6 +66,7 @@
     <Compile Include="Engine\Physics.cs" />
     <Compile Include="Engine\PostProcessRenderer.cs" />
     <Compile Include="Engine\Prefabs\AmmoPC.cs" />
+    <Compile Include="Engine\Prefabs\AmmoPCMark.cs" />
     <Compile Include="Engine\Prefabs\AnimatedDoor.cs" />
     <Compile Include="Engine\Prefabs\Column.cs" />
     <Compile Include="Engine\Prefabs\ColumnRotated.cs" />
@@ -110,7 +111,9 @@
     <Compile Include="Scripts\CameraFollowBox.cs" />
     <Compile Include="Scripts\CameraPivotFollow.cs" />
     <Compile Include="Scripts\DispenserTriggerController.cs" />
+    <Compile Include="Scripts\DispenserTriggerControllerMark.cs" />
     <Compile Include="Scripts\DoorAnimation.cs" />
+    <Compile Include="Scripts\DoorTrigger.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />

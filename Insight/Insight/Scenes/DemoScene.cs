@@ -150,6 +150,10 @@ namespace Insight.Scenes
         AmmoPC ammoPC;
         AmmoPC ammoPC2;
         Corridor wall55;
+        AmmoPCMark ammoPC3;
+        AmmoPCMark ammoPC4;
+        AmmoPCMark ammoPC5;
+        AmmoPC ammoPC6;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -562,6 +566,18 @@ namespace Insight.Scenes
             ammoPC2 = new AmmoPC();
             ammoPC2.Initialize(new Vector3(36.5f, 0, 19), new Vector3(0, 4.713f, 0));
 
+            ammoPC3 = new AmmoPCMark();
+            ammoPC3.Initialize(new Vector3(11f, 0, 60.5f), new Vector3(0, 1.571f, 0));
+
+            ammoPC4 = new AmmoPCMark();
+            ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
+
+            ammoPC5 = new AmmoPCMark();
+            ammoPC5.Initialize(new Vector3(44f, -4, 68f), new Vector3(0, 1.571f, 0));
+
+            ammoPC6 = new AmmoPC();
+            ammoPC6.Initialize(new Vector3(52f, -4, 82f), new Vector3(0, 4.713f, 0));
+
             wall55 = new Corridor();
             wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
 
@@ -637,7 +653,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
-            //player.AddNewComponent<SphereCollider>();
+            player.AddNewComponent<SphereCollider>();
             player.AddNewComponent<PlayerBullets>();
             corridor.LoadContent(content);
             corridor2.LoadContent(content);
@@ -761,6 +777,10 @@ namespace Insight.Scenes
             door7.LoadContent(content);
             ammoPC.LoadContent(content);
             ammoPC2.LoadContent(content);
+            ammoPC3.LoadContent(content);
+            ammoPC4.LoadContent(content);
+            ammoPC5.LoadContent(content);
+            ammoPC6.LoadContent(content);
             //stairs.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
