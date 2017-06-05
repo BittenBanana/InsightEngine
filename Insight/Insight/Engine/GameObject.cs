@@ -155,8 +155,8 @@ namespace Insight.Engine
 
                         if (Backward)
                         {
-                            Transform.Position.X += 0.05f * (float)Math.Sin(Transform.Rotation.Y);
-                            Transform.Position.Z += 0.05f * (float)Math.Cos(Transform.Rotation.Y);
+                            Transform.Position.X += 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                            Transform.Position.Z += 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             //rotationSpeed = 0;
                         }
 
