@@ -38,8 +38,8 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            pcModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/ammo-pc", 1.0f);
-            triggerModel.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 1.0f);
+            pcModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.ammo_pc, 1.0f);
+            triggerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 1.0f);
             pcModel.AddNewComponent<BoxCollider>();
             triggerModel.AddNewComponent<SphereCollider>();
             triggerModel.GetComponent<SphereCollider>().IsTrigger = true;

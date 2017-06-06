@@ -1282,6 +1282,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Enviroment/ammo-pc.FBX
 
+#begin Shaders/black&whitePostProcess.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/black&whitePostProcess.fx
+
 #begin Models/Konrads/Character/postac.FBX
 /importer:FbxImporter
 /processor:SkinnedModelProcessor
@@ -1300,10 +1306,4 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Character/postac.FBX
-
-#begin Shaders/black&whitePostProcess.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Shaders/black&whitePostProcess.fx
 

@@ -30,7 +30,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            doorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/wall5x5withDoor", 1.0f);
+            doorModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.wall5x5withDoor, 1.0f);
 
             doorModel.AddNewComponent<BoxCollider>();
 

@@ -27,7 +27,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            columnModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/column-rotated", 1.0f);
+            columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.column_rotated, 1.0f);
             columnModel.AddNewComponent<BoxCollider>();
 
         }
