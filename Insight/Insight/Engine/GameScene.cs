@@ -18,6 +18,7 @@ namespace Insight.Engine
         protected List<GameObject> gameObjects;
         protected Camera mainCam;
         public UserInterface ui;
+        public GameObject player;
 
         protected Matrix projection { get; set; }
 
@@ -37,6 +38,8 @@ namespace Insight.Engine
         {
             content = new ContentManager(
                    SceneManager.Instance.Content.ServiceProvider, "Content");
+
+            ContentModels.Instance.LoadContent(content);
         }
 
         public virtual void UnloadContent()

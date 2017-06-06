@@ -33,9 +33,9 @@ namespace Insight.Engine.Components
             effect = Material.GetEffect();
         }
 
-        public void Load(ContentManager c, string path, float scale)
+        public void Load(ContentManager c, Model model, float scale)
         {
-            model = c.Load<Model>(path);
+            this.model = model;
             generateTags();
             effect = Material.GetEffect();
             this.scale = scale;

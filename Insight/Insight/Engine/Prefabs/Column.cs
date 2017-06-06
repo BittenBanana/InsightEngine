@@ -27,7 +27,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            columnModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/column", 1.0f);
+            columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.column, 1.0f);
             columnModel.AddNewComponent<BoxCollider>();
 
         }

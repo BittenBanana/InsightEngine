@@ -41,6 +41,7 @@
     <StartupObject>Insight.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ContentModels.cs" />
     <Compile Include="Engine\AudioManager.cs" />
     <Compile Include="Engine\Banana Scripting\BananaScript.cs" />
     <Compile Include="Engine\Components\AnimationRender.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Engine\Components\Rigidbody.cs" />
     <Compile Include="Engine\Components\SphereCollider.cs" />
     <Compile Include="Engine\Components\UserInterface.cs" />
+    <Compile Include="Engine\EnemyWalkingSpots.cs" />
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Components\Component.cs" />
     <Compile Include="Engine\Components\Transform.cs" />
@@ -63,7 +65,9 @@
     <Compile Include="Engine\Material.cs" />
     <Compile Include="Engine\MeshTag.cs" />
     <Compile Include="Engine\Physics.cs" />
+    <Compile Include="Engine\PostProcessRenderer.cs" />
     <Compile Include="Engine\Prefabs\AmmoPC.cs" />
+    <Compile Include="Engine\Prefabs\AmmoPCMark.cs" />
     <Compile Include="Engine\Prefabs\AnimatedDoor.cs" />
     <Compile Include="Engine\Prefabs\Column.cs" />
     <Compile Include="Engine\Prefabs\ColumnRotated.cs" />
@@ -108,7 +112,9 @@
     <Compile Include="Scripts\CameraFollowBox.cs" />
     <Compile Include="Scripts\CameraPivotFollow.cs" />
     <Compile Include="Scripts\DispenserTriggerController.cs" />
+    <Compile Include="Scripts\DispenserTriggerControllerMark.cs" />
     <Compile Include="Scripts\DoorAnimation.cs" />
+    <Compile Include="Scripts\DoorTrigger.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />

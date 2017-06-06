@@ -37,8 +37,8 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            corridorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/f-3x5-rotated", 1.0f);
-            floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
+            corridorModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.f_3x5_rotated, 1.0f);
+            floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
             floor.AddNewComponent<BoxCollider>();
             floor.physicLayer = Layer.Ground;
         }

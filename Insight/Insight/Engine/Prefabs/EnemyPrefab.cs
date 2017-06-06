@@ -13,17 +13,17 @@ namespace Insight.Engine.Prefabs
 {
     class EnemyPrefab : Prefab
     {
-        private GameObject enemy;
-        private GameObject enemySightTrigger;
+        public GameObject enemy;
+        public GameObject enemySightTrigger;
 
         public override void Initialize(Vector3 position)
         {
-            enemy = new GameObject(new Vector3(0, 0, 0), true);
+            enemy = new GameObject(new Vector3(0, 0, 0), false);
             enemy.AddNewComponent<AnimationRender>();
 
             
 
-            enemySightTrigger = new GameObject(enemy.Transform.Position, true);
+            enemySightTrigger = new GameObject(enemy.Transform.Position, false);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
             
@@ -39,14 +39,15 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
             enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
-           // enemy.AddNewComponent<BasicAI>();
+            enemy.AddNewComponent<BasicAI>();
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
-            enemySightTrigger.LoadContent(content, "Models/ball", 1f);
+            enemySightTrigger.LoadContent(content, ContentModels.Instance.ball, 1f);
             enemySightTrigger.AddNewComponent<SphereCollider>();
             enemySightTrigger.GetComponent<SphereCollider>().IsTrigger = true;
             enemySightTrigger.AddNewComponent<EnemySight>();
             enemySightTrigger.GetComponent<EnemySight>().followTransform = enemy.Transform;
+            enemySightTrigger.physicLayer = Layer.DispenserTrigger;
             base.LoadContent(content);
         }
     }
