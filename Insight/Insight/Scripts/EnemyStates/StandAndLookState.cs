@@ -34,6 +34,11 @@ namespace Insight.Scripts.EnemyStates
             {
                 enemy.ChangeState(new DeathState());
             }
+
+            if (enemy.enemySight.isPlayerSeen)
+            {
+                enemy.ChangeState(new ChaseState());
+            }
         }
 
         public override void Exit(EnemyAI enemy)

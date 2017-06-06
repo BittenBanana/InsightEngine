@@ -118,6 +118,7 @@
     <Compile Include="Scripts\EnemyAI.cs" />
     <Compile Include="Scripts\EnemyAIState.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
+    <Compile Include="Scripts\EnemyStates\ChaseState.cs" />
     <Compile Include="Scripts\EnemyStates\DeathState.cs" />
     <Compile Include="Scripts\EnemyStates\StandAndLookState.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
