@@ -57,20 +57,20 @@ namespace Insight.Engine
         public EnemyWalkingSpots()
         {
             nodes = new List<PathNode>();
-            pathPoint1 = new PathNode(new Vector3(2.5f, 0, 0),1);
-            pathPoint2 = new PathNode(new Vector3(2.5f, 0, 5),2);
-            pathPoint3 = new PathNode(new Vector3(2.5f, 0, 9.5f),3);
-            pathPoint4 = new PathNode(new Vector3(3,0,11.5f),4);
-            pathPoint5 = new PathNode(new Vector3(5.5f, 0, 13.5f),5);
-            pathPoint6 = new PathNode(new Vector3(10, 0, 13.5f),6);
-            pathPoint7 = new PathNode(new Vector3(17.5f, 0, 13.5f),7);
-            pathPoint8 = new PathNode(new Vector3(17.5f, 0, 6),8);
-            pathPoint9 = new PathNode(new Vector3(17.5f, 0, 3.5f),9);
-            pathPoint10 = new PathNode(new Vector3(25, 0, 13.5f),10);
-            pathPoint11 = new PathNode(new Vector3(30, 0, 13.5f),11);
-            pathPoint12 = new PathNode(new Vector3(33.5f,0, 14.5f),12);
-            pathPoint13 = new PathNode(new Vector3(34,0,16.5f),13);
-            pathPoint14 = new PathNode(new Vector3(34, 0, 20),14);
+            pathPoint1 = new PathNode(new Vector3(2.5f, 0, 0), 1);
+            pathPoint2 = new PathNode(new Vector3(2.5f, 0, 5), 2);
+            pathPoint3 = new PathNode(new Vector3(2.5f, 0, 9.5f), 3);
+            pathPoint4 = new PathNode(new Vector3(3, 0, 11.5f), 4);
+            pathPoint5 = new PathNode(new Vector3(5.5f, 0, 13.5f), 5);
+            pathPoint6 = new PathNode(new Vector3(10, 0, 13.5f), 6);
+            pathPoint7 = new PathNode(new Vector3(17.5f, 0, 13.5f), 7);
+            pathPoint8 = new PathNode(new Vector3(17.5f, 0, 6), 8);
+            pathPoint9 = new PathNode(new Vector3(17.5f, 0, 3.5f), 9);
+            pathPoint10 = new PathNode(new Vector3(25, 0, 13.5f), 10);
+            pathPoint11 = new PathNode(new Vector3(30, 0, 13.5f), 11);
+            pathPoint12 = new PathNode(new Vector3(33.5f, 0, 14.5f), 12);
+            pathPoint13 = new PathNode(new Vector3(34, 0, 16.5f), 13);
+            pathPoint14 = new PathNode(new Vector3(34, 0, 20), 14);
 
             nodes.Add(pathPoint1);
             nodes.Add(pathPoint2);
@@ -148,7 +148,7 @@ namespace Insight.Engine
             return destNode.rootPoint;
         }
 
-        public Vector3 findNearestPath(Vector3 currentPosition,Vector3 destPath)
+        public Vector3 findNearestPath(Vector3 currentPosition, Vector3 destPath)
         {
             PathNode enemyNearbyNode = findNearestNode(currentPosition);
 
@@ -181,6 +181,17 @@ namespace Insight.Engine
                 }
             }
             return nearestNode;
+        }
+
+        public Vector3 MoveToDestination(Vector3 currentPosition, Vector3 targetDestination, float speed)
+        {
+            Vector3 nearest = currentPosition;
+            if (Vector3.Distance(nearest, currentPosition) <= 0.1f)
+                nearest = findNearestPath(currentPosition, targetDestination);
+            if (Vector3.Distance(nearest, currentPosition) > 0.1f)
+                return VectorHelper.MoveTowards(currentPosition, nearest, speed);
+
+            return currentPosition;
         }
     }
 }

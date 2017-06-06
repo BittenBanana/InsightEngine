@@ -70,18 +70,15 @@ namespace Insight.Scripts
 
             if (state == AiState.FollowingPlayer)
             {
-                Debug.WriteLine(Vector3.Distance(destinationPosition, this.gameObject.Transform.Position));
-                if (Vector3.Distance(destinationPosition, this.gameObject.Transform.Position) < 2.5f)
+                if (Vector3.Distance(destinationPosition, this.gameObject.Transform.Position) < 3f)
                 {
                     state = AiState.None;
                 }
-                else
-                {
-                    if (Vector3.Distance(currentNodePos, this.gameObject.Transform.Position) <= 0.05f)
-                        currentNodePos = EnemyWalkingSpots.getInstance().findNearestPath(this.gameObject.Transform.Position, destinationPosition);
-                    else
-                        gameObject.Transform.Position = VectorHelper.MoveTowards(gameObject.Transform.Position, currentNodePos, 0.1f);
-                }
+
+                Debug.WriteLine(Vector3.Distance(destinationPosition, this.gameObject.Transform.Position));
+
+                gameObject.Transform.Position = EnemyWalkingSpots.getInstance().MoveToDestination(gameObject.Transform.Position, destinationPosition, 0.1f);
+
             }
         }
     }
