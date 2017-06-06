@@ -17,7 +17,7 @@ namespace Insight.Engine.Prefabs
         GameObject rightDoorModel;
         GameObject frame;
 
-        GameObject triggerModel;
+        public GameObject triggerModel;
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
@@ -26,7 +26,7 @@ namespace Insight.Engine.Prefabs
             leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             frame = new GameObject(new Vector3(0, 0, 0), false);
-            triggerModel = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(2.7f, 0, -0.4f), false);
 
 
             wallModel.AddNewComponent<MeshRenderer>();
@@ -80,17 +80,17 @@ namespace Insight.Engine.Prefabs
 
         public override void LoadContent(ContentManager content)
         {
-            wallModel.LoadContent(content, "Models/Konrads/Enviroment/Door/wall-5x4", 1.0f);
-            leftDoorModel.LoadContent(content, "Models/Konrads/Enviroment/Door/l-wing", 1.0f);
-            rightDoorModel.LoadContent(content, "Models/Konrads/Enviroment/Door/r-wing", 1.0f);
-            frame.LoadContent(content, "Models/Konrads/Enviroment/Door/frame", 1.0f);
+            wallModel.LoadContent(content, ContentModels.Instance.door_wall_5x4, 1.0f);
+            leftDoorModel.LoadContent(content, ContentModels.Instance.door_l_wing, 1.0f);
+            rightDoorModel.LoadContent(content, ContentModels.Instance.door_r_wing, 1.0f);
+            frame.LoadContent(content, ContentModels.Instance.door_frame, 1.0f);
 
             wallModel.AddNewComponent<BoxCollider>();
             leftDoorModel.AddNewComponent<BoxCollider>();
             rightDoorModel.AddNewComponent<BoxCollider>();
             //frame.AddNewComponent<BoxCollider>();
 
-            triggerModel.GetComponent<MeshRenderer>().Load(content, "Models/dispensertrigger", 5.0f);
+            triggerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 5.0f);
             triggerModel.AddNewComponent<BoxCollider>();
             triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
             triggerModel.Transform.Rotation = new Vector3(0);

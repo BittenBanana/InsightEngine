@@ -37,8 +37,8 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            corridorModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-str-3way-nt-g", 1.0f);
-            floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
+            corridorModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_str_3way_nt_g, 1.0f);
+            floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
 
             corridorModel.AddNewComponent<BoxCollider>();
             floor.AddNewComponent<BoxCollider>();

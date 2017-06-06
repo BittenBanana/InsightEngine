@@ -38,6 +38,8 @@ namespace Insight.Engine
         {
             content = new ContentManager(
                    SceneManager.Instance.Content.ServiceProvider, "Content");
+
+            ContentModels.Instance.LoadContent(content);
         }
 
         public virtual void UnloadContent()

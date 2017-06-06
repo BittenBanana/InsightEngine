@@ -608,6 +608,7 @@ namespace Insight.Scenes
         public override void LoadContent()
         {
             base.LoadContent();
+
             #region Effects 
 
             //postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
@@ -618,7 +619,7 @@ namespace Insight.Scenes
             ((DefaultMaterial)defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             #endregion
-
+            
             List<Renderer> models = new List<Renderer>();
             List<Light> lights = new List<Light>();
 
@@ -648,7 +649,7 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
 
-            player.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Character/superBoxHero", 1f);
+            player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
 
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();

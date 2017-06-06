@@ -19,7 +19,7 @@ namespace Insight.Engine
         public GraphicsDeviceManager device { private set; get; }
         public GameScene currentScene { get; set; }
 
-        private MainScene mainS;
+        //private MainScene mainS;
         private DemoScene demoS;
 
         public static SceneManager Instance
@@ -35,7 +35,7 @@ namespace Insight.Engine
         public SceneManager()
         {
             Dimensions = new Vector2(1280, 720);
-            mainS = new MainScene();
+            //mainS = new MainScene();
             demoS = new DemoScene();
             LoadDemoScene();
         }
@@ -44,14 +44,14 @@ namespace Insight.Engine
         {
             device = graphicsDevice;
             currentScene.Initialize(graphicsDevice);
-            mainS.Initialize(graphicsDevice);
+            //mainS.Initialize(graphicsDevice);
         }
 
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
             currentScene.LoadContent();
-            mainS.LoadContent();
+            //mainS.LoadContent();
         }
 
         public void UnloadContent()
@@ -83,7 +83,7 @@ namespace Insight.Engine
 
         public void LoadMainScene()
         {
-            currentScene = mainS;
+            //currentScene = mainS;
         }
 
         public void LoadDemoScene()

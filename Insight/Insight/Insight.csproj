@@ -41,6 +41,7 @@
     <StartupObject>Insight.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ContentModels.cs" />
     <Compile Include="Engine\AudioManager.cs" />
     <Compile Include="Engine\Banana Scripting\BananaScript.cs" />
     <Compile Include="Engine\Components\AnimationRender.cs" />
