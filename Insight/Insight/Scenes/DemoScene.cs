@@ -21,6 +21,8 @@ namespace Insight.Scenes
 
         private PostProcessRenderer postProcessRenderer;
 
+        private RenderTarget2D sceneRenderTarget2D;
+
         static String floorPrefab = "floor5x5";
         //GameObject floor1;
         TestPrefab testPrefab;
@@ -174,6 +176,10 @@ namespace Insight.Scenes
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
+
+            sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
+
             windowWidth = SceneManager.Instance.Dimensions.X;
             windowHeight = SceneManager.Instance.Dimensions.Y;
             pointLight1 = new GameObject(new Vector3(17, 3f, 5), false);
@@ -188,7 +194,7 @@ namespace Insight.Scenes
             enemy1 = new EnemyPrefab();
             enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
             
-            //player.AddNewComponent<Rigidbody>();
+            player.AddNewComponent<Rigidbody>();
 
             cameraPivot = new GameObject(player.Transform.Position, false);
 
@@ -605,7 +611,7 @@ namespace Insight.Scenes
 
             #region Effects 
 
-            postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
+            //postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
 
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);
@@ -887,10 +893,6 @@ namespace Insight.Scenes
         public override void Draw()
         {
             lightRenderer.Draw();
-
-
-            RenderTarget2D sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
-                graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
             if (postEffect != null)
                 graphics.GraphicsDevice.SetRenderTarget(sceneRenderTarget2D);
