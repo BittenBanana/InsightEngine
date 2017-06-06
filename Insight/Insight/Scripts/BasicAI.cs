@@ -75,7 +75,7 @@ namespace Insight.Scripts
                     state = AiState.None;
                 }
 
-                Debug.WriteLine(Vector3.Distance(destinationPosition, this.gameObject.Transform.Position));
+                Debug.WriteLine(EnemyWalkingSpots.getInstance().DistanceFromDestination(this.gameObject.Transform.Position, destinationPosition));
 
                 gameObject.Transform.Position = EnemyWalkingSpots.getInstance().MoveToDestination(gameObject.Transform.Position, destinationPosition, 0.1f);
 

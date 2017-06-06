@@ -193,5 +193,34 @@ namespace Insight.Engine
 
             return currentPosition;
         }
+
+        public float DistanceFromDestination(Vector3 currentPosition, Vector3 targetDestination)
+        {
+            PathNode nearestNodeFromCurrent = findNearestNode(currentPosition);
+            PathNode nearestNodeFromDestination = findNearestNode(targetDestination);
+            PathNode currentNode = nearestNodeFromCurrent;
+            int maxNodes = 0;
+            float distance = 0.0f;
+            while(currentNode.nodeID != nearestNodeFromDestination.nodeID)
+            {
+                PathNode nearest = new PathNode();
+                float dist = 9999.0f;
+                foreach (PathNode node in currentNode.neighbours)
+                {
+                    if(Vector3.Distance(node.rootPoint, targetDestination) < dist)
+                    {
+                        dist = Vector3.Distance(node.rootPoint, targetDestination);
+                        nearest = node;
+                    }
+                }
+                distance += Vector3.Distance(currentNode.rootPoint, nearest.rootPoint);
+                currentNode = nearest;
+                maxNodes++;
+
+                if (maxNodes > 15)
+                    return 9999.0f;
+            }
+            return distance;
+        }
     }
 }
