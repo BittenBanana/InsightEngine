@@ -30,7 +30,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            wallModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/w-3x4-visible", 1.0f);
+            wallModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.w_3x4_visible, 1.0f);
 
             wallModel.AddNewComponent<BoxCollider>();
 

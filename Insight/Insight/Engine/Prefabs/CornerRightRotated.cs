@@ -43,9 +43,9 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            cornerModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-corn-lt", 1.0f);
-            cornerCollider.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/cor-corn-col", 1.0f);
-            floor.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/floorPlane", 1.0f);
+            cornerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_corn_lt, 1.0f);
+            cornerCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_corn_col, 1.0f);
+            floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
 
             cornerCollider.AddNewComponent<BoxCollider>();
             floor.AddNewComponent<BoxCollider>();

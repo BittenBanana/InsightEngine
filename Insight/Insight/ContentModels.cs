@@ -1,0 +1,132 @@
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Insight
+{
+    class ContentModels
+    {
+        private static ContentModels instance;
+        public static ContentModels Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new ContentModels();
+                return instance;
+            }
+        }
+
+        public Model ammo_pc { get; private set; }
+        public Model column { get; private set; }
+        public Model column_rotated { get; private set; }
+        public Model cor_corn_col { get; private set; }
+        public Model cor_corn_col_rotated { get; private set; }
+        public Model cor_corn_lt { get; private set; }
+        public Model cor_corn_lt_rotated { get; private set; }
+        public Model cor_corn_rt { get; private set; }
+        public Model corner { get; private set; }
+        public Model corridor_corner_colliders { get; private set; }
+        public Model cor_str_3way_lt_g { get; private set; }
+        public Model cor_str_3way_nt_g { get; private set; }
+        public Model cor_str_3way_nt_g_rotated { get; private set; }
+        public Model cor_str_4way_g { get; private set; }
+        public Model cor_str_rt_g { get; private set; }
+        public Model cor_str_rt_g_rotated { get; private set; }
+        public Model cor_str_rt_g_window { get; private set; }
+        public Model door_frame { get; private set; }
+        public Model door_l_wing { get; private set; }
+        public Model door_r_wing { get; private set; }
+        public Model door_wall_5x4 { get; private set; }
+        public Model f_3x5 { get; private set; }
+        public Model f_3x5_rotated { get; private set; }
+        public Model f_5x5 { get; private set; }
+        public Model floor5x5 { get; private set; }
+        public Model floor_5x5_box { get; private set; }
+        public Model floorPlane { get; private set; }
+        public Model stairs { get; private set; }
+        public Model straight { get; private set; }
+        public Model straight_rotated { get; private set; }
+        public Model w_3x4 { get; private set; }
+        public Model w_3x4_visible { get; private set; }
+        public Model w_3x5 { get; private set; }
+        public Model w_5x4 { get; private set; }
+        public Model w_5x4_visible { get; private set; }
+        public Model w_5x5 { get; private set; }
+        public Model w_5x5_visible { get; private set; }
+        public Model wall { get; private set; }
+        public Model wall_5x3_dm_g { get; private set; }
+        public Model wall_5x4_dm_g { get; private set; }
+        public Model wall5x5withDoor { get; private set; }
+        public Model wall_dm_g { get; private set; }
+        public Model wall_sdl_g { get; private set; }
+        public Model wall_sdm_g { get; private set; }
+        public Model wall_sdr_g { get; private set; }
+
+        public Model ball { get; private set; }
+        public Model bulletdispenser { get; private set; }
+        public Model dispensertrigger { get; private set; }
+        public Model triggerbox { get; private set; }
+
+        public Model superBoxHero { get; private set; }
+
+        public void LoadContent(ContentManager content)
+        {
+            ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
+            column = content.Load<Model>("Models/Konrads/Enviroment/column");
+            column_rotated = content.Load<Model>("Models/Konrads/Enviroment/column-rotated");
+            cor_corn_col = content.Load<Model>("Models/Konrads/Enviroment/cor-corn-col");
+            cor_corn_col_rotated = content.Load<Model>("Models/Konrads/Enviroment/cor-corn-col-rotated");
+            cor_corn_lt = content.Load<Model>("Models/Konrads/Enviroment/cor-corn-lt");
+            cor_corn_lt_rotated = content.Load<Model>("Models/Konrads/Enviroment/cor-corn-lt-rotated");
+            cor_corn_rt = content.Load<Model>("Models/Konrads/Enviroment/cor-corn-rt");
+            corner = content.Load<Model>("Models/Konrads/Enviroment/corner");
+            corridor_corner_colliders = content.Load<Model>("Models/Konrads/Enviroment/corridor-corner-colliders");
+            cor_str_3way_lt_g = content.Load<Model>("Models/Konrads/Enviroment/cor-str-3way-lt-g");
+            cor_str_3way_nt_g = content.Load<Model>("Models/Konrads/Enviroment/cor-str-3way-nt-g");
+            cor_str_3way_nt_g_rotated = content.Load<Model>("Models/Konrads/Enviroment/cor-str-3way-nt-g-rotated");
+            cor_str_4way_g = content.Load<Model>("Models/Konrads/Enviroment/cor-str-4way-g");
+            cor_str_rt_g = content.Load<Model>("Models/Konrads/Enviroment/cor-str-rt-g");
+            cor_str_rt_g_rotated = content.Load<Model>("Models/Konrads/Enviroment/cor-str-rt-g-rotated");
+            cor_str_rt_g_window = content.Load<Model>("Models/Konrads/Enviroment/cor-str-rt-g-window");
+            door_frame = content.Load<Model>("Models/Konrads/Enviroment/Door/frame");
+            door_l_wing = content.Load<Model>("Models/Konrads/Enviroment/Door/l-wing");
+            door_r_wing = content.Load<Model>("Models/Konrads/Enviroment/Door/r-wing");
+            door_wall_5x4 = content.Load<Model>("Models/Konrads/Enviroment/Door/wall-5x4");
+            f_3x5 = content.Load<Model>("Models/Konrads/Enviroment/f-3x5");
+            f_3x5_rotated = content.Load<Model>("Models/Konrads/Enviroment/f-3x5-rotated");
+            f_5x5 = content.Load<Model>("Models/Konrads/Enviroment/f-5x5");
+            floor5x5 = content.Load<Model>("Models/Konrads/Enviroment/floor5x5");
+            floor_5x5_box = content.Load<Model>("Models/Konrads/Enviroment/floor-5x5-box");
+            floorPlane = content.Load<Model>("Models/Konrads/Enviroment/floorPlane");
+            stairs = content.Load<Model>("Models/Konrads/Enviroment/stairs");
+            straight = content.Load<Model>("Models/Konrads/Enviroment/straight");
+            straight_rotated = content.Load<Model>("Models/Konrads/Enviroment/straight-rotated");
+            w_3x4 = content.Load<Model>("Models/Konrads/Enviroment/w-3x4");
+            w_3x4_visible = content.Load<Model>("Models/Konrads/Enviroment/w-3x4-visible");
+            w_3x5 = content.Load<Model>("Models/Konrads/Enviroment/w-3x5");
+            w_5x4 = content.Load<Model>("Models/Konrads/Enviroment/w-5x4");
+            w_5x4_visible = content.Load<Model>("Models/Konrads/Enviroment/w-5x4-visible");
+            w_5x5 = content.Load<Model>("Models/Konrads/Enviroment/w-5x5");
+            w_5x5_visible = content.Load<Model>("Models/Konrads/Enviroment/w-5x5-visible");
+            wall = content.Load<Model>("Models/Konrads/Enviroment/wall");
+            wall_5x3_dm_g = content.Load<Model>("Models/Konrads/Enviroment/wall-5x3-dm-g");
+            wall_5x4_dm_g = content.Load<Model>("Models/Konrads/Enviroment/wall-5x4-dm-g");
+            wall5x5withDoor = content.Load<Model>("Models/Konrads/Enviroment/wall5x5withDoor");
+            wall_dm_g = content.Load<Model>("Models/Konrads/Enviroment/wall-dm-g");
+            wall_sdl_g = content.Load<Model>("Models/Konrads/Enviroment/wall-sdl-g");
+            wall_sdm_g = content.Load<Model>("Models/Konrads/Enviroment/wall-sdm-g");
+            wall_sdr_g = content.Load<Model>("Models/Konrads/Enviroment/wall-sdr-g");
+
+            ball = content.Load<Model>("Models/ball");
+            bulletdispenser = content.Load<Model>("Models/bulletdispenser");
+            dispensertrigger = content.Load<Model>("Models/dispensertrigger");
+            triggerbox = content.Load<Model>("Models/triggerbox");
+            superBoxHero = content.Load<Model>("Models/Konrads/Character/superBoxHero");
+        }
+    }
+}

@@ -30,7 +30,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            stairsModel.GetComponent<MeshRenderer>().Load(content, "Models/Konrads/Enviroment/stairs", 1.0f);
+            stairsModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.stairs, 1.0f);
 
             stairsModel.AddNewComponent<BoxCollider>();
 
