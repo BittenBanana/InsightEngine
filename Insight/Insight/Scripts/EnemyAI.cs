@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,18 +19,22 @@ namespace Insight.Scripts
             FollowingPlayer,
         }
 
+        public int health { get; private set; }
+
+        public EnemySight enemySight { get; set; }
+
         private EnemyAIState currentState;
+        private EnemyAIState firstState;
 
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
+            health = 100;
         }
 
         public override void Update()
         {
-            if (currentState != null)
-            {
-                currentState.Execute(this);
-            }
+            currentState?.Execute(this);
+            Debug.WriteLine(currentState);
             base.Update();
         }
 
@@ -38,6 +43,17 @@ namespace Insight.Scripts
             currentState.Exit(this);
             currentState = newState;
             currentState.EnterState(this);
+        }
+
+        public void SetFirstState(EnemyAIState state)
+        {
+            currentState = state;
+            firstState = state;
+        }
+
+        public void Hit(int dmg)
+        {
+            health -= dmg;
         }
     }
 }

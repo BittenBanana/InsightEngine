@@ -9,6 +9,12 @@ namespace Insight.Scripts
 {
     class PlayerBullets : BaseScript
     {
+        public enum Bullets
+        {
+            Agressive,
+            Transmitter
+        }
+
         public bool aggresiveBullet { get; set; }
         public bool transmitterBullet { get; set; }
         public bool enemySightBullet { get; set; }

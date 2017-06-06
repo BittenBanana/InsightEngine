@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Insight.Engine.Components;
 using Insight.Materials;
 using Insight.Scripts;
+using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -39,7 +40,8 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
             enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
-            enemy.AddNewComponent<BasicAI>();
+            enemy.AddNewComponent<EnemyAI>();
+            enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
             enemySightTrigger.LoadContent(content, ContentModels.Instance.ball, 1f);

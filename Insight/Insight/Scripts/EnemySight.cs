@@ -17,10 +17,23 @@ namespace Insight.Scripts
         public float reactionTime { get; set; }
         private float timer;
 
+        public bool isPlayerSeen { get; private set; }
+        public bool isPlayerHeard { get; private set; }
+        public GameObject player { get; private set; }
+
+        public Vector3 lastSeenPosition { get; private set; }
+
         public EnemySight(GameObject gameObject) : base(gameObject)
         {
             fovAngle = DegreeToRadian(110f);
             reactionTime = 0.25f;
+
+            foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
+            {
+                if (item.physicLayer != Layer.Player) continue;
+                player = item;
+                break;
+            }
         }
 
         public override void Update()
@@ -47,10 +60,21 @@ namespace Insight.Scripts
                         {
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
-                                Debug.WriteLine("Player InSight");
+                                isPlayerSeen = true;
+                                lastSeenPosition = player.Transform.Position;
                             }
                         }
-                        
+
+                        timer = 0;
+                    }
+                    timer += Time.deltaTime;
+                }
+                else
+                {
+                    if (timer >= reactionTime)
+                    {
+                        isPlayerHeard = true;
+
                         timer = 0;
                     }
                     timer += Time.deltaTime;
@@ -60,6 +84,8 @@ namespace Insight.Scripts
 
         public override void OnTriggerExit(object source, CollisionEventArgs args)
         {
+            isPlayerHeard = false;
+            isPlayerSeen = false;
             timer = 0f;
         }
 

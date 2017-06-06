@@ -194,7 +194,7 @@ namespace Insight.Scenes
             enemy1 = new EnemyPrefab();
             enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
             
-            player.AddNewComponent<Rigidbody>();
+            //player.AddNewComponent<Rigidbody>();
 
             cameraPivot = new GameObject(player.Transform.Position, false);
 
