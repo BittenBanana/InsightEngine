@@ -28,6 +28,7 @@ namespace SkinnedModel
         AnimationClip currentClipValue;
         TimeSpan currentTimeValue;
         int currentKeyframe;
+        int actualKeyFrame;
 
 
         // Current animation transform matrices.
@@ -62,7 +63,7 @@ namespace SkinnedModel
         /// <summary>
         /// Starts decoding the specified animation clip.
         /// </summary>
-        public void StartClip(AnimationClip clip)
+        public void StartClip(AnimationClip clip, int actualKeyframe)
         {
             if (clip == null)
                 throw new ArgumentNullException("clip");
@@ -70,7 +71,7 @@ namespace SkinnedModel
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
             currentKeyframe = 0;
-
+            this.actualKeyFrame = actualKeyframe * 40;
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
         }
@@ -124,6 +125,7 @@ namespace SkinnedModel
 
             while (currentKeyframe < keyframes.Count)
             {
+
                 Keyframe keyframe = keyframes[currentKeyframe];
 
                 // Stop when we've read up to the current time position.
@@ -134,6 +136,13 @@ namespace SkinnedModel
                 boneTransforms[keyframe.Bone] = keyframe.Transform;
 
                 currentKeyframe++;
+
+                if(currentKeyframe > actualKeyFrame)
+                {
+                    currentKeyframe = 0;
+                    currentTimeValue = new TimeSpan();
+                    break;
+                }
             }
         }
 

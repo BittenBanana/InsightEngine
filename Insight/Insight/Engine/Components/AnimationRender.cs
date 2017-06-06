@@ -22,7 +22,7 @@ namespace Insight.Engine.Components
 
         public override void Load(ContentManager c)
         {
-            model = c.Load<Model>("Models/Konrads/Character/badassRunIdle");
+            model = c.Load<Model>("Models/Konrads/Character/postacRun");
             effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
@@ -34,7 +34,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip);
+            animationPlayer.StartClip(clip,24);
         }
 
 
