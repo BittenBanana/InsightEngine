@@ -17,7 +17,7 @@ namespace Insight.Engine.Prefabs
         GameObject rightDoorModel;
         GameObject frame;
 
-        GameObject triggerModel;
+        public GameObject triggerModel;
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
@@ -26,7 +26,7 @@ namespace Insight.Engine.Prefabs
             leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             frame = new GameObject(new Vector3(0, 0, 0), false);
-            triggerModel = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(2.7f, 0, -0.4f), false);
 
 
             wallModel.AddNewComponent<MeshRenderer>();
