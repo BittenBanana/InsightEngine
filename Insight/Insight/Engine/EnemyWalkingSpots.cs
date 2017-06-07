@@ -144,7 +144,7 @@ namespace Insight.Engine
                     destNode = node;
                 }
             }
-            Debug.WriteLine(destNode.nodeID);
+            //Debug.WriteLine(destNode.nodeID);
             return destNode.rootPoint;
         }
 
@@ -163,7 +163,7 @@ namespace Insight.Engine
                     destNode = node;
                 }
             }
-            Debug.WriteLine(destNode.nodeID);
+            //Debug.WriteLine(destNode.nodeID);
             return destNode.rootPoint;
         }
 

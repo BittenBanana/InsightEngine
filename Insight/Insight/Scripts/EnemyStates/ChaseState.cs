@@ -19,7 +19,7 @@ namespace Insight.Scripts.EnemyStates
         {
             timer = 0;
             wait = 15;
-            shootDistance = 1;
+            shootDistance = 5;
             Debug.WriteLine("Enter Chase State");
         }
 
@@ -28,7 +28,7 @@ namespace Insight.Scripts.EnemyStates
             if (!enemy.enemySight.isPlayerSeen)
             {
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
-                        enemy.enemySight.lastSeenPosition) > 0.1f)
+                        enemy.enemySight.lastSeenPosition) < 0.1f)
                 {
                     if (timer >= wait)
                     {
@@ -41,6 +41,11 @@ namespace Insight.Scripts.EnemyStates
                         timer = 0;
                     }
                     timer += Time.deltaTime;
+                }
+                else
+                {
+                    EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
+                        enemy.enemySight.lastSeenPosition, 0.05f, 0.1f);
                 }
 
             }
