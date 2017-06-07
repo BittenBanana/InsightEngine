@@ -11,9 +11,9 @@ namespace Insight.Engine.Prefabs
 {
     class Crate : Prefab
     {
-        GameObject crateModel;
+        public GameObject crateModel;
 
-        public override void Initialize(Vector3 position)
+        public override void Initialize(Vector3 position, Vector3 rotation)
         {
             prefabGameObjects = new List<GameObject>();
 
@@ -21,7 +21,7 @@ namespace Insight.Engine.Prefabs
             crateModel.AddNewComponent<MeshRenderer>();
 
             prefabGameObjects.Add(crateModel);
-            base.Initialize(position);
+            base.Initialize(position, rotation);
         }
 
         public override void LoadContent(ContentManager content)
@@ -29,6 +29,7 @@ namespace Insight.Engine.Prefabs
 
             crateModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.crate, 1.0f);
             crateModel.AddNewComponent<BoxCollider>();
+            crateModel.physicLayer = Layer.IgnoreRaycast;
 
         }
     }

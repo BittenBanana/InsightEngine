@@ -44,6 +44,7 @@ namespace Insight.Engine
         {
             for (int j = 0; j < dynamicObjects.Count; j++)
             {
+                
                 if (j + 1 < dynamicObjects.Count)
                     isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<Renderer>().GetMatrix(),
                         dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<Renderer>().GetMatrix());
@@ -67,7 +68,7 @@ namespace Insight.Engine
                         
                 }
 
-
+                
                 for (int k = j; k < staticObjects.Count; k++)
                 {
                     if (staticObjects[k].GetComponent<Renderer>() != null)
@@ -78,26 +79,29 @@ namespace Insight.Engine
                     }
                     if (isCollision)
                     {
-                        
-                        if(staticObjects[k].GetComponent<Collider>().IsTrigger && dynamicObjects[j].physicLayer != Layer.Enemy)
+                        if(staticObjects[k].GetComponent<Collider>() != null)
                         {
-                            ObjectColided += staticObjects[k].OnObjectColided;
-                            OnObjectColided(dynamicObjects[j]);
-                            ObjectColided -= staticObjects[k].OnObjectColided;
+                            if (staticObjects[k].GetComponent<Collider>().IsTrigger && dynamicObjects[j].physicLayer != Layer.Enemy)
+                            {
+                                ObjectColided += staticObjects[k].OnObjectColided;
+                                OnObjectColided(dynamicObjects[j]);
+                                ObjectColided -= staticObjects[k].OnObjectColided;
+                            }
+                            else
+                            {
+
+                                ObjectColided += dynamicObjects[j].OnObjectColided;
+                                OnObjectColided(staticObjects[k]);
+                                ObjectColided -= dynamicObjects[j].OnObjectColided;
+                            }
                         }
-                        else
-                        {
-                            ObjectColided += dynamicObjects[j].OnObjectColided;
-                            OnObjectColided(staticObjects[k]);
-                            ObjectColided -= dynamicObjects[j].OnObjectColided;
-                        }
-                        
-                        
+                                               
                     }
                 }
+                
             }
 
-
+            
 
 
             //for (int j = 0; j < MainScene.GetGameObjects().Count; j++)
