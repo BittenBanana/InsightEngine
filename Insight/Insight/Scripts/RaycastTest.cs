@@ -171,7 +171,7 @@ namespace Insight.Scripts
 
                         Effect e = SceneManager.Instance.Content.Load<Effect>("Shaders/PhongBlinnShader");
                         test.GetComponent<MeshRenderer>().Material = new DefaultMaterial(e);
-                        test.GetComponent<MeshRenderer>().Load(SceneManager.Instance.Content);
+                        test.GetComponent<MeshRenderer>().Load(SceneManager.Instance.Content,ContentModels.Instance.ball, 0.05f);
 
 
                         //Debug.WriteLine("Hit!" + " " + hit.collider.gameObject + " " + hit.distance);
