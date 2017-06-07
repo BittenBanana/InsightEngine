@@ -4,20 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SkinnedModel;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Insight.Engine.Components
 {
-    class AnimationRender : Renderer
+    public class AnimationRender : Renderer
     {
         //Model model;
         //Matrix[] boneTransformations;
 
-        Model model1;
-        Model model2;
         AnimationPlayer animationPlayer;
         //float scale;
-
         public AnimationRender(GameObject gameObject) : base(gameObject)
         {
 
@@ -26,9 +24,7 @@ namespace Insight.Engine.Components
 
         public override void Load(ContentManager c)
         {
-            model1 = c.Load<Model>("Models/Konrads/Character/postacIdleGun");
-            model2 = c.Load<Model>("Models/Konrads/Character/postacRunGun");
-            model = model2;
+            model = c.Load<Model>("Models/Konrads/Character/postacRunGun");
             effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
@@ -40,10 +36,10 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip,30);
+            animationPlayer.StartClip(clip,0, 14);
         }
 
-        public void Load(ContentManager c, String path)
+        public void Load(ContentManager c, String path, int frames)
         {
             model = c.Load<Model>(path);
             effect = Material.GetEffect();
@@ -57,7 +53,12 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip, 30);
+            animationPlayer.StartClip(clip, 0, frames);
+        }
+
+        public void SetFrames(int firstFrame, int lastFrame)
+        {
+            animationPlayer.SetFrames(firstFrame, lastFrame);
         }
 
         public override void Update()

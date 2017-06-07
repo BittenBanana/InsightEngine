@@ -194,7 +194,7 @@ namespace Insight.Scenes
         private float windowHeight;
 
         private Effect postEffect;
-
+        
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
@@ -212,8 +212,9 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
+            player.AddNewComponent<PlayerManager>();
             player.physicLayer = Layer.Player;
-
+            
             enemy1 = new EnemyPrefab();
             enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
             
@@ -711,7 +712,8 @@ namespace Insight.Scenes
 
             #region Effects 
 
-            //postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
+            postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
+            postEffect.Parameters["BloodTexture"]?.SetValue(content.Load<Texture2D>("Sprites/blood"));
 
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);
@@ -750,7 +752,13 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
 
             //player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
-            player.GetComponent<AnimationRender>().Load(content, "Models/Konrads/Character/postacRunGun");
+            player.GetComponent<AnimationRender>().Load(content, "Models/Konrads/Character/postacRunGun", 30);
+            //playerAnimRun.Load(content, "Models/Konrads/Character/postacRunGun", 30);
+            //playerAnimIdle.Load(content, "Models/Konrads/Character/postacIdleGun", 60);
+            player.GetComponent<AnimationRender>().SetFrames(0, 1);
+
+            //player.ReplaceAnimationRendrer(playerAnimIdle);
+
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
@@ -954,16 +962,21 @@ namespace Insight.Scenes
             }
             colliderManager.Update();
 
+            float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
+                1 - ((float) player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
+            postEffect.Parameters["colorPercentage"]?.SetValue(lerped);
+
             KeyboardState keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.LeftControl))
             {
-                ui.ChangeSpriteOpacity("blood", 0.05f);
+                player.GetComponent<PlayerManager>().GotDamage(20);
+                //ui.ChangeSpriteOpacity("blood", 0.05f);
             }
 
             if (keyState.IsKeyDown(Keys.N))
             {
-                ui.ChangeSpriteOpacity("blood", 0.05f);
+                //ui.ChangeSpriteOpacity("blood", 0.05f);
             }
 
             ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));

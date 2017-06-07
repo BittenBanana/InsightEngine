@@ -13,6 +13,22 @@ namespace Insight.Scripts
 {
     class BoxController : BaseScript
     {
+        enum KeyState
+        {
+            Pressed,
+            Released,
+            None
+        }
+        enum MovementState
+        {
+            IsRunning,
+            IsIdle,
+            SetRunning,
+            SetIdle,
+            Busy
+        }
+        KeyState kState = KeyState.None;
+        MovementState mState = MovementState.IsIdle;
         private MouseState s;
         private Vector2 lastMousePos;
         public BoxController(GameObject gameObject) : base(gameObject)
@@ -38,6 +54,9 @@ namespace Insight.Scripts
                 gameObject.Transform.Rotation.Y -= gameObject.rotationSpeed * Math.Abs(s.Position.X - lastMousePos.X);
                 gameObject.Transform.Rotate(Vector3.UnitY, -gameObject.rotationSpeed);
             }
+
+            if (kState == KeyState.Pressed)
+                kState = KeyState.Released;
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
                 //gameObject.Transform.Position.X += gameObject.velocityX;
@@ -47,6 +66,15 @@ namespace Insight.Scripts
                 gameObject.Forward = true;
                 gameObject.Backward = false;
                 gameObject.IsMoving = true;
+
+                kState = KeyState.Pressed;
+
+                if(mState == MovementState.IsIdle)
+                {
+                    this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 30);
+                        mState = MovementState.IsRunning;
+                }
+
             }
             if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
             {
@@ -57,6 +85,14 @@ namespace Insight.Scripts
                 gameObject.Forward = false;
                 gameObject.Backward = true;
                 gameObject.IsMoving = true;
+
+                kState = KeyState.Pressed;
+
+                if (mState == MovementState.IsIdle)
+                {
+                    this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 30);
+                        mState = MovementState.IsRunning;
+                }
             }
 
             if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
@@ -87,6 +123,14 @@ namespace Insight.Scripts
             gameObject.rotationSpeed = .01f;
 
             Mouse.SetPosition(SceneManager.Instance.device.GraphicsDevice.Viewport.Width /2, s.Position.Y);
+
+            if(kState == KeyState.Released && mState == MovementState.IsRunning)
+            {
+                this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 1);
+                kState = KeyState.None;
+                mState = MovementState.IsIdle;
+            }
+
             base.Update();
         }
 
