@@ -18,8 +18,8 @@ namespace Insight.Scripts.EnemyStates
         public override void Execute(EnemyAI enemy)
         {
             //if(EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position, EnemyWalkingSpots.getInstance().targetDestination) > 0.1f)
-            enemy.gameObject.Transform.Position = EnemyWalkingSpots.getInstance().MoveToDestination(enemy.gameObject.Transform.Position,
-                enemy.enemySight.lastSeenPosition, 0.1f);
+            EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
+                enemy.enemySight.lastSeenPosition, 0.05f, 0.1f);
             if (enemy.enemySight.isPlayerHeard && !enemy.enemySight.isPlayerSeen)
             {
                 enemy.ChangeState(new CheckState());

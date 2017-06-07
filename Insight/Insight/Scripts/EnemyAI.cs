@@ -38,10 +38,12 @@ namespace Insight.Scripts
         /// May be set for Stand State default is gameObject.Transform.Position
         /// </summary>
         public Vector3 standPosition { get; set; }
+        public Vector3 defaultRotation { get; private set; }
 
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
             standPosition = gameObject.Transform.Position;
+            defaultRotation = gameObject.Transform.Rotation;
             health = 100;
         }
 
