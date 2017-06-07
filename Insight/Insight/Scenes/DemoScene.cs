@@ -934,15 +934,15 @@ namespace Insight.Scenes
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
-            ui.AddSprite("Sprites/GUI/bg", "bg", new Vector2(30, windowHeight - 200), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/oko_nieaktywne", "oko_na", new Vector2(30, windowHeight - 200), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/marker_niekatywny", "marker_na", new Vector2(30, windowHeight - 200), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/agresja_nieaktywna", "agresja_na", new Vector2(30, windowHeight - 200), Color.White, 1);
+            ui.AddSprite("Sprites/GUI/bg", "bg", new Vector2(30, windowHeight - 100), Color.White, 1);
+            ui.AddSprite("Sprites/GUI/oko_nieaktywne", "oko_na", new Vector2(30, windowHeight - 100), Color.White, 1);
+            ui.AddSprite("Sprites/GUI/marker_niekatywny", "marker_na", new Vector2(30, windowHeight - 100), Color.White, 1);
+            ui.AddSprite("Sprites/GUI/agresja_nieaktywna", "agresja_na", new Vector2(30, windowHeight - 100), Color.White, 1);
 
-            ui.AddSprite("Sprites/GUI/oko_aktywne", "oko_a", new Vector2(30, windowHeight - 200), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/marker_atywny", "marker_a", new Vector2(30, windowHeight - 200), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/agresja_aktywna", "agresja_a", new Vector2(30, windowHeight - 200), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/przeslonka", "przeslonka", new Vector2(30, windowHeight - 200), Color.White, 1);
+            ui.AddSprite("Sprites/GUI/oko_aktywne", "oko_a", new Vector2(30, windowHeight - 100), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/marker_atywny", "marker_a", new Vector2(30, windowHeight - 100), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/agresja_aktywna", "agresja_a", new Vector2(30, windowHeight - 100), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/przeslonka", "przeslonka", new Vector2(30, windowHeight - 100), Color.White, 1);
 
 
 

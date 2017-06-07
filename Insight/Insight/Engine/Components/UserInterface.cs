@@ -100,7 +100,7 @@ namespace Insight.Engine.Components
 
             foreach (KeyValuePair<string, Sprite> pair in sprites)
             {
-                spriteBatch.Draw(pair.Value.spriteTexture, pair.Value.position, pair.Value.color * pair.Value.opacity);
+                spriteBatch.Draw(pair.Value.spriteTexture, pair.Value.position, null, pair.Value.color * pair.Value.opacity, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
             }
 
             foreach (KeyValuePair<string, FontText> pair in texts)
