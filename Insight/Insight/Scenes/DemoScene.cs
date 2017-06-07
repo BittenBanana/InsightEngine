@@ -23,9 +23,6 @@ namespace Insight.Scenes
 
         private RenderTarget2D sceneRenderTarget2D;
 
-        static String floorPrefab = "floor5x5";
-        //GameObject floor1;
-        TestPrefab testPrefab;
         Corridor corridor;
         Corridor corridor2;
         Corridor corridor3;
@@ -195,7 +192,7 @@ namespace Insight.Scenes
             pointLight1.GetComponent<Light>().Attenuation = 10;
 
             player = new GameObject(new Vector3(2, 1.0f, 7), true);
-            player.AddNewComponent<MeshRenderer>();
+            player.AddNewComponent<AnimationRender>();
             player.physicLayer = Layer.Player;
 
             enemy1 = new EnemyPrefab();
@@ -677,8 +674,8 @@ namespace Insight.Scenes
             //floor1.GetComponent<MeshRenderer>().Load(content, "floor5x5", 1.0f);
             //testPrefab.LoadContent(content);
 
-            player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
-
+            //player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
+            player.GetComponent<AnimationRender>().Load(content, "Models/Konrads/Character/postacRunGun");
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
