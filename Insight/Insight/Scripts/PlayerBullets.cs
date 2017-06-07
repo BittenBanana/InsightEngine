@@ -21,7 +21,7 @@ namespace Insight.Scripts
         public PlayerBullets(GameObject gameObject) : base(gameObject)
         {
             aggresiveBullet = false;
-            transmitterBullet = false;
+            transmitterBullet = true;
             enemySightBullet = false;
         }
 

@@ -24,7 +24,7 @@ namespace Insight.Scripts.EnemyStates
             wait = 15;
 
             shootTimer = 1;
-            shootWait = 0.5f;
+            shootWait = 0.75f;
             shootDistance = 5;
             Debug.WriteLine("Enter Chase State");
         }
@@ -55,10 +55,10 @@ namespace Insight.Scripts.EnemyStates
                 }
 
             }
-            else if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.enemySight.lastSeenPosition) > 0.1f)
+            else if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.enemySight.lastHeardPosition) > 0.1f)
             {
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
-                    enemy.enemySight.lastSeenPosition, 0.05f, 0.1f);
+                    enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
 
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
                         enemy.enemySight.player.Transform.Position) < shootDistance)

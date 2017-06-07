@@ -44,7 +44,7 @@ namespace Insight.Engine.Prefabs
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
 
-            enemySightTrigger.LoadContent(content, ContentModels.Instance.ball, 2f);
+            enemySightTrigger.LoadContent(content, ContentModels.Instance.ball, 1.5f);
             enemySightTrigger.AddNewComponent<SphereCollider>();
             enemySightTrigger.GetComponent<SphereCollider>().IsTrigger = true;
             enemySightTrigger.AddNewComponent<EnemySight>();
