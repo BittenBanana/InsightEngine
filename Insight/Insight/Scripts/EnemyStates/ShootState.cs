@@ -33,7 +33,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 if (hit.collider.gameObject.physicLayer == Layer.Player)
                 {
-                    hit.collider.gameObject.GetComponent<PlayerManager>().GotDamage(35);
+                    hit.collider.gameObject.GetComponent<PlayerManager>().GotDamage(random.Next(10, 25));
                 }
             }
             enemy.ChangeState(enemy.previousState);

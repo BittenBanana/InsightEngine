@@ -34,7 +34,7 @@ namespace Insight.Scripts.EnemyStates
             if (!enemy.enemySight.isPlayerSeen)
             {
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
-                        enemy.enemySight.lastSeenPosition) < 0.1f)
+                        enemy.enemySight.lastHeardPosition) < 0.1f)
                 {
                     if (timer >= wait)
                     {
@@ -51,7 +51,7 @@ namespace Insight.Scripts.EnemyStates
                 else
                 {
                     EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
-                        enemy.enemySight.lastSeenPosition, 0.05f, 0.1f);
+                        enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
                 }
 
             }
