@@ -24,7 +24,7 @@ namespace Insight.Scripts
         public EnemySight enemySight { get; set; }
 
         private EnemyAIState currentState;
-        private EnemyAIState firstState;
+        public EnemyAIState defaultState { get; private set; }
 
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
@@ -34,7 +34,7 @@ namespace Insight.Scripts
         public override void Update()
         {
             currentState?.Execute(this);
-            Debug.WriteLine(currentState);
+            //Debug.WriteLine(currentState);
             base.Update();
         }
 
@@ -48,7 +48,7 @@ namespace Insight.Scripts
         public void SetFirstState(EnemyAIState state)
         {
             currentState = state;
-            firstState = state;
+            defaultState = state;
         }
 
         public void Hit(int dmg)

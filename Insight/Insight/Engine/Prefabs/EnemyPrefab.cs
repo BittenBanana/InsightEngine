@@ -22,12 +22,12 @@ namespace Insight.Engine.Prefabs
             enemy = new GameObject(new Vector3(0, 0, 0), false);
             enemy.AddNewComponent<AnimationRender>();
 
-            
+
 
             enemySightTrigger = new GameObject(enemy.Transform.Position, false);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
-            
+
             prefabGameObjects.Add(enemy);
             prefabGameObjects.Add(enemySightTrigger);
             base.Initialize(position);
@@ -41,15 +41,18 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
             enemy.AddNewComponent<EnemyAI>();
-            enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
+
             enemySightTrigger.LoadContent(content, ContentModels.Instance.ball, 1f);
             enemySightTrigger.AddNewComponent<SphereCollider>();
             enemySightTrigger.GetComponent<SphereCollider>().IsTrigger = true;
             enemySightTrigger.AddNewComponent<EnemySight>();
             enemySightTrigger.GetComponent<EnemySight>().followTransform = enemy.Transform;
             enemySightTrigger.physicLayer = Layer.DispenserTrigger;
+
+            enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
+            enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
             base.LoadContent(content);
         }
     }

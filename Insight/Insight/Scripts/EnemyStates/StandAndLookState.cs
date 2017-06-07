@@ -15,8 +15,11 @@ namespace Insight.Scripts.EnemyStates
 
         private float delay;
 
+        private bool left;
+
         public override void EnterState(EnemyAI enemy)
         {
+            Debug.WriteLine("Enter Stand State");
             timer = 0;
             delay = 1;
         }
@@ -25,10 +28,26 @@ namespace Insight.Scripts.EnemyStates
         {
             if (timer >= delay)
             {
-                enemy.gameObject.Transform.Rotation += new Vector3(0,1,0) * Time.deltaTime;
-                Debug.WriteLine(enemy.gameObject.Transform.forward);
-                timer = 0;
+                if (timer >= 2 * delay)
+                {
+                    timer = 0;
+                }
+                else
+                {
+                    if (left)
+                    {
+                        enemy.gameObject.Transform.Rotation += new Vector3(0, 1, 0) * Time.deltaTime;
+                        left = false;
+                    }
+                    else
+                    {
+                        enemy.gameObject.Transform.Rotation -= new Vector3(0, 1, 0) * Time.deltaTime;
+                        left = true;
+                    }
+                }
+
             }
+            timer += Time.deltaTime;
 
             if (enemy.health <= 0)
             {
@@ -39,11 +58,15 @@ namespace Insight.Scripts.EnemyStates
             {
                 enemy.ChangeState(new ChaseState());
             }
+            else if (enemy.enemySight.isPlayerHeard)
+            {
+                enemy.ChangeState(new CheckState());
+            }
         }
 
         public override void Exit(EnemyAI enemy)
         {
-            
+            Debug.WriteLine("Exit Stand State");
         }
     }
 }
