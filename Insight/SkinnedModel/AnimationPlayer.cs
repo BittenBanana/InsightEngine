@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 #endregion
 
 namespace SkinnedModel
@@ -28,7 +29,8 @@ namespace SkinnedModel
         AnimationClip currentClipValue;
         TimeSpan currentTimeValue;
         int currentKeyframe;
-        int actualKeyFrame;
+        int firstFrame;
+        int lastFrame;
 
 
         // Current animation transform matrices.
@@ -63,7 +65,7 @@ namespace SkinnedModel
         /// <summary>
         /// Starts decoding the specified animation clip.
         /// </summary>
-        public void StartClip(AnimationClip clip, int actualKeyframe)
+        public void StartClip(AnimationClip clip, int firstFrame,int lastFrame)
         {
             if (clip == null)
                 throw new ArgumentNullException("clip");
@@ -71,11 +73,21 @@ namespace SkinnedModel
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
             currentKeyframe = 0;
-            this.actualKeyFrame = actualKeyframe * 40;
+            this.firstFrame = 14*40;
+            this.lastFrame = 30 * 40;
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
         }
 
+        public void SetFrames(int first, int last)
+        {
+            this.firstFrame = first * 40;
+            this.lastFrame = last * 40;
+            currentKeyframe = firstFrame;
+            currentTimeValue = new TimeSpan();
+
+            Debug.WriteLine(firstFrame + " " + lastFrame);
+        }
 
         /// <summary>
         /// Advances the current animation position.
@@ -126,7 +138,7 @@ namespace SkinnedModel
             while (currentKeyframe < keyframes.Count)
             {
 
-                Keyframe keyframe = keyframes[currentKeyframe];
+                Keyframe keyframe = keyframes[currentKeyframe+firstFrame];
 
                 // Stop when we've read up to the current time position.
                 if (keyframe.Time > currentTimeValue)
@@ -137,7 +149,7 @@ namespace SkinnedModel
 
                 currentKeyframe++;
 
-                if(currentKeyframe > actualKeyFrame)
+                if(currentKeyframe > lastFrame - firstFrame)
                 {
                     currentKeyframe = 0;
                     currentTimeValue = new TimeSpan();
