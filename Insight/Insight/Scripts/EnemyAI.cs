@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 
@@ -51,6 +52,10 @@ namespace Insight.Scripts
 
         public override void Update()
         {
+            if (health <= 0 && !(currentState is DeathState))
+            {
+                ChangeState(new DeathState());
+            }
             currentState?.Execute(this);
             //Debug.WriteLine(currentState);
             base.Update();

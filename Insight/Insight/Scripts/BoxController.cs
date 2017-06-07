@@ -94,7 +94,27 @@ namespace Insight.Scripts
                         mState = MovementState.IsRunning;
                 }
             }
-            //this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 1);
+
+            if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
+            {
+                //gameObject.Transform.Position.X += gameObject.velocityX;
+                //gameObject.Transform.Position.Z += gameObject.velocityZ;
+                gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityZ);
+                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityX);
+                gameObject.Forward = true;
+                gameObject.Backward = false;
+                gameObject.IsMoving = true;
+            }
+            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
+            {
+                //gameObject.Transform.Position.X -= gameObject.velocityX;
+                //gameObject.Transform.Position.Z -= gameObject.velocityZ;
+                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityZ);
+                gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityX);
+                gameObject.Forward = false;
+                gameObject.Backward = true;
+                gameObject.IsMoving = true;
+            }
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
