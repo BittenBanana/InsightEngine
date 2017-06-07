@@ -43,7 +43,7 @@ namespace Insight.Scripts.EnemyStates
             }
             else
             {
-                enemy.ChangeState(enemy.previousState);
+                enemy.ChangeState(enemy.defaultState);
             }
         }
 

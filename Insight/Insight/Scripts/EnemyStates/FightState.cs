@@ -26,7 +26,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health > 0)
                 {
-                    enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(10);
+                    enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(25);
                 }
                 
                 timer = 0;
