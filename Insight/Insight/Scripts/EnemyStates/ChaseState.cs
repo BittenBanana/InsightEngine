@@ -60,6 +60,7 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Exit(EnemyAI enemy)
         {
+            enemy.previousState = this;
             Debug.WriteLine("Exit Chase State");
         }
     }

@@ -27,7 +27,7 @@ namespace Insight.Scripts
         public Vector3? markerPosition { get; set; }
 
         private EnemyAIState currentState;
-        public EnemyAIState previousState { get; private set; }
+        public EnemyAIState previousState { get; set; }
         public EnemyAIState defaultState { get; private set; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Insight.Scripts
 
         public void ChangeState(EnemyAIState newState)
         {
-            previousState = currentState;
+            //previousState = currentState;
             currentState.Exit(this);
             currentState = newState;
             currentState.EnterState(this);
