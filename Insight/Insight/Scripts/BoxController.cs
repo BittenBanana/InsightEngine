@@ -39,7 +39,13 @@ namespace Insight.Scripts
 
         public override void Update()
         {
+            Debug.WriteLine((float)Math.Sin(gameObject.Transform.Rotation.Y) + " Sinus");
+            Debug.WriteLine((float)Math.Cos(gameObject.Transform.Rotation.Y) + " Cosinus");
             gameObject.IsMoving = false;
+            gameObject.Right = false;
+            gameObject.Left = false;
+            gameObject.Forward = false;
+            gameObject.Backward = false;
             KeyboardState keyState = Keyboard.GetState();
             s = Mouse.GetState();
 
@@ -64,7 +70,6 @@ namespace Insight.Scripts
                 gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityX);
                 gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityZ);
                 gameObject.Forward = true;
-                gameObject.Backward = false;
                 gameObject.IsMoving = true;
 
                 kState = KeyState.Pressed;
@@ -82,7 +87,6 @@ namespace Insight.Scripts
                 //gameObject.Transform.Position.Z -= gameObject.velocityZ;
                 gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityX);
                 gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityZ);
-                gameObject.Forward = false;
                 gameObject.Backward = true;
                 gameObject.IsMoving = true;
 
@@ -101,9 +105,10 @@ namespace Insight.Scripts
                 //gameObject.Transform.Position.Z += gameObject.velocityZ;
                 gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityZ);
                 gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityX);
-                gameObject.Forward = true;
-                gameObject.Backward = false;
-                gameObject.IsMoving = true;
+                //gameObject.Forward = true;
+                //gameObject.Backward = false;
+                //gameObject.IsMoving = true;
+                gameObject.Left = true;
             }
             if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
             {
@@ -111,9 +116,10 @@ namespace Insight.Scripts
                 //gameObject.Transform.Position.Z -= gameObject.velocityZ;
                 gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityZ);
                 gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityX);
-                gameObject.Forward = false;
-                gameObject.Backward = true;
-                gameObject.IsMoving = true;
+                //gameObject.Forward = false;
+                //gameObject.Backward = true;
+                //gameObject.IsMoving = true;
+                gameObject.Right = true;
             }
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {

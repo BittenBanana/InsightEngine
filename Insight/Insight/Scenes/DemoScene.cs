@@ -1055,7 +1055,7 @@ namespace Insight.Scenes
                 //if(go.GetComponent<BoxCollider>() != null)
                 //go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
             }
-            EnemyWalkingSpots.getInstance().Draw();
+            //EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)
                 postProcessRenderer.Draw(sceneRenderTarget2D);
 
