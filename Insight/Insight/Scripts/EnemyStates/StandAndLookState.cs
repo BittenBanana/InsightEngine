@@ -38,7 +38,7 @@ namespace Insight.Scripts.EnemyStates
                 }
                 if (timer >= delay)
                 {
-                    if (timer >= 1.5f * delay)
+                    if (timer >= delay + 1)
                     {
                         timer = 0;
                         if (left) left = false;
@@ -65,11 +65,6 @@ namespace Insight.Scripts.EnemyStates
             {
                 isRotationReset = false;
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
-            }
-
-            if (enemy.health <= 0)
-            {
-                enemy.ChangeState(new DeathState());
             }
 
             if (enemy.enemySight.isPlayerSeen)
