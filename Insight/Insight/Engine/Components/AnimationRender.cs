@@ -36,7 +36,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip,0, 14);
+            animationPlayer.StartClip(clip,0, 31);
         }
 
         public void Load(ContentManager c, String path, int frames)

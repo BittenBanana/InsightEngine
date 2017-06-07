@@ -41,6 +41,14 @@ namespace Insight.Engine.Components
             this.scale = scale;
         }
 
+        public void Load( Model model, float scale)
+        {
+            this.model = model;
+            generateTags();
+            effect = Material.GetEffect();
+            this.scale = scale;
+        }
+
 
 
         //public Model getModel()
