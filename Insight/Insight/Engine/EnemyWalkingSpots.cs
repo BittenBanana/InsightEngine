@@ -198,12 +198,27 @@ namespace Insight.Engine
         public void MoveGameObjectToDestination(GameObject gObject, Vector3 targetDestination, float speed, float stopValue)
         {
             Vector3 nearest = gObject.Transform.Position;
+            Vector3 direction = new Vector3();
+            float angle = 0;
             if (Vector3.Distance(gObject.Transform.Position, targetDestination) <= stopValue)
+            {
+                //Face player
+                direction = SceneManager.Instance.currentScene.player.Transform.Position - gObject.Transform.Position;
+                angle = (float)(Math.Atan2(direction.X, direction.Z));
+                gObject.Transform.Rotation.Y = angle;
                 return;
+            }
+
             if (Vector3.Distance(nearest, gObject.Transform.Position) <= 0.1f)
                 nearest = findNearestPath(gObject.Transform.Position, targetDestination);
             if (Vector3.Distance(nearest, gObject.Transform.Position) > 0.1f)
+            {
+                direction = nearest - gObject.Transform.Position;
+                angle = (float)(Math.Atan2(direction.X, direction.Z));
                 gObject.Transform.Position = VectorHelper.MoveTowards(gObject.Transform.Position, nearest, speed);
+             }
+            gObject.Transform.Rotation.Y = angle;
+
         }
 
         public float DistanceFromDestination(Vector3 currentPosition, Vector3 targetDestination)

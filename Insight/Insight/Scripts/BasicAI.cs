@@ -72,7 +72,7 @@ namespace Insight.Scripts
             {
                 //Debug.WriteLine(EnemyWalkingSpots.getInstance().DistanceFromDestination(this.gameObject.Transform.Position, destinationPosition));
 
-                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(gameObject, destinationPosition, 0.05f, 3.0f);
+                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(gameObject, destinationPosition, 0.05f, 2.0f);
 
             }
         }

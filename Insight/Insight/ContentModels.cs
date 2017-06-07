@@ -49,6 +49,7 @@ namespace Insight
         public Model floor_5x5_box { get; private set; }
         public Model floorPlane { get; private set; }
         public Model stairs { get; private set; }
+        public Model stairsCollider { get; private set; }
         public Model straight { get; private set; }
         public Model straight_rotated { get; private set; }
         public Model w_3x4 { get; private set; }
@@ -73,6 +74,9 @@ namespace Insight
         public Model triggerbox { get; private set; }
 
         public Model superBoxHero { get; private set; }
+        public Model crate { get; private set; }
+        public Model desk2Monitors { get; private set; }
+        public Model intercom { get; private set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -104,6 +108,7 @@ namespace Insight
             floor_5x5_box = content.Load<Model>("Models/Konrads/Enviroment/floor-5x5-box");
             floorPlane = content.Load<Model>("Models/Konrads/Enviroment/floorPlane");
             stairs = content.Load<Model>("Models/Konrads/Enviroment/stairs");
+            stairsCollider = content.Load<Model>("Models/Konrads/Enviroment/stairs-col");
             straight = content.Load<Model>("Models/Konrads/Enviroment/straight");
             straight_rotated = content.Load<Model>("Models/Konrads/Enviroment/straight-rotated");
             w_3x4 = content.Load<Model>("Models/Konrads/Enviroment/w-3x4");
@@ -127,6 +132,9 @@ namespace Insight
             dispensertrigger = content.Load<Model>("Models/dispensertrigger");
             triggerbox = content.Load<Model>("Models/triggerbox");
             superBoxHero = content.Load<Model>("Models/Konrads/Character/superBoxHero");
+            crate = content.Load<Model>("Models/Konrads/Enviroment/crate");
+            desk2Monitors = content.Load<Model>("Models/Konrads/Enviroment/desk-2monitors");
+            intercom = content.Load<Model>("Models/Konrads/Enviroment/intercom");
         }
     }
 }
