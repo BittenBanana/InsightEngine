@@ -103,17 +103,11 @@ namespace Insight.Scripts
                 {
                     case PlayerBullets.Bullets.Agressive:
                         gameObject.GetComponent<PlayerBullets>().aggresiveBullet = false;
-                        if (gameObject.GetComponent<PlayerBullets>().transmitterBullet)
-                        {
-                            currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
-                        }
+                        currentBulletLoaded = null;
                         break;
                     case PlayerBullets.Bullets.Transmitter:
                         gameObject.GetComponent<PlayerBullets>().transmitterBullet = false;
-                        if (gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
-                        {
-                            currentBulletLoaded = PlayerBullets.Bullets.Agressive;
-                        }
+                        currentBulletLoaded = null;
                         break;
                 }
                 isPressed = true;

@@ -33,7 +33,11 @@ namespace Insight.Engine
         public event EventHandler<CollisionEventArgs> ExitCollisionActivated;
         public bool Forward { get; set; }
         public bool Backward { get; set; }
+        public bool Right { get; set; }
+        public bool Left { get; set; }
         public bool IsMoving { get; set; }
+        public bool IsRotating { get; set; }
+        public Vector3 nextPosition;
 
         //temp
         public bool isCube;
@@ -45,6 +49,7 @@ namespace Insight.Engine
             components.Add(Transform);
             this.isDynamic = isDynamic;
             rotationSpeed = .05f;
+            nextPosition = new Vector3(0);
         }
         public GameObject(Vector3 position, bool isDynamic)
         {
@@ -52,7 +57,7 @@ namespace Insight.Engine
             Transform = new Transform(this, position);
             components.Add(Transform);
             this.isDynamic = isDynamic;
-
+            nextPosition = new Vector3(0);
 
         }
 
@@ -111,6 +116,8 @@ namespace Insight.Engine
             {
                 item.Update();
             }
+
+            
         }
 
         public void Draw(Camera camera)
@@ -127,6 +134,8 @@ namespace Insight.Engine
 
         public void OnObjectColided(object source, CollisionEventArgs args)
         {
+            nextPosition.X = Transform.Position.X + 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+            nextPosition.Z = Transform.Position.Z + 0.1f * (float)Math.Cos(Transform.Rotation.Y);
             velocityX = 0;
             velocityZ = 0;
             collision = true;
@@ -149,9 +158,9 @@ namespace Insight.Engine
                             Transform.Position.X -= 0.1f * (float)Math.Sin(Transform.Rotation.Y);
                             Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             //rotationSpeed = 0;
-                        }   
-                    
-                    
+                        }
+
+
 
                         if (Backward)
                         {
@@ -159,6 +168,56 @@ namespace Insight.Engine
                             Transform.Position.Z += 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             //rotationSpeed = 0;
                         }
+
+                        if (Left)
+                        {
+                            
+
+                            if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f) 
+                            {
+                                Transform.Position.X += 0.1f;
+                            }
+                            else if((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
+                            {
+                                Transform.Position.Z += 0.1f;
+                            }
+                            else if((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
+                            {
+                                Transform.Position.Z -= 0.1f;
+                            }
+                            else
+                            {
+                                Transform.Position.X -= 0.1f;
+                            }
+
+                            //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                            rotationSpeed = 0;
+                        }
+
+                        if (Right)
+                        {
+                            if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f)
+                            {
+                                Transform.Position.X -= 0.1f;
+                            }
+                            else if ((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
+                            {
+                                Transform.Position.Z -= 0.1f;
+                            }
+                            else if ((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
+                            {
+                                Transform.Position.Z += 0.1f;
+                            }
+                            else
+                            {
+                                Transform.Position.X += 0.1f;
+                            }
+                            
+                            //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                            rotationSpeed = 0;
+                        }
+
+                        //Transform.Position = nextPosition - Transform.Position;
 
                     }
                 }

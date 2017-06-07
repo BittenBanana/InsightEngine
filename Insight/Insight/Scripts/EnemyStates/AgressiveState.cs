@@ -20,6 +20,7 @@ namespace Insight.Scripts.EnemyStates
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
                 if(item.physicLayer != Layer.Enemy && item.physicLayer != Layer.Player) continue;
+                if(item == enemy.gameObject) continue;
                 if (enemy.nearestEnemyPosition == null)
                 {
                     enemy.nearestEnemyPosition = item;
@@ -47,8 +48,11 @@ namespace Insight.Scripts.EnemyStates
             }
             else
             {
-                if(enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
+                if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
+                {
+                    enemy.nearestEnemyPosition.GetComponent<EnemyAI>().nearestEnemyPosition = enemy.gameObject;
                     enemy.nearestEnemyPosition.GetComponent<EnemyAI>().ChangeState(new FightState());
+                }
                 enemy.ChangeState(new FightState());
             }
         }
