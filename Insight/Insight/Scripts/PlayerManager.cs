@@ -17,7 +17,8 @@ namespace Insight.Scripts
 
         public void GotDamage(int dmg)
         {
-            health -= dmg;
+            if(health > 0)
+                health -= dmg;
         }
     }
 }

@@ -52,10 +52,6 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            if (health <= 0 && !(currentState is DeathState))
-            {
-                ChangeState(new DeathState());
-            }
             currentState?.Execute(this);
             //Debug.WriteLine(currentState);
             base.Update();
@@ -78,7 +74,10 @@ namespace Insight.Scripts
 
         public void Hit(int dmg)
         {
-            health -= dmg;
+            if (health > 0)
+                health -= dmg;
+            else
+                ChangeState(new DeathState());
         }
     }
 }

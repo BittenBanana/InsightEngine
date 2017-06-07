@@ -193,6 +193,7 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(2, 1.0f, 7), true);
             player.AddNewComponent<AnimationRender>();
+            player.AddNewComponent<PlayerManager>();
             player.physicLayer = Layer.Player;
             
             enemy1 = new EnemyPrefab();
@@ -867,16 +868,21 @@ namespace Insight.Scenes
             }
             colliderManager.Update();
 
+            float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
+                1 - ((float) player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
+            postEffect.Parameters["colorPercentage"]?.SetValue(lerped);
+
             KeyboardState keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.LeftControl))
             {
-                ui.ChangeSpriteOpacity("blood", 0.05f);
+                player.GetComponent<PlayerManager>().GotDamage(20);
+                //ui.ChangeSpriteOpacity("blood", 0.05f);
             }
 
             if (keyState.IsKeyDown(Keys.N))
             {
-                ui.ChangeSpriteOpacity("blood", 0.05f);
+                //ui.ChangeSpriteOpacity("blood", 0.05f);
             }
 
             ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
