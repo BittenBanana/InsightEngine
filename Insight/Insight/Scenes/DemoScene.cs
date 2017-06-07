@@ -636,7 +636,8 @@ namespace Insight.Scenes
 
             #region Effects 
 
-            //postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
+            postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
+            postEffect.Parameters["BloodTexture"]?.SetValue(content.Load<Texture2D>("Sprites/blood"));
 
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);

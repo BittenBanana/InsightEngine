@@ -1,10 +1,10 @@
 ﻿#if OPENGL
-	#define SV_POSITION POSITION
-	#define VS_SHADERMODEL vs_3_0
-	#define PS_SHADERMODEL ps_3_0
+#define SV_POSITION POSITION
+#define VS_SHADERMODEL vs_3_0
+#define PS_SHADERMODEL ps_3_0
 #else
-	#define VS_SHADERMODEL vs_4_0_level_9_1
-	#define PS_SHADERMODEL ps_4_0_level_9_1
+#define VS_SHADERMODEL vs_4_0_level_9_1
+#define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
 
 //------------------------------ TEXTURE PROPERTIES ----------------------------
@@ -22,6 +22,20 @@ sampler TextureSampler = sampler_state
     mipfilter = linear;
 };
 
+texture2D BloodTexture;
+
+sampler BloodSampler = sampler_state
+{
+    texture = <BloodTexture>;
+    addressU = wrap;
+    addressV = wrap;
+    minfilter = anisotropic;
+    magfilter = anisotropic;
+    mipfilter = linear;
+};
+
+float colorPercentage = 0;
+
 struct VertexShaderOutput
 {
     float4 Position : SV_POSITION;
@@ -32,11 +46,16 @@ struct VertexShaderOutput
 float4 PixelShaderFunction(VertexShaderOutput i) : COLOR0
 {
     float4 color = tex2D(TextureSampler, i.TextureCoordinates);
-    float value = (color.r + color.g + color.b) / 3;
-    color.r = value;
-    color.g = value;
-    color.b = value;
- 
+    float4 blood = tex2D(BloodSampler, i.TextureCoordinates);
+    float3 value;
+
+    float invColorPercentage = 1 - colorPercentage;
+
+    value.r = (color.r * invColorPercentage + blood.r * colorPercentage);
+    value.g = (color.g * invColorPercentage + blood.g * colorPercentage);
+    value.b = (color.b * invColorPercentage + blood.b * colorPercentage);
+    color.rgb = value;
+    color.a = 1;
     return color;
 }
  
