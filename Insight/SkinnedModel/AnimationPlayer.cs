@@ -138,7 +138,7 @@ namespace SkinnedModel
             while (currentKeyframe < keyframes.Count)
             {
 
-                Keyframe keyframe = keyframes[currentKeyframe+firstFrame];
+                Keyframe keyframe = keyframes[currentKeyframe];
 
                 // Stop when we've read up to the current time position.
                 if (keyframe.Time > currentTimeValue)
