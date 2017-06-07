@@ -9,14 +9,33 @@ namespace Insight.Scripts
 {
     class PlayerManager :BaseScript
     {
+        private float timer;
+        private float healTime;
+
         public int health { get; private set; }
         public PlayerManager(GameObject gameObject) : base(gameObject)
         {
             health = 100;
+            healTime = 10;
+        }
+
+        public override void Update()
+        {
+            if (health < 100)
+            {
+                if (timer > healTime)
+                {
+                    health = 100;
+                    timer = 0;
+                }
+                timer += Time.deltaTime;
+            }
+            base.Update();
         }
 
         public void GotDamage(int dmg)
         {
+            timer = 0;
             if(health > 0)
                 health -= dmg;
         }

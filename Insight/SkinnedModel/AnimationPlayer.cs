@@ -86,7 +86,7 @@ namespace SkinnedModel
             currentKeyframe = firstFrame;
             currentTimeValue = new TimeSpan();
 
-            Debug.WriteLine(firstFrame + " " + lastFrame);
+            //Debug.WriteLine(firstFrame + " " + lastFrame);
         }
 
         /// <summary>
