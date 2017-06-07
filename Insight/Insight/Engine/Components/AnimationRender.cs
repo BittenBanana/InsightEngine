@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using SkinnedModel;
 using System;
+using System.Diagnostics;
 
 namespace Insight.Engine.Components
 {
@@ -11,6 +13,8 @@ namespace Insight.Engine.Components
         //Model model;
         //Matrix[] boneTransformations;
 
+        Model model1;
+        Model model2;
         AnimationPlayer animationPlayer;
         //float scale;
 
@@ -22,7 +26,9 @@ namespace Insight.Engine.Components
 
         public override void Load(ContentManager c)
         {
-            model = c.Load<Model>("Models/Konrads/Character/postacRun");
+            model1 = c.Load<Model>("Models/Konrads/Character/postacIdleGun");
+            model2 = c.Load<Model>("Models/Konrads/Character/postacRunGun");
+            model = model2;
             effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
@@ -34,18 +40,24 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip,24);
+            animationPlayer.StartClip(clip,30);
         }
 
-
-        public Model getModel()
+        public void Load(ContentManager c, String path)
         {
-            return model;
-        }
+            model = c.Load<Model>(path);
+            effect = Material.GetEffect();
+            SkinningData skinningData = model.Tag as SkinningData;
 
-        public float GetScale()
-        {
-            return scale;
+            if (skinningData == null)
+                throw new InvalidOperationException
+                    ("This model does not contain a SkinningData tag.");
+
+            animationPlayer = new AnimationPlayer(skinningData);
+
+            AnimationClip clip = skinningData.AnimationClips["Take 001"];
+
+            animationPlayer.StartClip(clip, 30);
         }
 
         public override void Update()
