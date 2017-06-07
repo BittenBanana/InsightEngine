@@ -15,6 +15,7 @@ namespace Insight.Engine
         DoorTrigger,
         DispenserTrigger,
         Enemy,
-        Player
+        Player,
+        Marker
     }
 }

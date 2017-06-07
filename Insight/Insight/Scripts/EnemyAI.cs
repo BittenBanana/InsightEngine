@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 
 namespace Insight.Scripts
@@ -22,8 +23,10 @@ namespace Insight.Scripts
         public int health { get; private set; }
 
         public EnemySight enemySight { get; set; }
+        public Vector3? markerPosition { get; set; }
 
         private EnemyAIState currentState;
+        public EnemyAIState previousState { get; private set; }
         public EnemyAIState defaultState { get; private set; }
 
         public EnemyAI(GameObject gameObject) : base(gameObject)
@@ -40,6 +43,7 @@ namespace Insight.Scripts
 
         public void ChangeState(EnemyAIState newState)
         {
+            previousState = currentState;
             currentState.Exit(this);
             currentState = newState;
             currentState.EnterState(this);

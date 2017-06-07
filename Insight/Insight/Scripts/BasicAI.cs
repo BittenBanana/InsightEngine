@@ -70,14 +70,9 @@ namespace Insight.Scripts
 
             if (state == AiState.FollowingPlayer)
             {
-                if (Vector3.Distance(destinationPosition, this.gameObject.Transform.Position) < 3f)
-                {
-                    state = AiState.None;
-                }
+                //Debug.WriteLine(EnemyWalkingSpots.getInstance().DistanceFromDestination(this.gameObject.Transform.Position, destinationPosition));
 
-                Debug.WriteLine(EnemyWalkingSpots.getInstance().DistanceFromDestination(this.gameObject.Transform.Position, destinationPosition));
-
-                gameObject.Transform.Position = EnemyWalkingSpots.getInstance().MoveToDestination(gameObject.Transform.Position, destinationPosition, 0.1f);
+                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(gameObject, destinationPosition, 0.05f, 3.0f);
 
             }
         }
