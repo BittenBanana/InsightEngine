@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
 using Insight.Engine.Components;
 using Insight.Materials;
+using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Insight.Scripts
@@ -86,7 +87,15 @@ namespace Insight.Scripts
 
                         if (hit.collider.gameObject.physicLayer == Layer.Enemy)
                         {
-                            hit.collider.gameObject.GetComponent<EnemyAI>().Hit(100);
+                            switch (currentBulletLoaded)
+                            {
+                                case PlayerBullets.Bullets.Agressive:
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new DeathState()); // TODO change when aggresive state is finished
+                                    break;
+                                case PlayerBullets.Bullets.Transmitter:
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new FollowMarkerState());
+                                    break;
+                            }
                         }
                     }
                 }
@@ -157,7 +166,14 @@ namespace Insight.Scripts
                     if (hit != null)
                     {
                         test = new GameObject(hit.point, false);
+                        test.physicLayer = Layer.Marker;
                         test.AddNewComponent<MeshRenderer>();
+
+                        foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
+                        {
+                            if(item.physicLayer != Layer.Enemy) continue;
+                            item.GetComponent<EnemyAI>().markerPosition = test.Transform.Position;
+                        }
 
                         Effect e = SceneManager.Instance.Content.Load<Effect>("Shaders/PhongBlinnShader");
                         test.GetComponent<MeshRenderer>().Material = new DefaultMaterial(e);
@@ -182,7 +198,7 @@ namespace Insight.Scripts
             {
                 currentBulletLoaded = PlayerBullets.Bullets.Agressive;
             }
-            if (keyState.IsKeyDown(Keys.D2) && gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
+            if (keyState.IsKeyDown(Keys.D2) && gameObject.GetComponent<PlayerBullets>().transmitterBullet)
             {
                 currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
             }

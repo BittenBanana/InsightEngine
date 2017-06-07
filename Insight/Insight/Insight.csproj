@@ -121,6 +121,7 @@
     <Compile Include="Scripts\EnemyStates\ChaseState.cs" />
     <Compile Include="Scripts\EnemyStates\CheckState.cs" />
     <Compile Include="Scripts\EnemyStates\DeathState.cs" />
+    <Compile Include="Scripts\EnemyStates\FollowMarkerState.cs" />
     <Compile Include="Scripts\EnemyStates\StandAndLookState.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
