@@ -17,7 +17,7 @@ namespace Insight.Scripts.EnemyStates
         public override void EnterState(EnemyAI enemy)
         {
             timer = 0;
-            wait = 5;
+            wait = 10;
             Debug.WriteLine("Enter Marker State");
         }
 
@@ -36,7 +36,7 @@ namespace Insight.Scripts.EnemyStates
                 {
                     if (timer >= wait)
                     {
-                        enemy.ChangeState(enemy.previousState);
+                        enemy.ChangeState(enemy.defaultState);
                     }
                     timer += Time.deltaTime;
                 }
