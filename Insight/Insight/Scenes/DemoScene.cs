@@ -194,14 +194,15 @@ namespace Insight.Scenes
         private float windowHeight;
 
         private Effect postEffect;
-        
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
 
+
+            gameOver = false;
             sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
-                graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
+                    graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
             windowWidth = SceneManager.Instance.Dimensions.X;
             windowHeight = SceneManager.Instance.Dimensions.Y;
@@ -214,10 +215,10 @@ namespace Insight.Scenes
             player.AddNewComponent<AnimationRender>();
             player.AddNewComponent<PlayerManager>();
             player.physicLayer = Layer.Player;
-            
+
             enemy1 = new EnemyPrefab();
             enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
-            
+
             //player.AddNewComponent<Rigidbody>();
 
             cameraPivot = new GameObject(player.Transform.Position, false);
@@ -261,7 +262,7 @@ namespace Insight.Scenes
             corridor4.Initialize(new Vector3(16, 0, 6), new Vector3(0));
 
             door = new AnimatedDoor();
-            door.Initialize(new Vector3(16, 0, 1));         
+            door.Initialize(new Vector3(16, 0, 1));
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
@@ -693,7 +694,7 @@ namespace Insight.Scenes
             directionalLight.AddNewComponent<Light>();
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
             directionalLight.GetComponent<Light>().Color = Color.White;
-            
+
 
 
             gameObjects.Add(pointLight1);
@@ -721,7 +722,7 @@ namespace Insight.Scenes
             ((DefaultMaterial)defaultMaterial).LightColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             ((DefaultMaterial)defaultMaterial).SpecularColor = directionalLight.GetComponent<Light>().Color.ToVector3();
             #endregion
-            
+
             List<Renderer> models = new List<Renderer>();
             List<Light> lights = new List<Light>();
 
@@ -744,7 +745,7 @@ namespace Insight.Scenes
 
             lightRenderer = new PrelightingRenderer(graphics.GraphicsDevice, content);
 
-            if(postEffect != null)
+            if (postEffect != null)
                 postProcessRenderer = new PostProcessRenderer(graphics.GraphicsDevice, postEffect);
 
 
@@ -938,6 +939,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "gameOver", "GAVE OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
             ui.AddSprite("Sprites/crosshair", "crosshair", new Vector2(windowWidth / 2 - 16, windowHeight / 2 - 16), Color.White, 1);
 
@@ -956,77 +958,84 @@ namespace Insight.Scenes
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach (GameObject go in gameObjects)
+
+            if (!gameOver)
             {
-                go.Update();
+                foreach (GameObject go in gameObjects)
+                {
+                    go.Update();
+                }
+                colliderManager.Update();
+
+                float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
+                    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
+                postEffect.Parameters["colorPercentage"]?.SetValue(lerped);
+
+                KeyboardState keyState = Keyboard.GetState();
+
+                if (keyState.IsKeyDown(Keys.LeftControl))
+                {
+                    player.GetComponent<PlayerManager>().GotDamage(20);
+                    //ui.ChangeSpriteOpacity("blood", 0.05f);
+                }
+
+                if (keyState.IsKeyDown(Keys.N))
+                {
+                    //ui.ChangeSpriteOpacity("blood", 0.05f);
+                }
+
+                ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
+
+                // Update
+                _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                // 1 Second has passed
+                if (_elapsed_time >= 1000.0f)
+                {
+                    _fps = _total_frames;
+                    _total_frames = 0;
+                    _elapsed_time = 0;
+                }
+
+                if (Mouse.GetState().Position.X >= graphics.GraphicsDevice.Viewport.Width)
+                {
+                    Mouse.SetPosition(0, Mouse.GetState().Position.Y);
+                }
+
+                else if (Mouse.GetState().Position.X <= 0)
+                {
+                    Mouse.SetPosition(graphics.GraphicsDevice.Viewport.Width, Mouse.GetState().Position.Y);
+                }
+
+                //if (Mouse.GetState().Position.Y <= graphics.GraphicsDevice.Viewport.Height)
+                //{
+                //    Mouse.SetPosition(Mouse.GetState().Position.X, 0);
+                //}
+
+                //else if (Mouse.GetState().Position.X >= 0)
+                //{
+                //    Mouse.SetPosition(Mouse.GetState().Position.X, graphics.GraphicsDevice.Viewport.Height);
+                //}
+                if (player.GetComponent<PlayerBullets>().aggresiveBullet)
+                    ui.ChangeSpriteOpacity("aggresive", 1);
+                else
+                    ui.ChangeSpriteOpacity("aggresive", 0);
+
+                if (player.GetComponent<PlayerBullets>().transmitterBullet)
+                    ui.ChangeSpriteOpacity("transmitter", 1);
+                else
+                    ui.ChangeSpriteOpacity("transmitter", 0);
+
+                if (player.GetComponent<PlayerBullets>().enemySightBullet)
+                    ui.ChangeSpriteOpacity("sight", 1);
+                else
+                    ui.ChangeSpriteOpacity("sight", 0);
+
+                //Debug.WriteLine(mainCam.Position);
+                if(gameOver)
+                    ui.ChangeTextOpacity("gameOver", 1);
             }
-            colliderManager.Update();
 
-            float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
-                1 - ((float) player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
-            postEffect.Parameters["colorPercentage"]?.SetValue(lerped);
-
-            KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.LeftControl))
-            {
-                player.GetComponent<PlayerManager>().GotDamage(20);
-                //ui.ChangeSpriteOpacity("blood", 0.05f);
-            }
-
-            if (keyState.IsKeyDown(Keys.N))
-            {
-                //ui.ChangeSpriteOpacity("blood", 0.05f);
-            }
-
-            ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
-
-            // Update
-            _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            // 1 Second has passed
-            if (_elapsed_time >= 1000.0f)
-            {
-                _fps = _total_frames;
-                _total_frames = 0;
-                _elapsed_time = 0;
-            }
-
-            if (Mouse.GetState().Position.X >= graphics.GraphicsDevice.Viewport.Width)
-            {
-                Mouse.SetPosition(0,Mouse.GetState().Position.Y);
-            }
-
-            else if (Mouse.GetState().Position.X <= 0)
-            {
-                Mouse.SetPosition(graphics.GraphicsDevice.Viewport.Width, Mouse.GetState().Position.Y);
-            }
-
-            //if (Mouse.GetState().Position.Y <= graphics.GraphicsDevice.Viewport.Height)
-            //{
-            //    Mouse.SetPosition(Mouse.GetState().Position.X, 0);
-            //}
-
-            //else if (Mouse.GetState().Position.X >= 0)
-            //{
-            //    Mouse.SetPosition(Mouse.GetState().Position.X, graphics.GraphicsDevice.Viewport.Height);
-            //}
-            if (player.GetComponent<PlayerBullets>().aggresiveBullet)
-                ui.ChangeSpriteOpacity("aggresive", 1);
-            else
-                ui.ChangeSpriteOpacity("aggresive", 0);
-
-            if (player.GetComponent<PlayerBullets>().transmitterBullet)
-                ui.ChangeSpriteOpacity("transmitter", 1);
-            else
-                ui.ChangeSpriteOpacity("transmitter", 0);
-
-            if (player.GetComponent<PlayerBullets>().enemySightBullet)
-                ui.ChangeSpriteOpacity("sight", 1);
-            else
-                ui.ChangeSpriteOpacity("sight", 0);
-
-            //Debug.WriteLine(mainCam.Position);
         }
 
         public override void Draw()
@@ -1042,10 +1051,10 @@ namespace Insight.Scenes
                 //if(go.GetComponent<BoxCollider>() != null)
                 //go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
             }
-
+            EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)
                 postProcessRenderer.Draw(sceneRenderTarget2D);
-            
+
             ui.Draw();
             //crate.crateModel.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //dispenserTrigger.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
