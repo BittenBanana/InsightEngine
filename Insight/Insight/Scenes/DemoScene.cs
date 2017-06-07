@@ -156,6 +156,25 @@ namespace Insight.Scenes
         AmmoPC ammoPC6;
         AmmoPC ammoPC7;
         Crate crate;
+        Crate crate2;
+        Crate crate3;
+        Crate crate4;
+        Crate crate5;
+        Crate crate6;
+        Crate crate7;
+        Crate crate8;
+        Crate crate9;
+        Crate crate10;
+        Crate crate11;
+        Crate crate12;
+        Crate crate13;
+        Crate crate14;
+        Crate crate15;
+        Crate crate16;
+        Crate crate17;
+        Crate crate18;
+        Crate crate19;
+        Crate crate20;
         Desk2Monitors desk2Monitors;
         Desk2Monitors desk2Monitors2;
         Desk2Monitors desk2Monitors3;
@@ -191,7 +210,7 @@ namespace Insight.Scenes
             pointLight1.GetComponent<Light>().Color = Color.Cyan;
             pointLight1.GetComponent<Light>().Attenuation = 10;
 
-            player = new GameObject(new Vector3(2, 1.0f, 7), true);
+            player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
             player.physicLayer = Layer.Player;
 
@@ -598,13 +617,13 @@ namespace Insight.Scenes
             wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
 
             crate = new Crate();
-            crate.Initialize(new Vector3(32, 0, 26));
+            crate.Initialize(new Vector3(32, 0, 26), new Vector3(0, 0, 0));
 
             desk2Monitors = new Desk2Monitors();
             desk2Monitors.Initialize(new Vector3(42, 0, 27), new Vector3(0));
 
             desk2Monitors2 = new Desk2Monitors();
-            desk2Monitors2.Initialize(new Vector3(27, 0, 35), new Vector3(0, 1.571f, 0));
+            desk2Monitors2.Initialize(new Vector3(27.1f, 0, 35), new Vector3(0, 1.571f, 0));
 
             desk2Monitors3 = new Desk2Monitors();
             desk2Monitors3.Initialize(new Vector3(21, 0, 60), new Vector3(0, 4.713f, 0));
@@ -612,6 +631,62 @@ namespace Insight.Scenes
             intercom = new Intercom();
             intercom.Initialize(new Vector3(39, 0, 36.9f), new Vector3(0, 3.142f, 0));
 
+            crate2 = new Crate();
+            crate2.Initialize(new Vector3(42, 0, 62.5f), new Vector3(0));
+
+            crate3 = new Crate();
+            crate3.Initialize(new Vector3(41, 0, 62.5f), new Vector3(0));
+
+            crate4 = new Crate();
+            crate4.Initialize(new Vector3(41, 0, 61.5f), new Vector3(0));
+
+            crate5 = new Crate();
+            crate5.Initialize(new Vector3(42, 0, 61.5f), new Vector3(0));
+
+            crate6 = new Crate();
+            crate6.Initialize(new Vector3(41.5f, 1, 62.5f), new Vector3(0, 1, 0));
+
+            crate7 = new Crate();
+            crate7.Initialize(new Vector3(44f, 0, 61.5f), new Vector3(0, 0, 0));
+
+            crate8 = new Crate();
+            crate8.Initialize(new Vector3(45f, 0, 61.5f), new Vector3(0, 0, 0));
+
+            crate9 = new Crate();
+            crate9.Initialize(new Vector3(45f, -4, 73f), new Vector3(0, 0, 0));
+
+            crate10 = new Crate();
+            crate10.Initialize(new Vector3(44f, -4, 73f), new Vector3(0, 0, 0));
+
+            crate11 = new Crate();
+            crate11.Initialize(new Vector3(44f, -3, 73f), new Vector3(0, 0, 0));
+
+            crate12 = new Crate();
+            crate12.Initialize(new Vector3(45f, -4, 65f), new Vector3(0, 0, 0));
+
+            crate13 = new Crate();
+            crate13.Initialize(new Vector3(45f, -4, 84f), new Vector3(0, 0, 0));
+
+            crate14 = new Crate();
+            crate14.Initialize(new Vector3(45f, -4, 83f), new Vector3(0, 0, 0));
+
+            crate15 = new Crate();
+            crate15.Initialize(new Vector3(41.5f, -4, 79f), new Vector3(0, 0, 0));
+
+            crate16 = new Crate();
+            crate16.Initialize(new Vector3(41.5f, -4, 78f), new Vector3(0, 0, 0));
+
+            crate17 = new Crate();
+            crate17.Initialize(new Vector3(42.5f, -4, 78f), new Vector3(0, 0, 0));
+
+            crate18 = new Crate();
+            crate18.Initialize(new Vector3(42f, -3, 78.4f), new Vector3(0, 1, 0));
+
+            crate19 = new Crate();
+            crate19.Initialize(new Vector3(42.5f, -4, 77f), new Vector3(0, 0, 0));
+
+            crate20 = new Crate();
+            crate20.Initialize(new Vector3(41.5f, -4, 77f), new Vector3(0, 0, 0));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -815,6 +890,25 @@ namespace Insight.Scenes
             ammoPC6.LoadContent(content);
             ammoPC7.LoadContent(content);
             crate.LoadContent(content);
+            crate2.LoadContent(content);
+            crate3.LoadContent(content);
+            crate4.LoadContent(content);
+            crate5.LoadContent(content);
+            crate6.LoadContent(content);
+            crate7.LoadContent(content);
+            crate8.LoadContent(content);
+            crate9.LoadContent(content);
+            crate10.LoadContent(content);
+            crate11.LoadContent(content);
+            crate12.LoadContent(content);
+            crate13.LoadContent(content);
+            crate14.LoadContent(content);
+            crate15.LoadContent(content);
+            crate16.LoadContent(content);
+            crate17.LoadContent(content);
+            crate18.LoadContent(content);
+            crate19.LoadContent(content);
+            crate20.LoadContent(content);
             desk2Monitors.LoadContent(content);
             desk2Monitors2.LoadContent(content);
             desk2Monitors3.LoadContent(content);
@@ -940,6 +1034,7 @@ namespace Insight.Scenes
                 postProcessRenderer.Draw(sceneRenderTarget2D);
             
             ui.Draw();
+            //crate.crateModel.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //dispenserTrigger.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
             //for (int i = 0; i < player.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
             //{

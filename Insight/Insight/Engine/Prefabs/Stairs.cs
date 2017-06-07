@@ -12,7 +12,7 @@ namespace Insight.Engine.Prefabs
     class Stairs : Prefab
     {
         GameObject stairsModel;
-        GameObject stairsCollider;
+        public GameObject stairsCollider;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
