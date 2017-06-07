@@ -40,13 +40,18 @@ namespace Insight.Engine
             {
                 //if (item.physicLayer != Layer.Player)
                 //{
-                    BoxCollider bc = item.GetComponent<BoxCollider>();
-                    SphereCollider sc = item.GetComponent<SphereCollider>();
-                    if (bc != null)
+                BoxCollider bc = item.GetComponent<BoxCollider>();
+                SphereCollider sc = item.GetComponent<SphereCollider>();
+                if (bc != null)
+                {
+                    if (!bc.IsTrigger)
                     {
-                        if (!bc.IsTrigger)
+                        BoundingSphere origSphere1 = bc.GetCompleteBoundingSphere();
+                        BoundingSphere sphere1 =
+                            Collider.TransformBoundingSphere(origSphere1,
+                                bc.gameObject.GetComponent<Renderer>().GetMatrix());
+                        if (ray.Intersects(sphere1) != null)
                         {
-                            //if (ray.Intersects(bc.GetCompleteBoundingSphere()) != null)
                             foreach (var boundingBox in bc.GetPreciseBoundingBoxes())
                             {
                                 tempDistance = ray.Intersects(boundingBox);
@@ -62,9 +67,16 @@ namespace Insight.Engine
                             }
                         }
                     }
-                    if (sc != null)
+                }
+                if (sc != null)
+                {
+                    if (!sc.IsTrigger)
                     {
-                        if (!sc.IsTrigger)
+                        BoundingSphere origSphere1 = sc.GetCompleteBoundingSphere();
+                        BoundingSphere sphere1 =
+                            Collider.TransformBoundingSphere(origSphere1,
+                                sc.gameObject.GetComponent<Renderer>().GetMatrix());
+                        if (ray.Intersects(sphere1) != null)
                         {
                             Matrix[] model1Transforms =
                                 new Matrix[sc.gameObject.GetComponent<Renderer>().getModel().Bones.Count];
@@ -98,6 +110,7 @@ namespace Insight.Engine
                             }
                         }
                     }
+                }
                 //}
             }
             if (go != null)

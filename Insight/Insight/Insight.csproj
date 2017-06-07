@@ -136,6 +136,7 @@
     <Compile Include="Scripts\EnemyAI.cs" />
     <Compile Include="Scripts\EnemyAIState.cs" />
     <Compile Include="Scripts\EnemySight.cs" />
+    <Compile Include="Scripts\EnemyStates\AgressiveState.cs" />
     <Compile Include="Scripts\EnemyStates\ChaseState.cs" />
     <Compile Include="Scripts\EnemyStates\CheckState.cs" />
     <Compile Include="Scripts\EnemyStates\DeathState.cs" />

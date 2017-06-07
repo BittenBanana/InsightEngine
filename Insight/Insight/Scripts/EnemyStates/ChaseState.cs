@@ -13,12 +13,18 @@ namespace Insight.Scripts.EnemyStates
     {
         private float timer;
         private float wait;
+
+        private float shootTimer;
+        private float shootWait;
         private float shootDistance;
 
         public override void EnterState(EnemyAI enemy)
         {
             timer = 0;
             wait = 15;
+
+            shootTimer = 1;
+            shootWait = 0.5f;
             shootDistance = 5;
             Debug.WriteLine("Enter Chase State");
         }
@@ -57,7 +63,12 @@ namespace Insight.Scripts.EnemyStates
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
                         enemy.enemySight.player.Transform.Position) < shootDistance)
                 {
-                    enemy.ChangeState(new ShootState());
+                    if (shootTimer >= shootWait)
+                    {
+                        enemy.ChangeState(new ShootState());
+                        shootTimer = 0;
+                    }
+                    shootTimer += Time.deltaTime;
                 }
             }
 
