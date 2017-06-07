@@ -146,6 +146,7 @@ namespace Insight.Scenes
         WallVisible wall53;
         WallVisible wall54;
         Stairs stairs;
+        Stairs stairs2;
         Material defaultMaterial;
         GameObject directionalLight;
         ColliderManager colliderManager;
@@ -156,6 +157,12 @@ namespace Insight.Scenes
         AmmoPCMark ammoPC4;
         AmmoPCMark ammoPC5;
         AmmoPC ammoPC6;
+        AmmoPC ammoPC7;
+        Crate crate;
+        Desk2Monitors desk2Monitors;
+        Desk2Monitors desk2Monitors2;
+        Desk2Monitors desk2Monitors3;
+        Intercom intercom;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -437,8 +444,11 @@ namespace Insight.Scenes
             roomFloor25 = new RoomFloorSmallerRotated();
             roomFloor25.Initialize(new Vector3(49, -4, 79));
 
-            //stairs = new Stairs();
-            //stairs.Initialize(new Vector3(39, 0, 64));
+            stairs = new Stairs();
+            stairs.Initialize(new Vector3(42, -4, 64), new Vector3(0, 4.713f, 0));
+
+            stairs2 = new Stairs();
+            stairs2.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
 
             wall23 = new WallVisibleSmaller();
             wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
@@ -579,13 +589,31 @@ namespace Insight.Scenes
             ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
 
             ammoPC5 = new AmmoPCMark();
-            ammoPC5.Initialize(new Vector3(44f, -4, 68f), new Vector3(0, 1.571f, 0));
+            ammoPC5.Initialize(new Vector3(42f, -4, 68f), new Vector3(0, 1.571f, 0));
 
             ammoPC6 = new AmmoPC();
             ammoPC6.Initialize(new Vector3(52f, -4, 82f), new Vector3(0, 4.713f, 0));
 
+            ammoPC7 = new AmmoPC();
+            ammoPC7.Initialize(new Vector3(47f, -4, 89f), new Vector3(0, 3.142f, 0));
+
             wall55 = new Corridor();
             wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
+
+            crate = new Crate();
+            crate.Initialize(new Vector3(32, 0, 26));
+
+            desk2Monitors = new Desk2Monitors();
+            desk2Monitors.Initialize(new Vector3(42, 0, 27), new Vector3(0));
+
+            desk2Monitors2 = new Desk2Monitors();
+            desk2Monitors2.Initialize(new Vector3(27, 0, 35), new Vector3(0, 1.571f, 0));
+
+            desk2Monitors3 = new Desk2Monitors();
+            desk2Monitors3.Initialize(new Vector3(21, 0, 60), new Vector3(0, 4.713f, 0));
+
+            intercom = new Intercom();
+            intercom.Initialize(new Vector3(39, 0, 36.9f), new Vector3(0, 3.142f, 0));
 
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
@@ -788,7 +816,14 @@ namespace Insight.Scenes
             ammoPC4.LoadContent(content);
             ammoPC5.LoadContent(content);
             ammoPC6.LoadContent(content);
-            //stairs.LoadContent(content);
+            ammoPC7.LoadContent(content);
+            crate.LoadContent(content);
+            desk2Monitors.LoadContent(content);
+            desk2Monitors2.LoadContent(content);
+            desk2Monitors3.LoadContent(content);
+            intercom.LoadContent(content);
+            stairs.LoadContent(content);
+            stairs2.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
             enemy1.LoadContent(content);
