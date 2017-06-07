@@ -183,6 +183,7 @@ namespace Insight.Engine
             return nearestNode;
         }
 
+        [System.Obsolete("MoveToDestination is deprecated, please use MoveGameObjectToDestination instead.")]
         public Vector3 MoveToDestination(Vector3 currentPosition, Vector3 targetDestination, float speed)
         {
             Vector3 nearest = currentPosition;
@@ -192,6 +193,17 @@ namespace Insight.Engine
                 return VectorHelper.MoveTowards(currentPosition, nearest, speed);
 
             return currentPosition;
+        }
+
+        public void MoveGameObjectToDestination(GameObject gObject, Vector3 targetDestination, float speed, float stopValue)
+        {
+            Vector3 nearest = gObject.Transform.Position;
+            if (Vector3.Distance(gObject.Transform.Position, targetDestination) <= stopValue)
+                return;
+            if (Vector3.Distance(nearest, gObject.Transform.Position) <= 0.1f)
+                nearest = findNearestPath(gObject.Transform.Position, targetDestination);
+            if (Vector3.Distance(nearest, gObject.Transform.Position) > 0.1f)
+                gObject.Transform.Position = VectorHelper.MoveTowards(gObject.Transform.Position, nearest, speed);
         }
 
         public float DistanceFromDestination(Vector3 currentPosition, Vector3 targetDestination)
