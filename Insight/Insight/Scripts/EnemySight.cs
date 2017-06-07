@@ -22,6 +22,7 @@ namespace Insight.Scripts
         public GameObject player { get; private set; }
 
         public Vector3 lastSeenPosition { get; private set; }
+        public Vector3 lastHeardPosition { get; private set; }
 
         public EnemySight(GameObject gameObject) : base(gameObject)
         {
@@ -69,16 +70,14 @@ namespace Insight.Scripts
                     }
                     timer += Time.deltaTime;
                 }
-                else
-                {
-                    if (timer >= reactionTime)
-                    {
-                        isPlayerHeard = true;
 
-                        timer = 0;
-                    }
-                    timer += Time.deltaTime;
-                }
+
+
+                isPlayerHeard = true;
+                lastHeardPosition = player.Transform.Position;
+
+
+
             }
         }
 
