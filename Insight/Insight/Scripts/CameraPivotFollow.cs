@@ -23,7 +23,7 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            gameObject.Transform.Position = new Vector3(player.Transform.Position.X, player.Transform.Position.Y + 5, player.Transform.Position.Z);
+            gameObject.Transform.Position = new Vector3(player.Transform.Position.X, player.Transform.Position.Y + 3.5f, player.Transform.Position.Z);
             gameObject.Transform.Rotation.Y = player.Transform.Rotation.Y;
 
             s = Mouse.GetState();

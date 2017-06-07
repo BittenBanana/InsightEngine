@@ -121,6 +121,7 @@ namespace Insight.Scripts
                 //gameObject.IsMoving = true;
                 gameObject.Right = true;
             }
+            if(gameObject.GetComponent<Rigidbody>() != null)
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
