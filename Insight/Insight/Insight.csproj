@@ -76,9 +76,12 @@
     <Compile Include="Engine\Prefabs\Corridor.cs" />
     <Compile Include="Engine\Prefabs\Corridor3Way.cs" />
     <Compile Include="Engine\Prefabs\CorridorRotated.cs" />
+    <Compile Include="Engine\Prefabs\Crate.cs" />
+    <Compile Include="Engine\Prefabs\Desk2Monitors.cs" />
     <Compile Include="Engine\Prefabs\Door.cs" />
     <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
+    <Compile Include="Engine\Prefabs\Intercom.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
     <Compile Include="Engine\Prefabs\RoomFloorSmallerRotated.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Scripts\EnemyStates\ChaseState.cs" />
     <Compile Include="Scripts\EnemyStates\CheckState.cs" />
     <Compile Include="Scripts\EnemyStates\DeathState.cs" />
+    <Compile Include="Scripts\EnemyStates\FollowMarkerState.cs" />
     <Compile Include="Scripts\EnemyStates\StandAndLookState.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
