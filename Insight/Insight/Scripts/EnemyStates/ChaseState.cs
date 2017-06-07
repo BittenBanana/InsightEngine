@@ -23,7 +23,7 @@ namespace Insight.Scripts.EnemyStates
             timer = 0;
             wait = 15;
 
-            shootTimer = 1;
+            shootTimer = 0;
             shootWait = 0.75f;
             shootDistance = 5;
             Debug.WriteLine("Enter Chase State");

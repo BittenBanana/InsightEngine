@@ -30,6 +30,9 @@ namespace Insight.Scripts
                 }
                 timer += Time.deltaTime;
             }
+
+            if (health <= 0)
+                SceneManager.Instance.currentScene.gameOver = true;
             base.Update();
         }
 

@@ -19,7 +19,7 @@ namespace Insight.Engine
         protected Camera mainCam;
         public UserInterface ui;
         public GameObject player;
-
+        public bool gameOver;
         protected Matrix projection { get; set; }
 
         public GraphicsDevice GetGraphicsDevice()
