@@ -17,41 +17,54 @@ namespace Insight.Scripts.EnemyStates
 
         private bool left;
 
+        private bool isRotationReset;
+
         public override void EnterState(EnemyAI enemy)
         {
             Debug.WriteLine("Enter Stand State");
             timer = 0;
-            delay = 1;
+            delay = 4;
         }
 
         public override void Execute(EnemyAI enemy)
         {
-            if (timer >= delay)
+            if (EnemyWalkingSpots.getInstance()
+                    .DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.standPosition) < 0.1f)
             {
-                if (timer >= 2 * delay)
+                if (!isRotationReset)
                 {
-                    timer = 0;
+                    enemy.gameObject.Transform.Rotation = enemy.defaultRotation;
+                    isRotationReset = true;
                 }
-                else
+                if (timer >= delay)
                 {
-                    if (left)
+                    if (timer >= delay + 1)
                     {
-                        enemy.gameObject.Transform.Rotation += new Vector3(0, 1, 0) * Time.deltaTime;
-                        left = false;
+                        timer = 0;
+                        if (left) left = false;
+                        else left = true;
                     }
                     else
                     {
-                        enemy.gameObject.Transform.Rotation -= new Vector3(0, 1, 0) * Time.deltaTime;
-                        left = true;
+                        if (left)
+                        {
+                            enemy.gameObject.Transform.Rotation += new Vector3(0, 1, 0) * Time.deltaTime;
+                           
+                        }
+                        else
+                        {
+                            enemy.gameObject.Transform.Rotation -= new Vector3(0, 1, 0) * Time.deltaTime;
+                            
+                        }
                     }
+
                 }
-
+                timer += Time.deltaTime;
             }
-            timer += Time.deltaTime;
-
-            if (enemy.health <= 0)
+            else
             {
-                enemy.ChangeState(new DeathState());
+                isRotationReset = false;
+                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
             }
 
             if (enemy.enemySight.isPlayerSeen)

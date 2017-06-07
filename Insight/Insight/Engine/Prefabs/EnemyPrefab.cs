@@ -52,7 +52,9 @@ namespace Insight.Engine.Prefabs
             enemySightTrigger.physicLayer = Layer.DispenserTrigger;
 
             enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
-            enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
+            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 3.5f));
+            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
+            enemy.GetComponent<EnemyAI>().SetFirstState(new PatrolState());
             base.LoadContent(content);
         }
     }
