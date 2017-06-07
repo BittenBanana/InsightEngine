@@ -26,28 +26,36 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-            if (timer >= delay)
+            if (EnemyWalkingSpots.getInstance()
+                    .DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.standPosition) < 0.1f)
             {
-                if (timer >= 2 * delay)
+                if (timer >= delay)
                 {
-                    timer = 0;
-                }
-                else
-                {
-                    if (left)
+                    if (timer >= 2 * delay)
                     {
-                        enemy.gameObject.Transform.Rotation += new Vector3(0, 1, 0) * Time.deltaTime;
-                        left = false;
+                        timer = 0;
                     }
                     else
                     {
-                        enemy.gameObject.Transform.Rotation -= new Vector3(0, 1, 0) * Time.deltaTime;
-                        left = true;
+                        if (left)
+                        {
+                            enemy.gameObject.Transform.Rotation += new Vector3(0, 1, 0) * Time.deltaTime;
+                            left = false;
+                        }
+                        else
+                        {
+                            enemy.gameObject.Transform.Rotation -= new Vector3(0, 1, 0) * Time.deltaTime;
+                            left = true;
+                        }
                     }
-                }
 
+                }
+                timer += Time.deltaTime;
             }
-            timer += Time.deltaTime;
+            else
+            {
+                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
+            }
 
             if (enemy.health <= 0)
             {

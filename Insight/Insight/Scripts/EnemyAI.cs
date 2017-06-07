@@ -29,8 +29,19 @@ namespace Insight.Scripts
         public EnemyAIState previousState { get; private set; }
         public EnemyAIState defaultState { get; private set; }
 
+        /// <summary>
+        /// Must be set for Patrol State
+        /// </summary>
+        public List<Vector3> patrolPositions { get; set; }
+
+        /// <summary>
+        /// May be set for Stand State default is gameObject.Transform.Position
+        /// </summary>
+        public Vector3 standPosition { get; set; }
+
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
+            standPosition = gameObject.Transform.Position;
             health = 100;
         }
 
