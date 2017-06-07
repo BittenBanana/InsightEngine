@@ -182,6 +182,7 @@ namespace Insight.Scenes
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
+        private StandingEnemy enemyStanding;
         private GameObject pointLight1;
 
         int _total_frames = 0;
@@ -217,7 +218,9 @@ namespace Insight.Scenes
             player.physicLayer = Layer.Player;
 
             enemy1 = new EnemyPrefab();
-            enemy1.Initialize(new Vector3(18.5f, 0, 3.5f));
+            enemy1.Initialize(new Vector3(18.5f, 0, 6f));
+            enemyStanding = new StandingEnemy();
+            enemyStanding.Initialize(new Vector3(18.5f, 0, 3.5f));
 
             //player.AddNewComponent<Rigidbody>();
 
@@ -927,6 +930,7 @@ namespace Insight.Scenes
             //colliderManager.ObjectColided += player.OnObjectColided;
 
             enemy1.LoadContent(content);
+            enemyStanding.LoadContent(content);
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 

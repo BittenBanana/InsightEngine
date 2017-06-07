@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Insight.Engine.Components;
-using Insight.Materials;
+﻿using Insight.Engine.Components;
 using Insight.Scripts;
 using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Insight.Engine.Prefabs
 {
-    class EnemyPrefab : Prefab
+    class StandingEnemy : Prefab
     {
         public GameObject enemy;
         public GameObject enemySightTrigger;
@@ -52,9 +51,7 @@ namespace Insight.Engine.Prefabs
             enemySightTrigger.physicLayer = Layer.DispenserTrigger;
 
             enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
-            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 6f));
-            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
-            enemy.GetComponent<EnemyAI>().SetFirstState(new PatrolState());
+            enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
             base.LoadContent(content);
         }
     }
