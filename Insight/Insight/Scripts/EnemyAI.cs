@@ -41,8 +41,11 @@ namespace Insight.Scripts
         public Vector3 standPosition { get; set; }
         public Vector3 defaultRotation { get; private set; }
 
+        public GameObject nearestEnemyPosition { get; set; }
+
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
+            nearestEnemyPosition = null;
             patrolPositions = new List<Vector3>();
             standPosition = gameObject.Transform.Position;
             defaultRotation = gameObject.Transform.Rotation;

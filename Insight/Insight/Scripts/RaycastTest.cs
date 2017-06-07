@@ -90,7 +90,7 @@ namespace Insight.Scripts
                             switch (currentBulletLoaded)
                             {
                                 case PlayerBullets.Bullets.Agressive:
-                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new DeathState()); // TODO change when aggresive state is finished
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new AgressiveState());
                                     break;
                                 case PlayerBullets.Bullets.Transmitter:
                                     hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new FollowMarkerState());
