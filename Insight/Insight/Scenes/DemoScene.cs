@@ -979,9 +979,9 @@ namespace Insight.Scenes
                 }
                 colliderManager.Update();
 
-                float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
-                    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
-                postEffect.Parameters["colorPercentage"]?.SetValue(lerped);
+                //float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
+                //    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
+                postEffect.Parameters["colorPercentage"]?.SetValue(1 - ((float)player.GetComponent<PlayerManager>().health / 100));
 
                 KeyboardState keyState = Keyboard.GetState();
 

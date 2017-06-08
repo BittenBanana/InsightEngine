@@ -24,11 +24,18 @@ namespace Insight.Scripts.EnemyStates
         {
             if(timer >= wait)
             {
-                if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health > 0)
+                if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
                 {
-                    enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(25);
+                    if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health > 0)
+                    {
+                        enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(25);
+                    }
                 }
-                
+                else
+                {
+                    enemy.nearestEnemyPosition.GetComponent<PlayerManager>().GotDamage(25);
+                }
+
                 timer = 0;
             }
             timer += Time.deltaTime;
