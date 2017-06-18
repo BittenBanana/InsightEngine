@@ -179,6 +179,7 @@ namespace Insight.Scenes
         Desk2Monitors desk2Monitors2;
         Desk2Monitors desk2Monitors3;
         Intercom intercom;
+        BigMachine bigMachine;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -624,6 +625,9 @@ namespace Insight.Scenes
             crate = new Crate();
             crate.Initialize(new Vector3(32, 0, 26), new Vector3(0, 0, 0));
 
+            bigMachine = new BigMachine();
+            bigMachine.Initialize(new Vector3(27, 0, 27), new Vector3(0, 1.571f, 0));
+
             desk2Monitors = new Desk2Monitors();
             desk2Monitors.Initialize(new Vector3(42, 0, 27), new Vector3(0));
 
@@ -927,12 +931,13 @@ namespace Insight.Scenes
             intercom.LoadContent(content);
             stairs.LoadContent(content);
             stairs2.LoadContent(content);
+            bigMachine.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
             enemy1.LoadContent(content);
             enemyStanding.LoadContent(content);
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
-            ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
+            //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
             ui.AddSprite("Sprites/GUI/bg", "bg", new Vector2(30, windowHeight - 100), Color.White, 1);
             ui.AddSprite("Sprites/GUI/oko_nieaktywne", "oko_na", new Vector2(30, windowHeight - 100), Color.White, 1);
@@ -951,7 +956,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
-            ui.AddText("Fonts/gamefont", "gameOver", "GAVE OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
+            ui.AddText("Fonts/gamefont", "gameOver", "GAME OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
             ui.AddSprite("Sprites/crosshair", "crosshair", new Vector2(windowWidth / 2 - 16, windowHeight / 2 - 16), Color.White, 1);
 
@@ -996,7 +1001,7 @@ namespace Insight.Scenes
                     //ui.ChangeSpriteOpacity("blood", 0.05f);
                 }
 
-                ui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
+                //mui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
                 // Update
                 _elapsed_time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;

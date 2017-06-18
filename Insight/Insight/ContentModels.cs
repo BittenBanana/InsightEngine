@@ -77,6 +77,7 @@ namespace Insight
         public Model crate { get; private set; }
         public Model desk2Monitors { get; private set; }
         public Model intercom { get; private set; }
+        public Model bigMachine { get; private set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -135,6 +136,7 @@ namespace Insight
             crate = content.Load<Model>("Models/Konrads/Enviroment/crate");
             desk2Monitors = content.Load<Model>("Models/Konrads/Enviroment/desk-2monitors");
             intercom = content.Load<Model>("Models/Konrads/Enviroment/intercom");
+            bigMachine = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom");
         }
     }
 }
