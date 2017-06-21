@@ -71,7 +71,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 enemy.ChangeState(new ChaseState());
             }
-            else if (enemy.enemySight.detectionLevel > 0.5f && enemy.enemySight.detectionLevel <= 0.9f)
+            else if (enemy.enemySight.detectionLevel > 0.75f && enemy.enemySight.detectionLevel <= 0.9f)
             {
                 enemy.ChangeState(new CheckState());
             }

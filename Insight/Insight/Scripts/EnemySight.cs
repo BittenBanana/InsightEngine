@@ -17,6 +17,8 @@ namespace Insight.Scripts
         public float reactionTime { get; set; }
         private float timer;
 
+        private bool isOnTrigger;
+
         //public bool isPlayerSeen { get; private set; }
         //public bool isPlayerHeard { get; private set; }
         public GameObject player { get; private set; }
@@ -43,6 +45,9 @@ namespace Insight.Scripts
         {
             gameObject.Transform = followTransform;
             
+            if(!isOnTrigger && detectionLevel > 0)
+                detectionLevel -= Time.deltaTime * 0.1f;
+
             base.Update();
         }
 
@@ -65,7 +70,7 @@ namespace Insight.Scripts
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
                                 if (detectionLevel < 1)
-                                    detectionLevel += 4 * Time.deltaTime;
+                                    detectionLevel += Time.deltaTime * 0.5f;
                                 lastSeenPosition = player.Transform.Position;
                             }
                         }
@@ -75,10 +80,11 @@ namespace Insight.Scripts
                     timer += Time.deltaTime;
                 }
                 if (detectionLevel < 1)
-                    detectionLevel += Time.deltaTime;
+                    detectionLevel += Time.deltaTime * 0.25f;
                 //isPlayerHeard = true;
                 lastHeardPosition = player.Transform.Position;
-
+                if (!isOnTrigger)
+                    isOnTrigger = true;
             }
         }
 
@@ -86,8 +92,7 @@ namespace Insight.Scripts
         {
             //isPlayerHeard = false;
             //isPlayerSeen = false;
-            if (detectionLevel > 0)
-                detectionLevel -= Time.deltaTime;
+            isOnTrigger = false;
             timer = 0f;
         }
 
