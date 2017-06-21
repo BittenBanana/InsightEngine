@@ -12,6 +12,7 @@ using Insight.Scripts;
 using Insight.Engine.Prefabs;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
+using Insight.Engine.Prefabs.UI;
 
 namespace Insight.Scenes
 {
@@ -196,6 +197,9 @@ namespace Insight.Scenes
         private float windowHeight;
 
         private Effect postEffect;
+
+        SightSlider sightSlider;
+        float sliderOffset = 0;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
@@ -960,6 +964,8 @@ namespace Insight.Scenes
 
             ui.AddSprite("Sprites/crosshair", "crosshair", new Vector2(windowWidth / 2 - 16, windowHeight / 2 - 16), Color.White, 1);
 
+            sightSlider = new SightSlider(ui, windowWidth, windowHeight);
+
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;
             lightRenderer.Models = models;
@@ -1051,6 +1057,12 @@ namespace Insight.Scenes
                 //Debug.WriteLine(mainCam.Position);
                 if(gameOver)
                     ui.ChangeTextOpacity("gameOver", 1);
+
+
+                sliderOffset += Time.deltaTime/2;
+                if (sliderOffset > 1)
+                    sliderOffset = 0;
+                sightSlider.SetSightLevel(sliderOffset);
             }
 
         }
