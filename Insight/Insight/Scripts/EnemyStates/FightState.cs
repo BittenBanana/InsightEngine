@@ -43,7 +43,7 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Exit(EnemyAI enemy)
         {
-            Debug.WriteLine("Enter Fight State");
+            Debug.WriteLine("Exit Fight State");
         }
     }
 }

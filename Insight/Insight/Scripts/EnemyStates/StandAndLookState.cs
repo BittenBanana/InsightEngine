@@ -67,11 +67,11 @@ namespace Insight.Scripts.EnemyStates
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
             }
 
-            if (enemy.enemySight.isPlayerSeen)
+            if (enemy.enemySight.detectionLevel > 0.9f)
             {
                 enemy.ChangeState(new ChaseState());
             }
-            else if (enemy.enemySight.isPlayerHeard)
+            else if (enemy.enemySight.detectionLevel > 0.5f && enemy.enemySight.detectionLevel <= 0.9f)
             {
                 enemy.ChangeState(new CheckState());
             }

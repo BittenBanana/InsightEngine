@@ -32,7 +32,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 if (timer >= wait)
                 {
-                    if (!enemy.enemySight.isPlayerHeard)
+                    if (enemy.enemySight.detectionLevel <= 0.5f)
                     {
                         enemy.ChangeState(enemy.defaultState);
                     }
@@ -40,7 +40,7 @@ namespace Insight.Scripts.EnemyStates
                 }
                 timer += Time.deltaTime;
             }
-            if (enemy.enemySight.isPlayerSeen)
+            if (enemy.enemySight.detectionLevel > 0.9f)
             {
                 enemy.ChangeState(new ChaseState());
             }

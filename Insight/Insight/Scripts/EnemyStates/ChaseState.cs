@@ -31,14 +31,14 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-            if (!enemy.enemySight.isPlayerSeen)
+            if (enemy.enemySight.detectionLevel < 0.9f)
             {
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
                         enemy.enemySight.lastHeardPosition) < 0.1f)
                 {
                     if (timer >= wait)
                     {
-                        if (enemy.enemySight.isPlayerHeard)
+                        if (enemy.enemySight.detectionLevel > 0.5f)
                             enemy.ChangeState(new CheckState());
                         else
                         {

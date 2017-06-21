@@ -52,11 +52,11 @@ namespace Insight.Scripts.EnemyStates
                 timer += Time.deltaTime;
             }
 
-            if (enemy.enemySight.isPlayerSeen)
+            if (enemy.enemySight.detectionLevel > 0.9f)
             {
                 enemy.ChangeState(new ChaseState());
             }
-            else if (enemy.enemySight.isPlayerHeard)
+            else if (enemy.enemySight.detectionLevel > 0.5f && enemy.enemySight.detectionLevel <= 0.9f)
             {
                 enemy.ChangeState(new CheckState());
             }
