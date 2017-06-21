@@ -13,7 +13,7 @@ namespace Insight.Engine.Components
     {
         //Model model;
         //Matrix[] boneTransformations;
-
+        List<AnimationClip> clips = new List<AnimationClip>();
         AnimationPlayer animationPlayer;
         //float scale;
         public AnimationRender(GameObject gameObject) : base(gameObject)
@@ -39,7 +39,38 @@ namespace Insight.Engine.Components
             animationPlayer.StartClip(clip, 30);
         }
 
-        public void LoadNewModel(Model model)
+        //public void LoadNewModel(Model model, Model model2)
+        //{
+        //    this.model = model;
+        //    effect = Material.GetEffect();
+        //    SkinningData skinningData = model.Tag as SkinningData;
+
+        //    if (skinningData == null)
+        //        throw new InvalidOperationException
+        //            ("This model does not contain a SkinningData tag.");
+
+        //    animationPlayer = new AnimationPlayer(skinningData);
+
+        //    AnimationClip clip = skinningData.AnimationClips["Take 001"];
+
+
+        //    SkinningData skinningData2 = model2.Tag as SkinningData;
+
+        //    if (skinningData2 == null)
+        //        throw new InvalidOperationException
+        //            ("This model does not contain a SkinningData tag.");
+
+        //    AnimationPlayer animationPlayer2 = new AnimationPlayer(skinningData2);
+
+        //    AnimationClip clip2 = skinningData2.AnimationClips["Take 001"];
+
+        //    clips.Add(clip);
+        //    clips.Add(clip2);
+
+        //    animationPlayer.StartClip(clip, 30);
+        //}
+
+        public void Load(ContentManager c, Model model, Model model2, int frames)
         {
             this.model = model;
             effect = Material.GetEffect();
@@ -54,28 +85,28 @@ namespace Insight.Engine.Components
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
             animationPlayer.StartClip(clip, 30);
-        }
 
-        public void Load(ContentManager c, Model model, int frames)
-        {
-            this.model = model;
-            effect = Material.GetEffect();
-            SkinningData skinningData = model.Tag as SkinningData;
 
-            if (skinningData == null)
+
+            SkinningData skinningData2 = model2.Tag as SkinningData;
+
+            if (skinningData2 == null)
                 throw new InvalidOperationException
                     ("This model does not contain a SkinningData tag.");
 
-            animationPlayer = new AnimationPlayer(skinningData);
+            AnimationPlayer animationPlayer2 = new AnimationPlayer(skinningData2);
 
-            AnimationClip clip = skinningData.AnimationClips["Take 001"];
+            AnimationClip clip2 = skinningData2.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip, 30);
+            clips.Add(clip);
+            clips.Add(clip2);
+
+            animationPlayer.StartClip(clips[0], 30);
         }
 
-        public void SetFrames(int firstFrame, int lastFrame)
+        public void ChangeAnimation(int id)
         {
-            animationPlayer.SetFrames(firstFrame, lastFrame);
+            animationPlayer.StartClip(clips[id], 30);
         }
 
         public override void Update()
