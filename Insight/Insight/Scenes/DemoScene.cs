@@ -770,7 +770,7 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
 
             //player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
-            player.GetComponent<AnimationRender>().Load(content, "Models/Konrads/Character/postacRunGun", 30);
+            player.GetComponent<AnimationRender>().Load(content, ContentModels.Instance.playerRun, 30);
             //playerAnimRun.Load(content, "Models/Konrads/Character/postacRunGun", 30);
             //playerAnimIdle.Load(content, "Models/Konrads/Character/postacIdleGun", 60);
             player.GetComponent<AnimationRender>().SetFrames(0, 1);

@@ -78,9 +78,13 @@ namespace Insight
         public Model desk2Monitors { get; private set; }
         public Model intercom { get; private set; }
         public Model bigMachine { get; private set; }
+        public Model playerRun { get; set; }
+        public Model playerIdle { get; set; }
 
         public void LoadContent(ContentManager content)
         {
+            playerIdle = content.Load<Model>("Models/Konrads/Character/postacIdleGun");
+            playerRun = content.Load<Model>("Models/Konrads/Character/postacRunGun");
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
             column_rotated = content.Load<Model>("Models/Konrads/Enviroment/column-rotated");
