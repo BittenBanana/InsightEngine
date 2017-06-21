@@ -179,6 +179,7 @@ namespace Insight.Scenes
         Desk2Monitors desk2Monitors;
         Desk2Monitors desk2Monitors2;
         Desk2Monitors desk2Monitors3;
+        Desk2Monitors desk2Monitors4;
         Intercom intercom;
         BigMachine bigMachine;
 
@@ -627,10 +628,10 @@ namespace Insight.Scenes
             wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
 
             crate = new Crate();
-            crate.Initialize(new Vector3(32, 0, 26), new Vector3(0, 0, 0));
+            crate.Initialize(new Vector3(31, 0, 25.5f), new Vector3(0, 0, 0));
 
             bigMachine = new BigMachine();
-            bigMachine.Initialize(new Vector3(27, 0, 27), new Vector3(0, 1.571f, 0));
+            bigMachine.Initialize(new Vector3(27, 0, 26), new Vector3(0, 1.571f, 0));
 
             desk2Monitors = new Desk2Monitors();
             desk2Monitors.Initialize(new Vector3(42, 0, 27), new Vector3(0));
@@ -641,26 +642,29 @@ namespace Insight.Scenes
             desk2Monitors3 = new Desk2Monitors();
             desk2Monitors3.Initialize(new Vector3(21, 0, 60), new Vector3(0, 4.713f, 0));
 
+            desk2Monitors4 = new Desk2Monitors();
+            desk2Monitors4.Initialize(new Vector3(19, 0, 15.5f), new Vector3(0, 3.142f, 0));
+
             intercom = new Intercom();
-            intercom.Initialize(new Vector3(39, 0, 36.9f), new Vector3(0, 3.142f, 0));
+            intercom.Initialize(new Vector3(39, -0.5f, 36.9f), new Vector3(0, 3.142f, 0));
 
             crate2 = new Crate();
-            crate2.Initialize(new Vector3(42, 0, 62.5f), new Vector3(0));
+            crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 
             crate3 = new Crate();
-            crate3.Initialize(new Vector3(41, 0, 62.5f), new Vector3(0));
+            crate3.Initialize(new Vector3(41.5f, 0, 62f), new Vector3(0));
 
             crate4 = new Crate();
-            crate4.Initialize(new Vector3(41, 0, 61.5f), new Vector3(0));
+            crate4.Initialize(new Vector3(41.5f, 0, 61.5f), new Vector3(0));
 
             crate5 = new Crate();
             crate5.Initialize(new Vector3(42, 0, 61.5f), new Vector3(0));
 
             crate6 = new Crate();
-            crate6.Initialize(new Vector3(41.5f, 1, 62.5f), new Vector3(0, 1, 0));
+            crate6.Initialize(new Vector3(41.5f, 0.5f, 62f), new Vector3(0, 1, 0));
 
             crate7 = new Crate();
-            crate7.Initialize(new Vector3(44f, 0, 61.5f), new Vector3(0, 0, 0));
+            crate7.Initialize(new Vector3(44.5f, 0, 61.5f), new Vector3(0, 0, 0));
 
             crate8 = new Crate();
             crate8.Initialize(new Vector3(45f, 0, 61.5f), new Vector3(0, 0, 0));
@@ -669,37 +673,37 @@ namespace Insight.Scenes
             crate9.Initialize(new Vector3(45f, -4, 73f), new Vector3(0, 0, 0));
 
             crate10 = new Crate();
-            crate10.Initialize(new Vector3(44f, -4, 73f), new Vector3(0, 0, 0));
+            crate10.Initialize(new Vector3(44.5f, -4, 73f), new Vector3(0, 0, 0));
 
             crate11 = new Crate();
-            crate11.Initialize(new Vector3(44f, -3, 73f), new Vector3(0, 0, 0));
+            crate11.Initialize(new Vector3(44.5f, -3.5f, 73f), new Vector3(0, 0, 0));
 
             crate12 = new Crate();
             crate12.Initialize(new Vector3(45f, -4, 65f), new Vector3(0, 0, 0));
 
             crate13 = new Crate();
-            crate13.Initialize(new Vector3(45f, -4, 84f), new Vector3(0, 0, 0));
+            crate13.Initialize(new Vector3(45f, -4, 83.5f), new Vector3(0, 0, 0));
 
             crate14 = new Crate();
             crate14.Initialize(new Vector3(45f, -4, 83f), new Vector3(0, 0, 0));
 
             crate15 = new Crate();
-            crate15.Initialize(new Vector3(41.5f, -4, 79f), new Vector3(0, 0, 0));
+            crate15.Initialize(new Vector3(41.5f, -4, 78.5f), new Vector3(0, 0, 0));
 
             crate16 = new Crate();
             crate16.Initialize(new Vector3(41.5f, -4, 78f), new Vector3(0, 0, 0));
 
             crate17 = new Crate();
-            crate17.Initialize(new Vector3(42.5f, -4, 78f), new Vector3(0, 0, 0));
+            crate17.Initialize(new Vector3(42f, -4, 78f), new Vector3(0, 0, 0));
 
             crate18 = new Crate();
-            crate18.Initialize(new Vector3(42f, -3, 78.4f), new Vector3(0, 1, 0));
+            crate18.Initialize(new Vector3(41.7f, -3.5f, 78f), new Vector3(0, 1, 0));
 
             crate19 = new Crate();
-            crate19.Initialize(new Vector3(42.5f, -4, 77f), new Vector3(0, 0, 0));
+            crate19.Initialize(new Vector3(42f, -4, 77.5f), new Vector3(0, 0, 0));
 
             crate20 = new Crate();
-            crate20.Initialize(new Vector3(41.5f, -4, 77f), new Vector3(0, 0, 0));
+            crate20.Initialize(new Vector3(41.5f, -4, 77.5f), new Vector3(0, 0, 0));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -932,6 +936,7 @@ namespace Insight.Scenes
             desk2Monitors.LoadContent(content);
             desk2Monitors2.LoadContent(content);
             desk2Monitors3.LoadContent(content);
+            desk2Monitors4.LoadContent(content);
             intercom.LoadContent(content);
             stairs.LoadContent(content);
             stairs2.LoadContent(content);
