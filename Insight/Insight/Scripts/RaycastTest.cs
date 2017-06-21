@@ -23,18 +23,21 @@ namespace Insight.Scripts
 
         private GameObject test;
 
+        int previousScrollValue;
 
+        MouseState ms;
 
         private PlayerBullets.Bullets? currentBulletLoaded;
 
         public RaycastTest(GameObject gameObject) : base(gameObject)
         {
             currentBulletLoaded = null;
+            previousScrollValue = ms.ScrollWheelValue;
         }
 
         public override void Update()
         {
-            MouseState ms = Mouse.GetState();
+            ms = Mouse.GetState();
 
             #region LeftButton
             if (ms.LeftButton == ButtonState.Pressed && !isPressed && currentBulletLoaded != null)
@@ -188,7 +191,7 @@ namespace Insight.Scripts
             #endregion
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.D1) && gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
+            if (keyState.IsKeyDown(Keys.D3) && gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
             {
                 currentBulletLoaded = PlayerBullets.Bullets.Agressive;
             }
@@ -196,6 +199,18 @@ namespace Insight.Scripts
             {
                 currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
             }
+            if(ms.ScrollWheelValue != previousScrollValue)
+            {
+                if((currentBulletLoaded == PlayerBullets.Bullets.Agressive || currentBulletLoaded == null) 
+                    && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().transmitterBullet)
+                    currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
+                else if ((currentBulletLoaded == PlayerBullets.Bullets.Transmitter || currentBulletLoaded == null) 
+                    && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().aggresiveBullet)
+                    currentBulletLoaded = PlayerBullets.Bullets.Agressive;
+
+
+            }
+            previousScrollValue = ms.ScrollWheelValue;
             //base.Update();
         }
 
