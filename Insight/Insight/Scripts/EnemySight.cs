@@ -30,7 +30,7 @@ namespace Insight.Scripts
 
         public EnemySight(GameObject gameObject) : base(gameObject)
         {
-            fovAngle = DegreeToRadian(110f);
+            fovAngle = DegreeToRadian(170f);
             reactionTime = 0.25f;
 
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
@@ -70,7 +70,7 @@ namespace Insight.Scripts
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
                                 if (detectionLevel < 1)
-                                    detectionLevel += Time.deltaTime * 0.5f;
+                                    detectionLevel += Time.deltaTime * 2;
                                 lastSeenPosition = player.Transform.Position;
                             }
                         }

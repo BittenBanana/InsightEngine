@@ -725,7 +725,9 @@ namespace Insight.Scenes
             #region Effects 
 
             postEffect = content.Load<Effect>("Shaders/black&whitePostProcess");
-            postEffect.Parameters["BloodTexture"]?.SetValue(content.Load<Texture2D>("Sprites/blood"));
+            postEffect.Parameters["BloodTexture1"]?.SetValue(content.Load<Texture2D>("Sprites/1stHit"));
+            postEffect.Parameters["BloodTexture2"]?.SetValue(content.Load<Texture2D>("Sprites/2ndHit"));
+            postEffect.Parameters["BloodTexture3"]?.SetValue(content.Load<Texture2D>("Sprites/3rdHit"));
 
             Effect effect = content.Load<Effect>("Shaders/PhongBlinnShader");
             defaultMaterial = new DefaultMaterial(effect);
@@ -955,7 +957,7 @@ namespace Insight.Scenes
 
 
 
-            ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+            //ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
 
             ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);

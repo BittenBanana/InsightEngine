@@ -31,7 +31,7 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-            if (enemy.enemySight.detectionLevel < 0.9f)
+            if (enemy.enemySight.detectionLevel <= 0.9f)
             {
                 if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
                         enemy.enemySight.lastHeardPosition) < 0.1f)
@@ -57,19 +57,23 @@ namespace Insight.Scripts.EnemyStates
             }
             else if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.enemySight.lastHeardPosition) > 0.1f)
             {
-                EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
+                if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
+                        enemy.enemySight.player.Transform.Position) > shootDistance)
+                    EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
                     enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
 
-                if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
-                        enemy.enemySight.player.Transform.Position) < shootDistance)
+               
+            }
+
+            if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
+                    enemy.enemySight.player.Transform.Position) <= shootDistance)
+            {
+                if (shootTimer >= shootWait)
                 {
-                    if (shootTimer >= shootWait)
-                    {
-                        enemy.ChangeState(new ShootState());
-                        shootTimer = 0;
-                    }
-                    shootTimer += Time.deltaTime;
+                    enemy.ChangeState(new ShootState());
+                    shootTimer = 0;
                 }
+                shootTimer += Time.deltaTime;
             }
 
         }
