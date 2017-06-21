@@ -24,7 +24,7 @@ namespace Insight.Engine.Components
 
         public override void Load(ContentManager c)
         {
-            model = c.Load<Model>("Models/Konrads/Character/postacRunGun");
+            model = ContentModels.Instance.playerRun;
             effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
@@ -39,9 +39,26 @@ namespace Insight.Engine.Components
             animationPlayer.StartClip(clip,0, 31);
         }
 
-        public void Load(ContentManager c, String path, int frames)
+        public void LoadNewModel(Model model)
         {
-            model = c.Load<Model>(path);
+            this.model = model;
+            effect = Material.GetEffect();
+            SkinningData skinningData = model.Tag as SkinningData;
+
+            if (skinningData == null)
+                throw new InvalidOperationException
+                    ("This model does not contain a SkinningData tag.");
+
+            animationPlayer = new AnimationPlayer(skinningData);
+
+            AnimationClip clip = skinningData.AnimationClips["Take 001"];
+
+            animationPlayer.StartClip(clip, 0, 30);
+        }
+
+        public void Load(ContentManager c, Model model, int frames)
+        {
+            this.model = model;
             effect = Material.GetEffect();
             SkinningData skinningData = model.Tag as SkinningData;
 
