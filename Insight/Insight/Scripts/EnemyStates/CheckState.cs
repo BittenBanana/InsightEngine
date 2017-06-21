@@ -32,7 +32,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 if (timer >= wait)
                 {
-                    if (enemy.enemySight.detectionLevel <= 0.5f)
+                    if (enemy.enemySight.detectionLevel <= 0.75f)
                     {
                         enemy.ChangeState(enemy.defaultState);
                     }
