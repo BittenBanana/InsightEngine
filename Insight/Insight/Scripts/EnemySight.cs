@@ -17,8 +17,8 @@ namespace Insight.Scripts
         public float reactionTime { get; set; }
         private float timer;
 
-        public bool isPlayerSeen { get; private set; }
-        public bool isPlayerHeard { get; private set; }
+        //public bool isPlayerSeen { get; private set; }
+        //public bool isPlayerHeard { get; private set; }
         public GameObject player { get; private set; }
 
         public Vector3 lastSeenPosition { get; private set; }
@@ -76,7 +76,7 @@ namespace Insight.Scripts
                 }
                 if (detectionLevel < 1)
                     detectionLevel += Time.deltaTime;
-                isPlayerHeard = true;
+                //isPlayerHeard = true;
                 lastHeardPosition = player.Transform.Position;
 
             }
@@ -84,8 +84,10 @@ namespace Insight.Scripts
 
         public override void OnTriggerExit(object source, CollisionEventArgs args)
         {
-            isPlayerHeard = false;
-            isPlayerSeen = false;
+            //isPlayerHeard = false;
+            //isPlayerSeen = false;
+            if (detectionLevel > 0)
+                detectionLevel -= Time.deltaTime;
             timer = 0f;
         }
 
