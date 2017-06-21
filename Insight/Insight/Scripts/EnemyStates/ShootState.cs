@@ -29,11 +29,11 @@ namespace Insight.Scripts.EnemyStates
             Vector3 direction = enemy.enemySight.player.Transform.Position - enemy.gameObject.Transform.Position;
             direction += new Vector3((float)random.Next(minRand,maxRand) / 100, (float)random.Next(minRand, maxRand) / 100, (float)random.Next(minRand, maxRand) / 100);
             direction.Normalize();
-            if (Physics.Raycast(enemy.gameObject.Transform.Position + direction, direction, out hit))
+            if (Physics.Raycast(enemy.gameObject.Transform.Position + direction / 2, direction, out hit))
             {
                 if (hit.collider.gameObject.physicLayer == Layer.Player)
                 {
-                    hit.collider.gameObject.GetComponent<PlayerManager>().GotDamage(random.Next(10, 25));
+                    hit.collider.gameObject.GetComponent<PlayerManager>().GotDamage(random.Next(20, 45));
                 }
             }
             enemy.ChangeState(enemy.previousState);

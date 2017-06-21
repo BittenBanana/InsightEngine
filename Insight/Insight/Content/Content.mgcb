@@ -1409,18 +1409,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Character/postacRunGun.FBX
 
-#begin Sprites/blood.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/blood.png
-
 #begin Models/Konrads/Enviroment/bigMachine_1stRoom.FBX
 /importer:FbxImporter
 /processor:ModelProcessor
@@ -1439,6 +1427,30 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Enviroment/bigMachine_1stRoom.FBX
+
+#begin Sprites/GUI/SightSlider/wskaznik.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/GUI/SightSlider/wskaznik.png
+
+#begin Sprites/GUI/SightSlider/pasek.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/GUI/SightSlider/pasek.png
 
 #begin Sprites/GUI/agresja_aktywna.png
 /importer:TextureImporter
@@ -1536,6 +1548,25 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/GUI/przeslonka.png
 
+#begin Models/Konrads/Enviroment/bigMachine_1stRoom.FBX
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Models/Konrads/Enviroment/bigMachine_1stRoom.FBX
+
 #begin Sprites/GUI/ramka_pocisk1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1572,7 +1603,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/GUI/ramka_pocisk3.png
 
-#begin Sprites/GUI/SightSlider/wskaznik.png
+#begin Sprites/1stHit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1582,9 +1613,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/GUI/SightSlider/wskaznik.png
+/build:Sprites/1stHit.png
 
-#begin Sprites/GUI/SightSlider/pasek.png
+#begin Sprites/2ndHit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1594,5 +1625,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/GUI/SightSlider/pasek.png
+/build:Sprites/2ndHit.png
+
+#begin Sprites/3rdHit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/3rdHit.png
 
