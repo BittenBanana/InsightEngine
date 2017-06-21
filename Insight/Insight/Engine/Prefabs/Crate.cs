@@ -27,7 +27,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            crateModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.crate, 1.0f);
+            crateModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.crate, 0.5f);
             crateModel.AddNewComponent<BoxCollider>();
             crateModel.physicLayer = Layer.IgnoreRaycast;
 

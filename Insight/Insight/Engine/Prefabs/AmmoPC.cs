@@ -38,7 +38,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            pcModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.ammo_pc, 1.0f);
+            pcModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.ammo_pc, 0.5f);
             triggerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 1.0f);
             pcModel.AddNewComponent<BoxCollider>();
             triggerModel.AddNewComponent<BoxCollider>();

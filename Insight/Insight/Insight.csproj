@@ -104,6 +104,7 @@
     <Compile Include="Engine\Prefabs\Stairs.cs" />
     <Compile Include="Engine\Prefabs\StandingEnemy.cs" />
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
+    <Compile Include="Engine\Prefabs\UI\AmmoInterface.cs" />
     <Compile Include="Engine\Prefabs\UI\SightSlider.cs" />
     <Compile Include="Engine\Prefabs\Wall.cs" />
     <Compile Include="Engine\Prefabs\WallRotated.cs" />
