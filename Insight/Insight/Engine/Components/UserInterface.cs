@@ -94,13 +94,23 @@ namespace Insight.Engine.Components
             }
         }
 
+        public void ChangeSpritePosition(string spriteName, float posX, float posY)
+        {
+            if (sprites[spriteName].opacity <= 1)
+            {
+                Sprite sprite = sprites[spriteName];
+                sprite.position = new Vector2(posX, posY);
+                sprites[spriteName] = sprite;
+            }
+        }
+
         public void Draw()
         {
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
 
             foreach (KeyValuePair<string, Sprite> pair in sprites)
             {
-                spriteBatch.Draw(pair.Value.spriteTexture, pair.Value.position, null, pair.Value.color * pair.Value.opacity, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(pair.Value.spriteTexture, pair.Value.position, null, pair.Value.color * pair.Value.opacity, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0f);
             }
 
             foreach (KeyValuePair<string, FontText> pair in texts)
