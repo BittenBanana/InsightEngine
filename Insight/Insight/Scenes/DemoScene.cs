@@ -1057,12 +1057,9 @@ namespace Insight.Scenes
                 //Debug.WriteLine(mainCam.Position);
                 if(gameOver)
                     ui.ChangeTextOpacity("gameOver", 1);
+                
+                sightSlider.SetSightLevel(player.GetComponent<PlayerManager>().detectionLevel);
 
-
-                sliderOffset += Time.deltaTime/2;
-                if (sliderOffset > 1)
-                    sliderOffset = 0;
-                sightSlider.SetSightLevel(sliderOffset);
             }
 
         }

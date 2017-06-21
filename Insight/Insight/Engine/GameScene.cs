@@ -16,6 +16,7 @@ namespace Insight.Engine
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
         protected List<GameObject> gameObjects;
+        public List<GameObject> enemies;
         protected Camera mainCam;
         public UserInterface ui;
         public GameObject player;
@@ -32,6 +33,7 @@ namespace Insight.Engine
             this.graphics = graphicsDevice;
             debugDraw = new DebugDraw(graphics.GraphicsDevice);
             gameObjects = new List<GameObject>();
+            enemies = new List<GameObject>();
         }
 
         public virtual void LoadContent()

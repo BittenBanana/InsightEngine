@@ -35,6 +35,12 @@ namespace Insight.Scripts
 
             if (health <= 0)
                 SceneManager.Instance.currentScene.gameOver = true;
+            float detLvl = 0;
+            foreach (GameObject enemy in SceneManager.Instance.currentScene.enemies)
+            {
+                detLvl = Math.Max(detLvl, enemy.GetComponent<EnemySight>().detectionLevel);
+            }
+            detectionLevel = detLvl;
             base.Update();
         }
 

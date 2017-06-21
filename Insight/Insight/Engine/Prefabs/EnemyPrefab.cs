@@ -29,6 +29,7 @@ namespace Insight.Engine.Prefabs
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;
 
             prefabGameObjects.Add(enemy);
+            
             prefabGameObjects.Add(enemySightTrigger);
             base.Initialize(position);
         }
@@ -55,6 +56,7 @@ namespace Insight.Engine.Prefabs
             enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 6f));
             enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
             enemy.GetComponent<EnemyAI>().SetFirstState(new PatrolState());
+            SceneManager.Instance.currentScene.enemies.Add(enemySightTrigger);
             base.LoadContent(content);
         }
     }

@@ -29,6 +29,7 @@ namespace Insight.Engine.Prefabs
 
             prefabGameObjects.Add(enemy);
             prefabGameObjects.Add(enemySightTrigger);
+            
             base.Initialize(position);
         }
 
@@ -52,6 +53,7 @@ namespace Insight.Engine.Prefabs
 
             enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
             enemy.GetComponent<EnemyAI>().SetFirstState(new StandAndLookState());
+            SceneManager.Instance.currentScene.enemies.Add(enemySightTrigger);
             base.LoadContent(content);
         }
     }
