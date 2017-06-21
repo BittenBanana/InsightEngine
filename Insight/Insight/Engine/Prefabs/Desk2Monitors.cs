@@ -27,7 +27,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            deskModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.desk2Monitors, 1.0f);
+            deskModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.desk2Monitors, 0.5f);
             deskModel.AddNewComponent<BoxCollider>();
 
         }
