@@ -44,6 +44,10 @@ namespace Insight.Engine.Prefabs
         {
 
             cornerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_corn_rt, 1.0f);
+            cornerModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/cor-corn-rt_DefaultMaterial_AlbedoTransparency");
+            cornerModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/cor-corn-rt_DefaultMaterial_Normal");
+            cornerModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/cor-corn-rt_DefaultMaterial_AO");
+            cornerModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/cor-corn-rt_DefaultMaterial_MetallicSmoothness");
             cornerCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_corn_col, 1.0f);
             floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
 
