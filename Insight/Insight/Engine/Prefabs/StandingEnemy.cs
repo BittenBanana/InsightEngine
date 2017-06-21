@@ -36,6 +36,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
             enemy.LoadContent(content);
+            enemy.GetComponent<AnimationRender>().Load(content,ContentModels.Instance.playerIdle, ContentModels.Instance.playerRun,30);
             enemy.GetComponent<Renderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
             enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
             enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
