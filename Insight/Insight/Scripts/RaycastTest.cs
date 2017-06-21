@@ -204,5 +204,10 @@ namespace Insight.Scripts
             test?.Draw(cam);
             base.Draw(cam);
         }
+
+        public PlayerBullets.Bullets? GetLoadedBullet()
+        {
+            return currentBulletLoaded;
+        }
     }
 }

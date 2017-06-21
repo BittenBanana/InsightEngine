@@ -200,7 +200,7 @@ namespace Insight.Scenes
         private Effect postEffect;
 
         SightSlider sightSlider;
-        float sliderOffset = 0;
+        AmmoInterface ammoInterface;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
@@ -226,7 +226,7 @@ namespace Insight.Scenes
             enemy1 = new EnemyPrefab();
             enemy1.Initialize(new Vector3(18.5f, 0, 6f));
             enemyStanding = new StandingEnemy();
-            enemyStanding.Initialize(new Vector3(18.5f, 0, 3.5f));
+            enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
 
             //player.AddNewComponent<Rigidbody>();
 
@@ -948,16 +948,9 @@ namespace Insight.Scenes
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
-            ui.AddSprite("Sprites/GUI/bg", "bg", new Vector2(30, windowHeight - 100), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/oko_nieaktywne", "oko_na", new Vector2(30, windowHeight - 100), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/marker_niekatywny", "marker_na", new Vector2(30, windowHeight - 100), Color.White, 1);
-            ui.AddSprite("Sprites/GUI/agresja_nieaktywna", "agresja_na", new Vector2(30, windowHeight - 100), Color.White, 1);
 
-            ui.AddSprite("Sprites/GUI/oko_aktywne", "oko_a", new Vector2(30, windowHeight - 100), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/marker_atywny", "marker_a", new Vector2(30, windowHeight - 100), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/agresja_aktywna", "agresja_a", new Vector2(30, windowHeight - 100), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/przeslonka", "przeslonka", new Vector2(30, windowHeight - 100), Color.White, 1);
 
+            
 
 
             ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
@@ -970,6 +963,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/crosshair", "crosshair", new Vector2(windowWidth / 2 - 16, windowHeight / 2 - 16), Color.White, 1);
 
             sightSlider = new SightSlider(ui, windowWidth, windowHeight);
+            ammoInterface = new AmmoInterface(ui, windowHeight, windowHeight);
 
             lightRenderer.Camera = mainCam;
             lightRenderer.Lights = lights;
@@ -1064,6 +1058,25 @@ namespace Insight.Scenes
                     ui.ChangeTextOpacity("gameOver", 1);
                 
                 sightSlider.SetSightLevel(player.GetComponent<PlayerManager>().detectionLevel);
+
+                switch (player.GetComponent<RaycastTest>().GetLoadedBullet())
+                {
+                    case PlayerBullets.Bullets.Transmitter:
+                        ui.ChangeSpriteOpacity("ammo1", 0);
+                        ui.ChangeSpriteOpacity("ammo2", 1);
+                        ui.ChangeSpriteOpacity("ammo3", 0);
+                        break;
+                    case PlayerBullets.Bullets.Agressive:
+                        ui.ChangeSpriteOpacity("ammo1", 0);
+                        ui.ChangeSpriteOpacity("ammo2", 0);
+                        ui.ChangeSpriteOpacity("ammo3", 1);
+                        break;
+                    default:
+                        ui.ChangeSpriteOpacity("ammo1", 0);
+                        ui.ChangeSpriteOpacity("ammo2", 0);
+                        ui.ChangeSpriteOpacity("ammo3", 0);
+                        break;
+                }
 
             }
 
