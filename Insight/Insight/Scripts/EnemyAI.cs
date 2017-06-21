@@ -26,6 +26,8 @@ namespace Insight.Scripts
         public EnemySight enemySight { get; set; }
         public Vector3? markerPosition { get; set; }
 
+        public bool detect { get; set; }
+
         private EnemyAIState currentState;
         public EnemyAIState previousState { get; set; }
         public EnemyAIState defaultState { get; private set; }
@@ -50,7 +52,7 @@ namespace Insight.Scripts
             standPosition = gameObject.Transform.Position;
             defaultRotation = gameObject.Transform.Rotation;
             health = 100;
-
+            detect = true;
         }
 
         public override void Update()

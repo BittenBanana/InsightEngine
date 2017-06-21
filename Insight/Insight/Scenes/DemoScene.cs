@@ -995,19 +995,6 @@ namespace Insight.Scenes
                 //    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
                 postEffect.Parameters["colorPercentage"]?.SetValue(1 - ((float)player.GetComponent<PlayerManager>().health / 100));
 
-                KeyboardState keyState = Keyboard.GetState();
-
-                if (keyState.IsKeyDown(Keys.LeftControl))
-                {
-                    player.GetComponent<PlayerManager>().GotDamage(20);
-                    //ui.ChangeSpriteOpacity("blood", 0.05f);
-                }
-
-                if (keyState.IsKeyDown(Keys.N))
-                {
-                    //ui.ChangeSpriteOpacity("blood", 0.05f);
-                }
-
                 //mui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
                 // Update

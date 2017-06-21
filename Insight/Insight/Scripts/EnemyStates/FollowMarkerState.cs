@@ -19,6 +19,7 @@ namespace Insight.Scripts.EnemyStates
             timer = 0;
             wait = 10;
             Debug.WriteLine("Enter Marker State");
+            enemy.detect = false;
         }
 
         public override void Execute(EnemyAI enemy)

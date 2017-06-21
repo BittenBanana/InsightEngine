@@ -11,7 +11,7 @@ namespace Insight.Scripts.EnemyStates
     {
         public override void EnterState(EnemyAI enemy)
         {
-           
+            enemy.detect = false;
         }
 
         public override void Execute(EnemyAI enemy)

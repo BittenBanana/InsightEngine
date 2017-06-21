@@ -6,22 +6,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
 
 namespace Insight.Scripts
 {
     class EnemySight : BaseScript
     {
-        public Transform followTransform { get; set; }
         public float fovAngle { get; set; }
         public float reactionTime { get; set; }
         private float timer;
 
-        private bool isOnTrigger;
+        public bool isOnTrigger;
 
         //public bool isPlayerSeen { get; private set; }
         //public bool isPlayerHeard { get; private set; }
         public GameObject player { get; private set; }
+        public GameObject enemy { get; set; }
 
         public Vector3 lastSeenPosition { get; private set; }
         public Vector3 lastHeardPosition { get; private set; }
@@ -43,9 +44,9 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            gameObject.Transform = followTransform;
-            
-            if(!isOnTrigger && detectionLevel > 0)
+            gameObject.Transform = enemy.Transform;
+
+            if (!isOnTrigger && detectionLevel > 0)
                 detectionLevel -= Time.deltaTime * 0.1f;
 
             base.Update();
@@ -54,7 +55,7 @@ namespace Insight.Scripts
         public override void OnTriggerStay(object source, CollisionEventArgs args)
         {
             //Debug.WriteLine("OnTriggerStayEnemy");
-            if (args.GameObject.physicLayer == Layer.Player)
+            if (args.GameObject.physicLayer == Layer.Player && enemy.GetComponent<EnemyAI>().detect)
             {
                 Vector3 direction = args.GameObject.Transform.Position - gameObject.Transform.Position;
                 direction.Normalize();
@@ -70,7 +71,7 @@ namespace Insight.Scripts
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
                                 if (detectionLevel < 1)
-                                    detectionLevel += Time.deltaTime * 2;
+                                    detectionLevel += Time.deltaTime * 4;
                                 lastSeenPosition = player.Transform.Position;
                             }
                         }

@@ -11,15 +11,17 @@ namespace Insight.Scripts.EnemyStates
 {
     class AgressiveState : EnemyAIState
     {
-        
-
         private float minDistance = float.PositiveInfinity;
         public override void EnterState(EnemyAI enemy)
         {
+            if (enemy.enemySight.detectionLevel >= 0.5f)
+            {
+                enemy.nearestEnemyPosition = enemy.enemySight.player;
+            }
             Debug.WriteLine("Enter Agressive State");
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if(item.physicLayer != Layer.Enemy && item.physicLayer != Layer.Player) continue;
+                if(item.physicLayer != Layer.Enemy) continue;
                 if(item == enemy.gameObject) continue;
                 if (enemy.nearestEnemyPosition == null)
                 {
@@ -35,7 +37,7 @@ namespace Insight.Scripts.EnemyStates
                     }
                 }
             }
-
+            enemy.detect = false;
         }
 
         public override void Execute(EnemyAI enemy)

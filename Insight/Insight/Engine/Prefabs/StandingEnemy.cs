@@ -48,7 +48,7 @@ namespace Insight.Engine.Prefabs
             enemySightTrigger.AddNewComponent<SphereCollider>();
             enemySightTrigger.GetComponent<SphereCollider>().IsTrigger = true;
             enemySightTrigger.AddNewComponent<EnemySight>();
-            enemySightTrigger.GetComponent<EnemySight>().followTransform = enemy.Transform;
+            enemySightTrigger.GetComponent<EnemySight>().enemy = enemy;
             enemySightTrigger.physicLayer = Layer.DispenserTrigger;
 
             enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
