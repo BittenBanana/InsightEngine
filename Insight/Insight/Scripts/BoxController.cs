@@ -76,7 +76,6 @@ namespace Insight.Scripts
 
                 if(mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 30);
                     this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -95,7 +94,6 @@ namespace Insight.Scripts
 
                 if (mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 30);
                     this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -135,7 +133,6 @@ namespace Insight.Scripts
 
             if(kState == KeyState.Released && mState == MovementState.IsRunning)
             {
-                this.gameObject.GetComponent<AnimationRender>().SetFrames(0, 30);
                 this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerIdle);
                 kState = KeyState.None;
                 mState = MovementState.IsIdle;

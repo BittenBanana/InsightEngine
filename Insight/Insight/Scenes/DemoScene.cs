@@ -773,7 +773,6 @@ namespace Insight.Scenes
             player.GetComponent<AnimationRender>().Load(content, ContentModels.Instance.playerRun, 30);
             //playerAnimRun.Load(content, "Models/Konrads/Character/postacRunGun", 30);
             //playerAnimIdle.Load(content, "Models/Konrads/Character/postacIdleGun", 60);
-            player.GetComponent<AnimationRender>().SetFrames(0, 1);
 
             //player.ReplaceAnimationRendrer(playerAnimIdle);
 

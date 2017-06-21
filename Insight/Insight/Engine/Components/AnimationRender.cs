@@ -36,7 +36,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip,0, 31);
+            animationPlayer.StartClip(clip, 30);
         }
 
         public void LoadNewModel(Model model)
@@ -53,7 +53,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip, 0, 30);
+            animationPlayer.StartClip(clip, 30);
         }
 
         public void Load(ContentManager c, Model model, int frames)
@@ -70,7 +70,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip, 0, frames);
+            animationPlayer.StartClip(clip, 30);
         }
 
         public void SetFrames(int firstFrame, int lastFrame)
