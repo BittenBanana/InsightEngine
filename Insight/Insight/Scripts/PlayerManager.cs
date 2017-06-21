@@ -12,6 +12,8 @@ namespace Insight.Scripts
         private float timer;
         private float healTime;
 
+        public float detectionLevel { get; set; }
+
         public int health { get; private set; }
         public PlayerManager(GameObject gameObject) : base(gameObject)
         {

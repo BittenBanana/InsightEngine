@@ -24,6 +24,8 @@ namespace Insight.Scripts
         public Vector3 lastSeenPosition { get; private set; }
         public Vector3 lastHeardPosition { get; private set; }
 
+        public float detectionLevel { get; private set; }
+
         public EnemySight(GameObject gameObject) : base(gameObject)
         {
             fovAngle = DegreeToRadian(110f);
@@ -40,6 +42,7 @@ namespace Insight.Scripts
         public override void Update()
         {
             gameObject.Transform = followTransform;
+            
             base.Update();
         }
 
@@ -61,7 +64,8 @@ namespace Insight.Scripts
                         {
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
-                                isPlayerSeen = true;
+                                if (detectionLevel < 1)
+                                    detectionLevel += 4 * Time.deltaTime;
                                 lastSeenPosition = player.Transform.Position;
                             }
                         }
@@ -70,13 +74,10 @@ namespace Insight.Scripts
                     }
                     timer += Time.deltaTime;
                 }
-
-
-
+                if (detectionLevel < 1)
+                    detectionLevel += Time.deltaTime;
                 isPlayerHeard = true;
                 lastHeardPosition = player.Transform.Position;
-
-
 
             }
         }
