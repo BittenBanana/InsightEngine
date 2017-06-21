@@ -1409,18 +1409,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Character/postacRunGun.FBX
 
-#begin Sprites/blood.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/blood.png
-
 #begin Models/Konrads/Enviroment/bigMachine_1stRoom.FBX
 /importer:FbxImporter
 /processor:ModelProcessor
@@ -1590,7 +1578,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/GUI/ramka_pocisk1.png
->>>>>>> cdb4143348bd1878963bce96578c47b3f69b69d0
 
 #begin Sprites/GUI/ramka_pocisk2.png
 /importer:TextureImporter
