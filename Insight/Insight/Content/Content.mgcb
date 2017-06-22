@@ -1843,6 +1843,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/f-5x5_DefaultMaterial_AlbedoTransparency.png
 
+#begin Sprites/GUI/ikona_agresja.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/GUI/ikona_agresja.png
+
 #begin Materials/f-5x5_DefaultMaterial_AO.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2022,4 +2034,5 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/wall-5x6_DefaultMaterial_Normal.png
+
 
