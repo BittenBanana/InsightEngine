@@ -15,6 +15,8 @@ namespace Insight.Engine.Components
         //Matrix[] boneTransformations;
         List<AnimationClip> clips = new List<AnimationClip>();
         AnimationPlayer animationPlayer;
+
+        public int animationId { get; private set; }
         //float scale;
         public AnimationRender(GameObject gameObject) : base(gameObject)
         {
@@ -106,6 +108,7 @@ namespace Insight.Engine.Components
 
         public void ChangeAnimation(int id)
         {
+            animationId = id;
             animationPlayer.StartClip(clips[id], 30);
         }
 

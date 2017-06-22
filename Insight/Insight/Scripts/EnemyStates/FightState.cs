@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Engine.Components;
 
 namespace Insight.Scripts.EnemyStates
 {
@@ -19,6 +20,8 @@ namespace Insight.Scripts.EnemyStates
             wait = 1;
             Debug.WriteLine("Enter Fight State");
             enemy.detect = false;
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Fight Animation
         }
 
         public override void Execute(EnemyAI enemy)

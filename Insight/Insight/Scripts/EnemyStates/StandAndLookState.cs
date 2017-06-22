@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
 
 namespace Insight.Scripts.EnemyStates
@@ -31,6 +32,8 @@ namespace Insight.Scripts.EnemyStates
             if (EnemyWalkingSpots.getInstance()
                     .DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.standPosition) < 0.1f)
             {
+                if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
+                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0);
                 if (!isRotationReset)
                 {
                     enemy.gameObject.Transform.Rotation = enemy.defaultRotation;
@@ -63,6 +66,8 @@ namespace Insight.Scripts.EnemyStates
             }
             else
             {
+                if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
+                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
                 isRotationReset = false;
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
             }

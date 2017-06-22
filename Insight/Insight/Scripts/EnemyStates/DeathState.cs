@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
 
 namespace Insight.Scripts.EnemyStates
@@ -13,6 +14,8 @@ namespace Insight.Scripts.EnemyStates
         public override void EnterState(EnemyAI enemy)
         {
             enemy.detect = false;
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1); //TODO Death Animation
         }
 
         public override void Execute(EnemyAI enemy)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
 
 namespace Insight.Scripts.EnemyStates
@@ -22,6 +23,8 @@ namespace Insight.Scripts.EnemyStates
             minRand = 1;
             maxRand = 20;
             random = new Random();
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Shoot Animation
         }
 
         public override void Execute(EnemyAI enemy)
