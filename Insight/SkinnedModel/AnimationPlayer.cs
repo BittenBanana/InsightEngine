@@ -54,7 +54,7 @@ namespace SkinnedModel
                 throw new ArgumentNullException("skinningData");
 
             skinningDataValue = skinningData;
-
+            canLoop = true;
             boneTransforms = new Matrix[skinningData.BindPose.Count];
             worldTransforms = new Matrix[skinningData.BindPose.Count];
             skinTransforms = new Matrix[skinningData.BindPose.Count];
@@ -72,6 +72,19 @@ namespace SkinnedModel
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
             currentKeyframe = 0;
+            // Initialize bone transforms to the bind pose.
+            skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
+        }
+
+        public void StartClip(AnimationClip clip, int actualKeyframe, bool loop)
+        {
+            if (clip == null)
+                throw new ArgumentNullException("clip");
+            this.actualKeyFrame = actualKeyframe * 40;
+            currentClipValue = clip;
+            currentTimeValue = TimeSpan.Zero;
+            currentKeyframe = 0;
+            canLoop = loop;
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
         }
@@ -112,7 +125,7 @@ namespace SkinnedModel
                 throw new ArgumentOutOfRangeException("time");
 
             // If the position moved backwards, reset the keyframe index.
-            if (time < currentTimeValue)
+            if ((time < currentTimeValue) && canLoop == true)
             {
                 currentKeyframe = 0;
                 skinningDataValue.BindPose.CopyTo(boneTransforms, 0);

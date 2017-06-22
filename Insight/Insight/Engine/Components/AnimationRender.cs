@@ -120,7 +120,10 @@ namespace Insight.Engine.Components
         public void ChangeAnimation(int id)
         {
             animationId = id;
-            animationPlayer.StartClip(clips[id], 300);
+            if(id == 2) //death TO RECODE
+                animationPlayer.StartClip(clips[id], 300, false);
+            else
+                animationPlayer.StartClip(clips[id], 300);
         }
 
         public override void Update()
