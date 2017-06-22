@@ -28,6 +28,11 @@ namespace Insight.Engine.Prefabs
         {
 
             machineModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.bigMachine, 1.0f);
+            machineModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/bigMachine_1stRoom_DefaultMaterial_AlbedoTransparency");
+            machineModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_Normal");
+            machineModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_AO");
+            machineModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_MetallicSmoothness");
+
             machineModel.AddNewComponent<BoxCollider>();
 
         }

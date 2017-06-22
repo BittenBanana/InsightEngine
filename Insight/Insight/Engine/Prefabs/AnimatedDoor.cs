@@ -81,10 +81,10 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
             wallModel.LoadContent(content, ContentModels.Instance.door_wall_5x6, 1.0f);
-            wallModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
-            wallModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/substance painter_DefaultMaterial_Normal");
-            wallModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/substance painter_DefaultMaterial_AO");
-            wallModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/substance painter_DefaultMaterial_MetallicSmoothness");
+            wallModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/wall-5x6_DefaultMaterial_AlbedoTransparency");
+            wallModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/wall-5x6_DefaultMaterial_Normal");
+            wallModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/wall-5x6_DefaultMaterial_AO");
+            wallModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/wall-5x6_DefaultMaterial_MetallicSmoothness");
 
             leftDoorModel.LoadContent(content, ContentModels.Instance.door_l_wing, 1.0f);
             leftDoorModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
