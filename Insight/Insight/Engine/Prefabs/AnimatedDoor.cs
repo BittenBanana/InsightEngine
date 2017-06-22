@@ -80,10 +80,29 @@ namespace Insight.Engine.Prefabs
 
         public override void LoadContent(ContentManager content)
         {
-            wallModel.LoadContent(content, ContentModels.Instance.door_wall_5x4, 1.0f);
+            wallModel.LoadContent(content, ContentModels.Instance.door_wall_5x6, 1.0f);
+            wallModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
+            wallModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/substance painter_DefaultMaterial_Normal");
+            wallModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/substance painter_DefaultMaterial_AO");
+            wallModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/substance painter_DefaultMaterial_MetallicSmoothness");
+
             leftDoorModel.LoadContent(content, ContentModels.Instance.door_l_wing, 1.0f);
+            leftDoorModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
+            leftDoorModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/substance painter_DefaultMaterial_Normal");
+            leftDoorModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/substance painter_DefaultMaterial_AO");
+            leftDoorModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/substance painter_DefaultMaterial_MetallicSmoothness");
+
             rightDoorModel.LoadContent(content, ContentModels.Instance.door_r_wing, 1.0f);
+            rightDoorModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
+            rightDoorModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/substance painter_DefaultMaterial_Normal");
+            rightDoorModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/substance painter_DefaultMaterial_AO");
+            rightDoorModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/substance painter_DefaultMaterial_MetallicSmoothness");
+
             frame.LoadContent(content, ContentModels.Instance.door_frame, 1.0f);
+            frame.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/substance painter_DefaultMaterial_AlbedoTransparency");
+            frame.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/substance painter_DefaultMaterial_Normal");
+            frame.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/substance painter_DefaultMaterial_AO");
+            frame.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/substance painter_DefaultMaterial_MetallicSmoothness");
 
             wallModel.AddNewComponent<BoxCollider>();
             leftDoorModel.AddNewComponent<BoxCollider>();

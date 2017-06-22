@@ -55,8 +55,8 @@ namespace Insight.Scripts
                     currentOffset += openingSpeed;
                     if (currentOffset <= 1.0f)
                     {
-                        leftDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
-                        rightDoor.Transform.Move(Vector3.UnitX, openingSpeed);
+                        leftDoor.Transform.Move(Vector3.UnitX, openingSpeed);
+                        rightDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
                     }
                     else
                     {
@@ -72,8 +72,8 @@ namespace Insight.Scripts
                     currentOffset += openingSpeed;
                     if (currentOffset <= 1.0f)
                     {
-                        leftDoor.Transform.Move(Vector3.UnitX, openingSpeed);
-                        rightDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
+                        leftDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
+                        rightDoor.Transform.Move(Vector3.UnitX, openingSpeed);
                     }
                     else
                     {

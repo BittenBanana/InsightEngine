@@ -42,6 +42,7 @@ namespace Insight
         public Model door_l_wing { get; private set; }
         public Model door_r_wing { get; private set; }
         public Model door_wall_5x4 { get; private set; }
+        public Model door_wall_5x6 { get; private set; }
         public Model f_3x5 { get; private set; }
         public Model f_3x5_rotated { get; private set; }
         public Model f_5x5 { get; private set; }
@@ -106,6 +107,7 @@ namespace Insight
             door_l_wing = content.Load<Model>("Models/Konrads/Enviroment/Door/l-wing");
             door_r_wing = content.Load<Model>("Models/Konrads/Enviroment/Door/r-wing");
             door_wall_5x4 = content.Load<Model>("Models/Konrads/Enviroment/Door/wall-5x4");
+            door_wall_5x6 = content.Load<Model>("Models/Konrads/Enviroment/Door/wall-5x6");
             f_3x5 = content.Load<Model>("Models/Konrads/Enviroment/f-3x5");
             f_3x5_rotated = content.Load<Model>("Models/Konrads/Enviroment/f-3x5-rotated");
             f_5x5 = content.Load<Model>("Models/Konrads/Enviroment/f-5x5");

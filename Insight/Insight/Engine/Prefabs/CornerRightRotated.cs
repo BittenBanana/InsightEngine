@@ -23,16 +23,11 @@ namespace Insight.Engine.Prefabs
             cornerCollider = new GameObject(new Vector3(0, 0, 0), false);
             floor = new GameObject(new Vector3(0, 0, 0), false);
 
-
-
             cornerModel.AddNewComponent<MeshRenderer>();
             cornerCollider.AddNewComponent<MeshRenderer>();
             floor.AddNewComponent<MeshRenderer>();
             floor.GetComponent<MeshRenderer>().IsVisible = false;
             cornerCollider.GetComponent<MeshRenderer>().IsVisible = false;
-
-
-
 
             prefabGameObjects.Add(cornerModel);
             prefabGameObjects.Add(cornerCollider);
@@ -42,7 +37,6 @@ namespace Insight.Engine.Prefabs
 
         public override void LoadContent(ContentManager content)
         {
-
             cornerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_corn_lt, 1.0f);
             cornerModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/cor-corn-lt_DefaultMaterial_AlbedoTransparency");
             cornerModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/cor-corn-lt_DefaultMaterial_Normal");
