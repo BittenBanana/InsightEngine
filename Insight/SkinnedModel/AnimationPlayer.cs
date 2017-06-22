@@ -11,7 +11,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
 #endregion
 
 namespace SkinnedModel
@@ -29,8 +28,7 @@ namespace SkinnedModel
         AnimationClip currentClipValue;
         TimeSpan currentTimeValue;
         int currentKeyframe;
-        int firstFrame;
-        int lastFrame;
+        int actualKeyFrame;
 
 
         // Current animation transform matrices.
@@ -65,29 +63,18 @@ namespace SkinnedModel
         /// <summary>
         /// Starts decoding the specified animation clip.
         /// </summary>
-        public void StartClip(AnimationClip clip, int firstFrame,int lastFrame)
+        public void StartClip(AnimationClip clip, int actualKeyframe)
         {
             if (clip == null)
                 throw new ArgumentNullException("clip");
-
+            this.actualKeyFrame = actualKeyframe*40;
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
             currentKeyframe = 0;
-            this.firstFrame = 14*40;
-            this.lastFrame = 30 * 40;
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
         }
 
-        public void SetFrames(int first, int last)
-        {
-            this.firstFrame = first * 40;
-            this.lastFrame = last * 40;
-            currentKeyframe = firstFrame;
-            currentTimeValue = new TimeSpan();
-
-            //Debug.WriteLine(firstFrame + " " + lastFrame);
-        }
 
         /// <summary>
         /// Advances the current animation position.
@@ -149,7 +136,7 @@ namespace SkinnedModel
 
                 currentKeyframe++;
 
-                if(currentKeyframe > lastFrame - firstFrame)
+                if(currentKeyframe > actualKeyFrame)
                 {
                     currentKeyframe = 0;
                     currentTimeValue = new TimeSpan();

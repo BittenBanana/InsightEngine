@@ -1,0 +1,9 @@
+diff a/Insight/SkinnedModel/AnimationPlayer.cs b/Insight/SkinnedModel/AnimationPlayer.cs	(rejected hunks)
+@@ -149,6 +149,7 @@
+ 
+                 currentKeyframe++;
+ 
++                if(currentKeyframe > lastFrame - firstFrame)
+                 {
+                     currentKeyframe = 0;
+                     currentTimeValue = new TimeSpan();

@@ -224,5 +224,10 @@ namespace Insight.Scripts
         {
             return currentBulletLoaded;
         }
+
+        public void SetBulletLoad(PlayerBullets.Bullets? bullet)
+        {
+            currentBulletLoaded = bullet;
+        }
     }
 }

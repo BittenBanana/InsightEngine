@@ -770,10 +770,9 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
 
             //player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
-            player.GetComponent<AnimationRender>().Load(content, ContentModels.Instance.playerRun, 30);
+            player.GetComponent<AnimationRender>().Load(content, ContentModels.Instance.playerIdle, ContentModels.Instance.playerRun, 30);
             //playerAnimRun.Load(content, "Models/Konrads/Character/postacRunGun", 30);
             //playerAnimIdle.Load(content, "Models/Konrads/Character/postacIdleGun", 60);
-            player.GetComponent<AnimationRender>().SetFrames(0, 1);
 
             //player.ReplaceAnimationRendrer(playerAnimIdle);
 
@@ -1065,6 +1064,18 @@ namespace Insight.Scenes
                         ui.ChangeSpriteOpacity("ammo2", 0);
                         ui.ChangeSpriteOpacity("ammo3", 0);
                         break;
+                }
+
+                if(player.GetComponent<RaycastTest>().GetLoadedBullet() == null)
+                {
+                    if(player.GetComponent<PlayerBullets>().aggresiveBullet)
+                    {
+                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                    }
+                    else if (player.GetComponent<PlayerBullets>().transmitterBullet)
+                    {
+                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                    }
                 }
 
             }
