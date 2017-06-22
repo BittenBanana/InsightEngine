@@ -1066,6 +1066,18 @@ namespace Insight.Scenes
                         break;
                 }
 
+                if(player.GetComponent<RaycastTest>().GetLoadedBullet() == null)
+                {
+                    if(player.GetComponent<PlayerBullets>().aggresiveBullet)
+                    {
+                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                    }
+                    else if (player.GetComponent<PlayerBullets>().transmitterBullet)
+                    {
+                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                    }
+                }
+
             }
 
         }
