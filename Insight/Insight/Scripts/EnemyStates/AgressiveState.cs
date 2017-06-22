@@ -17,6 +17,7 @@ namespace Insight.Scripts.EnemyStates
             if (enemy.enemySight.detectionLevel >= 0.5f)
             {
                 enemy.nearestEnemyPosition = enemy.enemySight.player;
+                return;
             }
             Debug.WriteLine("Enter Agressive State");
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())

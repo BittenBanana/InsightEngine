@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.Engine;
+using Insight.Engine.Components;
 using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
 
@@ -29,10 +30,15 @@ namespace Insight.Scripts
 
         public float detectionLevel { get; private set; }
 
+        private float radius;
+        private float distance;
+
         public EnemySight(GameObject gameObject) : base(gameObject)
         {
             fovAngle = DegreeToRadian(170f);
             reactionTime = 0.25f;
+
+            radius = gameObject.GetComponent<SphereCollider>().GetCompleteBoundingSphere().Radius * gameObject.GetComponent<Renderer>().GetScale();
 
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
@@ -60,6 +66,8 @@ namespace Insight.Scripts
                 Vector3 direction = args.GameObject.Transform.Position - gameObject.Transform.Position;
                 direction.Normalize();
                 float angle = (float)Math.Acos(Vector3.Dot(gameObject.Transform.forward, direction));
+                distance = EnemyWalkingSpots.getInstance()
+                    .DistanceFromDestination(gameObject.Transform.Position, player.Transform.Position);
 
                 if (angle < fovAngle * 0.5f)
                 {
@@ -71,7 +79,7 @@ namespace Insight.Scripts
                             if (hit.collider.gameObject.physicLayer == Layer.Player)
                             {
                                 if (detectionLevel < 1)
-                                    detectionLevel += Time.deltaTime * 4;
+                                    detectionLevel += Time.deltaTime * 4 * (1 + (1 - distance / radius));
                                 lastSeenPosition = player.Transform.Position;
                             }
                         }
@@ -81,7 +89,7 @@ namespace Insight.Scripts
                     timer += Time.deltaTime;
                 }
                 if (detectionLevel < 1)
-                    detectionLevel += Time.deltaTime * 0.25f;
+                    detectionLevel += Time.deltaTime * 0.25f * (1 +(1 - distance/radius));
                 //isPlayerHeard = true;
                 lastHeardPosition = player.Transform.Position;
                 if (!isOnTrigger)
