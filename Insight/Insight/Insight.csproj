@@ -98,6 +98,7 @@
     <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
     <Compile Include="Engine\Prefabs\Intercom.cs" />
+    <Compile Include="Engine\Prefabs\LowerStairsTrigger.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
     <Compile Include="Engine\Prefabs\RoomFloorSmallerRotated.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
     <Compile Include="Engine\Prefabs\UI\AmmoInterface.cs" />
     <Compile Include="Engine\Prefabs\UI\SightSlider.cs" />
+    <Compile Include="Engine\Prefabs\UpperStairsTrigger.cs" />
     <Compile Include="Engine\Prefabs\Wall.cs" />
     <Compile Include="Engine\Prefabs\WallRotated.cs" />
     <Compile Include="Engine\Prefabs\WallShorter.cs" />
@@ -149,10 +151,12 @@
     <Compile Include="Scripts\EnemyStates\PatrolState.cs" />
     <Compile Include="Scripts\EnemyStates\ShootState.cs" />
     <Compile Include="Scripts\EnemyStates\StandAndLookState.cs" />
+    <Compile Include="Scripts\LowerStairsTriggerController.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\PlayerManager.cs" />
     <Compile Include="Scripts\RaycastTest.cs" />
     <Compile Include="Scripts\ThirdPersonCamera.cs" />
+    <Compile Include="Scripts\UpperStairsTriggerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
