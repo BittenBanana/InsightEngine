@@ -84,9 +84,9 @@ namespace Insight.Engine.Components
 
             animationPlayer = new AnimationPlayer(skinningData);
 
-            AnimationClip clip = skinningData.AnimationClips["Take 001"];
+            AnimationClip clip = skinningData.AnimationClips["mixamo.com"];
 
-            animationPlayer.StartClip(clip, 30);
+            //animationPlayer.StartClip(clip, 30);
 
 
 
@@ -98,12 +98,12 @@ namespace Insight.Engine.Components
 
             AnimationPlayer animationPlayer2 = new AnimationPlayer(skinningData2);
 
-            AnimationClip clip2 = skinningData2.AnimationClips["Take 001"];
+            AnimationClip clip2 = skinningData2.AnimationClips["mixamo.com"];
 
             clips.Add(clip);
             clips.Add(clip2);
 
-            animationPlayer.StartClip(clips[0], 30);
+            animationPlayer.StartClip(clips[0], 144);
         }
 
         public void ChangeAnimation(int id)

@@ -84,8 +84,8 @@ namespace Insight
 
         public void LoadContent(ContentManager content)
         {
-            playerIdle = content.Load<Model>("Models/Konrads/Character/postacIdleGun");
-            playerRun = content.Load<Model>("Models/Konrads/Character/postacRunGun");
+            playerIdle = content.Load<Model>("Models/pistol_idle");
+            playerRun = content.Load<Model>("Models/pistol_run");
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
             column_rotated = content.Load<Model>("Models/Konrads/Enviroment/column-rotated");
