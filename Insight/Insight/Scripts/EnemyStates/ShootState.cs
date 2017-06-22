@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Insight.Engine;
 using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Insight.Scripts.EnemyStates
 {
@@ -25,6 +26,8 @@ namespace Insight.Scripts.EnemyStates
             random = new Random();
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
                 enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Shoot Animation
+            SoundEffectInstance instance = SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot", enemy.gameObject);
+            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(instance);
         }
 
         public override void Execute(EnemyAI enemy)

@@ -23,6 +23,8 @@ namespace Insight.Engine
         public bool gameOver;
         protected Matrix projection { get; set; }
 
+        public AudioManager audioManager { get; protected set; }
+
         public GraphicsDevice GetGraphicsDevice()
         {
             return graphics.GraphicsDevice;

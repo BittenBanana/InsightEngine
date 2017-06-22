@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine
 {   
-    class AudioManager
+    public class AudioManager
     {
         private List<Song> songs;
         private List<SoundEffect> soundEffects;
@@ -60,7 +60,7 @@ namespace Insight.Engine
             }
         }
 
-        public void AddSoundEffectWithEmitter(string soundEffectName, GameObject gameObject)
+        public SoundEffectInstance AddSoundEffectWithEmitter(string soundEffectName, GameObject gameObject)
         {
             SoundEffect soundEffect = content.Load<SoundEffect>(soundEffectName);
             SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
@@ -70,16 +70,28 @@ namespace Insight.Engine
             audioEmitter.Position = gameObject.Transform.Position;
             audioEmitters.Add(audioEmitter);
             gameObjects.Add(gameObject);
+
+            return soundEffectInstance;
         }
 
+        [Obsolete("use PlaySoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
         public void PlaySoundEffect(int numberOfSoundEffect)
         {
             soundEffectInstances[numberOfSoundEffect].Play();
         }
+        public void PlaySoundEffect(SoundEffectInstance numberOfSoundEffect)
+        {
+            soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Play();
+        }
 
+        [Obsolete("use StopSoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
         public void StopSoundEffect(int numberOfSoundEffect)
         {
             soundEffectInstances[numberOfSoundEffect].Stop();
+        }
+        public void StopSoundEffect(SoundEffectInstance numberOfSoundEffect)
+        {
+            soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Stop();
         }
 
         public void SetSoundEffectLooped(int numberOfSoundEffect, bool isLooped)

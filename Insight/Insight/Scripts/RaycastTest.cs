@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Insight.Engine.Components;
 using Insight.Materials;
 using Insight.Scripts.EnemyStates;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Insight.Scripts
@@ -29,10 +30,14 @@ namespace Insight.Scripts
 
         private PlayerBullets.Bullets? currentBulletLoaded;
 
+        private SoundEffectInstance shoot;
+
         public RaycastTest(GameObject gameObject) : base(gameObject)
         {
             currentBulletLoaded = null;
             previousScrollValue = ms.ScrollWheelValue;
+            shoot = SceneManager.Instance.currentScene.audioManager
+                .AddSoundEffectWithEmitter("Audio/shoot", gameObject);
         }
 
         public override void Update()
@@ -42,6 +47,8 @@ namespace Insight.Scripts
             #region LeftButton
             if (ms.LeftButton == ButtonState.Pressed && !isPressed && currentBulletLoaded != null)
             {
+                SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(shoot);
+                //am.PlaySoundEffect(0);
                 Vector3 minPoint = SceneManager.Instance.device.GraphicsDevice.Viewport.Unproject(
                     new Vector3(SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2,
                         SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2,
@@ -201,12 +208,16 @@ namespace Insight.Scripts
             }
             if(ms.ScrollWheelValue != previousScrollValue)
             {
-                if((currentBulletLoaded == PlayerBullets.Bullets.Agressive || currentBulletLoaded == null) 
+                if ((currentBulletLoaded == PlayerBullets.Bullets.Agressive || currentBulletLoaded == null)
                     && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().transmitterBullet)
+                {
                     currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
-                else if ((currentBulletLoaded == PlayerBullets.Bullets.Transmitter || currentBulletLoaded == null) 
-                    && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().aggresiveBullet)
+                }
+                else if ((currentBulletLoaded == PlayerBullets.Bullets.Transmitter || currentBulletLoaded == null)
+                         && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().aggresiveBullet)
+                {
                     currentBulletLoaded = PlayerBullets.Bullets.Agressive;
+                }
 
 
             }

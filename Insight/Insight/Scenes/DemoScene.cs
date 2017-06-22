@@ -208,6 +208,7 @@ namespace Insight.Scenes
         {
             base.Initialize(graphicsDevice);
 
+            
 
             gameOver = false;
             sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
@@ -720,7 +721,7 @@ namespace Insight.Scenes
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
             directionalLight.GetComponent<Light>().Color = Color.White;
 
-
+            audioManager = new AudioManager(player, content);
 
             gameObjects.Add(pointLight1);
             gameObjects.Add(player);
@@ -735,6 +736,8 @@ namespace Insight.Scenes
         public override void LoadContent()
         {
             base.LoadContent();
+
+            audioManager = new AudioManager(player, content);
 
             #region Effects 
 
@@ -794,6 +797,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
             player.AddNewComponent<RaycastTest>();
+            
 
             player.AddNewComponent<BoxController>();
             cameraPivot.AddNewComponent<CameraFollowBox>();
@@ -966,9 +970,7 @@ namespace Insight.Scenes
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
 
-
             
-
 
             //ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
 
