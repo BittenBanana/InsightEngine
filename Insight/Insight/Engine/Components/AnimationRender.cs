@@ -100,16 +100,27 @@ namespace Insight.Engine.Components
 
             AnimationClip clip2 = skinningData2.AnimationClips["mixamo.com"];
 
+            SkinningData skinningData3 = ContentModels.Instance.playerDeath.Tag as SkinningData;
+
+            if (skinningData3 == null)
+                throw new InvalidOperationException
+                    ("This model does not contain a SkinningData tag.");
+
+            AnimationPlayer animationPlayer3 = new AnimationPlayer(skinningData3);
+
+            AnimationClip clip3 = skinningData3.AnimationClips["mixamo.com"];
+
             clips.Add(clip);
             clips.Add(clip2);
+            clips.Add(clip3);
 
-            animationPlayer.StartClip(clips[0], 144);
+            animationPlayer.StartClip(clips[0], 400);
         }
 
         public void ChangeAnimation(int id)
         {
             animationId = id;
-            animationPlayer.StartClip(clips[id], 30);
+            animationPlayer.StartClip(clips[id], 300);
         }
 
         public override void Update()

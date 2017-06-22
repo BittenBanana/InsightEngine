@@ -39,6 +39,7 @@ namespace SkinnedModel
 
         // Backlink to the bind pose and skeleton hierarchy data.
         SkinningData skinningDataValue;
+        public bool canLoop { get; set; }
 
 
         #endregion
@@ -136,7 +137,7 @@ namespace SkinnedModel
 
                 currentKeyframe++;
 
-                if(currentKeyframe > actualKeyFrame)
+                if((currentKeyframe > actualKeyFrame) && canLoop == true)
                 {
                     currentKeyframe = 0;
                     currentTimeValue = new TimeSpan();
