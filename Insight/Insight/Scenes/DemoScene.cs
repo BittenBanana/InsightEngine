@@ -182,6 +182,8 @@ namespace Insight.Scenes
         Desk2Monitors desk2Monitors4;
         Intercom intercom;
         BigMachine bigMachine;
+        UpperStairsTrigger upperStairsTrigger;
+        LowerStairsTrigger lowerStairsTrigger;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -228,7 +230,9 @@ namespace Insight.Scenes
             enemyStanding = new StandingEnemy();
             enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
 
-            //player.AddNewComponent<Rigidbody>();
+            player.AddNewComponent<Rigidbody>();
+
+            player.GetComponent<Rigidbody>().useGravity = false;
 
             cameraPivot = new GameObject(player.Transform.Position, false);
 
@@ -476,6 +480,12 @@ namespace Insight.Scenes
 
             stairs2 = new Stairs();
             stairs2.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
+
+            upperStairsTrigger = new UpperStairsTrigger();
+            upperStairsTrigger.Initialize(new Vector3(41, 1, 65.5f));
+
+            lowerStairsTrigger = new LowerStairsTrigger();
+            lowerStairsTrigger.Initialize(new Vector3(41, -4, 73f));
 
             wall23 = new WallVisibleSmaller();
             wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
@@ -942,6 +952,8 @@ namespace Insight.Scenes
             stairs.LoadContent(content);
             stairs2.LoadContent(content);
             bigMachine.LoadContent(content);
+            upperStairsTrigger.LoadContent(content);
+            lowerStairsTrigger.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
 
             enemy1.LoadContent(content);
