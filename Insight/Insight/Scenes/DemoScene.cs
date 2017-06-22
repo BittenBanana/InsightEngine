@@ -189,6 +189,13 @@ namespace Insight.Scenes
         private EnemyPrefab enemy1;
         private StandingEnemy enemyStanding;
         private GameObject pointLight1;
+        private GameObject pointLight2;
+        private GameObject pointLight3;
+        private GameObject pointLight4;
+        private GameObject pointLight5;
+        private GameObject pointLight6;
+        private GameObject pointLight7;
+        private GameObject pointLight8;
 
         int _total_frames = 0;
         float _elapsed_time = 0.0f;
@@ -216,10 +223,35 @@ namespace Insight.Scenes
 
             windowWidth = SceneManager.Instance.Dimensions.X;
             windowHeight = SceneManager.Instance.Dimensions.Y;
-            pointLight1 = new GameObject(new Vector3(17, 3f, 5), false);
+            pointLight1 = new GameObject(new Vector3(18.5f, 3f, 5), false);
             pointLight1.AddNewComponent<Light>();
-            pointLight1.GetComponent<Light>().Color = Color.Cyan;
-            pointLight1.GetComponent<Light>().Attenuation = 10;
+            pointLight1.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight1.GetComponent<Light>().Attenuation = 7.5f;
+
+            pointLight2 = new GameObject(new Vector3(2.5f, 3f, 2.5f), false);
+            pointLight2.AddNewComponent<Light>();
+            pointLight2.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight2.GetComponent<Light>().Attenuation = 7.5f;
+
+            pointLight3 = new GameObject(new Vector3(2.5f, 3f, 12.5f), false);
+            pointLight3.AddNewComponent<Light>();
+            pointLight3.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight3.GetComponent<Light>().Attenuation = 7.5f;
+
+            pointLight4 = new GameObject(new Vector3(12.5f, 3f, 13.5f), false);
+            pointLight4.AddNewComponent<Light>();
+            pointLight4.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight4.GetComponent<Light>().Attenuation = 7.5f;
+
+            pointLight5 = new GameObject(new Vector3(22.5f, 3f, 13.5f), false);
+            pointLight5.AddNewComponent<Light>();
+            pointLight5.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight5.GetComponent<Light>().Attenuation = 7.5f;
+
+            pointLight6 = new GameObject(new Vector3(32.5f, 3f, 13.5f), false);
+            pointLight6.AddNewComponent<Light>();
+            pointLight6.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight6.GetComponent<Light>().Attenuation = 7.5f;
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
@@ -724,6 +756,11 @@ namespace Insight.Scenes
             audioManager = new AudioManager(player, content);
 
             gameObjects.Add(pointLight1);
+            gameObjects.Add(pointLight2);
+            gameObjects.Add(pointLight3);
+            gameObjects.Add(pointLight4);
+            gameObjects.Add(pointLight5);
+            gameObjects.Add(pointLight6);
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);
