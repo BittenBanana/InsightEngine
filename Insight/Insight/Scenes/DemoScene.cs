@@ -956,7 +956,7 @@ namespace Insight.Scenes
 
             //ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
 
-            ui.AddSprite("Sprites/rakieta", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_agresja", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "gameOver", "GAME OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
