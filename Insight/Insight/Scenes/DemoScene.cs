@@ -1077,7 +1077,6 @@ namespace Insight.Scenes
                         player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
                     }
                 }
-
             }
 
         }
