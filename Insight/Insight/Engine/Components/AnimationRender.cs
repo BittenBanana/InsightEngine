@@ -117,6 +117,7 @@ namespace Insight.Engine.Components
             clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
             clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
             clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
+            clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
             animationPlayer.StartClip(clips[0], 400);
         }
 

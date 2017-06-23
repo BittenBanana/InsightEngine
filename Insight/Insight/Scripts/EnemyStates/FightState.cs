@@ -21,7 +21,7 @@ namespace Insight.Scripts.EnemyStates
             Debug.WriteLine("Enter Fight State");
             enemy.detect = false;
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Fight Animation
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(7); // TODO Fight Animation
         }
 
         public override void Execute(EnemyAI enemy)

@@ -86,6 +86,7 @@ namespace Insight
         public Model playerWalkB { get; set; }
         public Model playerWalkL { get; set; }
         public Model playerWalkR { get; set; }
+        public Model playerFistFight { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -96,6 +97,8 @@ namespace Insight
             playerWalkF = content.Load<Model>("Models/pistol_walk_f");
             playerWalkR = content.Load<Model>("Models/pistol_walk_r");
             playerWalkL = content.Load<Model>("Models/pistol_walk_l");
+            playerFistFight = content.Load<Model>("Models/fist_fight_A");
+
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
