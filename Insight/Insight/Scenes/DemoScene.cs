@@ -766,7 +766,7 @@ namespace Insight.Scenes
             gameObjects.Add(cameraPivot);
 
 
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, .1f, 1000f);
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio,0.5f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
         }
 

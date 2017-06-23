@@ -68,7 +68,6 @@ namespace Insight.Engine
                 T newComp = Activator.CreateInstance(typeof(T), this) as T;
                 components.Add(newComp);
             }
-            Console.WriteLine("Cannot add multiple transforms");
         }
 
         public void AddComponent(Component comp)
@@ -226,7 +225,6 @@ namespace Insight.Engine
                 {
                     if(this.IsMoving)
                     {
-                        Debug.WriteLine("stairsssssss");
                         this.Transform.Position.Y += 0.8f;
                         //GetComponent<Rigidbody>().useGravity = false;
                     }

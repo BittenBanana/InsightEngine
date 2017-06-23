@@ -113,8 +113,25 @@ namespace Insight.Engine.Components
             clips.Add(clip);
             clips.Add(clip2);
             clips.Add(clip3);
-
+            clips.Add(NewClip(ContentModels.Instance.playerWalkF));//3
+            clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
+            clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
+            clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
             animationPlayer.StartClip(clips[0], 400);
+        }
+
+        public AnimationClip NewClip(Model model)
+        {
+            SkinningData skinningData3 = model.Tag as SkinningData;
+
+            if (skinningData3 == null)
+                throw new InvalidOperationException
+                    ("This model does not contain a SkinningData tag.");
+
+            AnimationPlayer animationPlayer3 = new AnimationPlayer(skinningData3);
+
+            AnimationClip clip3 = skinningData3.AnimationClips["mixamo.com"];
+            return clip3;
         }
 
         public void ChangeAnimation(int id)
