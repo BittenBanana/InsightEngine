@@ -24,8 +24,9 @@ namespace Insight.Scripts.EnemyStates
             Debug.WriteLine("Enter Agressive State");
             foreach (GameObject item in SceneManager.Instance.GetGameObjectsFromCurrentScene())
             {
-                if(item.physicLayer != Layer.Enemy) continue;
+                if(item.physicLayer != Layer.Enemy && item.physicLayer != Layer.Player) continue;
                 if(item == enemy.gameObject) continue;
+                if(item.physicLayer == Layer.Enemy && item.GetComponent<EnemyAI>()?.currentState is DeathState) continue;
                 if (enemy.nearestEnemyPosition == null)
                 {
                     enemy.nearestEnemyPosition = item;

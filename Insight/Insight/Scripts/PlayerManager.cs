@@ -9,8 +9,8 @@ namespace Insight.Scripts
 {
     class PlayerManager :BaseScript
     {
-        private float timer;
-        private float healTime;
+        private float timer, restoreTimer;
+        private float healTime, restoreDelay;
 
         public float detectionLevel { get; set; }
 
@@ -19,6 +19,9 @@ namespace Insight.Scripts
         {
             health = 100;
             healTime = 10;
+            restoreTimer = 0;
+            timer = 0;
+            restoreDelay = 0.025f;
         }
 
         public override void Update()
@@ -27,10 +30,18 @@ namespace Insight.Scripts
             {
                 if (timer > healTime)
                 {
-                    health = 100;
-                    timer = 0;
+                    if (restoreTimer > restoreDelay)
+                    {
+                        health += 1;
+                        restoreTimer = 0;
+                    }
+                    restoreTimer += Time.deltaTime;
                 }
                 timer += Time.deltaTime;
+            }
+            if (health == 100)
+            {
+                timer = 0;
             }
 
             if (health <= 0)
