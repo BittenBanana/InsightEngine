@@ -7,6 +7,7 @@ using Insight.Engine;
 using Microsoft.Xna.Framework;
 using Insight.Scenes;
 using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
 using Microsoft.Xna.Framework.Input;
 using Insight.Engine.Components;
 using Insight.Materials;
@@ -97,6 +98,7 @@ namespace Insight.Scripts
 
                         if (hit.collider.gameObject.physicLayer == Layer.Enemy)
                         {
+                            if(!(hit.collider.gameObject.GetComponent<EnemyAI>().currentState is DeathState))
                             switch (currentBulletLoaded)
                             {
                                 case PlayerBullets.Bullets.Agressive:
@@ -104,6 +106,9 @@ namespace Insight.Scripts
                                     break;
                                 case PlayerBullets.Bullets.Transmitter:
                                     hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new TransitionState(), new FollowMarkerState());
+                                    break;
+                                case PlayerBullets.Bullets.Paralysis:
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new ParalysisState());
                                     break;
                             }
                         }
@@ -117,6 +122,10 @@ namespace Insight.Scripts
                         break;
                     case PlayerBullets.Bullets.Transmitter:
                         gameObject.GetComponent<PlayerBullets>().transmitterBullet = false;
+                        currentBulletLoaded = null;
+                        break;
+                    case PlayerBullets.Bullets.Paralysis:
+                        gameObject.GetComponent<PlayerBullets>().paralysisBullet = false;
                         currentBulletLoaded = null;
                         break;
                 }
@@ -206,21 +215,57 @@ namespace Insight.Scripts
             {
                 currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
             }
-            if(ms.ScrollWheelValue != previousScrollValue)
+            if (keyState.IsKeyDown(Keys.D1) && gameObject.GetComponent<PlayerBullets>().paralysisBullet)
             {
-                if ((currentBulletLoaded == PlayerBullets.Bullets.Agressive || currentBulletLoaded == null)
-                    && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().transmitterBullet)
-                {
-                    currentBulletLoaded = PlayerBullets.Bullets.Transmitter;
-                }
-                else if ((currentBulletLoaded == PlayerBullets.Bullets.Transmitter || currentBulletLoaded == null)
-                         && SceneManager.Instance.currentScene.player.GetComponent<PlayerBullets>().aggresiveBullet)
-                {
-                    currentBulletLoaded = PlayerBullets.Bullets.Agressive;
-                }
-
-
+                currentBulletLoaded = PlayerBullets.Bullets.Paralysis;
             }
+            if (ms.ScrollWheelValue > previousScrollValue)
+            {
+
+                if (currentBulletLoaded != null)
+                {
+                    if ((int) currentBulletLoaded < Enum.GetNames(typeof(PlayerBullets.Bullets)).Length -1)
+                    {
+                        currentBulletLoaded += 1;
+                    }
+                    else
+                    {
+                        currentBulletLoaded = (PlayerBullets.Bullets)Enum.GetValues(typeof(PlayerBullets.Bullets)).GetValue(0);
+                    }
+                }
+            }
+            if (ms.ScrollWheelValue < previousScrollValue)
+            {
+
+                if (currentBulletLoaded != null)
+                {
+                    if ((int)currentBulletLoaded > 0)
+                    {
+                        currentBulletLoaded -= 1;
+                    }
+                    else
+                    {
+                        currentBulletLoaded = (PlayerBullets.Bullets)Enum.GetValues(typeof(PlayerBullets.Bullets)).GetValue(Enum.GetValues(typeof(PlayerBullets.Bullets)).Length - 1);
+                    }
+                }
+            }
+
+            if (currentBulletLoaded == null)
+            {
+                if (gameObject.GetComponent<PlayerBullets>().paralysisBullet)
+                {
+                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Paralysis);
+                }
+                else if (gameObject.GetComponent<PlayerBullets>().transmitterBullet)
+                {
+                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                }
+                else if (gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
+                {
+                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                }
+            }
+
             previousScrollValue = ms.ScrollWheelValue;
             //base.Update();
         }

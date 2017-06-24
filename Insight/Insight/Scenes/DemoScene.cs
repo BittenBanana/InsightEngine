@@ -1091,7 +1091,7 @@ namespace Insight.Scenes
                 else
                     ui.ChangeSpriteOpacity("marker_a", 0);
 
-                if (player.GetComponent<PlayerBullets>().enemySightBullet)
+                if (player.GetComponent<PlayerBullets>().paralysisBullet)
                     ui.ChangeSpriteOpacity("oko_a", 1);
                 else
                     ui.ChangeSpriteOpacity("oko_a", 0);
@@ -1114,6 +1114,11 @@ namespace Insight.Scenes
                         ui.ChangeSpriteOpacity("ammo2", 0);
                         ui.ChangeSpriteOpacity("ammo3", 1);
                         break;
+                    case PlayerBullets.Bullets.Paralysis:
+                        ui.ChangeSpriteOpacity("ammo1", 1);
+                        ui.ChangeSpriteOpacity("ammo2", 0);
+                        ui.ChangeSpriteOpacity("ammo3", 0);
+                        break;
                     default:
                         ui.ChangeSpriteOpacity("ammo1", 0);
                         ui.ChangeSpriteOpacity("ammo2", 0);
@@ -1121,17 +1126,6 @@ namespace Insight.Scenes
                         break;
                 }
 
-                if(player.GetComponent<RaycastTest>().GetLoadedBullet() == null)
-                {
-                    if(player.GetComponent<PlayerBullets>().aggresiveBullet)
-                    {
-                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
-                    }
-                    else if (player.GetComponent<PlayerBullets>().transmitterBullet)
-                    {
-                        player.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
-                    }
-                }
             }
 
         }

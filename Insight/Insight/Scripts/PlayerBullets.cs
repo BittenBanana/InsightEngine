@@ -11,18 +11,19 @@ namespace Insight.Scripts
     {
         public enum Bullets
         {
-            Agressive,
-            Transmitter
+            Paralysis,
+            Transmitter,
+            Agressive
         }
 
         public bool aggresiveBullet { get; set; }
         public bool transmitterBullet { get; set; }
-        public bool enemySightBullet { get; set; }
+        public bool paralysisBullet { get; set; }
         public PlayerBullets(GameObject gameObject) : base(gameObject)
         {
-            aggresiveBullet = false;
-            transmitterBullet = false;
-            enemySightBullet = false;
+            aggresiveBullet = true;
+            transmitterBullet = true;
+            paralysisBullet = true;
         }
 
 
