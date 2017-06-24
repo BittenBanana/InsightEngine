@@ -78,6 +78,11 @@ namespace Insight.Engine
             }
         }
 
+        public void RemoveComponent(Component comp)
+        {
+            components.Remove(comp);
+        }
+
         public T GetComponent<T>()
         {
             return components.OfType<T>().FirstOrDefault();
