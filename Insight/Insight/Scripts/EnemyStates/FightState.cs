@@ -11,16 +11,18 @@ namespace Insight.Scripts.EnemyStates
 {
     class FightState : EnemyAIState
     {
-        private float timer;
-        private float wait;
+        private float timer, timerAfter;
+        private float wait, waitAfter;
 
         public override void EnterState(EnemyAI enemy)
         {
             timer = 0;
+            timerAfter = 0;
             wait = 1;
+            waitAfter = 3;
             Debug.WriteLine("Enter Fight State");
             enemy.detect = false;
-            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 7)
                 enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(7); // TODO Fight Animation
         }
 
@@ -34,6 +36,7 @@ namespace Insight.Scripts.EnemyStates
                     {
                         enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(25);
                     }
+                    
                 }
                 else
                 {
@@ -42,6 +45,21 @@ namespace Insight.Scripts.EnemyStates
 
                 timer = 0;
             }
+
+            if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
+            {
+                if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health <= 0)
+                {
+                    if (timerAfter >= waitAfter)
+                    {
+                        enemy.detect = true;
+                        enemy.ChangeState(new StandAndLookState());
+                        timerAfter = 0;
+                    }
+                    timerAfter += Time.deltaTime;
+                }
+            }
+
             timer += Time.deltaTime;
         }
 
