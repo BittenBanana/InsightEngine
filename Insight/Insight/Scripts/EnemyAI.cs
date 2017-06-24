@@ -31,6 +31,7 @@ namespace Insight.Scripts
         private EnemyAIState currentState;
         public EnemyAIState previousState { get; set; }
         public EnemyAIState defaultState { get; private set; }
+        public EnemyAIState nextState { get; set; }
 
         /// <summary>
         /// Must be set for Patrol State
@@ -69,6 +70,19 @@ namespace Insight.Scripts
             //previousState = currentState;
             currentState.Exit(this);
             currentState = newState;
+            currentState.EnterState(this);
+        }
+
+        /// <summary>
+        /// this method change state to transitionState and the nextState after it
+        /// </summary>
+        /// <param name="transitionState">set TransitionState only otherwise nextState won't be executed</param>
+        /// <param name="nextState">this state will be set after transitionState</param>
+        public void ChangeState(EnemyAIState transitionState, EnemyAIState nextState)
+        {
+            this.nextState = nextState;
+            currentState.Exit(this);
+            currentState = transitionState;
             currentState.EnterState(this);
         }
 
