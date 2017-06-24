@@ -17,17 +17,22 @@ namespace Insight.Scripts.EnemyStates
         private Random random;
         private int minRand;
         private int maxRand;
+        private Random rand;
 
         public override void EnterState(EnemyAI enemy)
         {
             Debug.WriteLine("Enter Shoot State");
+            rand = new Random();
             minRand = 1;
             maxRand = 20;
             random = new Random();
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
                 enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Shoot Animation
-            SoundEffectInstance instance = SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot", enemy.gameObject);
-            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(instance);
+            List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot1", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot2", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot3", enemy.gameObject));
+            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, 2)]);
         }
 
         public override void Execute(EnemyAI enemy)

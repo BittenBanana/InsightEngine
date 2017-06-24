@@ -31,14 +31,19 @@ namespace Insight.Scripts
 
         private PlayerBullets.Bullets? currentBulletLoaded;
 
-        private SoundEffectInstance shoot;
+        private List<SoundEffectInstance> sounds;
+        private Random rand;
 
         public RaycastTest(GameObject gameObject) : base(gameObject)
         {
             currentBulletLoaded = null;
             previousScrollValue = ms.ScrollWheelValue;
-            shoot = SceneManager.Instance.currentScene.audioManager
-                .AddSoundEffectWithEmitter("Audio/shoot", gameObject);
+            rand = new Random();
+            sounds = new List<SoundEffectInstance>();
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot1", gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot2", gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot3", gameObject));
+            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, 2)]);
         }
 
         public override void Update()
@@ -48,7 +53,7 @@ namespace Insight.Scripts
             #region LeftButton
             if (ms.LeftButton == ButtonState.Pressed && !isPressed && currentBulletLoaded != null)
             {
-                SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(shoot);
+                SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0,2)]);
                 //am.PlaySoundEffect(0);
                 Vector3 minPoint = SceneManager.Instance.device.GraphicsDevice.Viewport.Unproject(
                     new Vector3(SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2,
