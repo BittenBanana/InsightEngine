@@ -6,11 +6,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Insight.Engine.Components;
+using Microsoft.Xna.Framework.Content;
 
 namespace Insight.Scripts
 {
     class DispenserTriggerController : BaseScript
     {
+
+        public GameObject dispenser { get; set; }
+        public ContentManager content { get; set; }
         public DispenserTriggerController(GameObject gameObject) : base(gameObject)
         {
 
@@ -38,6 +43,10 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E))
                 {
+                    dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
+                    dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
+                    dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
+                    dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
                     args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
                     if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
                     {

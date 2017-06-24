@@ -39,12 +39,18 @@ namespace Insight.Engine.Prefabs
         {
 
             pcModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.ammo_pc, 0.5f);
+            pcModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_AO");
+            pcModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
+            pcModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_Normal");
+            pcModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
             triggerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 1.0f);
             pcModel.AddNewComponent<BoxCollider>();
             triggerModel.AddNewComponent<BoxCollider>();
             triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
             triggerModel.Transform.Rotation = new Vector3(0);
             triggerModel.AddNewComponent<DispenserTriggerController>();
+            triggerModel.GetComponent<DispenserTriggerController>().dispenser = pcModel;
+            triggerModel.GetComponent<DispenserTriggerController>().content = content;
         }
     }
 }
