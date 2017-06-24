@@ -253,14 +253,29 @@ namespace Insight.Scenes
             player.AddNewComponent<PlayerManager>();
             player.physicLayer = Layer.Player;
 
-            enemy1 = new EnemyPrefab();
+
+            List<Vector3> enemy1PatrolPositions = new List<Vector3>();
+            enemy1PatrolPositions.Add(new Vector3(18.5f, 0, 6f));
+            enemy1PatrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
+            enemy1 = new EnemyPrefab(enemy1PatrolPositions);
             enemy1.Initialize(new Vector3(18.5f, 0, 6f));
+            
+            
             enemyStanding = new StandingEnemy();
             enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
-            walkingEnemyInRoom = new EnemyPrefab();
+
+            List<Vector3> walkingEnemyPatrolPositions = new List<Vector3>();
+            walkingEnemyPatrolPositions.Add(new Vector3(29.5f, 0, 34f));
+            walkingEnemyPatrolPositions.Add(new Vector3(39.5f, 0, 34f));
+            walkingEnemyPatrolPositions.Add(new Vector3(39.3f, 0, 29.5f));
+            walkingEnemyPatrolPositions.Add(new Vector3(35.5f, 0, 32f));
+            walkingEnemyPatrolPositions.Add(new Vector3(35.5f, 0, 34.5f));
+            walkingEnemyInRoom = new EnemyPrefab(walkingEnemyPatrolPositions);
             walkingEnemyInRoom.Initialize(new Vector3(29.5f, 0, 34));
+
             standingEnemyNearPcInRoom1 = new StandingEnemy();
             standingEnemyNearPcInRoom1.Initialize(new Vector3(28.5f, 0, 35.5f));
+
             standingEnemyNearPcInRoom2 = new StandingEnemy();
             standingEnemyNearPcInRoom2.Initialize(new Vector3(28.5f, 0, 34f));
 

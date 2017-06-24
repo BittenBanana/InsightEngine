@@ -16,6 +16,11 @@ namespace Insight.Engine.Prefabs
     {
         public GameObject enemy;
         public GameObject enemySightTrigger;
+        public List<Vector3> patrolPos { get; set; }
+        public EnemyPrefab(List<Vector3> positions)
+        {
+            patrolPos = positions;
+        }
 
         public override void Initialize(Vector3 position)
         {
@@ -52,8 +57,9 @@ namespace Insight.Engine.Prefabs
             enemySightTrigger.physicLayer = Layer.DispenserTrigger;
 
             enemy.GetComponent<EnemyAI>().enemySight = enemySightTrigger.GetComponent<EnemySight>();
-            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 6f));
-            enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
+            //enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 6f));
+            //enemy.GetComponent<EnemyAI>().patrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
+            enemy.GetComponent<EnemyAI>().SetPatrolPositions(patrolPos);
             enemy.GetComponent<EnemyAI>().SetFirstState(new PatrolState());
             SceneManager.Instance.currentScene.enemies.Add(enemySightTrigger);
             base.LoadContent(content);
