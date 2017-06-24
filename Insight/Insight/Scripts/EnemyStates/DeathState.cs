@@ -13,6 +13,7 @@ namespace Insight.Scripts.EnemyStates
     {
         public override void EnterState(EnemyAI enemy)
         {
+            enemy.gameObject.RemoveComponent(enemy.gameObject.GetComponent<Collider>());
             enemy.detect = false;
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
                 enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(2); //TODO Death Animation
