@@ -11,7 +11,7 @@ namespace Insight.Engine.Prefabs
 {
     class WallVisible : Prefab
     {
-        GameObject wallModel;
+        public GameObject wallModel;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {

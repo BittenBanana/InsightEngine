@@ -98,6 +98,7 @@
     <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
     <Compile Include="Engine\Prefabs\Intercom.cs" />
+    <Compile Include="Engine\Prefabs\LastRoom.cs" />
     <Compile Include="Engine\Prefabs\LowerStairsTrigger.cs" />
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />

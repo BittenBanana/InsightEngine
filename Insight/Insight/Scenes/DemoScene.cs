@@ -59,7 +59,7 @@ namespace Insight.Scenes
         AnimatedDoor door4;
         AnimatedDoor door5;
         DoorSmaller door6;
-        AnimatedDoor door7;
+        
         RoomFloor roomFloor;
         RoomFloor roomFloor2;
         RoomFloor roomFloor3;
@@ -85,10 +85,7 @@ namespace Insight.Scenes
         RoomFloor roomFloor23;
         RoomFloor roomFloor24;
         RoomFloorSmallerRotated roomFloor25;
-        RoomFloor roomFloor26;
-        RoomFloor roomFloor27;
-        RoomFloor roomFloor28;
-        RoomFloor roomFloor29;
+        
         Wall wall;
         Wall wall2;
         WallRotated wall3;
@@ -136,13 +133,7 @@ namespace Insight.Scenes
         WallVisible wall45;
         WallVisible wall46;
         WallVisible wall47;
-        WallVisible wall48;
-        WallVisible wall49;
-        WallVisible wall50;
-        WallVisible wall51;
-        WallVisible wall52;
-        WallVisible wall53;
-        WallVisible wall54;
+        
         Stairs stairs;
         Stairs stairs2;
         Material defaultMaterial;
@@ -184,6 +175,7 @@ namespace Insight.Scenes
         BigMachine bigMachine;
         UpperStairsTrigger upperStairsTrigger;
         LowerStairsTrigger lowerStairsTrigger;
+        LastRoom lastRoom;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -463,197 +455,167 @@ namespace Insight.Scenes
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
 
-            wall18 = new Wall();
-            wall18.Initialize(new Vector3(39, 0, 59));
+            //wall18 = new Wall();
+            //wall18.Initialize(new Vector3(39, 0, 59));
 
-            wall19 = new Wall();
-            wall19.Initialize(new Vector3(44, 0, 59));
+            //wall19 = new Wall();
+            //wall19.Initialize(new Vector3(44, 0, 59));
 
-            wall20 = new WallVisible();
-            wall20.Initialize(new Vector3(49, 0, 59), new Vector3(0, 4.713f, 0));
+            //wall20 = new WallVisible();
+            //wall20.Initialize(new Vector3(49, 0, 59), new Vector3(0, 4.713f, 0));
 
-            wall21 = new WallShorter();
-            wall21.Initialize(new Vector3(39, -4, 64));
+            //wall21 = new WallShorter();
+            //wall21.Initialize(new Vector3(39, -4, 64));
 
-            wall22 = new WallShorter();
-            wall22.Initialize(new Vector3(44, -4, 64));
+            //wall22 = new WallShorter();
+            //wall22.Initialize(new Vector3(44, -4, 64));
 
-            roomFloor13 = new RoomFloor();
-            roomFloor13.Initialize(new Vector3(39, 0, 59));
+            //roomFloor13 = new RoomFloor();
+            //roomFloor13.Initialize(new Vector3(39, 0, 59));
 
-            roomFloor14 = new RoomFloor();
-            roomFloor14.Initialize(new Vector3(44, 0, 59));
+            //roomFloor14 = new RoomFloor();
+            //roomFloor14.Initialize(new Vector3(44, 0, 59));
 
-            roomFloor15 = new RoomFloor();
-            roomFloor15.Initialize(new Vector3(39, -4, 64));
+            //roomFloor15 = new RoomFloor();
+            //roomFloor15.Initialize(new Vector3(39, -4, 64));
 
-            roomFloor16 = new RoomFloor();
-            roomFloor16.Initialize(new Vector3(44, -4, 64));
+            //roomFloor16 = new RoomFloor();
+            //roomFloor16.Initialize(new Vector3(44, -4, 64));
 
-            roomFloor17 = new RoomFloor();
-            roomFloor17.Initialize(new Vector3(39, -4, 69));
+            //roomFloor17 = new RoomFloor();
+            //roomFloor17.Initialize(new Vector3(39, -4, 69));
 
-            roomFloor18 = new RoomFloor();
-            roomFloor18.Initialize(new Vector3(44, -4, 69));
+            //roomFloor18 = new RoomFloor();
+            //roomFloor18.Initialize(new Vector3(44, -4, 69));
 
-            roomFloor19 = new RoomFloor();
-            roomFloor19.Initialize(new Vector3(39, -4, 74));
+            //roomFloor19 = new RoomFloor();
+            //roomFloor19.Initialize(new Vector3(39, -4, 74));
 
-            roomFloor20 = new RoomFloor();
-            roomFloor20.Initialize(new Vector3(44, -4, 74));
+            //roomFloor20 = new RoomFloor();
+            //roomFloor20.Initialize(new Vector3(44, -4, 74));
 
-            roomFloor21 = new RoomFloor();
-            roomFloor21.Initialize(new Vector3(39, -4, 79));
+            //roomFloor21 = new RoomFloor();
+            //roomFloor21.Initialize(new Vector3(39, -4, 79));
 
-            roomFloor22 = new RoomFloor();
-            roomFloor22.Initialize(new Vector3(44, -4, 79));
+            //roomFloor22 = new RoomFloor();
+            //roomFloor22.Initialize(new Vector3(44, -4, 79));
 
-            roomFloor23 = new RoomFloor();
-            roomFloor23.Initialize(new Vector3(39, -4, 84));
+            //roomFloor23 = new RoomFloor();
+            //roomFloor23.Initialize(new Vector3(39, -4, 84));
 
-            roomFloor24 = new RoomFloor();
-            roomFloor24.Initialize(new Vector3(44, -4, 84));
+            //roomFloor24 = new RoomFloor();
+            //roomFloor24.Initialize(new Vector3(44, -4, 84));
 
-            roomFloor25 = new RoomFloorSmallerRotated();
-            roomFloor25.Initialize(new Vector3(49, -4, 79));
+            //roomFloor25 = new RoomFloorSmallerRotated();
+            //roomFloor25.Initialize(new Vector3(49, -4, 79));
 
-            stairs = new Stairs();
-            stairs.Initialize(new Vector3(42, -4, 64), new Vector3(0, 4.713f, 0));
+            //stairs = new Stairs();
+            //stairs.Initialize(new Vector3(42, -4, 64), new Vector3(0, 4.713f, 0));
 
-            stairs2 = new Stairs();
-            stairs2.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
+            //stairs2 = new Stairs();
+            //stairs2.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
 
-            upperStairsTrigger = new UpperStairsTrigger();
-            upperStairsTrigger.Initialize(new Vector3(41, 1, 65.5f));
+            //upperStairsTrigger = new UpperStairsTrigger();
+            //upperStairsTrigger.Initialize(new Vector3(41, 1, 65.5f));
 
-            lowerStairsTrigger = new LowerStairsTrigger();
-            lowerStairsTrigger.Initialize(new Vector3(41, -4, 73f));
+            //lowerStairsTrigger = new LowerStairsTrigger();
+            //lowerStairsTrigger.Initialize(new Vector3(41, -4, 73f));
 
-            wall23 = new WallVisibleSmaller();
-            wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
+            //wall23 = new WallVisibleSmaller();
+            //wall23.Initialize(new Vector3(49, -4, 64), new Vector3(0, 4.713f, 0));
 
-            wall24 = new WallVisibleSmaller();
-            wall24.Initialize(new Vector3(49, -4, 69), new Vector3(0, 4.713f, 0));
+            //wall24 = new WallVisibleSmaller();
+            //wall24.Initialize(new Vector3(49, -4, 69), new Vector3(0, 4.713f, 0));
 
-            wall25 = new WallVisibleSmaller();
-            wall25.Initialize(new Vector3(49, -4, 74), new Vector3(0, 4.713f, 0));
+            //wall25 = new WallVisibleSmaller();
+            //wall25.Initialize(new Vector3(49, -4, 74), new Vector3(0, 4.713f, 0));
 
-            wall26 = new WallVisibleSmaller();
-            wall26.Initialize(new Vector3(52, -4, 79), new Vector3(0, 4.713f, 0));
+            //wall26 = new WallVisibleSmaller();
+            //wall26.Initialize(new Vector3(52, -4, 79), new Vector3(0, 4.713f, 0));
 
-            wall27 = new WallVisibleSmaller();
-            wall27.Initialize(new Vector3(49, -4, 84), new Vector3(0, 4.713f, 0));
+            //wall27 = new WallVisibleSmaller();
+            //wall27.Initialize(new Vector3(49, -4, 84), new Vector3(0, 4.713f, 0));
 
-            wall28 = new WallVisibleSmaller();
-            wall28.Initialize(new Vector3(39, -4, 64), new Vector3(0, 4.713f, 0));
+            //wall28 = new WallVisibleSmaller();
+            //wall28.Initialize(new Vector3(39, -4, 64), new Vector3(0, 4.713f, 0));
 
-            wall29 = new WallVisibleSmaller();
-            wall29.Initialize(new Vector3(39, -4, 69), new Vector3(0, 4.713f, 0));
+            //wall29 = new WallVisibleSmaller();
+            //wall29.Initialize(new Vector3(39, -4, 69), new Vector3(0, 4.713f, 0));
 
-            wall30 = new WallVisibleSmaller();
-            wall30.Initialize(new Vector3(39, -4, 74), new Vector3(0, 4.713f, 0));
+            //wall30 = new WallVisibleSmaller();
+            //wall30.Initialize(new Vector3(39, -4, 74), new Vector3(0, 4.713f, 0));
 
-            wall31 = new WallVisibleSmaller();
-            wall31.Initialize(new Vector3(39, -4, 84), new Vector3(0, 4.713f, 0));
+            //wall31 = new WallVisibleSmaller();
+            //wall31.Initialize(new Vector3(39, -4, 84), new Vector3(0, 4.713f, 0));
 
-            wall32 = new WallVisibleSmaller();
-            wall32.Initialize(new Vector3(39, -4, 89), new Vector3(0));
+            //wall32 = new WallVisibleSmaller();
+            //wall32.Initialize(new Vector3(39, -4, 89), new Vector3(0));
 
-            wall33 = new WallVisibleSmaller();
-            wall33.Initialize(new Vector3(44, -4, 89), new Vector3(0));
+            //wall33 = new WallVisibleSmaller();
+            //wall33.Initialize(new Vector3(44, -4, 89), new Vector3(0));
 
-            wall34 = new WallSmallerShorter();
-            wall34.Initialize(new Vector3(49, -4, 84), new Vector3(0));
+            //wall34 = new WallSmallerShorter();
+            //wall34.Initialize(new Vector3(49, -4, 84), new Vector3(0));
 
-            wall35 = new WallSmallerShorter();
-            wall35.Initialize(new Vector3(49, -4, 79), new Vector3(0));
+            //wall35 = new WallSmallerShorter();
+            //wall35.Initialize(new Vector3(49, -4, 79), new Vector3(0));
 
             door6 = new DoorSmaller();
             door6.Initialize(new Vector3(39, -4, 79), new Vector3(0, 4.713f, 0));
 
-            wall36 = new WallVisible();
-            wall36.Initialize(new Vector3(49, 0, 64), new Vector3(0, 4.713f, 0));
+            //wall36 = new WallVisible();
+            //wall36.Initialize(new Vector3(49, 0, 64), new Vector3(0, 4.713f, 0));
 
-            wall37 = new WallRotated();
-            wall37.Initialize(new Vector3(49, 0, 69), new Vector3(0, 4.713f, 0));
+            //wall37 = new WallRotated();
+            //wall37.Initialize(new Vector3(49, 0, 69), new Vector3(0, 4.713f, 0));
 
-            wall38 = new WallRotated();
-            wall38.Initialize(new Vector3(49, 0, 74), new Vector3(0, 4.713f, 0));
+            //wall38 = new WallRotated();
+            //wall38.Initialize(new Vector3(49, 0, 74), new Vector3(0, 4.713f, 0));
 
-            wall39 = new WallRotated();
-            wall39.Initialize(new Vector3(49, 0, 79), new Vector3(0, 4.713f, 0));
+            //wall39 = new WallRotated();
+            //wall39.Initialize(new Vector3(49, 0, 79), new Vector3(0, 4.713f, 0));
 
-            wall40 = new WallRotated();
-            wall40.Initialize(new Vector3(49, 0, 84), new Vector3(0, 4.713f, 0));
+            //wall40 = new WallRotated();
+            //wall40.Initialize(new Vector3(49, 0, 84), new Vector3(0, 4.713f, 0));
 
-            wall41 = new WallVisible();
-            wall41.Initialize(new Vector3(39, 0, 64), new Vector3(0, 4.713f, 0));
+            //wall41 = new WallVisible();
+            //wall41.Initialize(new Vector3(39, 0, 64), new Vector3(0, 4.713f, 0));
 
-            wall42 = new WallVisible();
-            wall42.Initialize(new Vector3(39, 0, 69), new Vector3(0, 4.713f, 0));
+            //wall42 = new WallVisible();
+            //wall42.Initialize(new Vector3(39, 0, 69), new Vector3(0, 4.713f, 0));
 
-            wall43 = new WallVisible();
-            wall43.Initialize(new Vector3(39, 0, 74), new Vector3(0, 4.713f, 0));
+            //wall43 = new WallVisible();
+            //wall43.Initialize(new Vector3(39, 0, 74), new Vector3(0, 4.713f, 0));
 
-            wall44 = new WallVisible();
-            wall44.Initialize(new Vector3(39, 0, 79), new Vector3(0, 4.713f, 0));
+            //wall44 = new WallVisible();
+            //wall44.Initialize(new Vector3(39, 0, 79), new Vector3(0, 4.713f, 0));
 
-            wall45 = new WallVisible();
-            wall45.Initialize(new Vector3(39, 0, 84), new Vector3(0, 4.713f, 0));
+            //wall45 = new WallVisible();
+            //wall45.Initialize(new Vector3(39, 0, 84), new Vector3(0, 4.713f, 0));
 
-            wall46 = new WallVisible();
-            wall46.Initialize(new Vector3(39, 0, 89), new Vector3(0));
+            //wall46 = new WallVisible();
+            //wall46.Initialize(new Vector3(39, 0, 89), new Vector3(0));
 
-            wall47 = new WallVisible();
-            wall47.Initialize(new Vector3(44, 0, 89), new Vector3(0));
+            //wall47 = new WallVisible();
+            //wall47.Initialize(new Vector3(44, 0, 89), new Vector3(0));
 
-            corridorRotated6 = new Corridor();
-            corridorRotated6.Initialize(new Vector3(34, -4, 84), new Vector3(0, 1.571f, 0));
+            //corridorRotated6 = new Corridor();
+            //corridorRotated6.Initialize(new Vector3(34, -4, 84), new Vector3(0, 1.571f, 0));
 
-            corridorRotated7 = new Corridor();
-            corridorRotated7.Initialize(new Vector3(29, -4, 84), new Vector3(0, 1.571f, 0));
+            //corridorRotated7 = new Corridor();
+            //corridorRotated7.Initialize(new Vector3(29, -4, 84), new Vector3(0, 1.571f, 0));
 
-            cornerRight4 = new CornerRightRotated();
-            cornerRight4.Initialize(new Vector3(29, -4, 79), new Vector3(0, 4.713f, 0));
+            //cornerRight4 = new CornerRightRotated();
+            //cornerRight4.Initialize(new Vector3(29, -4, 79), new Vector3(0, 4.713f, 0));
 
-            corridor10 = new Corridor();
-            corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
+            //corridor10 = new Corridor();
+            //corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
 
-            door7 = new AnimatedDoor();
-            door7.Initialize(new Vector3(23f, -4, 90));
+           
 
-            roomFloor26 = new RoomFloor();
-            roomFloor26.Initialize(new Vector3(23, -4, 90));
+            
 
-            roomFloor27 = new RoomFloor();
-            roomFloor27.Initialize(new Vector3(23, -4, 95));
-
-            roomFloor28 = new RoomFloor();
-            roomFloor28.Initialize(new Vector3(28, -4, 90));
-
-            roomFloor29 = new RoomFloor();
-            roomFloor29.Initialize(new Vector3(28, -4, 95));
-
-            wall48 = new WallVisible();
-            wall48.Initialize(new Vector3(28, -4, 90), new Vector3(0));
-
-            wall49 = new WallVisible();
-            wall49.Initialize(new Vector3(28, -4, 100), new Vector3(0));
-
-            wall50 = new WallVisible();
-            wall50.Initialize(new Vector3(23, -4, 100), new Vector3(0));
-
-            wall51 = new WallVisible();
-            wall51.Initialize(new Vector3(33, -4, 90), new Vector3(0, 4.713f, 0));
-
-            wall52 = new WallVisible();
-            wall52.Initialize(new Vector3(33, -4, 95), new Vector3(0, 4.713f, 0));
-
-            wall53 = new WallVisible();
-            wall53.Initialize(new Vector3(23, -4, 90), new Vector3(0, 4.713f, 0));
-
-            wall54 = new WallVisible();
-            wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
+            
 
             ammoPC = new AmmoPC();
             ammoPC.Initialize(new Vector3(0.5f, 0, 8), new Vector3(0, 1.571f, 0));
@@ -664,17 +626,17 @@ namespace Insight.Scenes
             ammoPC3 = new AmmoPCMark();
             ammoPC3.Initialize(new Vector3(11f, 0, 60.5f), new Vector3(0, 1.571f, 0));
 
-            ammoPC4 = new AmmoPCMark();
-            ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
+            //ammoPC4 = new AmmoPCMark();
+            //ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
 
-            ammoPC5 = new AmmoPCMark();
-            ammoPC5.Initialize(new Vector3(42f, -4, 68f), new Vector3(0, 1.571f, 0));
+            //ammoPC5 = new AmmoPCMark();
+            //ammoPC5.Initialize(new Vector3(42f, -4, 68f), new Vector3(0, 1.571f, 0));
 
-            ammoPC6 = new AmmoPC();
-            ammoPC6.Initialize(new Vector3(52f, -4, 82f), new Vector3(0, 4.713f, 0));
+            //ammoPC6 = new AmmoPC();
+            //ammoPC6.Initialize(new Vector3(52f, -4, 82f), new Vector3(0, 4.713f, 0));
 
-            ammoPC7 = new AmmoPC();
-            ammoPC7.Initialize(new Vector3(47f, -4, 89f), new Vector3(0, 3.142f, 0));
+            //ammoPC7 = new AmmoPC();
+            //ammoPC7.Initialize(new Vector3(47f, -4, 89f), new Vector3(0, 3.142f, 0));
 
             wall55 = new Corridor();
             wall55.Initialize(new Vector3(-10, 0, 0), new Vector3(0));
@@ -700,62 +662,65 @@ namespace Insight.Scenes
             intercom = new Intercom();
             intercom.Initialize(new Vector3(39, -0.5f, 36.9f), new Vector3(0, 3.142f, 0));
 
-            crate2 = new Crate();
-            crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
+            //crate2 = new Crate();
+            //crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 
-            crate3 = new Crate();
-            crate3.Initialize(new Vector3(41.5f, 0, 62f), new Vector3(0));
+            //crate3 = new Crate();
+            //crate3.Initialize(new Vector3(41.5f, 0, 62f), new Vector3(0));
 
-            crate4 = new Crate();
-            crate4.Initialize(new Vector3(41.5f, 0, 61.5f), new Vector3(0));
+            //crate4 = new Crate();
+            //crate4.Initialize(new Vector3(41.5f, 0, 61.5f), new Vector3(0));
 
-            crate5 = new Crate();
-            crate5.Initialize(new Vector3(42, 0, 61.5f), new Vector3(0));
+            //crate5 = new Crate();
+            //crate5.Initialize(new Vector3(42, 0, 61.5f), new Vector3(0));
 
-            crate6 = new Crate();
-            crate6.Initialize(new Vector3(41.5f, 0.5f, 62f), new Vector3(0, 1, 0));
+            //crate6 = new Crate();
+            //crate6.Initialize(new Vector3(41.5f, 0.5f, 62f), new Vector3(0, 1, 0));
 
-            crate7 = new Crate();
-            crate7.Initialize(new Vector3(44.5f, 0, 61.5f), new Vector3(0, 0, 0));
+            //crate7 = new Crate();
+            //crate7.Initialize(new Vector3(44.5f, 0, 61.5f), new Vector3(0, 0, 0));
 
-            crate8 = new Crate();
-            crate8.Initialize(new Vector3(45f, 0, 61.5f), new Vector3(0, 0, 0));
+            //crate8 = new Crate();
+            //crate8.Initialize(new Vector3(45f, 0, 61.5f), new Vector3(0, 0, 0));
 
-            crate9 = new Crate();
-            crate9.Initialize(new Vector3(45f, -4, 73f), new Vector3(0, 0, 0));
+            //crate9 = new Crate();
+            //crate9.Initialize(new Vector3(45f, -4, 73f), new Vector3(0, 0, 0));
 
-            crate10 = new Crate();
-            crate10.Initialize(new Vector3(44.5f, -4, 73f), new Vector3(0, 0, 0));
+            //crate10 = new Crate();
+            //crate10.Initialize(new Vector3(44.5f, -4, 73f), new Vector3(0, 0, 0));
 
-            crate11 = new Crate();
-            crate11.Initialize(new Vector3(44.5f, -3.5f, 73f), new Vector3(0, 0, 0));
+            //crate11 = new Crate();
+            //crate11.Initialize(new Vector3(44.5f, -3.5f, 73f), new Vector3(0, 0, 0));
 
-            crate12 = new Crate();
-            crate12.Initialize(new Vector3(45f, -4, 65f), new Vector3(0, 0, 0));
+            //crate12 = new Crate();
+            //crate12.Initialize(new Vector3(45f, -4, 65f), new Vector3(0, 0, 0));
 
-            crate13 = new Crate();
-            crate13.Initialize(new Vector3(45f, -4, 83.5f), new Vector3(0, 0, 0));
+            //crate13 = new Crate();
+            //crate13.Initialize(new Vector3(45f, -4, 83.5f), new Vector3(0, 0, 0));
 
-            crate14 = new Crate();
-            crate14.Initialize(new Vector3(45f, -4, 83f), new Vector3(0, 0, 0));
+            //crate14 = new Crate();
+            //crate14.Initialize(new Vector3(45f, -4, 83f), new Vector3(0, 0, 0));
 
-            crate15 = new Crate();
-            crate15.Initialize(new Vector3(41.5f, -4, 78.5f), new Vector3(0, 0, 0));
+            //crate15 = new Crate();
+            //crate15.Initialize(new Vector3(41.5f, -4, 78.5f), new Vector3(0, 0, 0));
 
-            crate16 = new Crate();
-            crate16.Initialize(new Vector3(41.5f, -4, 78f), new Vector3(0, 0, 0));
+            //crate16 = new Crate();
+            //crate16.Initialize(new Vector3(41.5f, -4, 78f), new Vector3(0, 0, 0));
 
-            crate17 = new Crate();
-            crate17.Initialize(new Vector3(42f, -4, 78f), new Vector3(0, 0, 0));
+            //crate17 = new Crate();
+            //crate17.Initialize(new Vector3(42f, -4, 78f), new Vector3(0, 0, 0));
 
-            crate18 = new Crate();
-            crate18.Initialize(new Vector3(41.7f, -3.5f, 78f), new Vector3(0, 1, 0));
+            //crate18 = new Crate();
+            //crate18.Initialize(new Vector3(41.7f, -3.5f, 78f), new Vector3(0, 1, 0));
 
-            crate19 = new Crate();
-            crate19.Initialize(new Vector3(42f, -4, 77.5f), new Vector3(0, 0, 0));
+            //crate19 = new Crate();
+            //crate19.Initialize(new Vector3(42f, -4, 77.5f), new Vector3(0, 0, 0));
 
-            crate20 = new Crate();
-            crate20.Initialize(new Vector3(41.5f, -4, 77.5f), new Vector3(0, 0, 0));
+            //crate20 = new Crate();
+            //crate20.Initialize(new Vector3(41.5f, -4, 77.5f), new Vector3(0, 0, 0));
+
+            lastRoom = new LastRoom();
+            lastRoom.Initialize(new Vector3(20, 4, -30));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();
@@ -860,20 +825,20 @@ namespace Insight.Scenes
             corridor7.LoadContent(content);
             corridor8.LoadContent(content);
             corridor9.LoadContent(content);
-            corridor10.LoadContent(content);
+            //corridor10.LoadContent(content);
             cornerLeft.LoadContent(content);
             cornerLeft2.LoadContent(content);
             cornerRight.LoadContent(content);
             cornerRight2.LoadContent(content);
             cornerRight3.LoadContent(content);
-            cornerRight4.LoadContent(content);
+            //cornerRight4.LoadContent(content);
             corridorRotated.LoadContent(content);
             corridorRotated2.LoadContent(content);
             corridorRotated3.LoadContent(content);
             corridorRotated4.LoadContent(content);
             corridorRotated5.LoadContent(content);
-            corridorRotated6.LoadContent(content);
-            corridorRotated7.LoadContent(content);
+            //corridorRotated6.LoadContent(content);
+            //corridorRotated7.LoadContent(content);
             corridor3Way.LoadContent(content);
             corridor3Way2.LoadContent(content);
             column.LoadContent(content);
@@ -893,23 +858,20 @@ namespace Insight.Scenes
             roomFloor10.LoadContent(content);
             roomFloor11.LoadContent(content);
             roomFloor12.LoadContent(content);
-            roomFloor13.LoadContent(content);
-            roomFloor14.LoadContent(content);
-            roomFloor15.LoadContent(content);
-            roomFloor16.LoadContent(content);
-            roomFloor17.LoadContent(content);
-            roomFloor18.LoadContent(content);
-            roomFloor19.LoadContent(content);
-            roomFloor20.LoadContent(content);
-            roomFloor21.LoadContent(content);
-            roomFloor22.LoadContent(content);
-            roomFloor23.LoadContent(content);
-            roomFloor24.LoadContent(content);
-            roomFloor25.LoadContent(content);
-            roomFloor26.LoadContent(content);
-            roomFloor27.LoadContent(content);
-            roomFloor28.LoadContent(content);
-            roomFloor29.LoadContent(content);
+            //roomFloor13.LoadContent(content);
+            //roomFloor14.LoadContent(content);
+            //roomFloor15.LoadContent(content);
+            //roomFloor16.LoadContent(content);
+            //roomFloor17.LoadContent(content);
+            //roomFloor18.LoadContent(content);
+            //roomFloor19.LoadContent(content);
+            //roomFloor20.LoadContent(content);
+            //roomFloor21.LoadContent(content);
+            //roomFloor22.LoadContent(content);
+            //roomFloor23.LoadContent(content);
+            //roomFloor24.LoadContent(content);
+            //roomFloor25.LoadContent(content);
+            
             door2.LoadContent(content);
             wall.LoadContent(content);
             wall2.LoadContent(content);
@@ -928,88 +890,82 @@ namespace Insight.Scenes
             wall15.LoadContent(content);
             wall16.LoadContent(content);
             wall17.LoadContent(content);
-            wall18.LoadContent(content);
-            wall19.LoadContent(content);
-            wall20.LoadContent(content);
-            wall21.LoadContent(content);
-            wall22.LoadContent(content);
-            wall23.LoadContent(content);
-            wall24.LoadContent(content);
-            wall25.LoadContent(content);
-            wall26.LoadContent(content);
-            wall27.LoadContent(content);
-            wall28.LoadContent(content);
-            wall29.LoadContent(content);
-            wall30.LoadContent(content);
-            wall31.LoadContent(content);
-            wall32.LoadContent(content);
-            wall33.LoadContent(content);
-            wall34.LoadContent(content);
-            wall35.LoadContent(content);
-            wall36.LoadContent(content);
-            wall37.LoadContent(content);
-            wall38.LoadContent(content);
-            wall39.LoadContent(content);
-            wall40.LoadContent(content);
-            wall41.LoadContent(content);
-            wall42.LoadContent(content);
-            wall43.LoadContent(content);
-            wall44.LoadContent(content);
-            wall45.LoadContent(content);
-            wall46.LoadContent(content);
-            wall47.LoadContent(content);
-            wall48.LoadContent(content);
-            wall49.LoadContent(content);
-            wall50.LoadContent(content);
-            wall51.LoadContent(content);
-            wall52.LoadContent(content);
-            wall53.LoadContent(content);
-            wall54.LoadContent(content);
+            //wall18.LoadContent(content);
+            //wall19.LoadContent(content);
+            //wall20.LoadContent(content);
+            //wall21.LoadContent(content);
+            //wall22.LoadContent(content);
+            //wall23.LoadContent(content);
+            //wall24.LoadContent(content);
+            //wall25.LoadContent(content);
+            //wall26.LoadContent(content);
+            //wall27.LoadContent(content);
+            //wall28.LoadContent(content);
+            //wall29.LoadContent(content);
+            //wall30.LoadContent(content);
+            //wall31.LoadContent(content);
+            //wall32.LoadContent(content);
+            //wall33.LoadContent(content);
+            //wall34.LoadContent(content);
+            //wall35.LoadContent(content);
+            //wall36.LoadContent(content);
+            //wall37.LoadContent(content);
+            //wall38.LoadContent(content);
+            //wall39.LoadContent(content);
+            //wall40.LoadContent(content);
+            //wall41.LoadContent(content);
+            //wall42.LoadContent(content);
+            //wall43.LoadContent(content);
+            //wall44.LoadContent(content);
+            //wall45.LoadContent(content);
+            //wall46.LoadContent(content);
+            //wall47.LoadContent(content);
+            
             wall55.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
-            door6.LoadContent(content);
-            door7.LoadContent(content);
+            //door6.LoadContent(content);
+            
             ammoPC.LoadContent(content);
             ammoPC2.LoadContent(content);
             ammoPC3.LoadContent(content);
-            ammoPC4.LoadContent(content);
-            ammoPC5.LoadContent(content);
-            ammoPC6.LoadContent(content);
-            ammoPC7.LoadContent(content);
+            //ammoPC4.LoadContent(content);
+            //ammoPC5.LoadContent(content);
+            //ammoPC6.LoadContent(content);
+            //ammoPC7.LoadContent(content);
             crate.LoadContent(content);
-            crate2.LoadContent(content);
-            crate3.LoadContent(content);
-            crate4.LoadContent(content);
-            crate5.LoadContent(content);
-            crate6.LoadContent(content);
-            crate7.LoadContent(content);
-            crate8.LoadContent(content);
-            crate9.LoadContent(content);
-            crate10.LoadContent(content);
-            crate11.LoadContent(content);
-            crate12.LoadContent(content);
-            crate13.LoadContent(content);
-            crate14.LoadContent(content);
-            crate15.LoadContent(content);
-            crate16.LoadContent(content);
-            crate17.LoadContent(content);
-            crate18.LoadContent(content);
-            crate19.LoadContent(content);
-            crate20.LoadContent(content);
+            //crate2.LoadContent(content);
+            //crate3.LoadContent(content);
+            //crate4.LoadContent(content);
+            //crate5.LoadContent(content);
+            //crate6.LoadContent(content);
+            //crate7.LoadContent(content);
+            //crate8.LoadContent(content);
+            //crate9.LoadContent(content);
+            //crate10.LoadContent(content);
+            //crate11.LoadContent(content);
+            //crate12.LoadContent(content);
+            //crate13.LoadContent(content);
+            //crate14.LoadContent(content);
+            //crate15.LoadContent(content);
+            //crate16.LoadContent(content);
+            //crate17.LoadContent(content);
+            //crate18.LoadContent(content);
+            //crate19.LoadContent(content);
+            //crate20.LoadContent(content);
             desk2Monitors.LoadContent(content);
             desk2Monitors2.LoadContent(content);
             desk2Monitors3.LoadContent(content);
             desk2Monitors4.LoadContent(content);
             intercom.LoadContent(content);
-            stairs.LoadContent(content);
-            stairs2.LoadContent(content);
+            //stairs.LoadContent(content);
+            //stairs2.LoadContent(content);
             bigMachine.LoadContent(content);
-            upperStairsTrigger.LoadContent(content);
-            lowerStairsTrigger.LoadContent(content);
+            //upperStairsTrigger.LoadContent(content);
+            //lowerStairsTrigger.LoadContent(content);
             //colliderManager.ObjectColided += player.OnObjectColided;
-
+            lastRoom.LoadContent(content);
             enemy1.LoadContent(content);
             enemyStanding.LoadContent(content);
             standingEnemyNearPcInRoom1.LoadContent(content);
