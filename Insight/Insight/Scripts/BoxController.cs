@@ -39,8 +39,6 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            Debug.WriteLine((float)Math.Sin(gameObject.Transform.Rotation.Y) + " Sinus");
-            Debug.WriteLine((float)Math.Cos(gameObject.Transform.Rotation.Y) + " Cosinus");
             gameObject.IsMoving = false;
             gameObject.Right = false;
             gameObject.Left = false;
@@ -76,7 +74,7 @@ namespace Insight.Scripts
 
                 if(mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(3);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -86,8 +84,8 @@ namespace Insight.Scripts
             {
                 //gameObject.Transform.Position.X -= gameObject.velocityX;
                 //gameObject.Transform.Position.Z -= gameObject.velocityZ;
-                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityX);
-                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityZ);
+                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityX/2);
+                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityZ/2);
                 gameObject.Backward = true;
                 gameObject.IsMoving = true;
 
@@ -95,7 +93,7 @@ namespace Insight.Scripts
 
                 if (mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(4);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -107,6 +105,12 @@ namespace Insight.Scripts
                 //gameObject.Transform.Position.Z += gameObject.velocityZ;
                 gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityZ);
                 gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityX);
+                kState = KeyState.Pressed;
+                if (mState == MovementState.IsIdle)
+                {
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(6);
+                    mState = MovementState.IsRunning;
+                }
                 //gameObject.Forward = true;
                 //gameObject.Backward = false;
                 //gameObject.IsMoving = true;
@@ -118,6 +122,12 @@ namespace Insight.Scripts
                 //gameObject.Transform.Position.Z -= gameObject.velocityZ;
                 gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityZ);
                 gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityX);
+                kState = KeyState.Pressed;
+                if (mState == MovementState.IsIdle)
+                {
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(5);
+                    mState = MovementState.IsRunning;
+                }
                 //gameObject.Forward = false;
                 //gameObject.Backward = true;
                 //gameObject.IsMoving = true;
@@ -127,6 +137,10 @@ namespace Insight.Scripts
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
             {
                 gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
+            }
+            if (keyState.IsKeyDown(Keys.Enter))
+            {
+                Debug.WriteLine(gameObject.Transform.Position);
             }
             lastMousePos = s.Position.ToVector2();
             gameObject.rotationSpeed = .01f;
