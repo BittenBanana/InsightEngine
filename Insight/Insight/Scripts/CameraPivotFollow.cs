@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Windows;
 
 namespace Insight.Scripts
 {
@@ -41,7 +43,8 @@ namespace Insight.Scripts
             gameObject.rotationSpeed = .01f;
             lastMousePos = s.Position.ToVector2();
 
-            Mouse.SetPosition(s.Position.X, SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2);
+            if(Game1.instance.IsActive)
+                Mouse.SetPosition(s.Position.X, SceneManager.Instance.device.GraphicsDevice.Viewport.Height / 2);
 
             base.Update();
         }

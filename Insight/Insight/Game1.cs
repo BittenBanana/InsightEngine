@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Insight.Engine;
@@ -11,12 +12,15 @@ namespace Insight
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+
+        public static Game instance { get; private set; }
         //SpriteBatch spriteBatch;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            instance = this;
         }
 
         /// <summary>

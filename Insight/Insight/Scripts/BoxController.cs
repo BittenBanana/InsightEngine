@@ -145,7 +145,8 @@ namespace Insight.Scripts
             lastMousePos = s.Position.ToVector2();
             gameObject.rotationSpeed = .01f;
 
-            Mouse.SetPosition(SceneManager.Instance.device.GraphicsDevice.Viewport.Width /2, s.Position.Y);
+            if (Game1.instance.IsActive)
+                Mouse.SetPosition(SceneManager.Instance.device.GraphicsDevice.Viewport.Width /2, s.Position.Y);
 
             if(kState == KeyState.Released && mState == MovementState.IsRunning)
             {
