@@ -12,10 +12,10 @@ namespace Insight.Engine.Prefabs
 {
     class AnimatedDoor : Prefab
     {
-        GameObject wallModel;
-        GameObject leftDoorModel;
-        GameObject rightDoorModel;
-        GameObject frame;
+        public GameObject wallModel;
+        public GameObject leftDoorModel;
+        public GameObject rightDoorModel;
+        public GameObject frame;
 
         public GameObject triggerModel;
         public override void Initialize(Vector3 position)

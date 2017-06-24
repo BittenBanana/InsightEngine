@@ -11,8 +11,8 @@ namespace Insight.Engine.Prefabs
 {
     class RoomFloor : Prefab
     {
-        GameObject corridorModel;
-        GameObject floor;
+        public GameObject corridorModel;
+        public GameObject floor;
 
         public override void Initialize(Vector3 position)
         {
