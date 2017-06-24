@@ -809,7 +809,7 @@ namespace Insight.Scenes
             //testPrefab.LoadContent(content);
 
             //player.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.superBoxHero, 1f);
-            player.GetComponent<AnimationRender>().Load(content, ContentModels.Instance.playerIdle, ContentModels.Instance.playerRun, 30);
+            player.GetComponent<AnimationRender>().Load(content, AnimationRender.AnimationModel.Player);
             player.GetComponent<AnimationRender>().LoadAmbientOcclusionMap(content, "Materials/postacUV_2_DefaultMaterial_AO");
             player.GetComponent<AnimationRender>().LoadMetalnessMap(content, "Materials/postacUV_2_DefaultMaterial_MetallicSmoothness");
             player.GetComponent<AnimationRender>().LoadNormalMap(content, "Materials/postacUV_2_DefaultMaterial_Normal");
