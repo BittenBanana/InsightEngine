@@ -28,7 +28,7 @@ namespace Insight.Scripts
 
         public bool detect { get; set; }
 
-        private EnemyAIState currentState;
+        public EnemyAIState currentState { get; private set; }
         public EnemyAIState previousState { get; set; }
         public EnemyAIState defaultState { get; private set; }
         public EnemyAIState nextState { get; set; }
@@ -67,7 +67,7 @@ namespace Insight.Scripts
 
         public void ChangeState(EnemyAIState newState)
         {
-            //previousState = currentState;
+            previousState = currentState;
             currentState.Exit(this);
             currentState = newState;
             currentState.EnterState(this);
@@ -80,10 +80,16 @@ namespace Insight.Scripts
         /// <param name="nextState">this state will be set after transitionState</param>
         public void ChangeState(EnemyAIState transitionState, EnemyAIState nextState)
         {
+            previousState = currentState;
             this.nextState = nextState;
             currentState.Exit(this);
             currentState = transitionState;
             currentState.EnterState(this);
+        }
+
+        public void SetPatrolPositions(List<Vector3> positions)
+        {
+            patrolPositions = positions;
         }
 
         public void SetFirstState(EnemyAIState state)
@@ -97,6 +103,12 @@ namespace Insight.Scripts
         {
             if (health > 0)
                 health -= dmg;
+        }
+
+        public void HeathBoost(int boost)
+        {
+            if (health > 0)
+                health += boost;
         }
     }
 }
