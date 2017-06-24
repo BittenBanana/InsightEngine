@@ -2279,3 +2279,21 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/fist_fight_A.fbx
 
+#begin Audio/shoot1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/shoot1.wav
+
+#begin Audio/shoot2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/shoot2.wav
+
+#begin Audio/shoot3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/shoot3.wav
+
