@@ -22,8 +22,6 @@ namespace Insight.Engine.Prefabs
             enemy = new GameObject(new Vector3(0, 0, 0), false);
             enemy.AddNewComponent<AnimationRender>();
 
-
-
             enemySightTrigger = new GameObject(enemy.Transform.Position, false);
             enemySightTrigger.AddNewComponent<MeshRenderer>();
             enemySightTrigger.GetComponent<MeshRenderer>().IsVisible = false;

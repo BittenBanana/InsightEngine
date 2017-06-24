@@ -151,6 +151,7 @@
     <Compile Include="Scripts\EnemyStates\PatrolState.cs" />
     <Compile Include="Scripts\EnemyStates\ShootState.cs" />
     <Compile Include="Scripts\EnemyStates\StandAndLookState.cs" />
+    <Compile Include="Scripts\EnemyStates\TransitionState.cs" />
     <Compile Include="Scripts\LowerStairsTriggerController.cs" />
     <Compile Include="Scripts\PlayerBullets.cs" />
     <Compile Include="Scripts\PlayerManager.cs" />

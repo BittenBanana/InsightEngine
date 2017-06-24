@@ -100,10 +100,10 @@ namespace Insight.Scripts
                             switch (currentBulletLoaded)
                             {
                                 case PlayerBullets.Bullets.Agressive:
-                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new AgressiveState());
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new TransitionState(), new AgressiveState());
                                     break;
                                 case PlayerBullets.Bullets.Transmitter:
-                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new FollowMarkerState());
+                                    hit.collider.gameObject.GetComponent<EnemyAI>().ChangeState(new TransitionState(), new FollowMarkerState());
                                     break;
                             }
                         }
