@@ -188,6 +188,9 @@ namespace Insight.Scenes
         //GameObject enemy;
         private EnemyPrefab enemy1;
         private StandingEnemy enemyStanding;
+        private EnemyPrefab walkingEnemyInRoom;
+        private StandingEnemy standingEnemyNearPcInRoom1;
+        private StandingEnemy standingEnemyNearPcInRoom2;
         private GameObject pointLight1;
         private GameObject pointLight2;
         private GameObject pointLight3;
@@ -262,6 +265,12 @@ namespace Insight.Scenes
             enemy1.Initialize(new Vector3(18.5f, 0, 6f));
             enemyStanding = new StandingEnemy();
             enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
+            walkingEnemyInRoom = new EnemyPrefab();
+            walkingEnemyInRoom.Initialize(new Vector3(29.5f, 0, 34));
+            standingEnemyNearPcInRoom1 = new StandingEnemy();
+            standingEnemyNearPcInRoom1.Initialize(new Vector3(28.5f, 0, 35.5f));
+            standingEnemyNearPcInRoom2 = new StandingEnemy();
+            standingEnemyNearPcInRoom2.Initialize(new Vector3(28.5f, 0, 34f));
 
             player.AddNewComponent<Rigidbody>();
 
@@ -1003,6 +1012,9 @@ namespace Insight.Scenes
 
             enemy1.LoadContent(content);
             enemyStanding.LoadContent(content);
+            standingEnemyNearPcInRoom1.LoadContent(content);
+            standingEnemyNearPcInRoom2.LoadContent(content);
+            walkingEnemyInRoom.LoadContent(content);
             ui = new UserInterface(player, graphics.GraphicsDevice, content);
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
