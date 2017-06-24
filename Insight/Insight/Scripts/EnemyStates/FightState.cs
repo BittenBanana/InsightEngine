@@ -46,15 +46,18 @@ namespace Insight.Scripts.EnemyStates
                 timer = 0;
             }
 
-            if(enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health <= 0)
+            if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
             {
-                if (timerAfter >= waitAfter)
+                if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health <= 0)
                 {
-                    enemy.detect = true;
-                    enemy.ChangeState(new StandAndLookState());
-                    timerAfter = 0;
+                    if (timerAfter >= waitAfter)
+                    {
+                        enemy.detect = true;
+                        enemy.ChangeState(new StandAndLookState());
+                        timerAfter = 0;
+                    }
+                    timerAfter += Time.deltaTime;
                 }
-                timerAfter += Time.deltaTime;
             }
 
             timer += Time.deltaTime;
