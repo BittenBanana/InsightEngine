@@ -39,6 +39,21 @@ namespace Insight.Scripts
                 if (keyState.IsKeyDown(Keys.E))
                 {
                     args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+                    if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
+                    {
+                        if (args.GameObject.GetComponent<PlayerBullets>().paralysisBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Paralysis);
+                        }
+                        else if (args.GameObject.GetComponent<PlayerBullets>().transmitterBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                        }
+                        else if (args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                        }
+                    }
                 }
             }
 

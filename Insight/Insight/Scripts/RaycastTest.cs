@@ -112,6 +112,22 @@ namespace Insight.Scripts
                                     break;
                             }
                         }
+
+                        if (currentBulletLoaded == null)
+                        {
+                            if (gameObject.GetComponent<PlayerBullets>().paralysisBullet)
+                            {
+                                gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Paralysis);
+                            }
+                            else if (gameObject.GetComponent<PlayerBullets>().transmitterBullet)
+                            {
+                                gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                            }
+                            else if (gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
+                            {
+                                gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                            }
+                        }
                     }
                 }
                 switch (currentBulletLoaded)
@@ -247,22 +263,6 @@ namespace Insight.Scripts
                     {
                         currentBulletLoaded = (PlayerBullets.Bullets)Enum.GetValues(typeof(PlayerBullets.Bullets)).GetValue(Enum.GetValues(typeof(PlayerBullets.Bullets)).Length - 1);
                     }
-                }
-            }
-
-            if (currentBulletLoaded == null)
-            {
-                if (gameObject.GetComponent<PlayerBullets>().paralysisBullet)
-                {
-                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Paralysis);
-                }
-                else if (gameObject.GetComponent<PlayerBullets>().transmitterBullet)
-                {
-                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
-                }
-                else if (gameObject.GetComponent<PlayerBullets>().aggresiveBullet)
-                {
-                    gameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
                 }
             }
 
