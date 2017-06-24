@@ -28,39 +28,49 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-            if(timer >= wait)
+            if (enemy.nearestEnemyPosition != null)
             {
+                if (timer >= wait)
+                {
+                    if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
+                    {
+                        if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health > 0)
+                        {
+                            enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(10);
+                        }
+
+                    }
+                    else
+                    {
+                        enemy.nearestEnemyPosition.GetComponent<PlayerManager>().GotDamage(20);
+                    }
+
+                    timer = 0;
+                }
+
+
                 if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
                 {
-                    if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health > 0)
+                    if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health <= 0)
                     {
-                        enemy.nearestEnemyPosition.GetComponent<EnemyAI>().Hit(25);
+                        if (timerAfter >= waitAfter)
+                        {
+                            enemy.detect = true;
+                            enemy.ChangeState(new StandAndLookState());
+                            timerAfter = 0;
+                        }
+                        timerAfter += Time.deltaTime;
                     }
-                    
                 }
-                else
+
+                if (EnemyWalkingSpots.getInstance().DistanceFromDestination(enemy.gameObject.Transform.Position,
+                        enemy.nearestEnemyPosition.Transform.Position) >= 0.5f)
                 {
-                    enemy.nearestEnemyPosition.GetComponent<PlayerManager>().GotDamage(25);
+                    enemy.ChangeState(enemy.previousState);
                 }
 
-                timer = 0;
+                timer += Time.deltaTime;
             }
-
-            if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
-            {
-                if (enemy.nearestEnemyPosition.GetComponent<EnemyAI>().health <= 0)
-                {
-                    if (timerAfter >= waitAfter)
-                    {
-                        enemy.detect = true;
-                        enemy.ChangeState(new StandAndLookState());
-                        timerAfter = 0;
-                    }
-                    timerAfter += Time.deltaTime;
-                }
-            }
-
-            timer += Time.deltaTime;
         }
 
         public override void Exit(EnemyAI enemy)

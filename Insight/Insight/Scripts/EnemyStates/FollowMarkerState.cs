@@ -55,6 +55,7 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Exit(EnemyAI enemy)
         {
+            enemy.detect = true;
             Debug.WriteLine("Exit Marker State");
         }
     }

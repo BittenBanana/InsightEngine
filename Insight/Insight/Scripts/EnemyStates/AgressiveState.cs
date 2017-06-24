@@ -15,6 +15,7 @@ namespace Insight.Scripts.EnemyStates
         private float minDistance = float.PositiveInfinity;
         public override void EnterState(EnemyAI enemy)
         {
+            enemy.HeathBoost(50);
             if (enemy.enemySight.detectionLevel >= 0.5f)
             {
                 enemy.nearestEnemyPosition = enemy.enemySight.player;
@@ -51,13 +52,13 @@ namespace Insight.Scripts.EnemyStates
                 if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
                     enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
-                    enemy.nearestEnemyPosition.Transform.Position, 0.05f, 0.1f);
+                    enemy.nearestEnemyPosition.Transform.Position, 0.15f, 0.1f);
             }
             else
             {
                 if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
                 {
-                    enemy.nearestEnemyPosition.GetComponent<EnemyAI>().nearestEnemyPosition = enemy.gameObject;
+                    //enemy.nearestEnemyPosition.GetComponent<EnemyAI>().nearestEnemyPosition = enemy.gameObject;
                     enemy.nearestEnemyPosition.GetComponent<EnemyAI>().ChangeState(new FightState());
                 }
                 enemy.ChangeState(new FightState());
