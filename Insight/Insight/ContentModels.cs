@@ -87,17 +87,19 @@ namespace Insight
         public Model playerWalkL { get; set; }
         public Model playerWalkR { get; set; }
         public Model playerFistFight { get; set; }
+        public Model enemyWalkF { get; set; }
 
         public void LoadContent(ContentManager content)
         {
             playerIdle = content.Load<Model>("Models/pistol_idle");
             playerRun = content.Load<Model>("Models/pistol_run");
-            playerDeath = content.Load<Model>("Models/death");//"pistol_strafe2" "pistol_strafe" "pistol_walk_backward" "pistol_walk" 
+            playerDeath = content.Load<Model>("Models/death");
             playerWalkB = content.Load<Model>("Models/pistol_walk_b");
             playerWalkF = content.Load<Model>("Models/pistol_walk_f");
             playerWalkR = content.Load<Model>("Models/pistol_walk_r");
             playerWalkL = content.Load<Model>("Models/pistol_walk_l");
             playerFistFight = content.Load<Model>("Models/fist_fight_A");
+            enemyWalkF = content.Load<Model>("Models/Enemy/enemy_walk_f");
 
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");

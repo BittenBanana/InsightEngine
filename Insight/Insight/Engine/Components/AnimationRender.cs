@@ -11,6 +11,11 @@ namespace Insight.Engine.Components
 {
     public class AnimationRender : Renderer
     {
+        public enum AnimationModel
+        {
+            Player,
+            Enemy
+        }
         //Model model;
         //Matrix[] boneTransformations;
         List<AnimationClip> clips = new List<AnimationClip>();
@@ -72,53 +77,56 @@ namespace Insight.Engine.Components
         //    animationPlayer.StartClip(clip, 30);
         //}
 
-        public void Load(ContentManager c, Model model, Model model2, int frames)
+        public void Load(ContentManager c, AnimationModel animModel)
         {
-            this.model = model;
-            effect = Material.GetEffect();
-            SkinningData skinningData = model.Tag as SkinningData;
+            if(animModel == AnimationModel.Player)
+            {
+                this.model = ContentModels.Instance.playerIdle;
+                effect = Material.GetEffect();
+                SkinningData skinningData = model.Tag as SkinningData;
 
-            if (skinningData == null)
-                throw new InvalidOperationException
-                    ("This model does not contain a SkinningData tag.");
+                if (skinningData == null)
+                    throw new InvalidOperationException
+                        ("This model does not contain a SkinningData tag.");
 
-            animationPlayer = new AnimationPlayer(skinningData);
+                animationPlayer = new AnimationPlayer(skinningData);
 
-            AnimationClip clip = skinningData.AnimationClips["mixamo.com"];
+                AnimationClip clip = skinningData.AnimationClips["mixamo.com"];
+  
+                clips.Add(NewClip(ContentModels.Instance.playerIdle));
+                clips.Add(NewClip(ContentModels.Instance.playerRun));
+                clips.Add(NewClip(ContentModels.Instance.playerDeath));
+                clips.Add(NewClip(ContentModels.Instance.playerWalkF));//3
+                clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
+                clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
+                clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
+                clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
+                animationPlayer.StartClip(clips[0], 400);
+            }
+            if(animModel == AnimationModel.Enemy)
+            {
+                this.model = ContentModels.Instance.enemyWalkF;
+                effect = Material.GetEffect();
+                SkinningData skinningData = model.Tag as SkinningData;
 
-            //animationPlayer.StartClip(clip, 30);
+                if (skinningData == null)
+                    throw new InvalidOperationException
+                        ("This model does not contain a SkinningData tag.");
 
+                animationPlayer = new AnimationPlayer(skinningData);
 
+                AnimationClip clip = skinningData.AnimationClips["mixamo.com"];
 
-            SkinningData skinningData2 = model2.Tag as SkinningData;
-
-            if (skinningData2 == null)
-                throw new InvalidOperationException
-                    ("This model does not contain a SkinningData tag.");
-
-            AnimationPlayer animationPlayer2 = new AnimationPlayer(skinningData2);
-
-            AnimationClip clip2 = skinningData2.AnimationClips["mixamo.com"];
-
-            SkinningData skinningData3 = ContentModels.Instance.playerDeath.Tag as SkinningData;
-
-            if (skinningData3 == null)
-                throw new InvalidOperationException
-                    ("This model does not contain a SkinningData tag.");
-
-            AnimationPlayer animationPlayer3 = new AnimationPlayer(skinningData3);
-
-            AnimationClip clip3 = skinningData3.AnimationClips["mixamo.com"];
-
-            clips.Add(clip);
-            clips.Add(clip2);
-            clips.Add(clip3);
-            clips.Add(NewClip(ContentModels.Instance.playerWalkF));//3
-            clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
-            clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
-            clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
-            clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
-            animationPlayer.StartClip(clips[0], 400);
+                clips.Add(NewClip(ContentModels.Instance.playerIdle));
+                clips.Add(NewClip(ContentModels.Instance.enemyWalkF));
+                clips.Add(NewClip(ContentModels.Instance.playerDeath));
+                clips.Add(NewClip(ContentModels.Instance.playerWalkF));//3
+                clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
+                clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
+                clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
+                clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
+                animationPlayer.StartClip(clips[0], 400);
+            }
         }
 
         public AnimationClip NewClip(Model model)
