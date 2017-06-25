@@ -34,7 +34,7 @@ namespace Insight.Engine
 
         public SceneManager()
         {
-            Dimensions = new Vector2(1280, 720);
+            Dimensions = new Vector2(1920, 1080);
             //mainS = new MainScene();
             demoS = new DemoScene();
             //LoadDemoScene();
