@@ -676,7 +676,6 @@ namespace Insight.Scenes
 
             intercom = new Intercom();
             intercom.Initialize(new Vector3(39, -0.5f, 36.9f), new Vector3(0, 3.142f, 0));
-
             //crate2 = new Crate();
             //crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 
@@ -978,6 +977,9 @@ namespace Insight.Scenes
             desk2Monitors3.LoadContent(content);
             desk2Monitors4.LoadContent(content);
             intercom.LoadContent(content);
+            door3.wallModel.GetComponent<DoorAnimation>().canOpen = false;
+            intercom.SetDoorsToTrigger(door3.wallModel);
+
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);
             bigMachine.LoadContent(content);
@@ -994,9 +996,11 @@ namespace Insight.Scenes
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
 
-            
+
 
             //ui.AddSprite("Sprites/blood", "blood", new Vector2(0, 0), Color.White, 0);
+            SceneManager.Instance.currentScene.ui.AddText("Fonts/gamefont", "doorHint", "Press E to open doors",
+                                    new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
             ui.AddSprite("Sprites/GUI/ikona_agresja", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
@@ -1095,7 +1099,6 @@ namespace Insight.Scenes
                         ui.ChangeSpriteOpacity("ammo3", 0);
                         break;
                 }
-                Debug.WriteLine(walkingEnemyInRoom.enemy.Transform.Position);
             }
 
         }
