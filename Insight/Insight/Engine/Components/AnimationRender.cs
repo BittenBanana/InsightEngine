@@ -101,13 +101,13 @@ namespace Insight.Engine.Components
                 clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
                 clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
                 clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
-                animationPlayer.StartClip(clips[0], 400);
+                animationPlayer.StartClip(clips[0], 30);
             }
             if(animModel == AnimationModel.Enemy)
             {
                 this.model = ContentModels.Instance.enemyWalkF;
                 effect = Material.GetEffect();
-                SkinningData skinningData = model.Tag as SkinningData;
+                SkinningData skinningData = ContentModels.Instance.enemyWalkF.Tag as SkinningData;
 
                 if (skinningData == null)
                     throw new InvalidOperationException
@@ -117,15 +117,13 @@ namespace Insight.Engine.Components
 
                 AnimationClip clip = skinningData.AnimationClips["mixamo.com"];
 
-                clips.Add(NewClip(ContentModels.Instance.playerIdle));
-                clips.Add(NewClip(ContentModels.Instance.enemyWalkF));
-                clips.Add(NewClip(ContentModels.Instance.playerDeath));
-                clips.Add(NewClip(ContentModels.Instance.playerWalkF));//3
-                clips.Add(NewClip(ContentModels.Instance.playerWalkB));//4
-                clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
-                clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
-                clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
-                animationPlayer.StartClip(clips[0], 400);
+                clips.Add(NewClip(ContentModels.Instance.enemyIdle));//0
+                clips.Add(NewClip(ContentModels.Instance.enemyWalkF));//1
+                clips.Add(NewClip(ContentModels.Instance.enemyDeath));//2
+                clips.Add(NewClip(ContentModels.Instance.enemyAggresive));//3
+                clips.Add(NewClip(ContentModels.Instance.enemyFight));//4
+                clips.Add(NewClip(ContentModels.Instance.enemyParalysis));//5
+                animationPlayer.StartClip(clips[0], 30);
             }
         }
 
