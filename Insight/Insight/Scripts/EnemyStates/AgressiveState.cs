@@ -49,6 +49,7 @@ namespace Insight.Scripts.EnemyStates
                     if (distance < minDistance)
                     {
                         enemy.nearestEnemyPosition = item;
+                        minDistance = distance;
                     }
                 }
             }
@@ -72,7 +73,7 @@ namespace Insight.Scripts.EnemyStates
                 }
                 soundTimer += Time.deltaTime;
             }
-            else
+            else if(Vector3.Distance(enemy.gameObject.Transform.Position, enemy.nearestEnemyPosition.Transform.Position) < 1)
             {
                 if (enemy.nearestEnemyPosition.physicLayer == Layer.Enemy)
                 {
