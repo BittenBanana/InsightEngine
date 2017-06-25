@@ -103,5 +103,12 @@ namespace Insight.Engine
             currentScene.Initialize(device);
             currentScene.LoadContent();
         }
+
+        public void LoadMenu()
+        {
+            currentScene = new GameMenu();
+            currentScene.Initialize(device);
+            currentScene.LoadContent();
+        }
     }
 }
