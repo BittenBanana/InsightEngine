@@ -34,8 +34,8 @@ namespace Insight.Engine.Components
                 BoundingSphere origMeshSphere = mesh.BoundingSphere;
                 BoundingSphere transMeshSphere = TransformBoundingSphere(origMeshSphere, transforms[mesh.ParentBone.Index]);
                 completeBoundingSphere = BoundingSphere.CreateMerged(completeBoundingSphere, transMeshSphere);
-                completeBoundingSphere.Center.Y += 0.3f;
-                completeBoundingSphere.Radius = 1f;
+                //completeBoundingSphere.Center.Y += 0.3f;
+                //completeBoundingSphere.Radius = 1f;
             }
         }
 
