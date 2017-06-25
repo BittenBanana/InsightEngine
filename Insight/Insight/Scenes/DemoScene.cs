@@ -829,7 +829,7 @@ namespace Insight.Scenes
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
 
-            audioManager = new AudioManager(mainCam.gameObject, content);
+            audioManager = new AudioManager(player, content);
 
             player.AddNewComponent<RaycastTest>();
             player.AddNewComponent<SphereCollider>();

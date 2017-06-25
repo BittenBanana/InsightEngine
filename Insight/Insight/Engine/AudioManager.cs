@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Insight.Engine
 {   
@@ -39,9 +40,9 @@ namespace Insight.Engine
 
         public void Update()
         {
-            audioListener.Position = playerListener.GetComponent<Camera>().Position;
-            audioListener.Forward = playerListener.GetComponent<Camera>().view.Forward;
-            audioListener.Up = playerListener.GetComponent<Camera>().view.Up;
+            audioListener.Position = playerListener.Transform.Position;
+            audioListener.Forward = playerListener.Transform.forward;
+            audioListener.Up = Vector3.Up;
 
             int j = 0;
 
