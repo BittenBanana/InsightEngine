@@ -27,7 +27,7 @@ namespace Insight.Scripts.EnemyStates
             maxRand = 20;
             random = new Random();
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0); // TODO Shoot Animation
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true); // TODO Shoot Animation
             List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
             sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot1", enemy.gameObject));
             sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot2", enemy.gameObject));

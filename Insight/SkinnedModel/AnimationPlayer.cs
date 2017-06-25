@@ -71,6 +71,7 @@ namespace SkinnedModel
             this.actualKeyFrame = actualKeyframe*40;
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
+            canLoop = true;
             currentKeyframe = 0;
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
@@ -80,7 +81,7 @@ namespace SkinnedModel
         {
             if (clip == null)
                 throw new ArgumentNullException("clip");
-            this.actualKeyFrame = actualKeyframe;
+            this.actualKeyFrame = actualKeyframe*40;
             currentClipValue = clip;
             currentTimeValue = TimeSpan.Zero;
             currentKeyframe = 0;

@@ -51,7 +51,7 @@ namespace Insight.Scripts.EnemyStates
                     enemy.nearestEnemyPosition.Transform.Position) > 0.1f)
             {
                 if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
                     enemy.nearestEnemyPosition.Transform.Position, 0.15f, 0.1f);
             }

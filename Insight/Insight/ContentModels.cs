@@ -93,6 +93,7 @@ namespace Insight
         public Model enemyDeath { get; set; }
         public Model enemyIdle { get; set; }
         public Model enemyParalysis{ get; set; }
+        public Model enemyMarker { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -107,9 +108,10 @@ namespace Insight
             enemyWalkF = content.Load<Model>("Models/Enemy/enemy_walk_f");
             enemyAggresive = content.Load<Model>("Models/Enemy/enemy_aggresive");
             enemyDeath = content.Load<Model>("Models/Enemy/enemy_death");
-            enemyFight = content.Load<Model>("Models/Enemy/enemy_fight");
+            enemyFight = content.Load<Model>("Models/Enemy/enemy_fight_fist");
             enemyIdle = content.Load<Model>("Models/Enemy/enemy_idle");
             enemyParalysis = content.Load<Model>("Models/Enemy/enemy_paralysis");
+            enemyMarker = content.Load<Model>("Models/Enemy/enemy_marker");
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");

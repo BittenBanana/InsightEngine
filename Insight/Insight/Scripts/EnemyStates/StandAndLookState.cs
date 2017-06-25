@@ -33,7 +33,7 @@ namespace Insight.Scripts.EnemyStates
                     .DistanceFromDestination(enemy.gameObject.Transform.Position, enemy.standPosition) < 0.1f)
             {
                 if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0);
+                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true);
                 if (!isRotationReset)
                 {
                     enemy.gameObject.Transform.Rotation = enemy.defaultRotation;
@@ -67,7 +67,7 @@ namespace Insight.Scripts.EnemyStates
             else
             {
                 if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                    enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                 isRotationReset = false;
                 EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject, enemy.standPosition, 0.05f, 0.1f);
             }

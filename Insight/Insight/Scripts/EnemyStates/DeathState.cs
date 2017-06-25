@@ -15,8 +15,8 @@ namespace Insight.Scripts.EnemyStates
         {
             enemy.gameObject.GetComponent<Collider>().IsTrigger = true;
             enemy.detect = false;
-            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(2); //TODO Death Animation
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 2)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(2,false); //TODO Death Animation
         }
 
         public override void Execute(EnemyAI enemy)

@@ -38,7 +38,7 @@ namespace Insight.Scripts.EnemyStates
                         enemy.enemySight.lastHeardPosition) < 0.1f)
                 {
                     if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0);
+                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true);
                     if (timer >= wait)
                     {
                         if (enemy.enemySight.detectionLevel > 0.75f)
@@ -54,7 +54,7 @@ namespace Insight.Scripts.EnemyStates
                 else
                 {
                     if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                     EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
                         enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
                 }
@@ -68,7 +68,7 @@ namespace Insight.Scripts.EnemyStates
                     EnemyWalkingSpots.getInstance().MoveGameObjectToDestination(enemy.gameObject,
                         enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
                     if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1);
+                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                 }
 
             }

@@ -74,7 +74,7 @@ namespace Insight.Scripts
 
                 if(mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(3);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(3,true);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -93,7 +93,7 @@ namespace Insight.Scripts
 
                 if (mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(4);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(4,true);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
                 }
@@ -108,7 +108,7 @@ namespace Insight.Scripts
                 kState = KeyState.Pressed;
                 if (mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(6);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(6,true);
                     mState = MovementState.IsRunning;
                 }
                 //gameObject.Forward = true;
@@ -125,7 +125,7 @@ namespace Insight.Scripts
                 kState = KeyState.Pressed;
                 if (mState == MovementState.IsIdle)
                 {
-                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(5);
+                    this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(5,true);
                     mState = MovementState.IsRunning;
                 }
                 //gameObject.Forward = false;
@@ -151,7 +151,7 @@ namespace Insight.Scripts
             if(kState == KeyState.Released && mState == MovementState.IsRunning)
             {
                 //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerIdle);
-                this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0);
+                this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true);
                 kState = KeyState.None;
                 mState = MovementState.IsIdle;
             }

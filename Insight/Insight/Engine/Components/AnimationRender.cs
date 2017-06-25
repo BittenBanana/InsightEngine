@@ -43,7 +43,7 @@ namespace Insight.Engine.Components
 
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
 
-            animationPlayer.StartClip(clip, 30);
+            animationPlayer.StartClip(clip, 300);
         }
 
         //public void LoadNewModel(Model model, Model model2)
@@ -101,7 +101,7 @@ namespace Insight.Engine.Components
                 clips.Add(NewClip(ContentModels.Instance.playerWalkR));//5
                 clips.Add(NewClip(ContentModels.Instance.playerWalkL));//6
                 clips.Add(NewClip(ContentModels.Instance.playerFistFight));//7
-                animationPlayer.StartClip(clips[0], 30);
+                animationPlayer.StartClip(clips[0], 400);
             }
             if(animModel == AnimationModel.Enemy)
             {
@@ -123,7 +123,8 @@ namespace Insight.Engine.Components
                 clips.Add(NewClip(ContentModels.Instance.enemyAggresive));//3
                 clips.Add(NewClip(ContentModels.Instance.enemyFight));//4
                 clips.Add(NewClip(ContentModels.Instance.enemyParalysis));//5
-                animationPlayer.StartClip(clips[0], 30);
+                clips.Add(NewClip(ContentModels.Instance.enemyMarker));//5
+                animationPlayer.StartClip(clips[0], 400);
             }
         }
 
@@ -141,13 +142,10 @@ namespace Insight.Engine.Components
             return clip3;
         }
 
-        public void ChangeAnimation(int id)
+        public void ChangeAnimation(int id, bool loop)
         {
             animationId = id;
-            if(id == 2) //death TO RECODE
-                animationPlayer.StartClip(clips[id], 300, false);
-            else
-                animationPlayer.StartClip(clips[id], 300);
+            animationPlayer.StartClip(clips[id], 400, loop);
         }
 
         public override void Update()

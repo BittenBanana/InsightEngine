@@ -14,8 +14,8 @@ namespace Insight.Scripts.EnemyStates
         {
             Debug.WriteLine("Enter ParalysisState");
             enemy.detect = false;
-            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 1)
-                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(2); //TODO Paralysis Animation
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 5)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(5,false); //TODO Paralysis Animation
         }
 
         public override void Execute(EnemyAI enemy)
