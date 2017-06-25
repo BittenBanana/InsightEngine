@@ -742,7 +742,7 @@ namespace Insight.Scenes
             directionalLight.GetComponent<Light>().Direction = new Vector3(3, -5, 0);
             directionalLight.GetComponent<Light>().Color = Color.White;
 
-            audioManager = new AudioManager(player, content);
+            //audioManager = new AudioManager(cameraPivot, content);
 
             gameObjects.Add(pointLight1);
             gameObjects.Add(pointLight2);
@@ -763,7 +763,7 @@ namespace Insight.Scenes
         {
             base.LoadContent();
 
-            audioManager = new AudioManager(player, content);
+            
 
             #region Effects 
 
@@ -822,13 +822,17 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
-            player.AddNewComponent<RaycastTest>();
+            
             
 
             player.AddNewComponent<BoxController>();
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
+
+            audioManager = new AudioManager(mainCam.gameObject, content);
+
+            player.AddNewComponent<RaycastTest>();
             player.AddNewComponent<SphereCollider>();
             player.AddNewComponent<PlayerBullets>();
             corridor.LoadContent(content);
@@ -1009,6 +1013,8 @@ namespace Insight.Scenes
             lightRenderer.Models = models;
 
             Debug.WriteLine(gameObjects.Count + "=============================");
+
+            
         }
 
         public override void UnloadContent()

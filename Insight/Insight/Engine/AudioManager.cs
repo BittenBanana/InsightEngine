@@ -14,7 +14,7 @@ namespace Insight.Engine
         private List<Song> songs;
         private List<SoundEffect> soundEffects;
         private List<SoundEffectInstance> soundEffectInstances;
-        private AudioListener audioListener;
+        public AudioListener audioListener { get; private set; }
         private List<AudioEmitter> audioEmitters;
         private GameObject playerListener;
         private ContentManager content;

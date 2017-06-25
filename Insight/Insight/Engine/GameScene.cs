@@ -54,6 +54,7 @@ namespace Insight.Engine
         {
             Time.deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Time.gameTime = gameTime;
+            audioManager?.Update();
         }
 
         public virtual void Draw()
