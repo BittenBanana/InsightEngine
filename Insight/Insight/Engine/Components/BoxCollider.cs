@@ -29,7 +29,8 @@ namespace Insight.Engine.Components
             0, 4, 1, 5, 2, 6, 3, 7 // Side edges connecting front and back
         };
         #endregion
-
+        BasicEffect boxEffect;
+        BasicEffect basicEffect;
         #region Contructors
         public BoxCollider(GameObject gameObject) :base(gameObject)
         {
@@ -63,6 +64,8 @@ namespace Insight.Engine.Components
                 BoundingSphere transMeshSphere = TransformBoundingSphere(origMeshSphere, transforms[mesh.ParentBone.Index]);
                 completeBoundingSphere = BoundingSphere.CreateMerged(completeBoundingSphere, transMeshSphere);
             }
+            boxEffect = new BasicEffect(SceneManager.Instance.currentScene.GetGraphicsDevice());
+            basicEffect = new BasicEffect(SceneManager.Instance.currentScene.GetGraphicsDevice());
         }
         #endregion
 
@@ -185,7 +188,6 @@ namespace Insight.Engine.Components
                 }
 
                 /* Set your own effect parameters here */
-                BasicEffect boxEffect = new BasicEffect(graphics.GraphicsDevice);
                 //boxEffect.World = Matrix.Identity;
                 boxEffect.View = view;
                 boxEffect.Projection = projection;
@@ -223,8 +225,6 @@ namespace Insight.Engine.Components
             sphereLineVertices[3] = new VertexPositionColor(right, Color.White);
             sphereLineVertices[4] = new VertexPositionColor(forward, Color.White);
             sphereLineVertices[5] = new VertexPositionColor(back, Color.White);
-
-            BasicEffect basicEffect = new BasicEffect(device);
 
             basicEffect.World = worldMatrix;
             basicEffect.View = viewMatrix;

@@ -18,6 +18,11 @@ namespace Insight.Scenes
 {
     class DemoScene : GameScene
     {
+        enum KeyPress
+        {
+            Free, Pressed
+        }
+        KeyPress keyPress = KeyPress.Free;
         private PrelightingRenderer lightRenderer;
 
         private PostProcessRenderer postProcessRenderer;
@@ -1035,9 +1040,14 @@ namespace Insight.Scenes
 
             KeyboardState keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(Keys.L))
+            if (keyState.IsKeyDown(Keys.L) && keyPress == KeyPress.Free)
             {
                 showColliders *= -1;
+                keyPress = KeyPress.Pressed;
+            }
+            if (keyState.IsKeyUp(Keys.L) && keyPress == KeyPress.Pressed)
+            {
+                keyPress = KeyPress.Free;
             }
 
             if (!gameOver)
