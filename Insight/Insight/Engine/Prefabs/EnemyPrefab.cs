@@ -41,10 +41,10 @@ namespace Insight.Engine.Prefabs
         {
             enemy.LoadContent(content);
             enemy.GetComponent<AnimationRender>().Load(content, AnimationRender.AnimationModel.Enemy);
-            enemy.GetComponent<Renderer>().LoadTexture(content, "Materials/corridor-straight_DefaultMaterial_AlbedoTransparency");
-            enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/corridor-straight_DefaultMaterial_Normal");
-            enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
-            enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
+            enemy.GetComponent<Renderer>().LoadTexture(content, "Materials/straznikUV_DefaultMaterial_AlbedoTransparency");
+            enemy.GetComponent<Renderer>().LoadNormalMap(content, "Materials/straznikUV_DefaultMaterial_Normal");
+            enemy.GetComponent<Renderer>().LoadAmbientOcclusionMap(content, "Materials/straznikUV_DefaultMaterial_AO");
+            enemy.GetComponent<Renderer>().LoadMetalnessMap(content, "Materials/straznikUV_DefaultMaterial_MetallicSmoothness");
             enemy.AddNewComponent<EnemyAI>();
             enemy.AddNewComponent<SphereCollider>();
             enemy.physicLayer = Layer.Enemy;
