@@ -986,7 +986,7 @@ namespace Insight.Engine
                 currentNode = nearest;
                 maxNodes++;
 
-                if (maxNodes > 15)
+                if (maxNodes > 20)
                     return 9999.0f;
             }
             return distance;

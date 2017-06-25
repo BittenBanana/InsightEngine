@@ -13,12 +13,12 @@ namespace Insight.Scripts
 {
     class DispenserTriggerController : BaseScript
     {
-
+        bool isEmpty;
         public GameObject dispenser { get; set; }
         public ContentManager content { get; set; }
         public DispenserTriggerController(GameObject gameObject) : base(gameObject)
         {
-
+            isEmpty = false;
         }
 
         public override void Update()
@@ -28,7 +28,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerEnter(object source, CollisionEventArgs args)
         {
-            if (args.GameObject.physicLayer == Layer.Player)
+            if (args.GameObject.physicLayer == Layer.Player && isEmpty == false)
             {
                 Debug.WriteLine("dispenser");
                 SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 1);
@@ -41,13 +41,16 @@ namespace Insight.Scripts
             if (args.GameObject.physicLayer == Layer.Player)
             {
                 KeyboardState keyState = Keyboard.GetState();
-                if (keyState.IsKeyDown(Keys.E))
+                if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
                     dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
                     dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
                     dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
                     dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
                     args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+                    isEmpty = true;
+                    SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 0);
+                    SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
                     if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
                     {
                         if (args.GameObject.GetComponent<PlayerBullets>().paralysisBullet == true)

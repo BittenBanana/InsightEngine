@@ -11,6 +11,7 @@ namespace Insight.Scripts
 {
     class DispenserTriggerControllerMark : BaseScript
     {
+        bool isEmpty = false;
         public DispenserTriggerControllerMark(GameObject gameObject) : base(gameObject)
         {
 
@@ -23,7 +24,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerEnter(object source, CollisionEventArgs args)
         {
-            if (args.GameObject.physicLayer == Layer.Player)
+            if (args.GameObject.physicLayer == Layer.Player && isEmpty == false)
             {
                 Debug.WriteLine("dispenser marker");
                 SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 1);
@@ -36,9 +37,26 @@ namespace Insight.Scripts
             if (args.GameObject.physicLayer == Layer.Player)
             {
                 KeyboardState keyState = Keyboard.GetState();
-                if (keyState.IsKeyDown(Keys.E))
+                if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
                     args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+                    isEmpty = true;
+
+                    if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
+                    {
+                        if (args.GameObject.GetComponent<PlayerBullets>().paralysisBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Paralysis);
+                        }
+                        else if (args.GameObject.GetComponent<PlayerBullets>().transmitterBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Transmitter);
+                        }
+                        else if (args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet == true)
+                        {
+                            args.GameObject.GetComponent<RaycastTest>().SetBulletLoad(PlayerBullets.Bullets.Agressive);
+                        }
+                    }
                 }
             }
 
