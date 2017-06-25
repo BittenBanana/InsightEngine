@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine;
 using Insight.Engine.Components;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Insight.Scripts.EnemyStates
 {
@@ -13,10 +14,25 @@ namespace Insight.Scripts.EnemyStates
     {
         private float timer;
         private float wait;
+
+        private Random rand;
+        List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
+        private float soundTimer, soundDelay, moveSpeed;
         public override void EnterState(EnemyAI enemy)
         {
             timer = 0;
             wait = 10;
+
+            soundTimer = 0;
+            moveSpeed = 0.05f;
+            soundDelay = (1 / moveSpeed) / 50;
+
+            rand = new Random();
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot1", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot2", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot3", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot4", enemy.gameObject));
+
             Debug.WriteLine("Enter Check State");
         }
 
@@ -30,6 +46,12 @@ namespace Insight.Scripts.EnemyStates
                     enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                 EnemyWalkingSpots.getInstance()
                     .MoveGameObjectToDestination(enemy.gameObject, enemy.enemySight.lastHeardPosition, 0.05f, 0.1f);
+                if (soundTimer > soundDelay)
+                {
+                    SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, sounds.Count - 1)]);
+                    soundTimer = 0;
+                }
+                soundTimer += Time.deltaTime;
             }
             else
             {

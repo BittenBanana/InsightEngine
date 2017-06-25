@@ -25,6 +25,7 @@ namespace Insight.Scripts
         private float openingSpeed = 0.025f;
         private float maxOffset = 1.0f;
         private float currentOffset = 0;
+        public bool canOpen = true;
         public DoorAnimation(GameObject gameObject) : base(gameObject)
         {
         }
@@ -90,14 +91,16 @@ namespace Insight.Scripts
 
         public void OpenDoor()
         {
-            if(doorState == DoorState.Closed)
-                doorState = DoorState.Opening;
+            if(canOpen)
+                if(doorState == DoorState.Closed)
+                    doorState = DoorState.Opening;
         }
 
         public void CloseDoor()
         {
-            if (doorState == DoorState.Opened)
-                doorState = DoorState.Closing;
+            if(canOpen)
+                if (doorState == DoorState.Opened)
+                    doorState = DoorState.Closing;
         }
     }
 }

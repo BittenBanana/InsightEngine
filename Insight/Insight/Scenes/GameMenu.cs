@@ -14,12 +14,16 @@ namespace Insight.Scenes
 {
     class GameMenu : GameScene
     {
-
+        enum PressState
+        {
+            Free,
+            Pressed,
+            Released
+        }
+        PressState pressState = PressState.Free;
         int currentlySelected = 1;
-        int menuCount = 2;
+        int menuCount = 3;
 
-        bool isGameLoading = false;
-        bool isGameLoaded = false;
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
 
@@ -33,12 +37,11 @@ namespace Insight.Scenes
             base.LoadContent();
 
             ui = new UserInterface(graphics.GraphicsDevice, content);
-            ui.AddText("Fonts/gamefont", "1", "Play Game",
-                new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2), Color.White, 1);
-            ui.AddText("Fonts/gamefont", "2", "ExitGame",
-                new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2 + 20), Color.White, 1);
+            ui.AddSprite("Sprites/Menu/bg", "menuBg", new Vector2(0, 0), Color.White, 1);
+            ui.AddSprite("Sprites/Menu/pasek", "pasek", new Vector2(0, 0), Color.White, 1);
+            ui.AddSprite("Sprites/Menu/tekst", "tekst", new Vector2(0, 0), Color.White, 1);
 
-            ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
+            //ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
 
         }
 
@@ -54,37 +57,48 @@ namespace Insight.Scenes
             base.Update(gameTime);
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
+            if(pressState == PressState.Free)
             {
-                currentlySelected++;
-                if (currentlySelected > menuCount)
-                    currentlySelected = 2;
+                if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
+                {
+                    currentlySelected++;
+                    if (currentlySelected > menuCount)
+                        currentlySelected = 3;
+                }
+                if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
+                {
+                    currentlySelected--;
+                    if (currentlySelected <= 0)
+                        currentlySelected = 1;
+                }
+                pressState = PressState.Pressed;
             }
-            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
+            if(!keyState.IsKeyDown(Keys.Down) && !keyState.IsKeyDown(Keys.S)
+                && !keyState.IsKeyDown(Keys.Up) && !keyState.IsKeyDown(Keys.W))
             {
-                currentlySelected--;
-                if (currentlySelected <= 0)
-                    currentlySelected = 1;
+                pressState = PressState.Free;
             }
+
 
             if (currentlySelected == 1)
             {
-                ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
-                ui.ChangeTextColor("2", Color.White);
+                ui.ChangeSpritePosition("pasek", 0, 360);
             }
             if (currentlySelected == 2)
             {
-                ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
-                ui.ChangeTextColor("1", Color.White);
+                ui.ChangeSpritePosition("pasek", 0, 555);
             }
-
+            if (currentlySelected == 3)
+            {
+                ui.ChangeSpritePosition("pasek", 0, 740);
+            }
             if (keyState.IsKeyDown(Keys.Enter))
             {
                 if (currentlySelected == 1)
                 {
                     SceneManager.Instance.LoadGame();
                 }
-                if (currentlySelected == 2)
+                if (currentlySelected == 3)
                 {
                     SceneManager.Instance.gameApp.Quit();
                 }

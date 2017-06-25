@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using Insight.Engine;
 using Insight.Scripts.EnemyStates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace Insight.Scripts
 {
     class EnemyAI : BaseScript
     {
+        private bool enabled;
         public enum AiState
         {
             None,
@@ -48,6 +50,7 @@ namespace Insight.Scripts
 
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
+            enabled = true;
             nearestEnemyPosition = null;
             //patrolPositions = new List<Vector3>();
             standPosition = gameObject.Transform.Position;
@@ -58,9 +61,17 @@ namespace Insight.Scripts
 
         public override void Update()
         {
-            if(health <= 0 && !(currentState is DeathState))
-                ChangeState(new DeathState());
-            currentState?.Execute(this);
+            if (enabled)
+            {
+                if (health <= 0 && !(currentState is DeathState))
+                    ChangeState(new DeathState());
+                currentState?.Execute(this);
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.F3))
+            {
+                enabled = !enabled;
+            }
             //Debug.WriteLine(currentState);
             base.Update();
         }

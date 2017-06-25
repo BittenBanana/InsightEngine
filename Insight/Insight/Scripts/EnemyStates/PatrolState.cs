@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Insight.Engine;
 using Microsoft.Xna.Framework;
 using Insight.Engine.Components;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Insight.Scripts.EnemyStates
 {
@@ -18,6 +19,10 @@ namespace Insight.Scripts.EnemyStates
         private float timer;
         private float wait;
 
+        private Random rand;
+        List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
+        private float soundTimer, soundDelay, moveSpeed;
+
         public override void EnterState(EnemyAI enemy)
         {
             Debug.WriteLine("Enter Patrol State");
@@ -25,6 +30,16 @@ namespace Insight.Scripts.EnemyStates
             currentDestination = enemy.patrolPositions[destIterator];
             timer = 0;
             wait = 5;
+
+            soundTimer = 0;
+            moveSpeed = 0.05f;
+            soundDelay = (1 / moveSpeed) / 50;
+
+            rand = new Random();
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot1", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot2", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot3", enemy.gameObject));
+            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot4", enemy.gameObject));
         }
 
         public override void Execute(EnemyAI enemy)
@@ -36,6 +51,12 @@ namespace Insight.Scripts.EnemyStates
                      enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(1,true);
                 EnemyWalkingSpots.getInstance()
                     .MoveGameObjectToDestination(enemy.gameObject, currentDestination, 0.05f, 0.1f);
+                if (soundTimer > soundDelay)
+                {
+                    SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, sounds.Count - 1)]);
+                    soundTimer = 0;
+                }
+                soundTimer += Time.deltaTime;
             }
             else
             {
