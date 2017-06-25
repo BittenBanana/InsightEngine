@@ -49,7 +49,7 @@ namespace Insight.Scripts
         public EnemyAI(GameObject gameObject) : base(gameObject)
         {
             nearestEnemyPosition = null;
-            patrolPositions = new List<Vector3>();
+            //patrolPositions = new List<Vector3>();
             standPosition = gameObject.Transform.Position;
             defaultRotation = gameObject.Transform.Rotation;
             health = 100;

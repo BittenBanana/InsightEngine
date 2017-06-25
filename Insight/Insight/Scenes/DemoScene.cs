@@ -1045,25 +1045,6 @@ namespace Insight.Scenes
                     _elapsed_time = 0;
                 }
 
-                if (Mouse.GetState().Position.X >= graphics.GraphicsDevice.Viewport.Width)
-                {
-                    Mouse.SetPosition(0, Mouse.GetState().Position.Y);
-                }
-
-                else if (Mouse.GetState().Position.X <= 0)
-                {
-                    Mouse.SetPosition(graphics.GraphicsDevice.Viewport.Width, Mouse.GetState().Position.Y);
-                }
-
-                //if (Mouse.GetState().Position.Y <= graphics.GraphicsDevice.Viewport.Height)
-                //{
-                //    Mouse.SetPosition(Mouse.GetState().Position.X, 0);
-                //}
-
-                //else if (Mouse.GetState().Position.X >= 0)
-                //{
-                //    Mouse.SetPosition(Mouse.GetState().Position.X, graphics.GraphicsDevice.Viewport.Height);
-                //}
                 if (player.GetComponent<PlayerBullets>().aggresiveBullet)
                     ui.ChangeSpriteOpacity("agresja_a", 1);
                 else

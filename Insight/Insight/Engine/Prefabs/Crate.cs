@@ -28,6 +28,10 @@ namespace Insight.Engine.Prefabs
         {
 
             crateModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.crate, 0.5f);
+            crateModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/crate_DefaultMaterial_AlbedoTransparency");
+            crateModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/crate_DefaultMaterial_AO");
+            crateModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/crate_DefaultMaterial_MetallicSmoothness");
+            crateModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/crate_DefaultMaterial_Normal");
             crateModel.AddNewComponent<BoxCollider>();
             crateModel.physicLayer = Layer.IgnoreRaycast;
 
