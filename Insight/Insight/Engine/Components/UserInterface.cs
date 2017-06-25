@@ -16,7 +16,6 @@ namespace Insight.Engine.Components
         private Dictionary<string, Sprite>  sprites;
         private Dictionary<string, FontText> texts;
         private ContentManager content;
-        private GameObject gameObject;
 
         private struct Sprite
         {
@@ -35,13 +34,12 @@ namespace Insight.Engine.Components
             public float opacity;
         }
 
-        public UserInterface(GameObject gameObject, GraphicsDevice graphics, ContentManager content)
+        public UserInterface(GraphicsDevice graphics, ContentManager content)
         {
             sprites = new Dictionary<string, Sprite>();
             texts = new Dictionary<string, FontText>();
             spriteBatch = new SpriteBatch(graphics);
             this.content = content;
-            this.gameObject = gameObject;
         }
 
         public void AddSprite(string path, string name, Vector2 position, Color color, float opacity)
@@ -90,6 +88,16 @@ namespace Insight.Engine.Components
             {
                 FontText text = texts[textName];
                 text.opacity = opacity;
+                texts[textName] = text;
+            }
+        }
+
+        public void ChangeTextColor(string textName, Color color)
+        {
+            if (texts[textName].opacity <= 1)
+            {
+                FontText text = texts[textName];
+                text.color = color;
                 texts[textName] = text;
             }
         }

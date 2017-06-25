@@ -36,6 +36,7 @@ namespace Insight
             graphics.PreferredBackBufferHeight = (int)SceneManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
             SceneManager.Instance.Initialize(graphics);
+            SceneManager.Instance.SetGameApp(this);
             base.Initialize();
         }
 
@@ -91,6 +92,11 @@ namespace Insight
             SceneManager.Instance.Draw();
 
             base.Draw(gameTime);
+        }
+
+        public void Quit()
+        {
+            this.Exit();
         }
     }
 }

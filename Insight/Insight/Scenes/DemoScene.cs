@@ -986,7 +986,7 @@ namespace Insight.Scenes
             standingEnemyNearPcInRoom1.LoadContent(content);
             standingEnemyNearPcInRoom2.LoadContent(content);
             walkingEnemyInRoom.LoadContent(content);
-            ui = new UserInterface(player, graphics.GraphicsDevice, content);
+            ui = new UserInterface(graphics.GraphicsDevice, content);
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
 
