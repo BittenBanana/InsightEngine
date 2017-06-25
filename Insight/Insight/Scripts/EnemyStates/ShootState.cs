@@ -18,6 +18,7 @@ namespace Insight.Scripts.EnemyStates
         private int minRand;
         private int maxRand;
         private Random rand;
+        private int shootCueNumber;
 
         public override void EnterState(EnemyAI enemy)
         {
@@ -28,11 +29,9 @@ namespace Insight.Scripts.EnemyStates
             random = new Random();
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
                 enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true); // TODO Shoot Animation
-            List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot1", enemy.gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot2", enemy.gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot3", enemy.gameObject));
-            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, 2)]);
+            shootCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Shoots"), enemy.gameObject);
+            SceneManager.Instance.currentScene.audioManager.PlayCue(shootCueNumber);
         }
 
         public override void Execute(EnemyAI enemy)

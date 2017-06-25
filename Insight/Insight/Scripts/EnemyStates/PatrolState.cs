@@ -14,13 +14,11 @@ namespace Insight.Scripts.EnemyStates
     class PatrolState : EnemyAIState
     {
         private Vector3 currentDestination;
-        private int destIterator;
+        private int destIterator, footCueNumber;
 
         private float timer;
         private float wait;
 
-        private Random rand;
-        List<SoundEffectInstance> sounds = new List<SoundEffectInstance>();
         private float soundTimer, soundDelay, moveSpeed;
 
         public override void EnterState(EnemyAI enemy)
@@ -35,11 +33,8 @@ namespace Insight.Scripts.EnemyStates
             moveSpeed = 0.05f;
             soundDelay = (1 / moveSpeed) / 50;
 
-            rand = new Random();
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot1", enemy.gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot2", enemy.gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot3", enemy.gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/enemyfoot4", enemy.gameObject));
+            footCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Foots"), enemy.gameObject);
         }
 
         public override void Execute(EnemyAI enemy)
@@ -53,7 +48,7 @@ namespace Insight.Scripts.EnemyStates
                     .MoveGameObjectToDestination(enemy.gameObject, currentDestination, 0.05f, 0.1f);
                 if (soundTimer > soundDelay)
                 {
-                    SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, sounds.Count - 1)]);
+                    SceneManager.Instance.currentScene.audioManager.PlayCue(footCueNumber);
                     soundTimer = 0;
                 }
                 soundTimer += Time.deltaTime;

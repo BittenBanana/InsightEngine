@@ -2665,3 +2665,12 @@
 /processorParam:TextureFormat=Color
 /build:Materials/straznikUV_DefaultMaterial_Normal.png
 
+#begin Audio/AudioEngine.xgs
+/copy:Audio/AudioEngine.xgs
+
+#begin Audio/WaveBank.xwb
+/copy:Audio/WaveBank.xwb
+
+#begin Audio/SoundBank.xsb
+/copy:Audio/SoundBank.xsb
+

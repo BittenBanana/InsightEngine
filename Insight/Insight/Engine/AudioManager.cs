@@ -13,19 +13,26 @@ namespace Insight.Engine
     public class AudioManager
     {
         private List<Song> songs;
-        private List<SoundEffect> soundEffects;
-        private List<SoundEffectInstance> soundEffectInstances;
+        private List<Cue> cues;
         public AudioListener audioListener { get; private set; }
         private List<AudioEmitter> audioEmitters;
         private GameObject playerListener;
         private ContentManager content;
         private List<GameObject> gameObjects;
 
+        public AudioEngine engine { get; private set; }
+        public SoundBank soundBank { get; private set; }
+        WaveBank waveBank;
+
         public AudioManager(GameObject playerListener, ContentManager content)
         {
+            engine = new AudioEngine("Content/Audio/AudioEngine.xgs");
+            waveBank = new WaveBank(engine, "Content/Audio/WaveBank.xwb");
+            soundBank = new SoundBank(engine, "Content/Audio/SoundBank.xsb");
+
             songs = new List<Song>();
-            soundEffects = new List<SoundEffect>();
-            soundEffectInstances = new List<SoundEffectInstance>();
+            cues = new List<Cue>();
+
             audioEmitters = new List<AudioEmitter>();
             audioListener = new AudioListener();
             gameObjects = new List<GameObject>();
@@ -40,6 +47,8 @@ namespace Insight.Engine
 
         public void Update()
         {
+            
+
             audioListener.Position = playerListener.Transform.Position;
             audioListener.Forward = playerListener.Transform.forward;
             audioListener.Up = Vector3.Up;
@@ -54,56 +63,83 @@ namespace Insight.Engine
 
             int i = 0;
 
-            foreach (var soundEffectInstance in soundEffectInstances)
+            foreach (var cue in cues)
             {
-                soundEffectInstance.Apply3D(audioListener, audioEmitters[i]);
+                //float distance = cue.GetVariable("Distance");
+                //    distance = Vector3.Distance(audioListener.Position, audioEmitters[i].Position);
+                //cue.SetVariable("Distance", distance);
+                cue.Apply3D(audioListener, audioEmitters[i]);
+                
                 i++;          
             }
+
+            engine.Update();
         }
 
-        public SoundEffectInstance AddSoundEffectWithEmitter(string soundEffectName, GameObject gameObject)
+        public int AddCueWithEmitter(Cue cue, GameObject emitterGameObject)
         {
-            SoundEffect soundEffect = content.Load<SoundEffect>(soundEffectName);
-            SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
-            soundEffectInstances.Add(soundEffectInstance);
+            AudioEmitter emitter = new AudioEmitter();
+            emitter.Position = emitterGameObject.Transform.Position;
 
-            AudioEmitter audioEmitter = new AudioEmitter();
-            audioEmitter.Position = gameObject.Transform.Position;
-            audioEmitters.Add(audioEmitter);
-            gameObjects.Add(gameObject);
+            cue.Apply3D(audioListener, emitter);           
 
-            return soundEffectInstance;
-        }
+            audioEmitters.Add(emitter);
+            gameObjects.Add(emitterGameObject);
+            cues.Add(cue);
 
-        [Obsolete("use PlaySoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
-        public void PlaySoundEffect(int numberOfSoundEffect)
-        {
-            soundEffectInstances[numberOfSoundEffect].Play();
-        }
-        public void PlaySoundEffect(SoundEffectInstance numberOfSoundEffect)
-        {
-            soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Play();
+            return cues.Count - 1;
+            //cue.Play();
         }
 
-        [Obsolete("use StopSoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
-        public void StopSoundEffect(int numberOfSoundEffect)
+        public void PlayCue(int number)
         {
-            soundEffectInstances[numberOfSoundEffect].Stop();
-        }
-        public void StopSoundEffect(SoundEffectInstance numberOfSoundEffect)
-        {
-            soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Stop();
+            cues[number].Play();
         }
 
-        public void SetSoundEffectLooped(int numberOfSoundEffect, bool isLooped)
-        {
-            soundEffectInstances[numberOfSoundEffect].IsLooped = isLooped;
-        }
+        //public SoundEffectInstance AddSoundEffectWithEmitter(string soundEffectName, GameObject gameObject)
+        //{
+        //    SoundEffect soundEffect = content.Load<SoundEffect>(soundEffectName);
+        //    SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
+        //    soundEffectInstances.Add(soundEffectInstance);
 
-        public void SetSoundEffectsVolume(int numberOfSoundEffect, float value)
-        {
-            soundEffectInstances[numberOfSoundEffect].Volume = value;
-        }
+        //    AudioEmitter audioEmitter = new AudioEmitter();
+            
+        //    audioEmitter.Position = gameObject.Transform.Position;
+        //    audioEmitters.Add(audioEmitter);
+        //    gameObjects.Add(gameObject);
+
+        //    return soundEffectInstance;
+        //}
+
+        //[Obsolete("use PlaySoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
+        //public void PlaySoundEffect(int numberOfSoundEffect)
+        //{
+        //    soundEffectInstances[numberOfSoundEffect].Play();
+        //}
+        //public void PlaySoundEffect(SoundEffectInstance numberOfSoundEffect)
+        //{
+        //    soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Play();
+        //}
+
+        //[Obsolete("use StopSoundEffect(SoundEffectInstance numberOfSoundEffect) instead")]
+        //public void StopSoundEffect(int numberOfSoundEffect)
+        //{
+        //    soundEffectInstances[numberOfSoundEffect].Stop();
+        //}
+        //public void StopSoundEffect(SoundEffectInstance numberOfSoundEffect)
+        //{
+        //    soundEffectInstances.Find(i => i.Equals(numberOfSoundEffect)).Stop();
+        //}
+
+        //public void SetSoundEffectLooped(int numberOfSoundEffect, bool isLooped)
+        //{
+        //    soundEffectInstances[numberOfSoundEffect].IsLooped = isLooped;
+        //}
+
+        //public void SetSoundEffectsVolume(int numberOfSoundEffect, float value)
+        //{
+        //    soundEffectInstances[numberOfSoundEffect].Volume = value;
+        //}
 
         public void AddSong(string songName)
         {

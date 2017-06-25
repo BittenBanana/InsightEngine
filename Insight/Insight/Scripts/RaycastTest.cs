@@ -25,25 +25,18 @@ namespace Insight.Scripts
 
         private GameObject test;
 
-        int previousScrollValue;
+        int previousScrollValue, shootCueNumber;
 
         MouseState ms;
 
         private PlayerBullets.Bullets? currentBulletLoaded;
 
-        private List<SoundEffectInstance> sounds;
-        private Random rand;
-
         public RaycastTest(GameObject gameObject) : base(gameObject)
         {
             currentBulletLoaded = null;
             previousScrollValue = ms.ScrollWheelValue;
-            rand = new Random();
-            sounds = new List<SoundEffectInstance>();
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot1", gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot2", gameObject));
-            sounds.Add(SceneManager.Instance.currentScene.audioManager.AddSoundEffectWithEmitter("Audio/shoot3", gameObject));
-            SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0, 2)]);
+            shootCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Shoots"), gameObject);
         }
 
         public override void Update()
@@ -53,7 +46,9 @@ namespace Insight.Scripts
             #region LeftButton
             if (ms.LeftButton == ButtonState.Pressed && !isPressed && currentBulletLoaded != null)
             {
-                SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0,2)]);
+                //SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0,2)]);
+                SceneManager.Instance.currentScene.audioManager.PlayCue(shootCueNumber);
+
                 //am.PlaySoundEffect(0);
                 Vector3 minPoint = SceneManager.Instance.device.GraphicsDevice.Viewport.Unproject(
                     new Vector3(SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2,
