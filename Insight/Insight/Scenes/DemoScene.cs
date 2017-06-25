@@ -266,10 +266,10 @@ namespace Insight.Scenes
 
             List<Vector3> walkingEnemyPatrolPositions = new List<Vector3>();
             walkingEnemyPatrolPositions.Add(new Vector3(29.5f, 0, 34f));
-            walkingEnemyPatrolPositions.Add(new Vector3(39.5f, 0, 34f));
-            walkingEnemyPatrolPositions.Add(new Vector3(39.3f, 0, 29.5f));
-            walkingEnemyPatrolPositions.Add(new Vector3(35.5f, 0, 32f));
-            walkingEnemyPatrolPositions.Add(new Vector3(35.5f, 0, 34.5f));
+            walkingEnemyPatrolPositions.Add(new Vector3(37.5f, 0, 32f));
+            walkingEnemyPatrolPositions.Add(new Vector3(38f, 0, 32f));
+            walkingEnemyPatrolPositions.Add(new Vector3(38f, 0, 31f));
+            walkingEnemyPatrolPositions.Add(new Vector3(35f, 0, 34f));
             walkingEnemyInRoom = new EnemyPrefab(walkingEnemyPatrolPositions);
             walkingEnemyInRoom.Initialize(new Vector3(29.5f, 0, 34));
 
@@ -1108,7 +1108,7 @@ namespace Insight.Scenes
                         ui.ChangeSpriteOpacity("ammo3", 0);
                         break;
                 }
-
+                Debug.WriteLine(walkingEnemyInRoom.enemy.Transform.Position);
             }
 
         }
