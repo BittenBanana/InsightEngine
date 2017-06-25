@@ -4,14 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Insight.Engine;
 using Insight.Engine.Components;
 
 namespace Insight.Scripts.EnemyStates
 {
     class ParalysisState : EnemyAIState
     {
+        private float timer;
+
         public override void EnterState(EnemyAI enemy)
         {
+            timer = 0;
             Debug.WriteLine("Enter ParalysisState");
             enemy.detect = false;
             if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 5)
@@ -20,7 +24,11 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-
+            if (timer >= enemy.gameObject.GetComponent<AnimationRender>().GetCurrentClip().Duration.Seconds)
+            {
+                enemy.gameObject.GetComponent<Collider>().IsTrigger = true;
+            }
+            timer += Time.deltaTime;
         }
 
         public override void Exit(EnemyAI enemy)
