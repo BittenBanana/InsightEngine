@@ -206,6 +206,9 @@ namespace Insight.Scenes
         SightSlider sightSlider;
         AmmoInterface ammoInterface;
 
+        
+        int showColliders = -1;
+
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
@@ -1030,6 +1033,13 @@ namespace Insight.Scenes
         {
             base.Update(gameTime);
 
+            KeyboardState keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.L))
+            {
+                showColliders *= -1;
+            }
+
             if (!gameOver)
             {
                 foreach (GameObject go in gameObjects)
@@ -1113,8 +1123,33 @@ namespace Insight.Scenes
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(mainCam);
-                //if(go.GetComponent<BoxCollider>() != null)
-                //go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
+                
+
+                if(showColliders == 1)
+                {
+                    if(go.GetComponent<BoxCollider>() != null)
+                    go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
+
+                    if (go.GetComponent<SphereCollider>() != null)
+                    {
+                        if (go.GetComponent<AnimationRender>() != null)
+                        {
+                            for (int i = 0; i < go.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
+                            {
+                                go.GetComponent<SphereCollider>().DrawSphereSpikes(go.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, go.GetComponent<AnimationRender>().GetMatrix(), mainCam.view, projection);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < go.GetComponent<SphereCollider>().GetPreciseBoundingSpheres().Length; i++)
+                            {
+                                go.GetComponent<SphereCollider>().DrawSphereSpikes(go.GetComponent<SphereCollider>().GetPreciseBoundingSpheres()[i], graphics.GraphicsDevice, go.GetComponent<MeshRenderer>().GetMatrix(), mainCam.view, projection);
+                            }
+                        }
+
+                    }
+                }
+                
             }
             //EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)
