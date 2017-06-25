@@ -1,5 +1,6 @@
 ﻿using Insight.Engine.Components;
 using Microsoft.Xna.Framework;
+using System;
 using System.Diagnostics;
 
 namespace Insight.Engine
@@ -7,7 +8,8 @@ namespace Insight.Engine
     public class Transform : Component
     {
         public Vector3 Position;
-        public Vector3 prevPosition { get; private set; }
+        public Vector3 prevPosition { get; set; }
+        
         public Vector3 Rotation;
         public Quaternion quaterion;
         public Vector3 origin;
@@ -21,6 +23,7 @@ namespace Insight.Engine
             quaterion = Quaternion.Identity;
             forward = Vector3.Transform(Vector3.Backward, Matrix.CreateFromAxisAngle(Vector3.UnitX, Rotation.X) * Matrix.CreateFromAxisAngle(Vector3.UnitY, Rotation.Y) * Matrix.CreateFromAxisAngle(Vector3.UnitZ, Rotation.Z));
             Name = "Transform";
+            
         }
         public Transform(GameObject self, Vector3 pos) : base(self)
         {
@@ -47,8 +50,9 @@ namespace Insight.Engine
 
         public void Move(Vector3 axis, float speed)
         {
-            prevPosition = Position;
-            if(axis == Vector3.UnitX)
+            //prevPosition = Position;
+            
+            if (axis == Vector3.UnitX)
             {
                 Position.X += speed;
             }
@@ -60,6 +64,10 @@ namespace Insight.Engine
             {
                 Position.Z += speed;
             }
+
+            //Debug.WriteLine(prevPosition + "     previous transform");
+            //Debug.WriteLine(Position + "     current transform");
+            //Debug.WriteLine("");
         }
 
     }

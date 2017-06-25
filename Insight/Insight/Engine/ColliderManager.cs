@@ -1,5 +1,6 @@
 ﻿using Insight.Engine.Components;
 using Insight.Scenes;
+using Insight.Scripts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -44,7 +45,9 @@ namespace Insight.Engine
         {
             for (int j = 0; j < dynamicObjects.Count; j++)
             {
-                
+
+                dynamicObjects[j].Transform.prevPosition = dynamicObjects[j].Transform.Position;
+                    
                 if (j + 1 < dynamicObjects.Count)
                     isCollisionDynamic = PreciseCollisionTest(dynamicObjects[j], dynamicObjects[j].GetComponent<Renderer>().GetMatrix(),
                         dynamicObjects[j + 1], dynamicObjects[j + 1].GetComponent<Renderer>().GetMatrix());
@@ -89,16 +92,19 @@ namespace Insight.Engine
                             }
                             else
                             {
-
+                                //dynamicObjects[j].collision = true;
+                                ObjectColided += dynamicObjects[j].GetComponent<BoxController>().OnObjectColided;
                                 ObjectColided += dynamicObjects[j].OnObjectColided;
                                 OnObjectColided(staticObjects[k]);
                                 ObjectColided -= dynamicObjects[j].OnObjectColided;
+                                ObjectColided -= dynamicObjects[j].GetComponent<BoxController>().OnObjectColided;
                             }
                         }
                                                
                     }
                 }
-                
+                //Debug.WriteLine(dynamicObjects[j].Transform.prevPosition + "     previous");
+                //Debug.WriteLine(dynamicObjects[j].Transform.Position + "     current");
             }
 
             
@@ -199,7 +205,8 @@ namespace Insight.Engine
                 bool collision = sphere1.Intersects(sphere2);
                 if (collision)
                 {
-                    //Debug.WriteLine("Overall collision");
+                    //if(object1.physicLayer == Layer.Player)
+                    //    Debug.WriteLine("Overall collision");
                 }
                 else
                 {
@@ -404,6 +411,9 @@ namespace Insight.Engine
                 }
 
                 BoundingBox[] object2Colliders = object2.GetComponent<BoxCollider>().GetPreciseBoundingBoxes();
+
+                BoundingSphere origSphere1 = object1.GetComponent<SphereCollider>().GetCompleteBoundingSphere();
+                BoundingSphere sphere1 = Collider.TransformBoundingSphere(origSphere1, world1);
                 //BoundingBox[] object2Colliders;
                 //Matrix[] model2Transforms;
                 //ModelMesh mesh2;
@@ -423,9 +433,13 @@ namespace Insight.Engine
 
                 for (int i = 0; i < model1Spheres.Length; i++)
                     for (int j = 0; j < object2Colliders.Length; j++)
-                        if (model1Spheres[i].Intersects(object2Colliders[j]))
+                        if (model1Spheres[i].Intersects(object2Colliders[j]) || sphere1.Intersects(object2Colliders[j]))
                         {
-                            //Debug.WriteLine("Precise collision");
+                            //Debug.WriteLine("sphere collision");
+                            if(object1.physicLayer == Layer.Player)
+                            {
+                                object1.collision = true;
+                            }
                             return true;
                         }
 

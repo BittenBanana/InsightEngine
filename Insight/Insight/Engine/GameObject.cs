@@ -22,8 +22,10 @@ namespace Insight.Engine
         public string Tag { get; set; }
         public float velocityX;
         public float velocityZ;
+        public float velocityADX;
+        public float velocityADZ;
         public float rotationSpeed;
-        bool collision;
+        public bool collision = false;
         bool isDynamic;
         public Layer physicLayer { get; set; }
         public event EventHandler<CollisionEventArgs> EnterTriggerActivated;
@@ -38,6 +40,7 @@ namespace Insight.Engine
         public bool IsMoving { get; set; }
         public bool IsRotating { get; set; }
         public Vector3 nextPosition;
+        public bool SuperCollision { get; set; }
 
         //temp
         public bool isCube;
@@ -50,6 +53,7 @@ namespace Insight.Engine
             this.isDynamic = isDynamic;
             rotationSpeed = .05f;
             nextPosition = new Vector3(0);
+            SuperCollision = false;
         }
         public GameObject(Vector3 position, bool isDynamic)
         {
@@ -58,6 +62,7 @@ namespace Insight.Engine
             components.Add(Transform);
             this.isDynamic = isDynamic;
             nextPosition = new Vector3(0);
+            SuperCollision = false;
 
         }
 
@@ -109,19 +114,23 @@ namespace Insight.Engine
 
         public void Update()
         {
-            if (!collision)
-            {
+            //if (!collision)
+            //{
                 
                 velocityX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
                 velocityZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
-            }
+                velocityADX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                velocityADZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+            //}
 
             foreach (var item in components)
             {
                 item.Update();
             }
 
-            
+            //if (this.physicLayer == Layer.Player)
+               // Debug.WriteLine(Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Forward);
+
         }
 
         public void Draw(Camera camera)
@@ -142,7 +151,7 @@ namespace Insight.Engine
             nextPosition.Z = Transform.Position.Z + 0.1f * (float)Math.Cos(Transform.Rotation.Y);
             velocityX = 0;
             velocityZ = 0;
-            collision = true;
+            //collision = true;
             Rigidbody rb = GetComponent<Rigidbody>();
             //Transform.Position = args.LastPosition - new Vector3(0.8f, 0, 0.8f);
             //Transform.Position -= Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Backward;
@@ -157,10 +166,12 @@ namespace Insight.Engine
                     }
                     if (args.GameObject.physicLayer != Layer.Stairs)
                     {
+
+                        //Transform.Position += 0.1f * Matrix.CreateFromAxisAngle(Transform.Rotation, Transform.Rotation.Y).Forward;
                         if (Forward)
                         {
-                            Transform.Position.X -= 0.1f * (float)Math.Sin(Transform.Rotation.Y);
-                            Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                            //Transform.Position.X -= 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                            //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             //rotationSpeed = 0;
                         }
 
@@ -168,58 +179,58 @@ namespace Insight.Engine
 
                         if (Backward)
                         {
-                            Transform.Position.X += 0.1f * (float)Math.Sin(Transform.Rotation.Y);
-                            Transform.Position.Z += 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                            //Transform.Position.X += 0.1f * (float)Math.Sin(Transform.Rotation.Y);
+                            //Transform.Position.Z += 0.1f * (float)Math.Cos(Transform.Rotation.Y);
                             //rotationSpeed = 0;
                         }
 
-                        if (Left)
-                        {
-                            
+                        //if (Left)
+                        //{
 
-                            if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f) 
-                            {
-                                Transform.Position.X += 0.1f;
-                            }
-                            else if((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
-                            {
-                                Transform.Position.Z += 0.1f;
-                            }
-                            else if((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
-                            {
-                                Transform.Position.Z -= 0.1f;
-                            }
-                            else
-                            {
-                                Transform.Position.X -= 0.1f;
-                            }
 
-                            //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
-                            rotationSpeed = 0;
-                        }
+                        //    if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f) 
+                        //    {
+                        //        Transform.Position.X += 0.1f;
+                        //    }
+                        //    else if((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
+                        //    {
+                        //        Transform.Position.Z += 0.1f;
+                        //    }
+                        //    else if((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
+                        //    {
+                        //        Transform.Position.Z -= 0.1f;
+                        //    }
+                        //    else
+                        //    {
+                        //        Transform.Position.X -= 0.1f;
+                        //    }
 
-                        if (Right)
-                        {
-                            if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f)
-                            {
-                                Transform.Position.X -= 0.1f;
-                            }
-                            else if ((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
-                            {
-                                Transform.Position.Z -= 0.1f;
-                            }
-                            else if ((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
-                            {
-                                Transform.Position.Z += 0.1f;
-                            }
-                            else
-                            {
-                                Transform.Position.X += 0.1f;
-                            }
-                            
-                            //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
-                            rotationSpeed = 0;
-                        }
+                        //    //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                        //    rotationSpeed = 0;
+                        //}
+
+                        //if (Right)
+                        //{
+                        //    if ((float)Math.Sin(Transform.Rotation.Y) > -0.75f && (float)Math.Sin(Transform.Rotation.Y) < 0.75f && (float)Math.Cos(Transform.Rotation.Y) < -0.66f)
+                        //    {
+                        //        Transform.Position.X -= 0.1f;
+                        //    }
+                        //    else if ((float)Math.Sin(Transform.Rotation.Y) > 0.75f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f)
+                        //    {
+                        //        Transform.Position.Z -= 0.1f;
+                        //    }
+                        //    else if ((float)Math.Sin(Transform.Rotation.Y) < -0.75f && (float)Math.Cos(Transform.Rotation.Y) < 0.65f && (float)Math.Cos(Transform.Rotation.Y) > -0.65f)
+                        //    {
+                        //        Transform.Position.Z += 0.1f;
+                        //    }
+                        //    else
+                        //    {
+                        //        Transform.Position.X += 0.1f;
+                        //    }
+
+                        //    //Transform.Position.Z -= 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                        //    rotationSpeed = 0;
+                        //}
 
                         //Transform.Position = nextPosition - Transform.Position;
 
@@ -280,7 +291,6 @@ namespace Insight.Engine
 
 
 
-            collision = false;
         }
 
         public bool IsDynamic()
