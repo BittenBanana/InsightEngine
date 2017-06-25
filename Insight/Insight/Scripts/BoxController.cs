@@ -37,6 +37,9 @@ namespace Insight.Scripts
             lastMousePos = s.Position.ToVector2();
         }
 
+        int timer = 0;         //Initialize a 10 second timer
+        List<Vector3> lastPositions = new List<Vector3>();
+
         public override void Update()
         {
             gameObject.IsMoving = false;
@@ -44,8 +47,23 @@ namespace Insight.Scripts
             gameObject.Left = false;
             gameObject.Forward = false;
             gameObject.Backward = false;
+            //gameObject.collision = false;
             KeyboardState keyState = Keyboard.GetState();
             s = Mouse.GetState();
+
+            //timer++;
+            //if (timer > 20)
+            //{
+            //    Debug.WriteLine("timer");
+                gameObject.Transform.prevPosition = gameObject.Transform.Position;
+            //    timer = 0;
+            //}
+            if(lastPositions.Count > 1)
+            {
+                lastPositions.RemoveAt(lastPositions.Count - 1);
+            }
+
+            lastPositions.Insert(0, gameObject.Transform.Position);
 
             if (s.Position.ToVector2().X < SceneManager.Instance.device.GraphicsDevice.Viewport.Width / 2)
             {
@@ -69,7 +87,7 @@ namespace Insight.Scripts
                 gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityZ);
                 gameObject.Forward = true;
                 gameObject.IsMoving = true;
-
+                
                 kState = KeyState.Pressed;
 
                 if(mState == MovementState.IsIdle)
@@ -115,6 +133,7 @@ namespace Insight.Scripts
                 //gameObject.Backward = false;
                 //gameObject.IsMoving = true;
                 gameObject.Left = true;
+                gameObject.IsMoving = true;
             }
             if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
             {
@@ -132,6 +151,7 @@ namespace Insight.Scripts
                 //gameObject.Backward = true;
                 //gameObject.IsMoving = true;
                 gameObject.Right = true;
+                gameObject.IsMoving = true;
             }
             if(gameObject.GetComponent<Rigidbody>() != null)
             if (keyState.IsKeyDown(Keys.Space) && gameObject.GetComponent<Rigidbody>().isGrounded)
@@ -156,7 +176,38 @@ namespace Insight.Scripts
                 mState = MovementState.IsIdle;
             }
 
+            //if(gameObject.IsMoving)
+            //{
+                //Debug.WriteLine(gameObject.Transform.prevPosition + "     previous");
+                //Debug.WriteLine(gameObject.Transform.Position + "     current");
+                //Debug.WriteLine("");
+                if (gameObject.SuperCollision)
+                {
+                    //Debug.WriteLine(gameObject.Transform.prevPosition + "     previous");
+                    //Debug.WriteLine(gameObject.Transform.Position + "     current");
+                    //gameObject.Transform.Position = gameObject.Transform.prevPosition;
+                    //Debug.WriteLine(gameObject.Transform.Position + "     current after");
+                    while(lastPositions.Count > 0)
+                    {
+                        Debug.WriteLine("rewind");
+                        gameObject.Transform.Position = lastPositions[0];
+                        lastPositions.RemoveAt(0);
+                    }
+                    
+
+                }
+                gameObject.SuperCollision = false;
+            //}
+            //Debug.WriteLine(gameObject.SuperCollision);
             base.Update();
+        }
+
+        public void OnObjectColided(object source, CollisionEventArgs args)
+        {
+            gameObject.SuperCollision = true;
+            // Debug.WriteLine("yuuup");
+            //gameObject.Transform.Position = gameObject.Transform.prevPosition;
+            //gameObject.collision = true;
         }
 
         //public override void OnTriggerEnter(object source, CollisionEventArgs args)
