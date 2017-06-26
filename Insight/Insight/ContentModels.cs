@@ -171,7 +171,7 @@ namespace Insight
             desk2Monitors = content.Load<Model>("Models/Konrads/Enviroment/desk-2monitors");
             intercom = content.Load<Model>("Models/Konrads/Enviroment/intercom");
             bigMachine = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom");
-            bigMachineCollider = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom_collider_v2");
+            bigMachineCollider = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom_collider");
         }
     }
 }
