@@ -22,8 +22,8 @@ namespace Insight.Scripts
         private DoorState doorState = DoorState.Closed;
         public GameObject leftDoor { get; set; }
         public GameObject rightDoor { get; set; }
-        private float openingSpeed = 0.025f;
-        private float maxOffset = 1.0f;
+        private float openingSpeed = 2.5f;
+        private float maxOffset = 50.0f;
         private float currentOffset = 0;
         public bool canOpen = true;
         public DoorAnimation(GameObject gameObject) : base(gameObject)
@@ -54,7 +54,7 @@ namespace Insight.Scripts
                     break;
                 case DoorState.Opening:
                     currentOffset += openingSpeed;
-                    if (currentOffset <= 1.0f)
+                    if (currentOffset <= maxOffset)
                     {
                         leftDoor.Transform.Move(Vector3.UnitX, openingSpeed);
                         rightDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
@@ -71,7 +71,7 @@ namespace Insight.Scripts
                     break;
                 case DoorState.Closing:
                     currentOffset += openingSpeed;
-                    if (currentOffset <= 1.0f)
+                    if (currentOffset <= maxOffset)
                     {
                         leftDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
                         rightDoor.Transform.Move(Vector3.UnitX, openingSpeed);

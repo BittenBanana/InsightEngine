@@ -19,7 +19,7 @@ namespace Insight.Scripts
             Released,
             None
         }
-        enum MovementState
+        public enum MovementState
         {
             IsRunning,
             IsIdle,
@@ -28,7 +28,7 @@ namespace Insight.Scripts
             Busy
         }
         KeyState kState = KeyState.None;
-        MovementState mState = MovementState.IsIdle;
+        public MovementState mState = MovementState.IsIdle;
         private MouseState s;
         private Vector2 lastMousePos;
         private int stepsCueNumber;

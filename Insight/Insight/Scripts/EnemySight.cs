@@ -88,10 +88,13 @@ namespace Insight.Scripts
                     }
                     timer += Time.deltaTime;
                 }
-                if (detectionLevel < 1)
-                    detectionLevel += Time.deltaTime * 0.25f * (1 +(1 - distance/radius));
-                //isPlayerHeard = true;
-                lastHeardPosition = player.Transform.Position;
+                if (player.GetComponent<BoxController>().mState == BoxController.MovementState.IsRunning)
+                {
+                    if (detectionLevel < 1)
+                        detectionLevel += Time.deltaTime * 0.25f * (1 + (1 - distance / radius));
+                    //isPlayerHeard = true;
+                    lastHeardPosition = player.Transform.Position;
+                }
                 if (!isOnTrigger)
                     isOnTrigger = true;
             }
