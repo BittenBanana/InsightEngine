@@ -12,6 +12,7 @@ namespace Insight.Engine.Prefabs
     class BigMachine : Prefab
     {
         GameObject machineModel;
+        GameObject machineCollider;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
@@ -19,8 +20,11 @@ namespace Insight.Engine.Prefabs
 
             machineModel = new GameObject(new Vector3(0, 0, 0), false);
             machineModel.AddNewComponent<MeshRenderer>();
+            machineCollider = new GameObject(new Vector3(0, 0, 0), false);
+            machineCollider.AddNewComponent<MeshRenderer>();
 
             prefabGameObjects.Add(machineModel);
+            prefabGameObjects.Add(machineCollider);
             base.Initialize(position, rotation);
         }
 
@@ -33,8 +37,10 @@ namespace Insight.Engine.Prefabs
             machineModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_AO");
             machineModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_MetallicSmoothness");
 
-            machineModel.AddNewComponent<BoxCollider>();
-
+            machineCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.bigMachineCollider, 1.0f);
+            machineCollider.AddNewComponent<BoxCollider>();
+            //machineModel.AddNewComponent<BoxCollider>();
+            
         }
     }
 }

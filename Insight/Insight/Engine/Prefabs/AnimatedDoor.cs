@@ -75,7 +75,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(rightDoorModel);
             prefabGameObjects.Add(frame);
             prefabGameObjects.Add(triggerModel);
-            base.Initialize(position);
+            base.Initialize(position, rot);
         }
 
         public override void LoadContent(ContentManager content)

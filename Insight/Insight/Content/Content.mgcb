@@ -2665,7 +2665,6 @@
 /processorParam:TextureFormat=Color
 /build:Materials/straznikUV_DefaultMaterial_Normal.png
 
-
 #begin Audio/AudioEngine.xgs
 /copy:Audio/AudioEngine.xgs
 
@@ -2722,4 +2721,23 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Menu/tekst.png
+
+#begin Models/Konrads/Enviroment/bigMachine_1stRoom_collider.FBX
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Models/Konrads/Enviroment/bigMachine_1stRoom_collider.FBX
 
