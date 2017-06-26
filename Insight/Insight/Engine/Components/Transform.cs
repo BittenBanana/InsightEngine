@@ -54,15 +54,17 @@ namespace Insight.Engine
             
             if (axis == Vector3.UnitX)
             {
-                Position.X += speed;
+                gameObject.velocity.X = speed;
+                Position.X += speed * Time.deltaTime;
             }
             if(axis == Vector3.UnitY)
             {
-                Position.Y += speed;
+                Position.Y += speed * Time.deltaTime;
             }
             if(axis == Vector3.UnitZ)
             {
-                Position.Z += speed;
+                gameObject.velocity.Y = speed;
+                Position.Z += speed * Time.deltaTime;
             }
 
             //Debug.WriteLine(prevPosition + "     previous transform");

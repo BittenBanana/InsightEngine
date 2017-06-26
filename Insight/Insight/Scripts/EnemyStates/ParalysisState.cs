@@ -24,7 +24,7 @@ namespace Insight.Scripts.EnemyStates
 
         public override void Execute(EnemyAI enemy)
         {
-            if (timer >= enemy.gameObject.GetComponent<AnimationRender>().GetCurrentClip().Duration.Seconds)
+            if (timer >= enemy.gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip.Duration.Seconds)
             {
                 enemy.gameObject.GetComponent<Collider>().IsTrigger = true;
             }

@@ -142,9 +142,9 @@ namespace Insight.Engine.Components
             return clip3;
         }
 
-        public AnimationClip GetCurrentClip()
+        public AnimationPlayer GetAnimationPlayer()
         {
-            return animationPlayer.CurrentClip;
+            return animationPlayer;
         }
 
         public void ChangeAnimation(int id, bool loop)

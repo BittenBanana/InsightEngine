@@ -2665,7 +2665,6 @@
 /processorParam:TextureFormat=Color
 /build:Materials/straznikUV_DefaultMaterial_Normal.png
 
-
 #begin Audio/AudioEngine.xgs
 /copy:Audio/AudioEngine.xgs
 
@@ -2722,4 +2721,28 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Menu/tekst.png
+
+#begin Audio/playerfootstep1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/playerfootstep1.wav
+
+#begin Audio/playerfootstep2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/playerfootstep2.wav
+
+#begin Audio/playerfootstep3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/playerfootstep3.wav
+
+#begin Audio/playerfootstep4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/playerfootstep4.wav
 

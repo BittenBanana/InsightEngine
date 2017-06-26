@@ -825,15 +825,13 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
             
-            
-
-            player.AddNewComponent<BoxController>();
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
 
             audioManager = new AudioManager(player, content);
 
+            player.AddNewComponent<BoxController>();
             player.AddNewComponent<RaycastTest>();
             player.AddNewComponent<SphereCollider>();
             player.AddNewComponent<PlayerBullets>();
