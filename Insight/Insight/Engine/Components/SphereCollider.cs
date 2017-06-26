@@ -17,7 +17,7 @@ namespace Insight.Engine.Components
         Vector3 rotation;
         Vector3 pos;
         BoundingSphere completeBoundingSphere;
-
+        BasicEffect basicEffect;
         public SphereCollider(GameObject gameObject) :base(gameObject)
         {
             model = gameObject.GetComponent<Renderer>().getModel();
@@ -37,6 +37,7 @@ namespace Insight.Engine.Components
                 //completeBoundingSphere.Center.Y += 0.3f;
                 //completeBoundingSphere.Radius = 1f;
             }
+            basicEffect = new BasicEffect(SceneManager.Instance.currentScene.GetGraphicsDevice());
         }
 
         public BoundingSphere GetCompleteBoundingSphere()
@@ -86,7 +87,7 @@ namespace Insight.Engine.Components
             sphereLineVertices[4] = new VertexPositionColor(forward, Color.White);
             sphereLineVertices[5] = new VertexPositionColor(back, Color.White);
 
-            BasicEffect basicEffect = new BasicEffect(device);
+         
 
             basicEffect.World = worldMatrix;
             basicEffect.View = viewMatrix;
