@@ -63,8 +63,9 @@ namespace Insight.Scenes
         AnimatedDoor door3;
         AnimatedDoor door4;
         AnimatedDoor door5;
+        AnimatedDoor door7;
         //DoorSmaller door6;
-        
+
         RoomFloor roomFloor;
         RoomFloor roomFloor2;
         RoomFloor roomFloor3;
@@ -332,7 +333,10 @@ namespace Insight.Scenes
             corridor4.Initialize(new Vector3(16, 0, 6), new Vector3(0));
 
             door = new AnimatedDoor();
-            door.Initialize(new Vector3(16, 0, 1));
+            door.Initialize(new Vector3(16, 0, 1), true);
+
+            door7 = new AnimatedDoor();
+            door7.Initialize(new Vector3(0, 0, 0.2f), true);
 
             column = new Column();
             column.Initialize(new Vector3(16, 0, 11));
@@ -871,6 +875,7 @@ namespace Insight.Scenes
             columnRotated.LoadContent(content);
             columnRotated2.LoadContent(content);
             door.LoadContent(content);
+            door7.LoadContent(content);
             roomFloor.LoadContent(content);
             roomFloor2.LoadContent(content);
             roomFloor3.LoadContent(content);

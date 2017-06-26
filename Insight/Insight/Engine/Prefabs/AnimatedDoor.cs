@@ -16,6 +16,7 @@ namespace Insight.Engine.Prefabs
         public GameObject leftDoorModel;
         public GameObject rightDoorModel;
         public GameObject frame;
+        bool areClosed;
 
         public GameObject triggerModel;
         public override void Initialize(Vector3 position)
@@ -78,6 +79,37 @@ namespace Insight.Engine.Prefabs
             base.Initialize(position, rot);
         }
 
+        public override void Initialize(Vector3 position, bool areClosed)
+        {
+            prefabGameObjects = new List<GameObject>();
+
+            wallModel = new GameObject(new Vector3(0, 0, 0), false);
+            leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
+            rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
+            frame = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(2.7f, 0, -0.4f), false);
+
+            this.areClosed = areClosed;
+
+            wallModel.AddNewComponent<MeshRenderer>();
+            leftDoorModel.AddNewComponent<MeshRenderer>();
+            rightDoorModel.AddNewComponent<MeshRenderer>();
+            frame.AddNewComponent<MeshRenderer>();
+            triggerModel.AddNewComponent<MeshRenderer>();
+            triggerModel.GetComponent<MeshRenderer>().IsVisible = false;
+
+
+            wallModel.AddNewComponent<DoorAnimation>();
+            wallModel.GetComponent<DoorAnimation>().leftDoor = leftDoorModel;
+            wallModel.GetComponent<DoorAnimation>().rightDoor = rightDoorModel;
+            prefabGameObjects.Add(wallModel);
+            prefabGameObjects.Add(leftDoorModel);
+            prefabGameObjects.Add(rightDoorModel);
+            prefabGameObjects.Add(frame);
+            prefabGameObjects.Add(triggerModel);
+            base.Initialize(position);
+        }
+
         public override void LoadContent(ContentManager content)
         {
             wallModel.LoadContent(content, ContentModels.Instance.door_wall_5x6, 1.0f);
@@ -118,7 +150,8 @@ namespace Insight.Engine.Prefabs
             {
                 wallModel.GetComponent<DoorAnimation>().areRotated = true;
             }
-            triggerModel.GetComponent<DoorTrigger>().targetAnimation = wallModel.GetComponent<DoorAnimation>();
+            if(!areClosed)
+                triggerModel.GetComponent<DoorTrigger>().targetAnimation = wallModel.GetComponent<DoorAnimation>();
             base.LoadContent(content);
         }
     }

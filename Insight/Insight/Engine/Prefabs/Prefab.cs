@@ -33,6 +33,15 @@ namespace Insight.Engine.Prefabs
             }
         }
 
+        public virtual void Initialize(Vector3 position, bool areClosed)
+        {
+            foreach (GameObject go in prefabGameObjects)
+            {
+                go.Transform.Position += position;
+                SceneManager.Instance.currentScene.GetGameObjectsFromScene().Add(go);
+            }
+        }
+
         public virtual void LoadContent(ContentManager content)
         {
 
