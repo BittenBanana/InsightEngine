@@ -31,6 +31,7 @@ sampler2D normalSampler = sampler_state
 float3 LightColor;
 float3 LightPosition;
 float LightAttenuation;
+float Intensity;
 
 // Include shared functions
 #include "PPShared.fxh"
@@ -87,7 +88,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR
 	float d = distance(LightPosition, position.xyz);
 	float att = 1 - pow(d / LightAttenuation, 2);
 
-	return float4(LightColor * lighting * att, 1);
+	return float4(LightColor * lighting * att, 1) * Intensity;
 }
 
 technique LightMap

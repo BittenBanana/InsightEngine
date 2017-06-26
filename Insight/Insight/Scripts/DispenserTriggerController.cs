@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Engine.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace Insight.Scripts
@@ -15,6 +16,7 @@ namespace Insight.Scripts
     {
         bool isEmpty;
         public GameObject dispenser { get; set; }
+        public GameObject light { get; set; }
         public ContentManager content { get; set; }
 
         private int pickupCueNumber;
@@ -54,6 +56,7 @@ namespace Insight.Scripts
                     dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
                     dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
                     dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
+                    light.GetComponent<Light>().Color = Color.Red;
                     args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
                     isEmpty = true;
                     SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 0);
