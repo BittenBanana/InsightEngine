@@ -37,7 +37,8 @@ namespace Insight.Engine.Components
         {
             this.model = model;
             generateTags();
-            effect = Material.GetEffect();
+            if(Material != null)
+                effect = Material.GetEffect();
             this.scale = scale;
         }
 

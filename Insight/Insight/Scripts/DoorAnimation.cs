@@ -26,6 +26,7 @@ namespace Insight.Scripts
         private float maxOffset = 50.0f;
         private float currentOffset = 0;
         public bool canOpen = true;
+        public bool areRotated = false;
         public DoorAnimation(GameObject gameObject) : base(gameObject)
         {
         }
@@ -56,8 +57,17 @@ namespace Insight.Scripts
                     currentOffset += openingSpeed;
                     if (currentOffset <= maxOffset)
                     {
-                        leftDoor.Transform.Move(Vector3.UnitX, openingSpeed);
-                        rightDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
+                        if(areRotated)
+                        {
+                            leftDoor.Transform.Move(Vector3.UnitZ, openingSpeed);
+                            rightDoor.Transform.Move(Vector3.UnitZ, -openingSpeed);
+                        }
+                        else
+                        {
+                            leftDoor.Transform.Move(Vector3.UnitX, openingSpeed);
+                            rightDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
+                        }
+                        
                     }
                     else
                     {
@@ -73,8 +83,17 @@ namespace Insight.Scripts
                     currentOffset += openingSpeed;
                     if (currentOffset <= maxOffset)
                     {
-                        leftDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
-                        rightDoor.Transform.Move(Vector3.UnitX, openingSpeed);
+                        if (areRotated)
+                        {
+                            leftDoor.Transform.Move(Vector3.UnitZ, -openingSpeed);
+                            rightDoor.Transform.Move(Vector3.UnitZ, openingSpeed);
+                        }
+                        else
+                        {
+                            leftDoor.Transform.Move(Vector3.UnitX, -openingSpeed);
+                            rightDoor.Transform.Move(Vector3.UnitX, openingSpeed);
+                        }
+                        
                     }
                     else
                     {
