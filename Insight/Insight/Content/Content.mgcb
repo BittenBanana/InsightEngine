@@ -2874,3 +2874,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Models/Konrads/Enviroment/bigMachine_1stRoom_collider.FBX
 
+#begin Audio/detect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/detect.wav
+

@@ -43,7 +43,7 @@ namespace Insight.Engine.Components
         public Light(GameObject gameObject) : base(gameObject)
         {
             Color = Color.White;
-            Intensity = 0.5f;
+            Intensity = 1f;
             Direction = new Vector3(0.3f,-0.5f, 0);
             Attenuation = 5;
         }

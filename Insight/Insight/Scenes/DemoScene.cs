@@ -1165,6 +1165,11 @@ namespace Insight.Scenes
                 }
                 
             }
+            
+            //SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
+            //sprite.Begin(SpriteSortMode.Immediate,BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
+            //sprite.Draw(lightRenderer.depthTarg, new Rectangle(0,0,300,300),Color.White);
+
             //EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)
                 postProcessRenderer.Draw(sceneRenderTarget2D);

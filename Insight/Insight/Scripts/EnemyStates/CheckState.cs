@@ -17,7 +17,7 @@ namespace Insight.Scripts.EnemyStates
 
         private float soundTimer, soundDelay, moveSpeed;
 
-        private int footCueNumber;
+        private int footCueNumber, detectCueNumber;
         public override void EnterState(EnemyAI enemy)
         {
             timer = 0;
@@ -29,6 +29,10 @@ namespace Insight.Scripts.EnemyStates
 
             footCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
                 SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Foots"), enemy.gameObject);
+            detectCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Detect"), enemy.gameObject);
+
+            SceneManager.Instance.currentScene.audioManager.PlayCue(detectCueNumber);
 
             Debug.WriteLine("Enter Check State");
         }

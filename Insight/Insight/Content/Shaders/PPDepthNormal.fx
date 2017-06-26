@@ -82,9 +82,9 @@ PixelShaderOutput MainPS(VertexShaderOutput input)
 {
 	PixelShaderOutput output = (PixelShaderOutput)0;
 	
-	float4 color;
+	float4 color = 0;
 
-	color = input.Depth.x / input.Depth.y;
+	color.r = input.Depth.x / input.Depth.y;
 
     float3 normal = tex2D(normalSampler, input.UV).rgb;
     normal = normal * 2 - 1;
