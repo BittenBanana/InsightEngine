@@ -1059,7 +1059,7 @@ namespace Insight.Scenes
 
                 //float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
                 //    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
-                postEffect.Parameters["colorPercentage"]?.SetValue(1 - ((float)player.GetComponent<PlayerManager>().health / 100));
+                postEffect.Parameters["colorPercentage"]?.SetValue(0.75f - ((float)player.GetComponent<PlayerManager>().health / 100) / 1.3333333333333f);
 
                 //mui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 

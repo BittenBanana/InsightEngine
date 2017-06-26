@@ -74,26 +74,26 @@ float4 PixelShaderFunction(VertexShaderOutput i) : COLOR0
     float4 blood2 = tex2D(BloodSampler2, i.TextureCoordinates);
     float4 blood3 = tex2D(BloodSampler3, i.TextureCoordinates);
     float3 value;
-
+    //colorPercentage = clamp(colorPercentage, 0, .75);
     float invColorPercentage = 1 - colorPercentage;
-    if (colorPercentage >= 0.5 && colorPercentage < .75)
-    {
-        value.r = (color.r * invColorPercentage + blood2.r * colorPercentage);
-        value.g = (color.g * invColorPercentage + blood2.g * colorPercentage);
-        value.b = (color.b * invColorPercentage + blood2.b * colorPercentage);
-    }
-    else if(colorPercentage >= .75)
-    {
-        value.r = (color.r * invColorPercentage + blood3.r * colorPercentage);
-        value.g = (color.g * invColorPercentage + blood3.g * colorPercentage);
-        value.b = (color.b * invColorPercentage + blood3.b * colorPercentage);
-    }
-    else
-    {
+    //if (colorPercentage >= 0.5 && colorPercentage < .75)
+    //{
+    //    value.r = (color.r * invColorPercentage + blood2.r * colorPercentage);
+    //    value.g = (color.g * invColorPercentage + blood2.g * colorPercentage);
+    //    value.b = (color.b * invColorPercentage + blood2.b * colorPercentage);
+    //}
+    //else if(colorPercentage >= .75)
+    //{
+    //    value.r = (color.r * invColorPercentage + blood3.r * colorPercentage);
+    //    value.g = (color.g * invColorPercentage + blood3.g * colorPercentage);
+    //    value.b = (color.b * invColorPercentage + blood3.b * colorPercentage);
+    //}
+    //else
+    //{
         value.r = (color.r * invColorPercentage + blood1.r * colorPercentage);
         value.g = (color.g * invColorPercentage + blood1.g * colorPercentage);
         value.b = (color.b * invColorPercentage + blood1.b * colorPercentage);
-    }
+    //}
 
     color.rgb = value;
     color.a = 1;

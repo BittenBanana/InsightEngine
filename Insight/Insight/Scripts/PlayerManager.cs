@@ -71,12 +71,10 @@ namespace Insight.Scripts
             if (health > 0)
             {
                 health -= dmg;
-                SceneManager.Instance.currentScene.audioManager.PlayCue(damageCueNumber);
+                
             }
-            else
-            {
-                SceneManager.Instance.currentScene.audioManager.PlayCue(dieCueNumber);
-            }
+
+            SceneManager.Instance.currentScene.audioManager.PlayCue(health <= 0 ? dieCueNumber : damageCueNumber);
         }
     }
 }
