@@ -2782,3 +2782,9 @@
 /processorParam:Quality=Best
 /build:Audio/die.wav
 
+#begin Audio/pickup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/pickup.wav
+

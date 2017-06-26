@@ -16,9 +16,15 @@ namespace Insight.Scripts
         bool isEmpty;
         public GameObject dispenser { get; set; }
         public ContentManager content { get; set; }
+
+        private int pickupCueNumber;
+
         public DispenserTriggerController(GameObject gameObject) : base(gameObject)
         {
             isEmpty = false;
+            pickupCueNumber =
+                SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                    SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Pickup"), gameObject);
         }
 
         public override void Update()
@@ -43,6 +49,7 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
+                    SceneManager.Instance.currentScene.audioManager.PlayCue(pickupCueNumber);
                     dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
                     dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
                     dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
