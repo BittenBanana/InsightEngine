@@ -22,6 +22,7 @@ namespace Insight.Engine
         public string Tag { get; set; }
         public float velocityX;
         public float velocityZ;
+        public Vector2 velocity;
         public float velocityADX;
         public float velocityADZ;
         public float rotationSpeed;
@@ -117,10 +118,12 @@ namespace Insight.Engine
             //if (!collision)
             //{
                 
-                velocityX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
-                velocityZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+                velocityX = 2f * (float)Math.Sin(Transform.Rotation.Y);
+                velocityZ = 2f * (float)Math.Cos(Transform.Rotation.Y);
                 velocityADX = 0.1f * (float)Math.Sin(Transform.Rotation.Y);
                 velocityADZ = 0.1f * (float)Math.Cos(Transform.Rotation.Y);
+            velocity.X = velocityX;
+            velocity.Y = velocityZ;
             //}
 
             foreach (var item in components)

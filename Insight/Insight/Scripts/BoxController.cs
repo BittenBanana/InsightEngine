@@ -19,7 +19,7 @@ namespace Insight.Scripts
             Released,
             None
         }
-        enum MovementState
+        public enum MovementState
         {
             IsRunning,
             IsIdle,
@@ -28,12 +28,18 @@ namespace Insight.Scripts
             Busy
         }
         KeyState kState = KeyState.None;
-        MovementState mState = MovementState.IsIdle;
+        public MovementState mState = MovementState.IsIdle;
         private MouseState s;
         private Vector2 lastMousePos;
+        private int stepsCueNumber;
+
+        private float soundTimer, soundDelay, moveSpeed;
+
         public BoxController(GameObject gameObject) : base(gameObject)
         {
-
+            stepsCueNumber =
+                SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                    SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("PlayerSteps"), gameObject);
             lastMousePos = s.Position.ToVector2();
         }
 
@@ -86,17 +92,28 @@ namespace Insight.Scripts
                 gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityX);
                 gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityZ);
                 gameObject.Forward = true;
-                gameObject.IsMoving = true;
+                gameObject.IsMoving = true; 
                 
                 kState = KeyState.Pressed;
-
+               
                 if(mState == MovementState.IsIdle)
                 {
+                    SceneManager.Instance.currentScene.audioManager.PlayCue(stepsCueNumber);
                     this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(3,true);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
+                    soundDelay = (float)gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip
+                                     .Duration.TotalSeconds / 2f;
                 }
 
+                if (gameObject.GetComponent<AnimationRender>().animationId == 3) {
+                    if ( soundTimer > soundDelay)
+                    {
+                        SceneManager.Instance.currentScene.audioManager.PlayCue(stepsCueNumber);
+                        soundTimer = 0;
+                    }
+                    soundTimer += Time.deltaTime;
+                }
             }
             if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
             {
@@ -107,13 +124,25 @@ namespace Insight.Scripts
                 gameObject.Backward = true;
                 gameObject.IsMoving = true;
 
-                kState = KeyState.Pressed;
+                kState = KeyState.Pressed;             
 
                 if (mState == MovementState.IsIdle)
                 {
                     this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(4,true);
                     //this.gameObject.GetComponent<AnimationRender>().LoadNewModel(ContentModels.Instance.playerRun);
                     mState = MovementState.IsRunning;
+                    soundDelay = (float) gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip
+                                     .Duration.TotalSeconds / 2f;
+                }
+
+                if (gameObject.GetComponent<AnimationRender>().animationId == 4)
+                {
+                    if (soundTimer > soundDelay)
+                    {
+                        SceneManager.Instance.currentScene.audioManager.PlayCue(stepsCueNumber);
+                        soundTimer = 0;
+                    }
+                    soundTimer += Time.deltaTime;
                 }
             }
 
@@ -121,13 +150,26 @@ namespace Insight.Scripts
             {
                 //gameObject.Transform.Position.X += gameObject.velocityX;
                 //gameObject.Transform.Position.Z += gameObject.velocityZ;
-                gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityZ);
-                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityX);
+                gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityZ/2);
+                gameObject.Transform.Move(Vector3.UnitZ, -gameObject.velocityX/2);
                 kState = KeyState.Pressed;
+
                 if (mState == MovementState.IsIdle)
                 {
                     this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(6,true);
                     mState = MovementState.IsRunning;
+                    soundDelay = (float)gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip
+                                     .Duration.TotalSeconds / 2f;
+                }
+
+                if (gameObject.GetComponent<AnimationRender>().animationId == 6)
+                {
+                    if (soundTimer > soundDelay)
+                    {
+                        SceneManager.Instance.currentScene.audioManager.PlayCue(stepsCueNumber);
+                        soundTimer = 0;
+                    }
+                    soundTimer += Time.deltaTime;
                 }
                 //gameObject.Forward = true;
                 //gameObject.Backward = false;
@@ -139,13 +181,26 @@ namespace Insight.Scripts
             {
                 //gameObject.Transform.Position.X -= gameObject.velocityX;
                 //gameObject.Transform.Position.Z -= gameObject.velocityZ;
-                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityZ);
-                gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityX);
+                gameObject.Transform.Move(Vector3.UnitX, -gameObject.velocityZ/2);
+                gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityX/2);
                 kState = KeyState.Pressed;
+
                 if (mState == MovementState.IsIdle)
                 {
                     this.gameObject.GetComponent<AnimationRender>().ChangeAnimation(5,true);
                     mState = MovementState.IsRunning;
+                    soundDelay = (float)gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip
+                                     .Duration.TotalSeconds / 2f;
+                }
+
+                if (gameObject.GetComponent<AnimationRender>().animationId == 5)
+                {
+                    if (soundTimer > soundDelay)
+                    {
+                        SceneManager.Instance.currentScene.audioManager.PlayCue(stepsCueNumber);
+                        soundTimer = 0;
+                    }
+                    soundTimer += Time.deltaTime;
                 }
                 //gameObject.Forward = false;
                 //gameObject.Backward = true;
@@ -197,6 +252,7 @@ namespace Insight.Scripts
 
                 }
                 gameObject.SuperCollision = false;
+
             //}
             //Debug.WriteLine(gameObject.SuperCollision);
             base.Update();
