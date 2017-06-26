@@ -24,7 +24,7 @@ namespace Insight.Engine.Prefabs
             machineCollider.AddNewComponent<MeshRenderer>();
 
             prefabGameObjects.Add(machineModel);
-            prefabGameObjects.Add(machineCollider);
+            //prefabGameObjects.Add(machineCollider);
             base.Initialize(position, rotation);
         }
 
@@ -37,8 +37,8 @@ namespace Insight.Engine.Prefabs
             machineModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_AO");
             machineModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/bigMachine_1stRoom_DefaultMaterial_MetallicSmoothness");
 
-            machineCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.bigMachineCollider, 1.0f);
-            machineCollider.AddNewComponent<BoxCollider>();
+            //machineCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.bigMachineCollider, 1.0f);
+           // machineCollider.AddNewComponent<BoxCollider>();
             //machineModel.AddNewComponent<BoxCollider>();
             
         }
