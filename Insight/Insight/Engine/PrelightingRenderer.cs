@@ -121,6 +121,7 @@ namespace Insight.Engine
                 lightingEffect.Parameters["LightColor"]?.SetValue(light.Color.ToVector3());
                 lightingEffect.Parameters["LightAttenuation"]?.SetValue(light.Attenuation);
                 lightingEffect.Parameters["LightPosition"]?.SetValue(light.gameObject.Transform.Position);
+                lightingEffect.Parameters["Intensity"]?.SetValue(light.Intensity);
 
                 // Calculate the world * view * projection matrix and set it to
                 // the effect

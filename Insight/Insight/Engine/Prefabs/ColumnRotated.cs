@@ -28,6 +28,10 @@ namespace Insight.Engine.Prefabs
         {
 
             columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.column_rotated, 1.0f);
+            columnModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/column_DefaultMaterial_AlbedoTransparency");
+            columnModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/column_DefaultMaterial_AO");
+            columnModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/column_DefaultMaterial_MetallicSmoothness");
+            columnModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/column_DefaultMaterial_Normal");
             columnModel.AddNewComponent<BoxCollider>();
 
         }

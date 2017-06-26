@@ -31,10 +31,6 @@ namespace Insight.Engine.Components
                 {
                     _intensity = 0;
                 }
-                else if (value >= 1)
-                {
-                    _intensity = 1;
-                }
                 else
                 {
                     _intensity = value;
