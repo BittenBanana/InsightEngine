@@ -258,7 +258,7 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
-            player.AddNewComponent<PlayerManager>();
+            
             player.physicLayer = Layer.Player;
 
 
@@ -836,6 +836,7 @@ namespace Insight.Scenes
 
             audioManager = new AudioManager(player, content);
 
+            player.AddNewComponent<PlayerManager>();
             player.AddNewComponent<BoxController>();
             player.AddNewComponent<RaycastTest>();
             player.AddNewComponent<SphereCollider>();

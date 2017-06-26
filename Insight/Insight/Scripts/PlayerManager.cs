@@ -15,6 +15,10 @@ namespace Insight.Scripts
         public float detectionLevel { get; set; }
 
         public int health { get; private set; }
+
+        private int damageCueNumber;
+        private int dieCueNumber;
+
         public PlayerManager(GameObject gameObject) : base(gameObject)
         {
             health = 100;
@@ -22,6 +26,12 @@ namespace Insight.Scripts
             restoreTimer = 0;
             timer = 0;
             restoreDelay = 0.025f;
+
+            damageCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Hurt"), gameObject);
+            dieCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Die"), gameObject);
+
         }
 
         public override void Update()
@@ -58,8 +68,15 @@ namespace Insight.Scripts
         public void GotDamage(int dmg)
         {
             timer = 0;
-            if(health > 0)
+            if (health > 0)
+            {
                 health -= dmg;
+                SceneManager.Instance.currentScene.audioManager.PlayCue(damageCueNumber);
+            }
+            else
+            {
+                SceneManager.Instance.currentScene.audioManager.PlayCue(dieCueNumber);
+            }
         }
     }
 }

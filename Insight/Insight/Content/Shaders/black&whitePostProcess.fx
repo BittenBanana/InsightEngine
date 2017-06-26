@@ -76,13 +76,13 @@ float4 PixelShaderFunction(VertexShaderOutput i) : COLOR0
     float3 value;
 
     float invColorPercentage = 1 - colorPercentage;
-    if (colorPercentage >= 0.5 && colorPercentage < 1)
+    if (colorPercentage >= 0.5 && colorPercentage < .75)
     {
         value.r = (color.r * invColorPercentage + blood2.r * colorPercentage);
         value.g = (color.g * invColorPercentage + blood2.g * colorPercentage);
         value.b = (color.b * invColorPercentage + blood2.b * colorPercentage);
     }
-    else if(colorPercentage >= 1)
+    else if(colorPercentage >= .75)
     {
         value.r = (color.r * invColorPercentage + blood3.r * colorPercentage);
         value.g = (color.g * invColorPercentage + blood3.g * colorPercentage);

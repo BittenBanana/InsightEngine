@@ -2746,3 +2746,39 @@
 /processorParam:Quality=Best
 /build:Audio/playerfootstep4.wav
 
+#begin Audio/damage1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/damage1.wav
+
+#begin Audio/damage2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/damage2.wav
+
+#begin Audio/damage3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/damage3.wav
+
+#begin Audio/damage4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/damage4.wav
+
+#begin Audio/damage5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/damage5.wav
+
+#begin Audio/die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/die.wav
+
