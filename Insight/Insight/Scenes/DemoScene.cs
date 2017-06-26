@@ -742,7 +742,7 @@ namespace Insight.Scenes
             //crate20.Initialize(new Vector3(41.5f, -4, 77.5f), new Vector3(0, 0, 0));
 
             lastRoom = new LastRoom();
-            lastRoom.Initialize(new Vector3(20, 4, -30));
+            lastRoom.Initialize(new Vector3(15.95f, 4, -31));
 
             directionalLight = new GameObject(new Vector3(-5, 5, 0), false);
             directionalLight.AddNewComponent<Light>();

@@ -16,15 +16,13 @@ namespace Insight.Engine.Prefabs
         WallVisible wall50;
         WallVisible wall51;
         WallVisible wall52;
-        WallVisible wall53;
         WallVisible wall54;
+        WallVisible wall55;
 
         RoomFloor roomFloor26;
         RoomFloor roomFloor27;
         RoomFloor roomFloor28;
         RoomFloor roomFloor29;
-
-        AnimatedDoor door7;
 
         public override void Initialize(Vector3 position)
         {
@@ -32,6 +30,9 @@ namespace Insight.Engine.Prefabs
 
             wall48 = new WallVisible();
             wall48.Initialize(new Vector3(28, -4, 90), new Vector3(0));
+
+            wall55 = new WallVisible();
+            wall55.Initialize(new Vector3(23, -4, 90), new Vector3(0));
 
             wall49 = new WallVisible();
             wall49.Initialize(new Vector3(28, -4, 100), new Vector3(0));
@@ -44,9 +45,6 @@ namespace Insight.Engine.Prefabs
 
             wall52 = new WallVisible();
             wall52.Initialize(new Vector3(33, -4, 95), new Vector3(0, 4.713f, 0));
-
-            wall53 = new WallVisible();
-            wall53.Initialize(new Vector3(23, -4, 90), new Vector3(0, 4.713f, 0));
 
             wall54 = new WallVisible();
             wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
@@ -63,17 +61,15 @@ namespace Insight.Engine.Prefabs
             roomFloor29 = new RoomFloor();
             roomFloor29.Initialize(new Vector3(28, -4, 95));
 
-            door7 = new AnimatedDoor();
-            door7.Initialize(new Vector3(23f, -4, 90));
 
 
-
+            prefabGameObjects.Add(wall55.wallModel);
             prefabGameObjects.Add(wall48.wallModel);
             prefabGameObjects.Add(wall49.wallModel);
             prefabGameObjects.Add(wall50.wallModel);
             prefabGameObjects.Add(wall51.wallModel);
             prefabGameObjects.Add(wall52.wallModel);
-            prefabGameObjects.Add(wall53.wallModel);
+
             prefabGameObjects.Add(wall54.wallModel);
             prefabGameObjects.Add(roomFloor26.floor);
             prefabGameObjects.Add(roomFloor27.floor);
@@ -83,10 +79,6 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(roomFloor27.corridorModel);
             prefabGameObjects.Add(roomFloor28.corridorModel);
             prefabGameObjects.Add(roomFloor29.corridorModel);
-            prefabGameObjects.Add(door7.wallModel);
-            prefabGameObjects.Add(door7.leftDoorModel);
-            prefabGameObjects.Add(door7.rightDoorModel);
-            prefabGameObjects.Add(door7.frame);
             base.Initialize(position);
         }
 
@@ -97,15 +89,13 @@ namespace Insight.Engine.Prefabs
             wall50.LoadContent(content);
             wall51.LoadContent(content);
             wall52.LoadContent(content);
-            wall53.LoadContent(content);
             wall54.LoadContent(content);
+            wall55.LoadContent(content);
 
             roomFloor26.LoadContent(content);
             roomFloor27.LoadContent(content);
             roomFloor28.LoadContent(content);
             roomFloor29.LoadContent(content);
-
-            door7.LoadContent(content);
         }
     }
 }
