@@ -56,7 +56,7 @@ namespace Insight.Engine.Prefabs
             leftDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             rightDoorModel = new GameObject(new Vector3(0, 0, 0), false);
             frame = new GameObject(new Vector3(0, 0, 0), false);
-            triggerModel = new GameObject(new Vector3(0, 0, 0), false);
+            triggerModel = new GameObject(new Vector3(0, 0, 2), false);
 
 
             wallModel.AddNewComponent<MeshRenderer>();
@@ -114,6 +114,10 @@ namespace Insight.Engine.Prefabs
             triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
             triggerModel.Transform.Rotation = new Vector3(0);
             triggerModel.AddNewComponent<DoorTrigger>();
+            if(wallModel.Transform.Rotation != new Vector3(0))
+            {
+                wallModel.GetComponent<DoorAnimation>().areRotated = true;
+            }
             triggerModel.GetComponent<DoorTrigger>().targetAnimation = wallModel.GetComponent<DoorAnimation>();
             base.LoadContent(content);
         }

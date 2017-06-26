@@ -473,7 +473,7 @@ namespace Insight.Scenes
             cornerLeft2.Initialize(new Vector3(33, 0, 58));
 
             door5 = new AnimatedDoor();
-            door5.Initialize(new Vector3(35f, 0, 69.15f), new Vector3(0, 4.713f, 0));
+            door5.Initialize(new Vector3(38.95f, 0, 59f), new Vector3(0, 4.713f, 0));
 
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
