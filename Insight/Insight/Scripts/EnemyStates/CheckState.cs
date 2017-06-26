@@ -56,7 +56,7 @@ namespace Insight.Scripts.EnemyStates
                     enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true);
                 if (timer >= wait)
                 {
-                    if (enemy.enemySight.detectionLevel <= 0.75f)
+                    if (enemy.enemySight.detectionLevel <= 0.6f)
                     {
                         enemy.ChangeState(enemy.defaultState);
                     }
