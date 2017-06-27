@@ -2880,12 +2880,36 @@
 /processorParam:Quality=Best
 /build:Audio/detect.wav
 
-#begin Models/Konrads/Enviroment/sufit_pokojZMaszyna.FBX
+#begin Sprites/GUI/ikona_marker.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/GUI/ikona_marker.png
+
+#begin Sprites/GUI/ikona_widzenie.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/GUI/ikona_widzenie.png
+
+#begin Models/Enemy/shooting.fbx
 /importer:FbxImporter
-/processor:ModelProcessor
+/processor:SkinnedModelProcessor
+/processorParam:DefaultEffect=SkinnedEffect
 /processorParam:ColorKeyColor=0,0,0,0
 /processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
 /processorParam:GenerateMipmaps=True
 /processorParam:GenerateTangentFrames=False
 /processorParam:PremultiplyTextureAlpha=True
@@ -2897,5 +2921,5 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/Konrads/Enviroment/sufit_pokojZMaszyna.FBX
+/build:Models/Enemy/shooting.fbx
 

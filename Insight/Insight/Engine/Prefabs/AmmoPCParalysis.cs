@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine.Prefabs
 {
-    class AmmoPCMark : Prefab
+    class AmmoPCParalysis : Prefab
     {
         public GameObject pcModel;
         GameObject triggerModel;
@@ -53,10 +53,10 @@ namespace Insight.Engine.Prefabs
             triggerModel.AddNewComponent<BoxCollider>();
             triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
             triggerModel.Transform.Rotation = new Vector3(0);
-            triggerModel.AddNewComponent<DispenserTriggerControllerMark>();
-            triggerModel.GetComponent<DispenserTriggerControllerMark>().dispenser = pcModel;
-            triggerModel.GetComponent<DispenserTriggerControllerMark>().content = content;
-            triggerModel.GetComponent<DispenserTriggerControllerMark>().light = light;
+            triggerModel.AddNewComponent<DispenserTriggerControllerParalysis>();
+            triggerModel.GetComponent<DispenserTriggerControllerParalysis>().dispenser = pcModel;
+            triggerModel.GetComponent<DispenserTriggerControllerParalysis>().content = content;
+            triggerModel.GetComponent<DispenserTriggerControllerParalysis>().light = light;
         }
     }
 }
