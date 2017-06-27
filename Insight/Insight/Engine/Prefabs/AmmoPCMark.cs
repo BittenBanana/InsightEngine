@@ -14,6 +14,7 @@ namespace Insight.Engine.Prefabs
     {
         public GameObject pcModel;
         GameObject triggerModel;
+        private GameObject light;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
@@ -21,7 +22,11 @@ namespace Insight.Engine.Prefabs
 
             pcModel = new GameObject(new Vector3(0, 0, 0), false);
             triggerModel = new GameObject(new Vector3(0, 0, 0), false);
-
+            light = new GameObject(new Vector3(0, 1f, 0), false);
+            light.AddNewComponent<Light>();
+            light.GetComponent<Light>().Color = Color.Green;
+            light.GetComponent<Light>().Attenuation = 0.65f;
+            light.GetComponent<Light>().Intensity = 5;
 
 
             pcModel.AddNewComponent<MeshRenderer>();
@@ -29,7 +34,7 @@ namespace Insight.Engine.Prefabs
             triggerModel.GetComponent<MeshRenderer>().IsVisible = false;
 
 
-
+            prefabGameObjects.Add(light);
             prefabGameObjects.Add(pcModel);
             prefabGameObjects.Add(triggerModel);
             base.Initialize(position, rotation);
@@ -45,10 +50,13 @@ namespace Insight.Engine.Prefabs
             pcModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
             triggerModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 1.0f);
             pcModel.AddNewComponent<BoxCollider>();
-            triggerModel.AddNewComponent<SphereCollider>();
-            triggerModel.GetComponent<SphereCollider>().IsTrigger = true;
+            triggerModel.AddNewComponent<BoxCollider>();
+            triggerModel.GetComponent<BoxCollider>().IsTrigger = true;
             triggerModel.Transform.Rotation = new Vector3(0);
             triggerModel.AddNewComponent<DispenserTriggerControllerMark>();
+            triggerModel.GetComponent<DispenserTriggerControllerMark>().dispenser = pcModel;
+            triggerModel.GetComponent<DispenserTriggerControllerMark>().content = content;
+            triggerModel.GetComponent<DispenserTriggerControllerMark>().light = light;
         }
     }
 }
