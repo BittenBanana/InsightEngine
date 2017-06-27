@@ -27,8 +27,8 @@ namespace Insight.Scripts.EnemyStates
             minRand = 1;
             maxRand = 20;
             random = new Random();
-            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true); // TODO Shoot Animation
+            if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 7)
+                enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(7,true); // TODO Shoot Animation
             shootCueNumber = SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
                 SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Shoots"), enemy.gameObject);
             SceneManager.Instance.currentScene.audioManager.PlayCue(shootCueNumber);

@@ -124,6 +124,7 @@ namespace Insight.Engine.Components
                 clips.Add(NewClip(ContentModels.Instance.enemyFight));//4
                 clips.Add(NewClip(ContentModels.Instance.enemyParalysis));//5
                 clips.Add(NewClip(ContentModels.Instance.enemyMarker));//5
+                clips.Add(NewClip(ContentModels.Instance.enemyShooting));//7
                 animationPlayer.StartClip(clips[0], 400);
             }
         }
