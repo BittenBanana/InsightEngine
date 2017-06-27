@@ -149,13 +149,13 @@ namespace Insight.Scenes
         AmmoPC ammoPC2;
         Corridor wall55;
         AmmoPCMark ammoPC3;
-        AmmoPCMark ammoPC4;
-        AmmoPCMark ammoPC5;
-        AmmoPC ammoPC6;
-        AmmoPC ammoPC7;
-        AmmoPC ammoPC8;
-        AmmoPC ammoPC9;
-        AmmoPC ammoPC10;
+        //AmmoPCMark ammoPC4;
+        //AmmoPCMark ammoPC5;
+        //AmmoPC ammoPC6;
+        //AmmoPC ammoPC7;
+        AmmoPCParalysis ammoPC8;
+        AmmoPCMark ammoPC9;
+        AmmoPCMark ammoPC10;
         Crate crate;
         Crate crate2;
         Crate crate3;
@@ -656,13 +656,13 @@ namespace Insight.Scenes
             ammoPC3 = new AmmoPCMark();
             ammoPC3.Initialize(new Vector3(11f, 0, 60.5f), new Vector3(0, 1.571f, 0));
 
-            ammoPC8 = new AmmoPC();
+            ammoPC8 = new AmmoPCParalysis();
             ammoPC8.Initialize(new Vector3(20.5f, 0, 3), new Vector3(0, 4.713f, 0));
 
-            ammoPC9 = new AmmoPC();
+            ammoPC9 = new AmmoPCMark();
             ammoPC9.Initialize(new Vector3(27.1f, 0, 24), new Vector3(0, 1.571f, 0));
 
-            ammoPC10 = new AmmoPC();
+            ammoPC10 = new AmmoPCMark();
             ammoPC10.Initialize(new Vector3(45f, 0, 29), new Vector3(0, 4.713f, 0));
 
             //ammoPC4 = new AmmoPCMark();
@@ -1029,7 +1029,9 @@ namespace Insight.Scenes
             SceneManager.Instance.currentScene.ui.AddText("Fonts/gamefont", "doorHint", "Press E to open doors",
                                     new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
-            ui.AddSprite("Sprites/GUI/ikona_agresja", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_agresja", "aggresive", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_marker", "marker", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_widzenie", "paralysis", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "gameOver", "GAME OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);

@@ -1,4 +1,7 @@
 ﻿using Insight.Engine;
+using Insight.Engine.Components;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -11,10 +14,18 @@ namespace Insight.Scripts
 {
     class DispenserTriggerControllerMark : BaseScript
     {
-        bool isEmpty = false;
+        bool isEmpty;
+        public GameObject dispenser { get; set; }
+        public GameObject light { get; set; }
+        public ContentManager content { get; set; }
+
+        private int pickupCueNumber;
         public DispenserTriggerControllerMark(GameObject gameObject) : base(gameObject)
         {
-
+            isEmpty = false;
+            pickupCueNumber =
+                SceneManager.Instance.currentScene.audioManager.AddCueWithEmitter(
+                    SceneManager.Instance.currentScene.audioManager.soundBank.GetCue("Pickup"), gameObject);
         }
 
         public override void Update()
@@ -27,7 +38,7 @@ namespace Insight.Scripts
             if (args.GameObject.physicLayer == Layer.Player && isEmpty == false)
             {
                 Debug.WriteLine("dispenser marker");
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 1);
+                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("marker", 1);
                 SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 1);
             }
         }
@@ -39,9 +50,16 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
-                    args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+                    SceneManager.Instance.currentScene.audioManager.PlayCue(pickupCueNumber);
+                    dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
+                    dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
+                    dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
+                    dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
+                    light.GetComponent<Light>().Color = Color.Red;
+                    args.GameObject.GetComponent<PlayerBullets>().transmitterBullet = true;
                     isEmpty = true;
-
+                    SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("marker", 0);
+                    SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
                     if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
                     {
                         if (args.GameObject.GetComponent<PlayerBullets>().paralysisBullet == true)
@@ -67,7 +85,7 @@ namespace Insight.Scripts
         {
             if (args.GameObject.physicLayer == Layer.Player)
             {
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("bulletRakieta", 0);
+                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("marker", 0);
                 SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
             }
 

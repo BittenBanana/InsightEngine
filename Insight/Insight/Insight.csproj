@@ -83,6 +83,7 @@
     <Compile Include="Engine\PostProcessRenderer.cs" />
     <Compile Include="Engine\Prefabs\AmmoPC.cs" />
     <Compile Include="Engine\Prefabs\AmmoPCMark.cs" />
+    <Compile Include="Engine\Prefabs\AmmoPCParalysis.cs" />
     <Compile Include="Engine\Prefabs\AnimatedDoor.cs" />
     <Compile Include="Engine\Prefabs\BigMachine.cs" />
     <Compile Include="Engine\Prefabs\Column.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Scripts\CameraPivotFollow.cs" />
     <Compile Include="Scripts\DispenserTriggerController.cs" />
     <Compile Include="Scripts\DispenserTriggerControllerMark.cs" />
+    <Compile Include="Scripts\DispenserTriggerControllerParalysis.cs" />
     <Compile Include="Scripts\DoorAnimation.cs" />
     <Compile Include="Scripts\DoorTrigger.cs" />
     <Compile Include="Scripts\EnemyAI.cs" />
