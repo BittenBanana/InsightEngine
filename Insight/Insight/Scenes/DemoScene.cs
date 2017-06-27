@@ -153,6 +153,9 @@ namespace Insight.Scenes
         AmmoPCMark ammoPC5;
         AmmoPC ammoPC6;
         AmmoPC ammoPC7;
+        AmmoPC ammoPC8;
+        AmmoPC ammoPC9;
+        AmmoPC ammoPC10;
         Crate crate;
         Crate crate2;
         Crate crate3;
@@ -653,6 +656,15 @@ namespace Insight.Scenes
             ammoPC3 = new AmmoPCMark();
             ammoPC3.Initialize(new Vector3(11f, 0, 60.5f), new Vector3(0, 1.571f, 0));
 
+            ammoPC8 = new AmmoPC();
+            ammoPC8.Initialize(new Vector3(20.5f, 0, 3), new Vector3(0, 4.713f, 0));
+
+            ammoPC9 = new AmmoPC();
+            ammoPC9.Initialize(new Vector3(27.1f, 0, 24), new Vector3(0, 1.571f, 0));
+
+            ammoPC10 = new AmmoPC();
+            ammoPC10.Initialize(new Vector3(45f, 0, 29), new Vector3(0, 4.713f, 0));
+
             //ammoPC4 = new AmmoPCMark();
             //ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
 
@@ -960,6 +972,9 @@ namespace Insight.Scenes
             ammoPC.LoadContent(content);
             ammoPC2.LoadContent(content);
             ammoPC3.LoadContent(content);
+            ammoPC8.LoadContent(content);
+            ammoPC9.LoadContent(content);
+            ammoPC10.LoadContent(content);
             //ammoPC4.LoadContent(content);
             //ammoPC5.LoadContent(content);
             //ammoPC6.LoadContent(content);
