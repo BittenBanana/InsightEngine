@@ -23,6 +23,7 @@ namespace Insight.Scenes
             Free, Pressed
         }
         KeyPress keyPress = KeyPress.Free;
+        private bool isGamePaused = false;
         private PrelightingRenderer lightRenderer;
 
         private PostProcessRenderer postProcessRenderer;
@@ -1070,8 +1071,17 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
-
-            if (!gameOver)
+            if (keyState.IsKeyDown(Keys.Escape) && keyPress == KeyPress.Free)
+            {
+                isGamePaused = !isGamePaused;
+                keyPress = KeyPress.Pressed;
+            }
+            if (keyState.IsKeyUp(Keys.Escape) && keyPress == KeyPress.Pressed)
+            {
+                keyPress = KeyPress.Free;
+            }
+            Debug.WriteLine(isGamePaused);
+            if (!gameOver && !isGamePaused)
             {
                 foreach (GameObject go in gameObjects)
                 {
@@ -1140,6 +1150,11 @@ namespace Insight.Scenes
                         ui.ChangeSpriteOpacity("ammo3", 0);
                         break;
                 }
+            }
+
+            if(isGamePaused)
+            {
+                SceneManager.Instance.LoadMenu();
             }
 
         }
