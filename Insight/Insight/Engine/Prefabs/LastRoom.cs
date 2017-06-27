@@ -1,6 +1,8 @@
 ﻿using Insight.Engine.Components;
+using Insight.Materials;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +20,14 @@ namespace Insight.Engine.Prefabs
         WallVisible wall52;
         WallVisible wall54;
         WallVisible wall55;
+        WallVisible wall56;
 
         RoomFloor roomFloor26;
         RoomFloor roomFloor27;
         RoomFloor roomFloor28;
         RoomFloor roomFloor29;
+
+        TransparencyMaterial glassMaterial;
 
         public override void Initialize(Vector3 position)
         {
@@ -49,6 +54,9 @@ namespace Insight.Engine.Prefabs
             wall54 = new WallVisible();
             wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
 
+            wall56 = new WallVisible();
+            wall56.Initialize(new Vector3(27, -4, 95), new Vector3(0, 4.713f, 0));
+
             roomFloor26 = new RoomFloor();
             roomFloor26.Initialize(new Vector3(23, -4, 90));
 
@@ -62,7 +70,7 @@ namespace Insight.Engine.Prefabs
             roomFloor29.Initialize(new Vector3(28, -4, 95));
 
 
-
+            prefabGameObjects.Add(wall56.wallModel);
             prefabGameObjects.Add(wall55.wallModel);
             prefabGameObjects.Add(wall48.wallModel);
             prefabGameObjects.Add(wall49.wallModel);
@@ -91,11 +99,18 @@ namespace Insight.Engine.Prefabs
             wall52.LoadContent(content);
             wall54.LoadContent(content);
             wall55.LoadContent(content);
+            
 
             roomFloor26.LoadContent(content);
             roomFloor27.LoadContent(content);
             roomFloor28.LoadContent(content);
             roomFloor29.LoadContent(content);
+
+            //Effect transparency = content.Load<Effect>("Shaders/glass");
+            //glassMaterial = new TransparencyMaterial(transparency);
+
+            //wall56.wallModel.GetComponent<MeshRenderer>().Material = glassMaterial;
+            //wall56.LoadContent(content);
         }
     }
 }

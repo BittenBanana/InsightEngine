@@ -185,6 +185,7 @@ namespace Insight.Scenes
         UpperStairsTrigger upperStairsTrigger;
         LowerStairsTrigger lowerStairsTrigger;
         LastRoom lastRoom;
+        CeilingBigRoom ceilingBigRoom;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -382,6 +383,9 @@ namespace Insight.Scenes
 
             door2 = new AnimatedDoor();
             door2.Initialize(new Vector3(32f, 0, 22));
+
+            ceilingBigRoom = new CeilingBigRoom();
+            ceilingBigRoom.Initialize(new Vector3(45, 0, 37), new Vector3(0, 1.571f, 0));
 
             wall = new Wall();
             wall.Initialize(new Vector3(37, 0, 22));
@@ -1006,6 +1010,7 @@ namespace Insight.Scenes
             intercom.LoadContent(content);
             door3.wallModel.GetComponent<DoorAnimation>().canOpen = false;
             intercom.SetDoorsToTrigger(door3.wallModel);
+            ceilingBigRoom.LoadContent(content);
 
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);

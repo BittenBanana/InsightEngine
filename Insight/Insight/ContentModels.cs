@@ -95,6 +95,7 @@ namespace Insight
         public Model enemyParalysis{ get; set; }
         public Model enemyMarker { get; set; }
         public Model bigMachineCollider { get; set; }
+        public Model ceilingBogRoom { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -172,6 +173,7 @@ namespace Insight
             intercom = content.Load<Model>("Models/Konrads/Enviroment/intercom");
             bigMachine = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom");
             bigMachineCollider = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom_collider");
+            ceilingBogRoom = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojZMaszyna");
         }
     }
 }
