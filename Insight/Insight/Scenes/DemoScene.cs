@@ -23,13 +23,24 @@ namespace Insight.Scenes
             Free, Pressed
         }
         KeyPress keyPress = KeyPress.Free;
+        enum EscapeKeyPress
+        {
+            Free, Pressed
+        }
+        EscapeKeyPress escapeKeyPress = EscapeKeyPress.Free;
+        enum PauseKeyState
+        {
+            Free, Pressed
+        }
+        PauseKeyState pauseKeyState = PauseKeyState.Free;
         private bool isGamePaused = false;
         private PrelightingRenderer lightRenderer;
 
         private PostProcessRenderer postProcessRenderer;
 
         private RenderTarget2D sceneRenderTarget2D;
-
+        MouseState tmpMouseState;
+        int pauseMenuSelectedIndex = 1;
         Corridor corridor;
         Corridor corridor2;
         Corridor corridor3;
@@ -92,7 +103,7 @@ namespace Insight.Scenes
         RoomFloor roomFloor23;
         RoomFloor roomFloor24;
         RoomFloorSmallerRotated roomFloor25;
-        
+
         Wall wall;
         Wall wall2;
         WallRotated wall3;
@@ -140,7 +151,7 @@ namespace Insight.Scenes
         WallVisible wall45;
         WallVisible wall46;
         WallVisible wall47;
-        
+
         Stairs stairs;
         Stairs stairs2;
         Material defaultMaterial;
@@ -216,14 +227,14 @@ namespace Insight.Scenes
         SightSlider sightSlider;
         AmmoInterface ammoInterface;
 
-        
+
         int showColliders = -1;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
 
-            
+
 
             gameOver = false;
             sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
@@ -263,7 +274,7 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
-            
+
             player.physicLayer = Layer.Player;
 
 
@@ -272,8 +283,8 @@ namespace Insight.Scenes
             enemy1PatrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
             enemy1 = new EnemyPrefab(enemy1PatrolPositions);
             enemy1.Initialize(new Vector3(18.5f, 0, 6f));
-            
-            
+
+
             enemyStanding = new StandingEnemy();
             enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
 
@@ -642,11 +653,11 @@ namespace Insight.Scenes
             //corridor10 = new Corridor();
             //corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
 
-           
 
-            
 
-            
+
+
+
 
             ammoPC = new AmmoPC();
             ammoPC.Initialize(new Vector3(0.5f, 0, 8), new Vector3(0, 1.571f, 0));
@@ -779,7 +790,7 @@ namespace Insight.Scenes
             gameObjects.Add(cameraPivot);
 
 
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio,0.5f, 1000f);
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, 0.5f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
         }
 
@@ -787,7 +798,7 @@ namespace Insight.Scenes
         {
             base.LoadContent();
 
-            
+
 
             #region Effects 
 
@@ -846,7 +857,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
-            
+
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
@@ -914,7 +925,7 @@ namespace Insight.Scenes
             //roomFloor23.LoadContent(content);
             //roomFloor24.LoadContent(content);
             //roomFloor25.LoadContent(content);
-            
+
             door2.LoadContent(content);
             wall.LoadContent(content);
             wall2.LoadContent(content);
@@ -963,13 +974,13 @@ namespace Insight.Scenes
             //wall45.LoadContent(content);
             //wall46.LoadContent(content);
             //wall47.LoadContent(content);
-            
+
             wall55.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
             //door6.LoadContent(content);
-            
+
             ammoPC.LoadContent(content);
             ammoPC2.LoadContent(content);
             ammoPC3.LoadContent(content);
@@ -1048,7 +1059,12 @@ namespace Insight.Scenes
 
             Debug.WriteLine(gameObjects.Count + "=============================");
 
-            
+            //pause menu
+            ui.AddSprite("Sprites/Pause/bg", "pauseBg", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/Pause/pasek", "pausePasek", new Vector2(0, 0), Color.White, 0);
+
+
         }
 
         public override void UnloadContent()
@@ -1071,16 +1087,24 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
-            if (keyState.IsKeyDown(Keys.Escape) && keyPress == KeyPress.Free)
+            if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free)
             {
                 isGamePaused = !isGamePaused;
-                keyPress = KeyPress.Pressed;
+                escapeKeyPress = EscapeKeyPress.Pressed;
+
+                if (isGamePaused == true)
+                {
+                    tmpMouseState = Mouse.GetState();
+                }
+                if (isGamePaused == false)
+                {
+                    Mouse.SetPosition(tmpMouseState.X, tmpMouseState.Y);
+                }
             }
-            if (keyState.IsKeyUp(Keys.Escape) && keyPress == KeyPress.Pressed)
+            if (keyState.IsKeyUp(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Pressed)
             {
-                keyPress = KeyPress.Free;
+                escapeKeyPress = EscapeKeyPress.Free;
             }
-            Debug.WriteLine(isGamePaused);
             if (!gameOver && !isGamePaused)
             {
                 foreach (GameObject go in gameObjects)
@@ -1122,9 +1146,9 @@ namespace Insight.Scenes
                     ui.ChangeSpriteOpacity("oko_a", 0);
 
                 //Debug.WriteLine(mainCam.Position);
-                if(gameOver)
+                if (gameOver)
                     ui.ChangeTextOpacity("gameOver", 1);
-                
+
                 sightSlider.SetSightLevel(player.GetComponent<PlayerManager>().detectionLevel);
 
                 switch (player.GetComponent<RaycastTest>().GetLoadedBullet())
@@ -1152,11 +1176,60 @@ namespace Insight.Scenes
                 }
             }
 
-            if(isGamePaused)
+            if (isGamePaused)
             {
-                SceneManager.Instance.LoadMenu();
-            }
+                ui.ChangeSpriteOpacity("pauseBg", 1);
+                ui.ChangeSpriteOpacity("pauseTekst", 1);
+                ui.ChangeSpriteOpacity("pausePasek", 1);
+                ui.ChangeSpritePosition("pausePasek", 0, 410 + 125 * (pauseMenuSelectedIndex - 1));
 
+                if (pauseKeyState == PauseKeyState.Free)
+                {
+                    if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
+                    {
+                        pauseMenuSelectedIndex++;
+                        if (pauseMenuSelectedIndex > 4)
+                            pauseMenuSelectedIndex = 4;
+                    }
+                    if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
+                    {
+                        pauseMenuSelectedIndex--;
+                        if (pauseMenuSelectedIndex <= 0)
+                            pauseMenuSelectedIndex = 1;
+                    }
+                    pauseKeyState = PauseKeyState.Pressed;
+                }
+                if (!keyState.IsKeyDown(Keys.Down) && !keyState.IsKeyDown(Keys.S)
+                    && !keyState.IsKeyDown(Keys.Up) && !keyState.IsKeyDown(Keys.W))
+                {
+                    pauseKeyState = PauseKeyState.Free;
+                }
+                if (keyState.IsKeyDown(Keys.Enter))
+                    switch (pauseMenuSelectedIndex)
+                    {
+                        case 1:
+                            isGamePaused = false;
+                            break;
+                        case 2:
+                            SceneManager.Instance.LoadGame();
+                            break;
+                        case 3:
+                            SceneManager.Instance.LoadMenu();
+                            break;
+                        case 4:
+                            SceneManager.Instance.gameApp.Quit();
+                            break;
+                        default:
+                            SceneManager.Instance.gameApp.Quit();
+                            break;
+                    }
+            }
+            if (!isGamePaused)
+            {
+                ui.ChangeSpriteOpacity("pauseBg", 0);
+                ui.ChangeSpriteOpacity("pauseTekst", 0);
+                ui.ChangeSpriteOpacity("pausePasek", 0);
+            }
         }
 
         public override void Draw()
@@ -1169,12 +1242,12 @@ namespace Insight.Scenes
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(mainCam);
-                
 
-                if(showColliders == 1)
+
+                if (showColliders == 1)
                 {
-                    if(go.GetComponent<BoxCollider>() != null)
-                    go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
+                    if (go.GetComponent<BoxCollider>() != null)
+                        go.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
 
                     if (go.GetComponent<SphereCollider>() != null)
                     {
@@ -1195,9 +1268,9 @@ namespace Insight.Scenes
 
                     }
                 }
-                
+
             }
-            
+
             //SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
             //sprite.Begin(SpriteSortMode.Immediate,BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
             //sprite.Draw(lightRenderer.depthTarg, new Rectangle(0,0,300,300),Color.White);
