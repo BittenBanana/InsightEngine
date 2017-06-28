@@ -232,6 +232,8 @@ namespace Insight.Scenes
         NewWall newWall15;
         NewWall newWall16;
         NewWall newWall17;
+
+        CeilingSmallRoom smallRoomCeiling;
         
 
         //GameObject enemy;
@@ -546,6 +548,9 @@ namespace Insight.Scenes
 
             door4 = new AnimatedDoor();
             door4.Initialize(new Vector3(16f, 0, 58));
+
+            smallRoomCeiling = new CeilingSmallRoom();
+            smallRoomCeiling.Initialize(new Vector3(21, 0, 63), new Vector3(0));
 
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
@@ -1132,6 +1137,8 @@ namespace Insight.Scenes
             newWall15.LoadContent(content);
             newWall16.LoadContent(content);
             newWall17.LoadContent(content);
+
+            smallRoomCeiling.LoadContent(content);
 
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);

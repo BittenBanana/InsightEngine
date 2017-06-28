@@ -87,6 +87,8 @@
     <Compile Include="Engine\Prefabs\AnimatedDoor.cs" />
     <Compile Include="Engine\Prefabs\BigMachine.cs" />
     <Compile Include="Engine\Prefabs\CeilingBigRoom.cs" />
+    <Compile Include="Engine\Prefabs\CeilingLastRoom.cs" />
+    <Compile Include="Engine\Prefabs\CeilingSmallRoom.cs" />
     <Compile Include="Engine\Prefabs\Column.cs" />
     <Compile Include="Engine\Prefabs\ColumnRotated.cs" />
     <Compile Include="Engine\Prefabs\CornerLeft.cs" />
