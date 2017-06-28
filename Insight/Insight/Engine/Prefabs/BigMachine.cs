@@ -20,7 +20,7 @@ namespace Insight.Engine.Prefabs
 
             machineModel = new GameObject(new Vector3(0, 0, 0), false);
             machineModel.AddNewComponent<MeshRenderer>();
-            machineCollider = new GameObject(new Vector3(0, 0, 0), false);
+            machineCollider = new GameObject(new Vector3(0, -5, 0), false);
             machineCollider.AddNewComponent<MeshRenderer>();
             machineCollider.GetComponent<MeshRenderer>().IsVisible = false;
             prefabGameObjects.Add(machineModel);
@@ -39,7 +39,7 @@ namespace Insight.Engine.Prefabs
 
             machineCollider.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.bigMachineCollider, 1.0f);
             machineCollider.AddNewComponent<BoxCollider>();
-            machineModel.AddNewComponent<BoxCollider>();
+            //machineModel.AddNewComponent<BoxCollider>();
             
         }
     }

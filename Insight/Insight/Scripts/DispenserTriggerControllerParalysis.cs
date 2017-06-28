@@ -1,4 +1,7 @@
 ﻿using Insight.Engine;
+using Insight.Engine.Components;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -6,14 +9,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Insight.Engine.Components;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Insight.Scenes;
 
 namespace Insight.Scripts
 {
-    class DispenserTriggerController : BaseScript
+    class DispenserTriggerControllerParalysis : BaseScript
     {
         bool isEmpty;
         public GameObject dispenser { get; set; }
@@ -21,8 +20,7 @@ namespace Insight.Scripts
         public ContentManager content { get; set; }
 
         private int pickupCueNumber;
-
-        public DispenserTriggerController(GameObject gameObject) : base(gameObject)
+        public DispenserTriggerControllerParalysis(GameObject gameObject) : base(gameObject)
         {
             isEmpty = false;
             pickupCueNumber =
@@ -39,8 +37,8 @@ namespace Insight.Scripts
         {
             if (args.GameObject.physicLayer == Layer.Player && isEmpty == false)
             {
-                Debug.WriteLine("dispenser");
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("aggresive", 1);
+                Debug.WriteLine("dispenser paralysis");
+                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("paralysis", 1);
                 SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 1);
             }
         }
@@ -52,17 +50,15 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
-                    DemoScene demo = (DemoScene)SceneManager.Instance.currentScene;
-                    demo.PlayDialogOne();
                     SceneManager.Instance.currentScene.audioManager.PlayCue(pickupCueNumber);
                     dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
                     dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
                     dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_Normal");
                     dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
                     light.GetComponent<Light>().Color = Color.Red;
-                    args.GameObject.GetComponent<PlayerBullets>().aggresiveBullet = true;
+                    args.GameObject.GetComponent<PlayerBullets>().paralysisBullet = true;
                     isEmpty = true;
-                    SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("aggresive", 0);
+                    SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("paralysis", 0);
                     SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
                     if (args.GameObject.GetComponent<RaycastTest>().GetLoadedBullet() == null)
                     {
@@ -89,7 +85,7 @@ namespace Insight.Scripts
         {
             if (args.GameObject.physicLayer == Layer.Player)
             {
-                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("aggresive", 0);
+                SceneManager.Instance.currentScene.ui.ChangeSpriteOpacity("paralysis", 0);
                 SceneManager.Instance.currentScene.ui.ChangeTextOpacity("dispenserHint", 0);
             }
 

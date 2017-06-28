@@ -36,14 +36,6 @@ namespace Insight.Scripts
             base.Update();
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.Enter))
-            {
-                OpenDoor();
-            }
-            if (keyState.IsKeyDown(Keys.RightShift))
-            {
-                CloseDoor();
-            }
 
             switch (doorState)
             {

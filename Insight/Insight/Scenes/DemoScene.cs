@@ -23,12 +23,30 @@ namespace Insight.Scenes
             Free, Pressed
         }
         KeyPress keyPress = KeyPress.Free;
+        enum EscapeKeyPress
+        {
+            Free, Pressed
+        }
+        EscapeKeyPress escapeKeyPress = EscapeKeyPress.Free;
+        enum PauseKeyState
+        {
+            Free, Pressed
+        }
+        PauseKeyState pauseKeyState = PauseKeyState.Free;
+        private bool isGamePaused = false;
+
+        private bool playFirstDialog, playSecondDialog, playThirdDialog;
+        private bool canPlayFirstDialog, canPlaySecondDialog, canPlayThirdDialog;
+        private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 6.0f;
+        private int firstDialogCount = 9;
+        private int firstDialogIndex = 0;
         private PrelightingRenderer lightRenderer;
 
         private PostProcessRenderer postProcessRenderer;
 
         private RenderTarget2D sceneRenderTarget2D;
-
+        MouseState tmpMouseState;
+        int pauseMenuSelectedIndex = 1;
         Corridor corridor;
         Corridor corridor2;
         Corridor corridor3;
@@ -91,7 +109,7 @@ namespace Insight.Scenes
         RoomFloor roomFloor23;
         RoomFloor roomFloor24;
         RoomFloorSmallerRotated roomFloor25;
-        
+
         Wall wall;
         Wall wall2;
         WallRotated wall3;
@@ -139,7 +157,7 @@ namespace Insight.Scenes
         WallVisible wall45;
         WallVisible wall46;
         WallVisible wall47;
-        
+
         Stairs stairs;
         Stairs stairs2;
         Material defaultMaterial;
@@ -149,10 +167,13 @@ namespace Insight.Scenes
         AmmoPC ammoPC2;
         Corridor wall55;
         AmmoPCMark ammoPC3;
-        AmmoPCMark ammoPC4;
-        AmmoPCMark ammoPC5;
-        AmmoPC ammoPC6;
-        AmmoPC ammoPC7;
+        //AmmoPCMark ammoPC4;
+        //AmmoPCMark ammoPC5;
+        //AmmoPC ammoPC6;
+        //AmmoPC ammoPC7;
+        AmmoPCParalysis ammoPC8;
+        AmmoPCMark ammoPC9;
+        AmmoPCMark ammoPC10;
         Crate crate;
         Crate crate2;
         Crate crate3;
@@ -182,6 +203,7 @@ namespace Insight.Scenes
         UpperStairsTrigger upperStairsTrigger;
         LowerStairsTrigger lowerStairsTrigger;
         LastRoom lastRoom;
+        CeilingBigRoom ceilingBigRoom;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -212,15 +234,20 @@ namespace Insight.Scenes
         SightSlider sightSlider;
         AmmoInterface ammoInterface;
 
-        
+
         int showColliders = -1;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
             base.Initialize(graphicsDevice);
 
-            
 
+            playFirstDialog = false;
+            playSecondDialog = false;
+            playThirdDialog = false;
+            canPlayFirstDialog = true;
+            canPlaySecondDialog = true;
+            canPlayThirdDialog = true;
             gameOver = false;
             sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
                     graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
@@ -259,7 +286,7 @@ namespace Insight.Scenes
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
-            
+
             player.physicLayer = Layer.Player;
 
 
@@ -268,8 +295,8 @@ namespace Insight.Scenes
             enemy1PatrolPositions.Add(new Vector3(18.5f, 0, 13.5f));
             enemy1 = new EnemyPrefab(enemy1PatrolPositions);
             enemy1.Initialize(new Vector3(18.5f, 0, 6f));
-            
-            
+
+
             enemyStanding = new StandingEnemy();
             enemyStanding.Initialize(new Vector3(18.5f, 0, 13.5f));
 
@@ -379,6 +406,9 @@ namespace Insight.Scenes
 
             door2 = new AnimatedDoor();
             door2.Initialize(new Vector3(32f, 0, 22));
+
+            ceilingBigRoom = new CeilingBigRoom();
+            ceilingBigRoom.Initialize(new Vector3(45, 0, 37), new Vector3(0, 1.571f, 0));
 
             wall = new Wall();
             wall.Initialize(new Vector3(37, 0, 22));
@@ -638,11 +668,11 @@ namespace Insight.Scenes
             //corridor10 = new Corridor();
             //corridor10.Initialize(new Vector3(23, -4, 85), new Vector3(0));
 
-           
 
-            
 
-            
+
+
+
 
             ammoPC = new AmmoPC();
             ammoPC.Initialize(new Vector3(0.5f, 0, 8), new Vector3(0, 1.571f, 0));
@@ -652,6 +682,15 @@ namespace Insight.Scenes
 
             ammoPC3 = new AmmoPCMark();
             ammoPC3.Initialize(new Vector3(11f, 0, 60.5f), new Vector3(0, 1.571f, 0));
+
+            ammoPC8 = new AmmoPCParalysis();
+            ammoPC8.Initialize(new Vector3(20.5f, 0, 3), new Vector3(0, 4.713f, 0));
+
+            ammoPC9 = new AmmoPCMark();
+            ammoPC9.Initialize(new Vector3(27.1f, 0, 24), new Vector3(0, 1.571f, 0));
+
+            ammoPC10 = new AmmoPCMark();
+            ammoPC10.Initialize(new Vector3(45f, 0, 29), new Vector3(0, 4.713f, 0));
 
             //ammoPC4 = new AmmoPCMark();
             //ammoPC4.Initialize(new Vector3(49f, 0, 61f), new Vector3(0, 4.713f, 0));
@@ -766,7 +805,7 @@ namespace Insight.Scenes
             gameObjects.Add(cameraPivot);
 
 
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio,0.5f, 1000f);
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, 0.5f, 1000f);
             colliderManager = new ColliderManager(gameObjects);
         }
 
@@ -774,7 +813,7 @@ namespace Insight.Scenes
         {
             base.LoadContent();
 
-            
+
 
             #region Effects 
 
@@ -833,7 +872,7 @@ namespace Insight.Scenes
             cameraPivot.AddNewComponent<Camera>();
             cameraPivot.AddNewComponent<CameraPivotFollow>();
             cameraPivot.GetComponent<CameraPivotFollow>().player = player;
-            
+
             cameraPivot.AddNewComponent<CameraFollowBox>();
             cameraPivot.GetComponent<CameraFollowBox>().player = player;
             mainCam = cameraPivot.GetComponent<Camera>();
@@ -901,7 +940,7 @@ namespace Insight.Scenes
             //roomFloor23.LoadContent(content);
             //roomFloor24.LoadContent(content);
             //roomFloor25.LoadContent(content);
-            
+
             door2.LoadContent(content);
             wall.LoadContent(content);
             wall2.LoadContent(content);
@@ -950,16 +989,19 @@ namespace Insight.Scenes
             //wall45.LoadContent(content);
             //wall46.LoadContent(content);
             //wall47.LoadContent(content);
-            
+
             wall55.LoadContent(content);
             door3.LoadContent(content);
             door4.LoadContent(content);
             door5.LoadContent(content);
             //door6.LoadContent(content);
-            
+
             ammoPC.LoadContent(content);
             ammoPC2.LoadContent(content);
             ammoPC3.LoadContent(content);
+            ammoPC8.LoadContent(content);
+            ammoPC9.LoadContent(content);
+            ammoPC10.LoadContent(content);
             //ammoPC4.LoadContent(content);
             //ammoPC5.LoadContent(content);
             //ammoPC6.LoadContent(content);
@@ -991,6 +1033,7 @@ namespace Insight.Scenes
             intercom.LoadContent(content);
             door3.wallModel.GetComponent<DoorAnimation>().canOpen = false;
             intercom.SetDoorsToTrigger(door3.wallModel);
+            ceilingBigRoom.LoadContent(content);
 
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);
@@ -1014,7 +1057,9 @@ namespace Insight.Scenes
             SceneManager.Instance.currentScene.ui.AddText("Fonts/gamefont", "doorHint", "Press E to open doors",
                                     new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
 
-            ui.AddSprite("Sprites/GUI/ikona_agresja", "bulletRakieta", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_agresja", "aggresive", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_marker", "marker", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_widzenie", "paralysis", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "gameOver", "GAME OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
@@ -1030,7 +1075,24 @@ namespace Insight.Scenes
 
             Debug.WriteLine(gameObjects.Count + "=============================");
 
-            
+            //pause menu
+            ui.AddSprite("Sprites/Pause/bg", "pauseBg", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/Pause/pasek", "pausePasek", new Vector2(0, 0), Color.White, 0);
+
+            #region Dialogi
+            //Dialogs
+            ui.AddSprite("Sprites/DialogOne/00", "d1-00", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/01", "d1-01", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/02", "d1-02", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/03", "d1-03", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/04", "d1-04", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/05", "d1-05", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/06", "d1-06", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/07", "d1-07", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/08", "d1-08", new Vector2(0, 0), Color.White, 0);
+            #endregion
+
         }
 
         public override void UnloadContent()
@@ -1062,8 +1124,25 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
+            if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free)
+            {
+                isGamePaused = !isGamePaused;
+                escapeKeyPress = EscapeKeyPress.Pressed;
 
-            if (!gameOver)
+                if (isGamePaused == true)
+                {
+                    tmpMouseState = Mouse.GetState();
+                }
+                if (isGamePaused == false)
+                {
+                    Mouse.SetPosition(tmpMouseState.X, tmpMouseState.Y);
+                }
+            }
+            if (keyState.IsKeyUp(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Pressed)
+            {
+                escapeKeyPress = EscapeKeyPress.Free;
+            }
+            if (!gameOver && !isGamePaused && !playFirstDialog && !playSecondDialog && !playThirdDialog)
             {
                 foreach (GameObject go in gameObjects)
                 {
@@ -1104,9 +1183,9 @@ namespace Insight.Scenes
                     ui.ChangeSpriteOpacity("oko_a", 0);
 
                 //Debug.WriteLine(mainCam.Position);
-                if(gameOver)
+                if (gameOver)
                     ui.ChangeTextOpacity("gameOver", 1);
-                
+
                 sightSlider.SetSightLevel(player.GetComponent<PlayerManager>().detectionLevel);
 
                 switch (player.GetComponent<RaycastTest>().GetLoadedBullet())
@@ -1134,6 +1213,89 @@ namespace Insight.Scenes
                 }
             }
 
+            if (isGamePaused && !playFirstDialog && !playSecondDialog && !playThirdDialog)
+            {
+                ui.ChangeSpriteOpacity("pauseBg", 1);
+                ui.ChangeSpriteOpacity("pauseTekst", 1);
+                ui.ChangeSpriteOpacity("pausePasek", 1);
+                ui.ChangeSpritePosition("pausePasek", 0, 410 + 125 * (pauseMenuSelectedIndex - 1));
+
+                if (pauseKeyState == PauseKeyState.Free)
+                {
+                    if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
+                    {
+                        pauseMenuSelectedIndex++;
+                        if (pauseMenuSelectedIndex > 4)
+                            pauseMenuSelectedIndex = 4;
+                    }
+                    if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
+                    {
+                        pauseMenuSelectedIndex--;
+                        if (pauseMenuSelectedIndex <= 0)
+                            pauseMenuSelectedIndex = 1;
+                    }
+                    pauseKeyState = PauseKeyState.Pressed;
+                }
+                if (!keyState.IsKeyDown(Keys.Down) && !keyState.IsKeyDown(Keys.S)
+                    && !keyState.IsKeyDown(Keys.Up) && !keyState.IsKeyDown(Keys.W))
+                {
+                    pauseKeyState = PauseKeyState.Free;
+                }
+                if (keyState.IsKeyDown(Keys.Enter))
+                    switch (pauseMenuSelectedIndex)
+                    {
+                        case 1:
+                            isGamePaused = false;
+                            break;
+                        case 2:
+                            SceneManager.Instance.LoadGame();
+                            break;
+                        case 3:
+                            SceneManager.Instance.LoadMenu();
+                            break;
+                        case 4:
+                            SceneManager.Instance.gameApp.Quit();
+                            break;
+                        default:
+                            SceneManager.Instance.gameApp.Quit();
+                            break;
+                    }
+            }
+            if (!isGamePaused)
+            {
+                ui.ChangeSpriteOpacity("pauseBg", 0);
+                ui.ChangeSpriteOpacity("pauseTekst", 0);
+                ui.ChangeSpriteOpacity("pausePasek", 0);
+            }
+
+            #region Dialogs
+            if (playFirstDialog && canPlayFirstDialog)
+            {
+                Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
+                ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 1);
+                firstDialogTimer += Time.deltaTime; 
+                if(firstDialogTimer >= dialogDuration)
+                {
+                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    firstDialogIndex++;
+                    firstDialogTimer = 0f;
+                }
+                if (firstDialogIndex >= firstDialogCount || keyState.IsKeyDown(Keys.Enter))
+                {
+                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    playFirstDialog = false;
+                    canPlayFirstDialog = false;
+                }
+
+            }
+            if (playSecondDialog && canPlaySecondDialog)
+            {
+            }
+            if (playThirdDialog && canPlayThirdDialog)
+            {
+            }
+
+            #endregion
         }
 
         public override void Draw()
@@ -1146,12 +1308,12 @@ namespace Insight.Scenes
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(mainCam);
-                
 
-                if(showColliders == 1)
+
+                if (showColliders == 1)
                 {
-                    if(go.GetComponent<BoxCollider>() != null)
-                    go.GetComponent<BoxCollider>().Draw(projection,graphics, mainCam.view);
+                    if (go.GetComponent<BoxCollider>() != null)
+                        go.GetComponent<BoxCollider>().Draw(projection, graphics, mainCam.view);
 
                     if (go.GetComponent<SphereCollider>() != null)
                     {
@@ -1172,12 +1334,12 @@ namespace Insight.Scenes
 
                     }
                 }
-                
+
             }
 
-            SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
-            sprite.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
-            sprite.Draw(lightRenderer.shadowDepthTarget, new Rectangle(0, 0, 300, 300), Color.White);
+            //SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
+            //sprite.Begin(SpriteSortMode.Immediate,BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
+            //sprite.Draw(lightRenderer.depthTarg, new Rectangle(0,0,300,300),Color.White);
 
             //EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)
@@ -1195,5 +1357,12 @@ namespace Insight.Scenes
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
         }
+
+        public void PlayDialogOne()
+        {
+            if (canPlayFirstDialog)
+                playFirstDialog = true;
+        }
+        
     }
 }
