@@ -556,17 +556,32 @@ namespace Insight.Scenes
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
 
+            newWall13 = new NewWall();
+            newWall13.Initialize(new Vector3(11, 0, 58));
+
             wall14 = new WallVisible();
             wall14.Initialize(new Vector3(11, 0, 63), new Vector3(0));
+
+            newWall14 = new NewWall();
+            newWall14.Initialize(new Vector3(16, 0, 63), new Vector3(0, 3.142f, 0));
 
             wall15 = new WallVisible();
             wall15.Initialize(new Vector3(16, 0, 63), new Vector3(0));
 
+            newWall15 = new NewWall();
+            newWall15.Initialize(new Vector3(21, 0, 63), new Vector3(0, 3.142f, 0));
+
             wall16 = new WallVisible();
             wall16.Initialize(new Vector3(11, 0, 58), new Vector3(0, 4.713f, 0));
 
+            newWall16 = new NewWall();
+            newWall16.Initialize(new Vector3(11, 0, 63), new Vector3(0, 1.571f, 0));
+
             wall17 = new WallVisible();
             wall17.Initialize(new Vector3(21, 0, 58), new Vector3(0, 4.713f, 0));
+
+            newWall17 = new NewWall();
+            newWall17.Initialize(new Vector3(21, 0, 58), new Vector3(0, 4.713f, 0));
 
             cornerRight3 = new CornerRightRotated();
             cornerRight3.Initialize(new Vector3(38, 0, 53), new Vector3(0, 3.142f, 0));
@@ -1118,6 +1133,11 @@ namespace Insight.Scenes
             newWall10.LoadContent(content);
             newWall11.LoadContent(content);
             newWall12.LoadContent(content);
+            newWall13.LoadContent(content);
+            newWall14.LoadContent(content);
+            newWall15.LoadContent(content);
+            newWall16.LoadContent(content);
+            newWall17.LoadContent(content);
 
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);
