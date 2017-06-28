@@ -41,7 +41,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 
 VertexShaderOutput SkinnedVS(in GameSkinnedInput input)
 {
-    //Skin(input, BoneCount);
+    Skin(input, 3);
 
     VertexShaderOutput output = (VertexShaderOutput) 0;
 

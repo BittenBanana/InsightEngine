@@ -107,13 +107,6 @@ struct VertexShaderOutput
     float4 ShadowScreenPosition : TEXCOORD3;
 };
 
-float sampleShadowMap(float2 UV)
-{
-    if (UV.x < 0 || UV.x > 1 || UV.y < 0 || UV.y > 1)
-        return 1;
-    return tex2D(shadowSampler, UV).r;
-}
-
 VertexShaderOutput MainVS(in VertexShaderInput input)
 {
 	VertexShaderOutput output = (VertexShaderOutput)0;
@@ -161,8 +154,8 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
 
     float3 metalness = tex2D(metalnessSampler, input.UV);
 
-    float2 shadowTexCoord = postProjToScreen(input.ShadowScreenPosition)
- + halfPixel();
+ //   float2 shadowTexCoord = postProjToScreen(input.ShadowScreenPosition)
+ //+ halfPixel();
  //   float mapDepth = sampleShadowMap(shadowTexCoord);
 
  //   float realDepth = input.ShadowScreenPosition.z / input.ShadowScreenPosition.w;
@@ -179,7 +172,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR0
     if ((saturate(ProjectedTexCoords).x == ProjectedTexCoords.x) && (saturate(ProjectedTexCoords).y == ProjectedTexCoords.y))
     {
         float depthStoredInShadowMap = tex2D(shadowSampler, ProjectedTexCoords).r;
-        float realDistance = input.ShadowScreenPosition.z / input.ShadowScreenPosition.w;
+            float realDistance = input.ShadowScreenPosition.z / input.ShadowScreenPosition.w;
         if (realDistance - ShadowBias >= depthStoredInShadowMap)
         {
             shadow = ShadowMult;

@@ -38,9 +38,10 @@ namespace Insight.Scenes
 
             ui = new UserInterface(graphics.GraphicsDevice, content);
             ui.AddSprite("Sprites/Menu/bg", "menuBg", new Vector2(0, 0), Color.White, 1);
+            ui.AddSprite("Sprites/Menu/menuNav", "menuNav", new Vector2(590, 800), Color.White, 1);
             ui.AddSprite("Sprites/Menu/pasek", "pasek", new Vector2(0, 0), Color.White, 1);
             ui.AddSprite("Sprites/Menu/tekst", "tekst", new Vector2(0, 0), Color.White, 1);
-
+            
             //ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
 
         }

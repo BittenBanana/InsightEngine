@@ -48,7 +48,7 @@ namespace Insight.Scenes
 
         private bool playFirstDialog, playSecondDialog, playThirdDialog;
         private bool canPlayFirstDialog, canPlaySecondDialog, canPlayThirdDialog;
-        private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 6.0f;
+        private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 8.0f;
         private int firstDialogCount = 8;
         private int firstDialogIndex = 0;
         private PrelightingRenderer lightRenderer;
@@ -1157,7 +1157,7 @@ namespace Insight.Scenes
 
             ui.AddSprite("Sprites/GUI/ikona_agresja", "aggresive", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddSprite("Sprites/GUI/ikona_marker", "marker", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
-            ui.AddSprite("Sprites/GUI/ikona_widzenie", "paralysis", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
+            ui.AddSprite("Sprites/GUI/ikona_paraliz", "paralysis", new Vector2(windowWidth / 2, windowHeight / 2 - 150), Color.White, 0);
             ui.AddText("Fonts/gamefont", "hint", "Press E to open doors", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "dispenserHint", "Press E to take the bullet", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
             ui.AddText("Fonts/gamefont", "gameOver", "GAME OVER", new Vector2(windowWidth / 2 - 50, windowHeight / 2 - 100), Color.White, 0);
@@ -1175,8 +1175,11 @@ namespace Insight.Scenes
 
             //pause menu
             ui.AddSprite("Sprites/Pause/bg", "pauseBg", new Vector2(0, 0), Color.White, 0);
-            ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
+            
+            ui.AddSprite("Sprites/Menu/menuNav", "menuNav", new Vector2(590, 800), Color.White, 0);
             ui.AddSprite("Sprites/Pause/pasek", "pausePasek", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
+            
 
             #region Dialogi
             //Dialogs
@@ -1189,6 +1192,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/DialogOne/06", "d1-06", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/DialogOne/07", "d1-07", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/DialogOne/08", "d1-08", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/dialogiNav", "dialogNav", new Vector2(640, 200), Color.White, 0);
             #endregion
 
         }
@@ -1317,6 +1321,7 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("pauseTekst", 1);
                 ui.ChangeSpriteOpacity("pausePasek", 1);
                 ui.ChangeSpritePosition("pausePasek", 0, 410 + 125 * (pauseMenuSelectedIndex - 1));
+                ui.ChangeSpriteOpacity("menuNav", 1);
 
                 if (pauseKeyState == PauseKeyState.Free)
                 {
@@ -1364,11 +1369,13 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("pauseBg", 0);
                 ui.ChangeSpriteOpacity("pauseTekst", 0);
                 ui.ChangeSpriteOpacity("pausePasek", 0);
+                ui.ChangeSpriteOpacity("menuNav", 0);
             }
 
             #region Dialogs
             if (playFirstDialog && canPlayFirstDialog)
             {
+                ui.ChangeSpriteOpacity("dialogNav", 1);
                 Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
                 ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 1);
                 firstDialogTimer += Time.deltaTime; 
@@ -1395,13 +1402,14 @@ namespace Insight.Scenes
                     nextDialogKeyState = NextDialogKeyState.Free;
 
             }
+            else
+                ui.ChangeSpriteOpacity("dialogNav", 0);
             if (playSecondDialog && canPlaySecondDialog)
             {
             }
             if (playThirdDialog && canPlayThirdDialog)
             {
             }
-
             #endregion
         }
 
