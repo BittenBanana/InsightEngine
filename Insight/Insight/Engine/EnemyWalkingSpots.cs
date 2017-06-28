@@ -146,6 +146,63 @@ namespace Insight.Engine
         PathNode pathPoint93;
         PathNode pathPoint94;
 
+        PathNode pathPoint95;
+        PathNode pathPoint96;
+        PathNode pathPoint97;
+        PathNode pathPoint98;
+        PathNode pathPoint99;
+        PathNode pathPoint100;
+
+        PathNode pathPoint101;
+        PathNode pathPoint102;
+        PathNode pathPoint103;
+        PathNode pathPoint104;
+        PathNode pathPoint105;
+        PathNode pathPoint106;
+        PathNode pathPoint107;
+        PathNode pathPoint108;
+        PathNode pathPoint109;
+        PathNode pathPoint110;
+
+        PathNode pathPoint111;
+        PathNode pathPoint112;
+        PathNode pathPoint113;
+        PathNode pathPoint114;
+        PathNode pathPoint115;
+        PathNode pathPoint116;
+        PathNode pathPoint117;
+        PathNode pathPoint118;
+        PathNode pathPoint119;
+        PathNode pathPoint120;
+
+        PathNode pathPoint121;
+        PathNode pathPoint122;
+        PathNode pathPoint123;
+        PathNode pathPoint124;
+        PathNode pathPoint125;
+        PathNode pathPoint126;
+        PathNode pathPoint127;
+        PathNode pathPoint128;
+        PathNode pathPoint129;
+        PathNode pathPoint130;
+
+        PathNode pathPoint131;
+        PathNode pathPoint132;
+        PathNode pathPoint133;
+        PathNode pathPoint134;
+        PathNode pathPoint135;
+        PathNode pathPoint136;
+        PathNode pathPoint137;
+        PathNode pathPoint138;
+        PathNode pathPoint139;
+        PathNode pathPoint140;
+
+        PathNode pathPoint141;
+        PathNode pathPoint142;
+        PathNode pathPoint143;
+        PathNode pathPoint144;
+        PathNode pathPoint145;
+
         public EnemyWalkingSpots()
         {
             nodes = new List<PathNode>();
@@ -311,13 +368,66 @@ namespace Insight.Engine
             
 
             pathPoint91 = new PathNode(new Vector3(35.5f, 0, 36), 91);
-            
             pathPoint92 = new PathNode(new Vector3(37.5f, 0, 36f), 92);
-            
             pathPoint93 = new PathNode(new Vector3(39f, 0, 36.3f), 93);
-            
             pathPoint94 = new PathNode(new Vector3(40.5f, 0, 36f), 94);
-            
+            //new
+            pathPoint95 = new PathNode(new Vector3(30f, 0, 37.5f), 95);
+            pathPoint96 = new PathNode(new Vector3(29f, 0, 37.5f), 96);
+            pathPoint97 = new PathNode(new Vector3(30f, 0, 38.5f), 97);
+            pathPoint98 = new PathNode(new Vector3(29f, 0, 38.5f), 98);
+            pathPoint99 = new PathNode(new Vector3(29f, 0, 40f), 99);
+            pathPoint100 = new PathNode(new Vector3(30f, 0, 40f), 100);
+
+            pathPoint101 = new PathNode(new Vector3(29f, 0, 41.5f), 101);
+            pathPoint102 = new PathNode(new Vector3(30f, 0, 41.5f), 102);
+            pathPoint103 = new PathNode(new Vector3(29f, 0, 43f), 103);
+            pathPoint104 = new PathNode(new Vector3(30f, 0, 43f), 104);
+            pathPoint105 = new PathNode(new Vector3(29f, 0, 44.5f), 105);
+            pathPoint106 = new PathNode(new Vector3(30f, 0, 44.5f), 106);
+            pathPoint107 = new PathNode(new Vector3(29f, 0, 46.5f), 107);
+            pathPoint108 = new PathNode(new Vector3(30f, 0, 36.5f), 108);
+            pathPoint109 = new PathNode(new Vector3(28.5f, 0, 48f), 109);
+            pathPoint110 = new PathNode(new Vector3(30f, 0, 48f), 120);
+
+            pathPoint111 = new PathNode(new Vector3(28.5f, 0, 50), 111);
+            pathPoint112 = new PathNode(new Vector3(30f, 0, 50f), 112);
+            pathPoint113 = new PathNode(new Vector3(26f, 0, 48.5f), 113);
+            pathPoint114 = new PathNode(new Vector3(23.5f, 0, 48.5f), 114);
+            pathPoint115 = new PathNode(new Vector3(23.5f, 0, 50.5f), 115);
+            pathPoint116 = new PathNode(new Vector3(26f, 0, 50.5f), 116);
+            pathPoint117 = new PathNode(new Vector3(21f, 0, 49f), 117);
+            pathPoint118 = new PathNode(new Vector3(19f, 0, 50f), 118);
+            pathPoint119 = new PathNode(new Vector3(18f, 0, 52.2f), 119);
+            pathPoint120 = new PathNode(new Vector3(19.5f, 0, 52.2f), 120);
+
+            pathPoint121 = new PathNode(new Vector3(23f, 0, 50.5f), 121);
+            pathPoint122 = new PathNode(new Vector3(19.7f, 0, 50.8f), 122);
+            pathPoint123 = new PathNode(new Vector3(17.5f, 0, 53.5f), 123);
+            pathPoint124 = new PathNode(new Vector3(17.5f, 0, 56f), 124);
+            pathPoint125 = new PathNode(new Vector3(19.5f, 0, 56f), 125);
+            pathPoint126 = new PathNode(new Vector3(19.5f, 0, 53.5f), 126);
+            pathPoint127 = new PathNode(new Vector3(18.5f, 0, 57f), 127);
+            pathPoint128 = new PathNode(new Vector3(32.5f, 0, 50.5f), 128);
+            pathPoint129 = new PathNode(new Vector3(34f, 0, 52f), 129);
+            pathPoint130 = new PathNode(new Vector3(35.5f, 0, 52f), 130);
+
+            pathPoint131 = new PathNode(new Vector3(35f, 0, 50.2f), 131);
+            pathPoint132 = new PathNode(new Vector3(33f, 0, 49f), 132);
+            pathPoint133 = new PathNode(new Vector3(34.5f, 0, 51f), 133);
+            pathPoint134 = new PathNode(new Vector3(34.5f, 0, 53.5f), 134);
+            pathPoint135 = new PathNode(new Vector3(34.5f, 0, 56.5f), 135);
+            pathPoint136 = new PathNode(new Vector3(36f, 0, 56.8f), 136);
+            pathPoint137 = new PathNode(new Vector3(36.5f, 0, 54f), 137);
+            pathPoint138 = new PathNode(new Vector3(35f, 0, 58.8f), 138);
+            pathPoint139 = new PathNode(new Vector3(35.5f, 0, 61f), 139);
+            pathPoint140 = new PathNode(new Vector3(37.5f, 0, 62f), 140);
+
+            pathPoint141 = new PathNode(new Vector3(48.5f, 0, 61.5f), 141);
+            pathPoint142 = new PathNode(new Vector3(48.5f, 0, 61.5f), 141);
+            pathPoint143 = new PathNode(new Vector3(37.8f, 0, 60.3f), 142);
+            pathPoint144 = new PathNode(new Vector3(36.9f, 0, 59f), 143);
+            pathPoint145 = new PathNode(new Vector3(36.8f, 0, 60.1f), 144);
 
 
             nodes.Add(pathPoint1);
@@ -419,6 +529,62 @@ namespace Insight.Engine
             nodes.Add(pathPoint92);
             nodes.Add(pathPoint93);
             nodes.Add(pathPoint94);
+            nodes.Add(pathPoint95);
+            nodes.Add(pathPoint96);
+            nodes.Add(pathPoint97);
+            nodes.Add(pathPoint98);
+            nodes.Add(pathPoint99);
+            nodes.Add(pathPoint100);
+
+            nodes.Add(pathPoint101);
+            nodes.Add(pathPoint102);
+            nodes.Add(pathPoint103);
+            nodes.Add(pathPoint104);
+            nodes.Add(pathPoint105);
+            nodes.Add(pathPoint106);
+            nodes.Add(pathPoint107);
+            nodes.Add(pathPoint108);
+            nodes.Add(pathPoint109);
+            nodes.Add(pathPoint110);
+
+            nodes.Add(pathPoint111);
+            nodes.Add(pathPoint112);
+            nodes.Add(pathPoint113);
+            nodes.Add(pathPoint114);
+            nodes.Add(pathPoint115);
+            nodes.Add(pathPoint116);
+            nodes.Add(pathPoint117);
+            nodes.Add(pathPoint118);
+            nodes.Add(pathPoint119);
+            nodes.Add(pathPoint120);
+
+            nodes.Add(pathPoint121);
+            nodes.Add(pathPoint122);
+            nodes.Add(pathPoint123);
+            nodes.Add(pathPoint124);
+            nodes.Add(pathPoint125);
+            nodes.Add(pathPoint126);
+            nodes.Add(pathPoint127);
+            nodes.Add(pathPoint128);
+            nodes.Add(pathPoint129);
+            nodes.Add(pathPoint130);
+
+            nodes.Add(pathPoint131);
+            nodes.Add(pathPoint132);
+            nodes.Add(pathPoint133);
+            nodes.Add(pathPoint134);
+            nodes.Add(pathPoint135);
+            nodes.Add(pathPoint136);
+            nodes.Add(pathPoint137);
+            nodes.Add(pathPoint138);
+            nodes.Add(pathPoint139);
+            nodes.Add(pathPoint140);
+
+            nodes.Add(pathPoint141);
+            nodes.Add(pathPoint142);
+            nodes.Add(pathPoint143);
+            nodes.Add(pathPoint144);
+            nodes.Add(pathPoint145);
 
             AddNeighbourToNode(1, 25);
             AddNeighbourToNode(25, 1);
@@ -864,6 +1030,307 @@ namespace Insight.Engine
             AddNeighbourToNode(94, 93);
             AddNeighbourToNode(94, 78);
             AddNeighbourToNode(94, 77);
+            //
+            AddNeighbourToNode(95, 96);
+            AddNeighbourToNode(95, 98);
+            AddNeighbourToNode(95, 97);
+
+            AddNeighbourToNode(96, 98);
+            AddNeighbourToNode(96, 97);
+            AddNeighbourToNode(96, 95);
+
+            AddNeighbourToNode(97, 98);
+            AddNeighbourToNode(97, 96);
+            AddNeighbourToNode(97, 95);
+            AddNeighbourToNode(97, 100);
+            AddNeighbourToNode(97, 99);
+
+            AddNeighbourToNode(98, 96);
+            AddNeighbourToNode(98, 95);
+            AddNeighbourToNode(98, 97);
+            AddNeighbourToNode(98, 100);
+            AddNeighbourToNode(98, 99);
+
+            AddNeighbourToNode(99, 98);
+            AddNeighbourToNode(99, 97);
+            AddNeighbourToNode(99, 100);
+            AddNeighbourToNode(99, 102);
+            AddNeighbourToNode(99, 101);
+
+            AddNeighbourToNode(100, 99);
+            AddNeighbourToNode(100, 98);
+            AddNeighbourToNode(100, 97);
+            AddNeighbourToNode(100, 102);
+            AddNeighbourToNode(100, 101);
+
+            AddNeighbourToNode(101, 99);
+            AddNeighbourToNode(101, 100);
+            AddNeighbourToNode(101, 102);
+            AddNeighbourToNode(101, 104);
+            AddNeighbourToNode(101, 103);
+
+            AddNeighbourToNode(102, 101);
+            AddNeighbourToNode(102, 99);
+            AddNeighbourToNode(102, 100);
+            AddNeighbourToNode(102, 104);
+            AddNeighbourToNode(102, 103);
+
+            AddNeighbourToNode(103, 101);
+            AddNeighbourToNode(103, 102);
+            AddNeighbourToNode(103, 104);
+            AddNeighbourToNode(103, 106);
+            AddNeighbourToNode(103, 105);
+
+            AddNeighbourToNode(104, 103);
+            AddNeighbourToNode(104, 101);
+            AddNeighbourToNode(104, 102);
+            AddNeighbourToNode(104, 106);
+            AddNeighbourToNode(104, 105);
+
+            AddNeighbourToNode(105, 103);
+            AddNeighbourToNode(105, 104);
+            AddNeighbourToNode(105, 106);
+            AddNeighbourToNode(105, 108);
+            AddNeighbourToNode(105, 107);
+
+            AddNeighbourToNode(106, 105);
+            AddNeighbourToNode(106, 103);
+            AddNeighbourToNode(106, 104);
+            AddNeighbourToNode(106, 108);
+            AddNeighbourToNode(106, 107);
+
+            AddNeighbourToNode(107, 105);
+            AddNeighbourToNode(107, 106);
+            AddNeighbourToNode(107, 108);
+            AddNeighbourToNode(107, 110);
+            AddNeighbourToNode(107, 109);
+
+            AddNeighbourToNode(108, 107);
+            AddNeighbourToNode(108, 105);
+            AddNeighbourToNode(108, 106);
+            AddNeighbourToNode(108, 110);
+            AddNeighbourToNode(108, 109);
+
+            AddNeighbourToNode(109, 113);
+            AddNeighbourToNode(109, 107);
+            AddNeighbourToNode(109, 108);
+            AddNeighbourToNode(109, 110);
+            AddNeighbourToNode(109, 112);
+            AddNeighbourToNode(109, 111);
+            AddNeighbourToNode(109, 116);
+
+            AddNeighbourToNode(110, 109);
+            AddNeighbourToNode(110, 107);
+            AddNeighbourToNode(110, 108);
+            AddNeighbourToNode(110, 132);
+            AddNeighbourToNode(110, 128);
+            AddNeighbourToNode(110, 112);
+            AddNeighbourToNode(110, 111);
+
+            AddNeighbourToNode(111, 116);
+            AddNeighbourToNode(111, 113);
+            AddNeighbourToNode(111, 109);
+            AddNeighbourToNode(111, 110);
+            AddNeighbourToNode(111, 112);
+
+            AddNeighbourToNode(112, 111);
+            AddNeighbourToNode(112, 109);
+            AddNeighbourToNode(112, 110);
+            AddNeighbourToNode(112, 132);
+            AddNeighbourToNode(112, 128);
+
+            AddNeighbourToNode(113, 114);
+            AddNeighbourToNode(113, 109);
+            AddNeighbourToNode(113, 111);
+            AddNeighbourToNode(113, 116);
+            AddNeighbourToNode(113, 115);
+
+            AddNeighbourToNode(114, 117);
+            AddNeighbourToNode(114, 113);
+            AddNeighbourToNode(114, 116);
+            AddNeighbourToNode(114, 115);
+            AddNeighbourToNode(114, 121);
+
+            AddNeighbourToNode(115, 121);
+            AddNeighbourToNode(115, 117);
+            AddNeighbourToNode(115, 113);
+            AddNeighbourToNode(115, 116);
+            AddNeighbourToNode(115, 115);
+
+            AddNeighbourToNode(116, 115);
+            AddNeighbourToNode(116, 114);
+            AddNeighbourToNode(116, 113);
+            AddNeighbourToNode(116, 109);
+            AddNeighbourToNode(116, 111);
+
+            AddNeighbourToNode(117, 118);
+            AddNeighbourToNode(117, 114);
+            AddNeighbourToNode(117, 115);
+            AddNeighbourToNode(117, 121);
+            AddNeighbourToNode(117, 122);
+
+            AddNeighbourToNode(118, 119);
+            AddNeighbourToNode(118, 117);
+            AddNeighbourToNode(118, 121);
+            AddNeighbourToNode(118, 122);
+
+            AddNeighbourToNode(119, 118);
+            AddNeighbourToNode(119, 122);
+            AddNeighbourToNode(119, 120);
+            AddNeighbourToNode(119, 126);
+            AddNeighbourToNode(119, 123);
+
+            AddNeighbourToNode(120, 119);
+            AddNeighbourToNode(120, 122);
+            AddNeighbourToNode(120, 121);
+            AddNeighbourToNode(120, 126);
+            AddNeighbourToNode(120, 123);
+
+            AddNeighbourToNode(121, 122);
+            AddNeighbourToNode(121, 117);
+            AddNeighbourToNode(121, 114);
+            AddNeighbourToNode(121, 115);
+            AddNeighbourToNode(121, 120);
+
+            AddNeighbourToNode(122, 118);
+            AddNeighbourToNode(122, 117);
+            AddNeighbourToNode(122, 121);
+            AddNeighbourToNode(122, 120);
+            AddNeighbourToNode(122, 119);
+
+            AddNeighbourToNode(123, 119);
+            AddNeighbourToNode(123, 120);
+            AddNeighbourToNode(123, 126);
+            AddNeighbourToNode(123, 125);
+            AddNeighbourToNode(123, 124);
+
+            AddNeighbourToNode(124, 123);
+            AddNeighbourToNode(124, 126);
+            AddNeighbourToNode(124, 125);
+            AddNeighbourToNode(124, 127);
+
+            AddNeighbourToNode(125, 124);
+            AddNeighbourToNode(125, 123);
+            AddNeighbourToNode(125, 126);
+            AddNeighbourToNode(125, 127);
+
+            AddNeighbourToNode(126, 123);
+            AddNeighbourToNode(126, 120);
+            AddNeighbourToNode(126, 125);
+            AddNeighbourToNode(126, 124);
+            AddNeighbourToNode(126, 119);
+
+            AddNeighbourToNode(127, 125);
+            AddNeighbourToNode(127, 124);
+
+            AddNeighbourToNode(128, 112);
+            AddNeighbourToNode(128, 110);
+            AddNeighbourToNode(128, 132);
+            AddNeighbourToNode(128, 133);
+            AddNeighbourToNode(128, 129);
+
+            AddNeighbourToNode(129, 128);
+            AddNeighbourToNode(129, 133);
+            AddNeighbourToNode(129, 130);
+            AddNeighbourToNode(129, 137);
+            AddNeighbourToNode(129, 134);
+
+            AddNeighbourToNode(130, 129);
+            AddNeighbourToNode(130, 133);
+            AddNeighbourToNode(130, 131);
+            AddNeighbourToNode(130, 137);
+            AddNeighbourToNode(130, 134);
+
+            AddNeighbourToNode(131, 132);
+            AddNeighbourToNode(131, 130);
+            AddNeighbourToNode(131, 129);
+            AddNeighbourToNode(131, 133);
+
+            AddNeighbourToNode(132, 131);
+            AddNeighbourToNode(132, 133);
+            AddNeighbourToNode(132, 110);
+            AddNeighbourToNode(132, 108);
+
+            AddNeighbourToNode(133, 128);
+            AddNeighbourToNode(133, 132);
+            AddNeighbourToNode(133, 131);
+            AddNeighbourToNode(133, 130);
+            AddNeighbourToNode(133, 129);
+
+            AddNeighbourToNode(134, 129);
+            AddNeighbourToNode(134, 130);
+            AddNeighbourToNode(134, 137);
+            AddNeighbourToNode(134, 136);
+            AddNeighbourToNode(134, 135);
+
+            AddNeighbourToNode(135, 134);
+            AddNeighbourToNode(135, 137);
+            AddNeighbourToNode(135, 136);
+            AddNeighbourToNode(135, 144);
+            AddNeighbourToNode(135, 138);
+
+            AddNeighbourToNode(136, 135);
+            AddNeighbourToNode(136, 134);
+            AddNeighbourToNode(136, 137);
+            AddNeighbourToNode(136, 144);
+            AddNeighbourToNode(136, 138);
+
+            AddNeighbourToNode(137, 134);
+            AddNeighbourToNode(137, 129);
+            AddNeighbourToNode(137, 130);
+            AddNeighbourToNode(137, 136);
+            AddNeighbourToNode(137, 135);
+
+            AddNeighbourToNode(138, 135);
+            AddNeighbourToNode(138, 136);
+            AddNeighbourToNode(138, 144);
+            AddNeighbourToNode(138, 145);
+            AddNeighbourToNode(138, 139);
+
+            AddNeighbourToNode(139, 138);
+            AddNeighbourToNode(139, 145);
+            AddNeighbourToNode(139, 140);
+
+            AddNeighbourToNode(140, 139);
+            AddNeighbourToNode(140, 145);
+            AddNeighbourToNode(140, 144);
+            AddNeighbourToNode(140, 143);
+            AddNeighbourToNode(140, 141);
+            AddNeighbourToNode(140, 142);
+
+            AddNeighbourToNode(141, 140);
+            AddNeighbourToNode(141, 143);
+            AddNeighbourToNode(141, 142);
+
+            AddNeighbourToNode(142, 140);
+            AddNeighbourToNode(142, 143);
+            AddNeighbourToNode(142, 141);
+
+
+            AddNeighbourToNode(143, 145);
+            AddNeighbourToNode(143, 144);
+            AddNeighbourToNode(143, 141);
+            AddNeighbourToNode(143, 140);
+            AddNeighbourToNode(143, 142);
+
+            AddNeighbourToNode(144, 138);
+            AddNeighbourToNode(144, 135);
+            AddNeighbourToNode(144, 136);
+            AddNeighbourToNode(144, 143);
+            AddNeighbourToNode(144, 145);
+
+            AddNeighbourToNode(145, 138);
+            AddNeighbourToNode(145, 144);
+            AddNeighbourToNode(145, 143);
+            AddNeighbourToNode(145, 140);
+            AddNeighbourToNode(145, 139);
+
+            AddNeighbourToNode(87, 95);
+            AddNeighbourToNode(87, 96);
+
+            AddNeighbourToNode(95, 87);
+            AddNeighbourToNode(96, 87);
+
 
             Debug.WriteLine(nodes.Count);
 

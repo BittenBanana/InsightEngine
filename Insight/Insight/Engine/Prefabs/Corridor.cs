@@ -13,13 +13,15 @@ namespace Insight.Engine.Prefabs
     class Corridor : Prefab
     {
         GameObject corridorModel;
-        GameObject floor;
+        GameObject colliderModel;
+        public GameObject floor;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
             prefabGameObjects = new List<GameObject>();
 
             corridorModel = new GameObject(new Vector3(0, 0, 0), false);
+            colliderModel = new GameObject(new Vector3(0, 0, 0), false);
             floor = new GameObject(new Vector3(0, 0, 0), false);
 
 
@@ -28,8 +30,16 @@ namespace Insight.Engine.Prefabs
             floor.AddNewComponent<MeshRenderer>();
             floor.GetComponent<MeshRenderer>().IsVisible = false;
 
+            if (corridorModel.Transform.Rotation == new Vector3(0) || corridorModel.Transform.Rotation == new Vector3(0, 3.142f, 0))
+            {
+                colliderModel.AddNewComponent<MeshRenderer>();
+                colliderModel.GetComponent<MeshRenderer>().IsVisible = false;
+            }
 
+                
 
+            if (corridorModel.Transform.Rotation == new Vector3(0) || corridorModel.Transform.Rotation == new Vector3(0, 3.142f, 0))
+                prefabGameObjects.Add(colliderModel);
             prefabGameObjects.Add(corridorModel);
             prefabGameObjects.Add(floor);
             base.Initialize(position, rotation);
@@ -44,9 +54,25 @@ namespace Insight.Engine.Prefabs
             corridorModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/corridor-straight_DefaultMaterial_AO");
             corridorModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/corridor-straight_DefaultMaterial_MetallicSmoothness");
             floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
-            corridorModel.AddNewComponent<BoxCollider>();
+            if (corridorModel.Transform.Rotation != new Vector3(0) && corridorModel.Transform.Rotation != new Vector3(0, 3.142f, 0))
+                corridorModel.AddNewComponent<BoxCollider>();
             floor.AddNewComponent<BoxCollider>();
             floor.physicLayer = Layer.Ground;
+
+            if (corridorModel.Transform.Rotation == new Vector3(0))
+            {
+                colliderModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.straightCollider, 1.0f);
+                colliderModel.AddNewComponent<BoxCollider>();
+            }
+
+            if(corridorModel.Transform.Rotation == new Vector3(0, 3.142f, 0))
+            {
+                colliderModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.straightCollider, 1.0f);
+                colliderModel.AddNewComponent<BoxCollider>();
+                colliderModel.Transform.Rotation = new Vector3(0);
+                colliderModel.Transform.Position = new Vector3(16, 0, 53);
+            }
+                
         }
     }
 }
