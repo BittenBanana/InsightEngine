@@ -47,7 +47,7 @@ namespace Insight.Scenes
         private int firstDialogCount = 9;
         private int firstDialogIndex = 0;
         private PrelightingRenderer lightRenderer;
-
+        private float brightness = 1.0f;
         private PostProcessRenderer postProcessRenderer;
 
         private RenderTarget2D sceneRenderTarget2D;
@@ -1159,7 +1159,7 @@ namespace Insight.Scenes
                 //float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
                 //    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
                 postEffect.Parameters["colorPercentage"]?.SetValue(0.75f - ((float)player.GetComponent<PlayerManager>().health / 100) / 1.3333333333333f);
-
+                postEffect.Parameters["brightness"]?.SetValue(brightness);
                 //mui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
                 // Update

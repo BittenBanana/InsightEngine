@@ -10,7 +10,7 @@
 //------------------------------ TEXTURE PROPERTIES ----------------------------
 // This is the texture that SpriteBatch will try to set before drawing
 texture2D ScreenTexture;
- 
+
 // Our sampler for the texture, which is just going to be pretty simple
 sampler TextureSampler = sampler_state
 {
@@ -59,6 +59,7 @@ sampler BloodSampler3 = sampler_state
 };
 
 float colorPercentage = 0;
+float brightness = 1.0;
 
 struct VertexShaderOutput
 {
@@ -97,6 +98,8 @@ float4 PixelShaderFunction(VertexShaderOutput i) : COLOR0
 
     color.rgb = value;
     color.a = 1;
+
+	color.rgba /= brightness;
     return color;
 }
  
