@@ -103,6 +103,7 @@ namespace Insight
         public Model straightCollider { get; set; }
         public Model smallRoomCeiling { get; set; }
         public Model lastRoomCeiling { get; set; }
+        public Model glassModel { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -188,6 +189,7 @@ namespace Insight
             straightCollider = content.Load<Model>("Models/Konrads/Enviroment/collider-cor-str");
             smallRoomCeiling = content.Load<Model>("Models/Konrads/Enviroment/sufit_malyPokoj");
             lastRoomCeiling = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojKoncowy");
+            glassModel = content.Load<Model>("Models/Konrads/Enviroment/szybaGora");
         }
     }
 }

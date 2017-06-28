@@ -40,6 +40,8 @@ namespace Insight.Engine.Prefabs
 
         CeilingLastRoom lastRoomCeiling;
 
+        GlassModel glassModel;
+
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
@@ -107,6 +109,9 @@ namespace Insight.Engine.Prefabs
             roomFloor29 = new RoomFloor();
             roomFloor29.Initialize(new Vector3(28, -4, 95));
 
+            glassModel = new GlassModel();
+            glassModel.Initialize(new Vector3(28, -4, 90));
+
 
             prefabGameObjects.Add(wall56.wallModel);
             prefabGameObjects.Add(wall55.wallModel);
@@ -135,6 +140,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(newWall24.wallModel);
             //prefabGameObjects.Add(newWall25.wallModel);
             prefabGameObjects.Add(lastRoomCeiling.wallModel);
+            prefabGameObjects.Add(glassModel.columnModel);
             base.Initialize(position);
         }
 
@@ -162,12 +168,13 @@ namespace Insight.Engine.Prefabs
             newWall23.LoadContent(content);
             newWall24.LoadContent(content);
             lastRoomCeiling.LoadContent(content);
+            glassModel.LoadContent(content);
             //newWall25.LoadContent(content);
 
-            //Effect transparency = content.Load<Effect>("Shaders/glass");
-            //glassMaterial = new TransparencyMaterial(transparency);
+            Effect transparency = content.Load<Effect>("Shaders/glass");
+            glassMaterial = new TransparencyMaterial(transparency);
 
-            //wall56.wallModel.GetComponent<MeshRenderer>().Material = glassMaterial;
+            glassModel.columnModel.GetComponent<MeshRenderer>().Material = glassMaterial;
             //wall56.LoadContent(content);
         }
     }
