@@ -3336,6 +3336,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/w-3x5_DefaultMaterial_AlbedoTransparency.png
 
+#begin Sprites/DialogTwo/00.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/00.png
+
 #begin Materials/w-3x5_DefaultMaterial_AO.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3347,6 +3359,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/w-3x5_DefaultMaterial_AO.png
+
+#begin Sprites/DialogTwo/01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/01.png
 
 #begin Materials/w-3x5_DefaultMaterial_MetallicSmoothness.png
 /importer:TextureImporter
@@ -3360,6 +3384,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/w-3x5_DefaultMaterial_MetallicSmoothness.png
 
+#begin Sprites/DialogTwo/02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/02.png
+
 #begin Materials/w-3x5_DefaultMaterial_Normal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3371,6 +3407,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/w-3x5_DefaultMaterial_Normal.png
+
+#begin Sprites/DialogTwo/03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/03.png
 
 #begin Materials/f-3x5_DefaultMaterial_AlbedoTransparency.png
 /importer:TextureImporter
@@ -3384,6 +3432,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/f-3x5_DefaultMaterial_AlbedoTransparency.png
 
+#begin Sprites/DialogTwo/04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/04.png
+
 #begin Materials/f-3x5_DefaultMaterial_AO.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3395,6 +3455,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/f-3x5_DefaultMaterial_AO.png
+
+#begin Sprites/DialogTwo/05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/05.png
 
 #begin Materials/f-3x5_DefaultMaterial_MetallicSmoothness.png
 /importer:TextureImporter
@@ -3408,6 +3480,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/f-3x5_DefaultMaterial_MetallicSmoothness.png
 
+#begin Sprites/DialogTwo/06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/06.png
+
 #begin Materials/f-3x5_DefaultMaterial_Normal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3419,6 +3503,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/f-3x5_DefaultMaterial_Normal.png
+
+#begin Sprites/DialogTwo/07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/07.png
 
 #begin Materials/sufit_pokojZMaszyna_DefaultMaterial_AlbedoTransparency.png
 /importer:TextureImporter
@@ -3432,6 +3528,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/sufit_pokojZMaszyna_DefaultMaterial_AlbedoTransparency.png
 
+#begin Sprites/DialogTwo/08.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/08.png
+
 #begin Materials/sufit_pokojZMaszyna_DefaultMaterial_AO.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3443,6 +3551,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/sufit_pokojZMaszyna_DefaultMaterial_AO.png
+
+#begin Sprites/DialogTwo/09.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogTwo/09.png
 
 #begin Materials/sufit_pokojZMaszyna_DefaultMaterial_MetallicSmoothness.png
 /importer:TextureImporter
@@ -3456,6 +3576,18 @@
 /processorParam:TextureFormat=Color
 /build:Materials/sufit_pokojZMaszyna_DefaultMaterial_MetallicSmoothness.png
 
+#begin Sprites/DialogThree/00.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/00.png
+
 #begin Materials/sufit_pokojZMaszyna_DefaultMaterial_Normal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3467,4 +3599,174 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Materials/sufit_pokojZMaszyna_DefaultMaterial_Normal.png
+
+#begin Sprites/DialogThree/01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/01.png
+
+#begin Sprites/DialogThree/02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/02.png
+
+#begin Sprites/DialogThree/03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/03.png
+
+#begin Sprites/DialogThree/04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/04.png
+
+#begin Sprites/DialogThree/05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/05.png
+
+#begin Sprites/DialogThree/06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/06.png
+
+#begin Sprites/DialogThree/07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/07.png
+
+#begin Sprites/DialogThree/08.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/08.png
+
+#begin Sprites/DialogThree/09.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/09.png
+
+#begin Sprites/DialogThree/10.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/10.png
+
+#begin Sprites/DialogThree/11.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/DialogThree/11.png
+
+#begin Models/Konrads/Enviroment/sufit_malyPokoj.FBX
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Models/Konrads/Enviroment/sufit_malyPokoj.FBX
+
+#begin Models/Konrads/Enviroment/sufit_pokojKoncowy.FBX
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:Models/Konrads/Enviroment/sufit_pokojKoncowy.FBX
 

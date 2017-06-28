@@ -51,6 +51,13 @@ namespace Insight.Scenes
         private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 8.0f;
         private int firstDialogCount = 8;
         private int firstDialogIndex = 0;
+
+        private int secondDialogCount = 9;
+        private int secondDialogIndex = 0;
+
+        private int thirdDialogCount = 11;
+        private int thirdDialogIndex = 0;
+
         private PrelightingRenderer lightRenderer;
         private float brightness = 1.0f;
         private PostProcessRenderer postProcessRenderer;
@@ -232,6 +239,8 @@ namespace Insight.Scenes
         NewWall newWall15;
         NewWall newWall16;
         NewWall newWall17;
+
+        CeilingSmallRoom smallRoomCeiling;
         
 
         //GameObject enemy;
@@ -240,6 +249,8 @@ namespace Insight.Scenes
         private EnemyPrefab walkingEnemyInRoom;
         private StandingEnemy standingEnemyNearPcInRoom1;
         private StandingEnemy standingEnemyNearPcInRoom2;
+        private StandingEnemy standingEnemyEndGame;
+        private EnemyPrefab walkingEnemyEndGame;
         private GameObject pointLight1;
         private GameObject pointLight2;
         private GameObject pointLight3;
@@ -343,6 +354,20 @@ namespace Insight.Scenes
 
             standingEnemyNearPcInRoom2 = new StandingEnemy();
             standingEnemyNearPcInRoom2.Initialize(new Vector3(28.5f, 0, 34f));
+
+            List<Vector3> walkingEnemyEndGamePatrolPositions = new List<Vector3>();
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(26.5f, 0, 59f));//144
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(28.5f, 0, 48f));//109
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(30f, 0, 50f));//112
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
+            walkingEnemyEndGame = new EnemyPrefab(walkingEnemyEndGamePatrolPositions);
+            walkingEnemyEndGame.Initialize(new Vector3(26.5f, 0, 59f));
+
+            standingEnemyEndGame = new StandingEnemy();
+            standingEnemyEndGame.Initialize(new Vector3(36.5f, 0, 60f));//145
 
             player.AddNewComponent<Rigidbody>();
 
@@ -546,6 +571,9 @@ namespace Insight.Scenes
 
             door4 = new AnimatedDoor();
             door4.Initialize(new Vector3(16f, 0, 58));
+
+            smallRoomCeiling = new CeilingSmallRoom();
+            smallRoomCeiling.Initialize(new Vector3(21, 0, 63), new Vector3(0));
 
             wall13 = new Wall();
             wall13.Initialize(new Vector3(11, 0, 58));
@@ -1133,6 +1161,8 @@ namespace Insight.Scenes
             newWall16.LoadContent(content);
             newWall17.LoadContent(content);
 
+            smallRoomCeiling.LoadContent(content);
+
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);
             bigMachine.LoadContent(content);
@@ -1145,6 +1175,8 @@ namespace Insight.Scenes
             standingEnemyNearPcInRoom1.LoadContent(content);
             standingEnemyNearPcInRoom2.LoadContent(content);
             walkingEnemyInRoom.LoadContent(content);
+            walkingEnemyEndGame.LoadContent(content);
+            standingEnemyEndGame.LoadContent(content);
             ui = new UserInterface(graphics.GraphicsDevice, content);
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
@@ -1192,6 +1224,31 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/DialogOne/06", "d1-06", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/DialogOne/07", "d1-07", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/DialogOne/08", "d1-08", new Vector2(0, 0), Color.White, 0);
+
+            ui.AddSprite("Sprites/DialogTwo/00", "d2-00", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/01", "d2-01", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/02", "d2-02", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/03", "d2-03", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/04", "d2-04", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/05", "d2-05", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/06", "d2-06", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/07", "d2-07", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/08", "d2-08", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogTwo/09", "d2-09", new Vector2(0, 0), Color.White, 0);
+
+            ui.AddSprite("Sprites/DialogThree/00", "d3-00", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/01", "d3-01", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/02", "d3-02", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/03", "d3-03", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/04", "d3-04", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/05", "d3-05", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/06", "d3-06", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/07", "d3-07", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/08", "d3-08", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/09", "d3-09", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/10", "d3-010", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogThree/11", "d3-011", new Vector2(0, 0), Color.White, 0);
+
             ui.AddSprite("Sprites/DialogOne/dialogiNav", "dialogNav", new Vector2(640, 200), Color.White, 0);
             #endregion
 
@@ -1379,20 +1436,20 @@ namespace Insight.Scenes
                 Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
                 ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 1);
                 firstDialogTimer += Time.deltaTime; 
-                if(firstDialogTimer >= dialogDuration || (keyState.IsKeyDown(Keys.Space)&& nextDialogKeyState == NextDialogKeyState.Free))
+                if(firstDialogTimer > dialogDuration || (keyState.IsKeyDown(Keys.Space)&& nextDialogKeyState == NextDialogKeyState.Free))
                 {
                     if (keyState.IsKeyDown(Keys.Space))
                         nextDialogKeyState = NextDialogKeyState.Pressed;
-                    if (firstDialogIndex <= firstDialogCount)
+                    if (firstDialogIndex < firstDialogCount)
                         ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     firstDialogIndex++;
                     firstDialogTimer = 0f;
                 }
-                if (firstDialogIndex >= firstDialogCount || (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free))
+                if (firstDialogIndex > firstDialogCount || (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free))
                 {
                     if (keyState.IsKeyDown(Keys.Escape))
                         escapeKeyPress = EscapeKeyPress.Pressed;
-                    if (firstDialogIndex <= firstDialogCount)
+                    if (firstDialogIndex < firstDialogCount)
                         ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     playFirstDialog = false;
                     canPlayFirstDialog = false;
@@ -1403,13 +1460,79 @@ namespace Insight.Scenes
 
             }
             else
-                ui.ChangeSpriteOpacity("dialogNav", 0);
+            {
+                ui.ChangeSpriteOpacity("d1-08" , 0);
+            }
+
             if (playSecondDialog && canPlaySecondDialog)
             {
+                ui.ChangeSpriteOpacity("dialogNav", 1);
+                Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
+                ui.ChangeSpriteOpacity("d2-0" + secondDialogIndex.ToString(), 1);
+                secondDialogTimer += Time.deltaTime;
+                if (secondDialogTimer > dialogDuration || (keyState.IsKeyDown(Keys.Space) && nextDialogKeyState == NextDialogKeyState.Free))
+                {
+                    if (keyState.IsKeyDown(Keys.Space))
+                        nextDialogKeyState = NextDialogKeyState.Pressed;
+                    if (secondDialogIndex < secondDialogCount)
+                        ui.ChangeSpriteOpacity("d2-0" + secondDialogIndex.ToString(), 0);
+                    secondDialogIndex++;
+                    secondDialogTimer = 0f;
+                }
+                if (secondDialogIndex > secondDialogCount || (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free))
+                {
+                    if (keyState.IsKeyDown(Keys.Escape))
+                        escapeKeyPress = EscapeKeyPress.Pressed;
+                    if (secondDialogIndex < secondDialogCount)
+                        ui.ChangeSpriteOpacity("d2-0" + secondDialogIndex.ToString(), 0);
+                    playSecondDialog = false;
+                    canPlaySecondDialog = false;
+                }
+
+                if (keyState.IsKeyUp(Keys.Space) && nextDialogKeyState == NextDialogKeyState.Pressed)
+                    nextDialogKeyState = NextDialogKeyState.Free;
+
+            }
+            else
+            {
+                ui.ChangeSpriteOpacity("d2-0" + secondDialogCount.ToString(), 0);
             }
             if (playThirdDialog && canPlayThirdDialog)
             {
+                ui.ChangeSpriteOpacity("dialogNav", 1);
+                Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
+                ui.ChangeSpriteOpacity("d3-0" + thirdDialogIndex.ToString(), 1);
+                thirdDialogTimer += Time.deltaTime;
+                if (thirdDialogTimer > dialogDuration || (keyState.IsKeyDown(Keys.Space) && nextDialogKeyState == NextDialogKeyState.Free))
+                {
+                    if (keyState.IsKeyDown(Keys.Space))
+                        nextDialogKeyState = NextDialogKeyState.Pressed;
+                    if (thirdDialogIndex < thirdDialogCount)
+                        ui.ChangeSpriteOpacity("d3-0" + thirdDialogIndex.ToString(), 0);
+                    thirdDialogIndex++;
+                    thirdDialogTimer = 0f;
+                }
+                if (thirdDialogIndex > thirdDialogCount || (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free))
+                {
+                    if (keyState.IsKeyDown(Keys.Escape))
+                        escapeKeyPress = EscapeKeyPress.Pressed;
+                    if (thirdDialogIndex < thirdDialogCount)
+                        ui.ChangeSpriteOpacity("d3-0" + thirdDialogIndex.ToString(), 0);
+                    playThirdDialog = false;
+                    canPlayThirdDialog = false;
+                }
+
+                if (keyState.IsKeyUp(Keys.Space) && nextDialogKeyState == NextDialogKeyState.Pressed)
+                    nextDialogKeyState = NextDialogKeyState.Free;
+
             }
+            else
+            {
+                ui.ChangeSpriteOpacity("d3-0" + thirdDialogCount.ToString(), 0);
+            }
+
+            if(!playFirstDialog && !playSecondDialog && !playThirdDialog)
+                ui.ChangeSpriteOpacity("dialogNav", 0);
             #endregion
         }
 
@@ -1477,6 +1600,18 @@ namespace Insight.Scenes
         {
             if (canPlayFirstDialog)
                 playFirstDialog = true;
+        }
+
+        public void PlayDialogTwo()
+        {
+            if (canPlaySecondDialog)
+                playSecondDialog = true;
+        }
+
+        public void PlayDialogThree()
+        {
+            if (canPlayThirdDialog)
+                playThirdDialog = true;
         }
         
     }
