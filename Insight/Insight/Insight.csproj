@@ -138,6 +138,7 @@
     <Compile Include="Scenes\DemoScene.cs" />
     <Compile Include="Scenes\GameMenu.cs" />
     <Compile Include="Scenes\MainScene.cs" />
+    <Compile Include="Scenes\SettingsMenu.cs" />
     <Compile Include="Scripts\BaseScript.cs" />
     <Compile Include="Scripts\BasicAI.cs" />
     <Compile Include="Scripts\BoxController.cs" />
