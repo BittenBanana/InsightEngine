@@ -34,6 +34,11 @@ namespace Insight.Scenes
         }
         PauseKeyState pauseKeyState = PauseKeyState.Free;
 
+        enum NextDialogKeyState
+        {
+            Free, Pressed
+        }
+        NextDialogKeyState nextDialogKeyState = NextDialogKeyState.Free;
         enum ShadowKeyState
         {
             Free, Pressed
@@ -1130,7 +1135,7 @@ namespace Insight.Scenes
             {
                 shadowKeyState = ShadowKeyState.Free;
             }
-            if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free)
+            if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free && !playFirstDialog && !playSecondDialog && !playThirdDialog)
             {
                 isGamePaused = !isGamePaused;
                 escapeKeyPress = EscapeKeyPress.Pressed;
@@ -1247,7 +1252,7 @@ namespace Insight.Scenes
                 {
                     pauseKeyState = PauseKeyState.Free;
                 }
-                if (keyState.IsKeyDown(Keys.Enter))
+                if (keyState.IsKeyDown(Keys.Enter) || keyState.IsKeyDown(Keys.Space))
                     switch (pauseMenuSelectedIndex)
                     {
                         case 1:
@@ -1280,20 +1285,27 @@ namespace Insight.Scenes
                 Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
                 ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 1);
                 firstDialogTimer += Time.deltaTime; 
-                if(firstDialogTimer >= dialogDuration)
+                if(firstDialogTimer >= dialogDuration || (keyState.IsKeyDown(Keys.Space)&& nextDialogKeyState == NextDialogKeyState.Free))
                 {
+                    if (keyState.IsKeyDown(Keys.Space))
+                        nextDialogKeyState = NextDialogKeyState.Pressed;
                     if (firstDialogIndex <= firstDialogCount)
                         ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     firstDialogIndex++;
                     firstDialogTimer = 0f;
                 }
-                if (firstDialogIndex >= firstDialogCount || keyState.IsKeyDown(Keys.Enter))
+                if (firstDialogIndex >= firstDialogCount || (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free))
                 {
-                    if(firstDialogIndex <= firstDialogCount)
+                    if (keyState.IsKeyDown(Keys.Escape))
+                        escapeKeyPress = EscapeKeyPress.Pressed;
+                    if (firstDialogIndex <= firstDialogCount)
                         ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     playFirstDialog = false;
                     canPlayFirstDialog = false;
                 }
+
+                if (keyState.IsKeyUp(Keys.Space) && nextDialogKeyState == NextDialogKeyState.Pressed)
+                    nextDialogKeyState = NextDialogKeyState.Free;
 
             }
             if (playSecondDialog && canPlaySecondDialog)
