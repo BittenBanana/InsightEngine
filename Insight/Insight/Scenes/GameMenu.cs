@@ -22,7 +22,7 @@ namespace Insight.Scenes
         }
         PressState pressState = PressState.Free;
         int currentlySelected = 1;
-        int menuCount = 3;
+        int menuCount = 4;
 
         public override void Initialize(GraphicsDeviceManager graphicsDevice)
         {
@@ -64,7 +64,7 @@ namespace Insight.Scenes
                 {
                     currentlySelected++;
                     if (currentlySelected > menuCount)
-                        currentlySelected = 3;
+                        currentlySelected = 4;
                 }
                 if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
                 {
@@ -87,11 +87,15 @@ namespace Insight.Scenes
             }
             if (currentlySelected == 2)
             {
-                ui.ChangeSpritePosition("pasek", 0, 555);
+                ui.ChangeSpritePosition("pasek", 0, 500);
             }
             if (currentlySelected == 3)
             {
-                ui.ChangeSpritePosition("pasek", 0, 740);
+                ui.ChangeSpritePosition("pasek", 0, 635);
+            }
+            if (currentlySelected == 4)
+            {
+                ui.ChangeSpritePosition("pasek", 0, 770);
             }
             if (keyState.IsKeyDown(Keys.Enter) || keyState.IsKeyDown(Keys.Space))
             {
@@ -99,7 +103,11 @@ namespace Insight.Scenes
                 {
                     SceneManager.Instance.LoadGame();
                 }
-                if (currentlySelected == 3)
+                if (currentlySelected == 2)
+                {
+                    SceneManager.Instance.LoadSettings();
+                }
+                if (currentlySelected == 4)
                 {
                     SceneManager.Instance.gameApp.Quit();
                 }
