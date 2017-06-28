@@ -249,6 +249,8 @@ namespace Insight.Scenes
         private EnemyPrefab walkingEnemyInRoom;
         private StandingEnemy standingEnemyNearPcInRoom1;
         private StandingEnemy standingEnemyNearPcInRoom2;
+        private StandingEnemy standingEnemyEndGame;
+        private EnemyPrefab walkingEnemyEndGame;
         private GameObject pointLight1;
         private GameObject pointLight2;
         private GameObject pointLight3;
@@ -352,6 +354,20 @@ namespace Insight.Scenes
 
             standingEnemyNearPcInRoom2 = new StandingEnemy();
             standingEnemyNearPcInRoom2.Initialize(new Vector3(28.5f, 0, 34f));
+
+            List<Vector3> walkingEnemyEndGamePatrolPositions = new List<Vector3>();
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(26.5f, 0, 59f));//144
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(28.5f, 0, 48f));//109
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(30f, 0, 50f));//112
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
+            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
+            walkingEnemyEndGame = new EnemyPrefab(walkingEnemyEndGamePatrolPositions);
+            walkingEnemyEndGame.Initialize(new Vector3(26.5f, 0, 59f));
+
+            standingEnemyEndGame = new StandingEnemy();
+            standingEnemyEndGame.Initialize(new Vector3(36.5f, 0, 60f));//145
 
             player.AddNewComponent<Rigidbody>();
 
@@ -1159,6 +1175,8 @@ namespace Insight.Scenes
             standingEnemyNearPcInRoom1.LoadContent(content);
             standingEnemyNearPcInRoom2.LoadContent(content);
             walkingEnemyInRoom.LoadContent(content);
+            walkingEnemyEndGame.LoadContent(content);
+            standingEnemyEndGame.LoadContent(content);
             ui = new UserInterface(graphics.GraphicsDevice, content);
             //ui.AddText("Fonts/gamefont", "generalFont", string.Format("FPS={0}", _fps), new Vector2(10, 20), Color.White, 1);
 
