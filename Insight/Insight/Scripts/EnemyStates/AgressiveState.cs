@@ -37,7 +37,7 @@ namespace Insight.Scripts.EnemyStates
             {
                 if(item.physicLayer != Layer.Enemy && item.physicLayer != Layer.Player) continue;
                 if(item == enemy.gameObject) continue;
-                if(item.physicLayer == Layer.Enemy && item.GetComponent<EnemyAI>()?.currentState is DeathState) continue;
+                if(item.physicLayer == Layer.Enemy && (item.GetComponent<EnemyAI>()?.currentState is DeathState || item.GetComponent<EnemyAI>()?.currentState is ParalysisState)) continue;
                 if (enemy.nearestEnemyPosition == null)
                 {
                     enemy.nearestEnemyPosition = item;

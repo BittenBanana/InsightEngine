@@ -46,6 +46,8 @@ namespace Insight.Scripts
             #region LeftButton
             if (ms.LeftButton == ButtonState.Pressed && !isPressed && currentBulletLoaded != null)
             {
+                if(currentBulletLoaded == PlayerBullets.Bullets.Transmitter && test == null) return;
+
                 //SceneManager.Instance.currentScene.audioManager.PlaySoundEffect(sounds[rand.Next(0,2)]);
                 SceneManager.Instance.currentScene.audioManager.PlayCue(shootCueNumber);
 
@@ -137,8 +139,11 @@ namespace Insight.Scripts
                         currentBulletLoaded = null;
                         break;
                     case PlayerBullets.Bullets.Transmitter:
-                        gameObject.GetComponent<PlayerBullets>().transmitterBullet = false;
-                        currentBulletLoaded = null;
+                        if (test != null)
+                        {
+                            gameObject.GetComponent<PlayerBullets>().transmitterBullet = false;
+                            currentBulletLoaded = null;
+                        }
                         break;
                     case PlayerBullets.Bullets.Paralysis:
                         gameObject.GetComponent<PlayerBullets>().paralysisBullet = false;
