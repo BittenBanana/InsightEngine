@@ -22,6 +22,11 @@ namespace Insight.Engine
         //private MainScene mainS;
         private DemoScene demoS;
 
+        public bool isFullscreen { get; set; }
+        public bool useShadows { get; set; }
+        public float brightnessLevel { get; set; }
+
+
         public static SceneManager Instance
         {
             get
@@ -39,6 +44,9 @@ namespace Insight.Engine
             demoS = new DemoScene();
             //LoadDemoScene();
             currentScene = new GameMenu();
+            isFullscreen = false;
+            useShadows = false;
+            brightnessLevel = 1.0f;
         }
 
         public void Initialize(GraphicsDeviceManager graphicsDevice)
@@ -99,6 +107,7 @@ namespace Insight.Engine
 
         public void LoadGame()
         {
+            currentScene.UnloadContent();
             currentScene = new DemoScene();
             currentScene.Initialize(device);
             currentScene.LoadContent();
@@ -106,7 +115,16 @@ namespace Insight.Engine
 
         public void LoadMenu()
         {
+            currentScene.UnloadContent();
             currentScene = new GameMenu();
+            currentScene.Initialize(device);
+            currentScene.LoadContent();
+        }
+
+        public void LoadSettings()
+        {
+            currentScene.UnloadContent();
+            currentScene = new SettingsMenu();
             currentScene.Initialize(device);
             currentScene.LoadContent();
         }
