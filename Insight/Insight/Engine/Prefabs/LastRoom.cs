@@ -38,9 +38,14 @@ namespace Insight.Engine.Prefabs
 
         TransparencyMaterial glassMaterial;
 
+        CeilingLastRoom lastRoomCeiling;
+
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
+
+            lastRoomCeiling = new CeilingLastRoom();
+            lastRoomCeiling.Initialize(new Vector3(33, -10, 100), new Vector3(0));
 
             wall48 = new WallVisible();
             wall48.Initialize(new Vector3(28, -4, 90), new Vector3(0));
@@ -129,6 +134,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(newWall23.wallModel);
             prefabGameObjects.Add(newWall24.wallModel);
             //prefabGameObjects.Add(newWall25.wallModel);
+            prefabGameObjects.Add(lastRoomCeiling.wallModel);
             base.Initialize(position);
         }
 
@@ -155,6 +161,7 @@ namespace Insight.Engine.Prefabs
             newWall22.LoadContent(content);
             newWall23.LoadContent(content);
             newWall24.LoadContent(content);
+            lastRoomCeiling.LoadContent(content);
             //newWall25.LoadContent(content);
 
             //Effect transparency = content.Load<Effect>("Shaders/glass");
