@@ -44,7 +44,7 @@ namespace Insight.Scenes
         private bool playFirstDialog, playSecondDialog, playThirdDialog;
         private bool canPlayFirstDialog, canPlaySecondDialog, canPlayThirdDialog;
         private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 6.0f;
-        private int firstDialogCount = 9;
+        private int firstDialogCount = 8;
         private int firstDialogIndex = 0;
         private PrelightingRenderer lightRenderer;
         private float brightness = 1.0f;
@@ -1282,13 +1282,15 @@ namespace Insight.Scenes
                 firstDialogTimer += Time.deltaTime; 
                 if(firstDialogTimer >= dialogDuration)
                 {
-                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    if (firstDialogIndex <= firstDialogCount)
+                        ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     firstDialogIndex++;
                     firstDialogTimer = 0f;
                 }
                 if (firstDialogIndex >= firstDialogCount || keyState.IsKeyDown(Keys.Enter))
                 {
-                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    if(firstDialogIndex <= firstDialogCount)
+                        ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
                     playFirstDialog = false;
                     canPlayFirstDialog = false;
                 }
