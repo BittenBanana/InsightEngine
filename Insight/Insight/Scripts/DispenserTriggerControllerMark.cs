@@ -1,5 +1,6 @@
 ﻿using Insight.Engine;
 using Insight.Engine.Components;
+using Insight.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
@@ -50,6 +51,8 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
+                    DemoScene demo = (DemoScene)SceneManager.Instance.currentScene;
+                    demo.PlayDialogTwo();
                     SceneManager.Instance.currentScene.audioManager.PlayCue(pickupCueNumber);
                     dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_AO");
                     dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/czerwoneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
