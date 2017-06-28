@@ -276,6 +276,10 @@ namespace Insight.Scenes
             {
                 SaveChanges();
             }
+            if (keyState.IsKeyDown(Keys.Escape))
+            {
+                SceneManager.Instance.LoadMenu();
+            }
 
         }
 
