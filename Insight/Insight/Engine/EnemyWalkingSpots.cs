@@ -899,7 +899,7 @@ namespace Insight.Engine
             PathNode destNode = new PathNode();
             foreach (PathNode node in enemyNearbyNode.neighbours)
             {
-                float tmpDist = Vector3.Distance(node.rootPoint, destPath);
+                float tmpDist = Vector2.Distance(new Vector2(node.rootPoint.X, node.rootPoint.Z), new Vector2(destPath.X, destPath.Z));
                 if (tmpDist < distance)
                 {
                     distance = tmpDist;
@@ -915,7 +915,7 @@ namespace Insight.Engine
             PathNode nearestNode = new PathNode();
             foreach (PathNode node in nodes)
             {
-                float tmpDist = Vector3.Distance(node.rootPoint, pos);
+                float tmpDist = Vector2.Distance(new Vector2(node.rootPoint.X,node.rootPoint.Z), new Vector2(pos.X, pos.Z));
                 if (tmpDist < distance)
                 {
                     distance = tmpDist;
@@ -924,25 +924,14 @@ namespace Insight.Engine
             }
             return nearestNode;
         }
-
-        [System.Obsolete("MoveToDestination is deprecated, please use MoveGameObjectToDestination instead.")]
-        public Vector3 MoveToDestination(Vector3 currentPosition, Vector3 targetDestination, float speed)
-        {
-            Vector3 nearest = currentPosition;
-            if (Vector3.Distance(nearest, currentPosition) <= 0.1f)
-                nearest = findNearestPath(currentPosition, targetDestination);
-            if (Vector3.Distance(nearest, currentPosition) > 0.1f)
-                return VectorHelper.MoveTowards(currentPosition, nearest, speed);
-
-            return currentPosition;
-        }
+        
 
         public void MoveGameObjectToDestination(GameObject gObject, Vector3 targetDestination, float speed, float stopValue)
         {
             Vector3 nearest = gObject.Transform.Position;
             Vector3 direction = new Vector3();
             float angle = 0;
-            if (Vector3.Distance(gObject.Transform.Position, targetDestination) <= stopValue)
+            if (Vector2.Distance(new Vector2(gObject.Transform.Position.X, gObject.Transform.Position.Z), new Vector2(targetDestination.X, targetDestination.Z)) <= stopValue)
             {
                 //Face player
                 direction = SceneManager.Instance.currentScene.player.Transform.Position - gObject.Transform.Position;
@@ -951,9 +940,9 @@ namespace Insight.Engine
                 return;
             }
 
-            if (Vector3.Distance(nearest, gObject.Transform.Position) <= 0.1f)
+            if (Vector2.Distance(new Vector2(nearest.X, nearest.Z), new Vector2(gObject.Transform.Position.X, gObject.Transform.Position.Z)) <= 0.1f)
                 nearest = findNearestPath(gObject.Transform.Position, targetDestination);
-            if (Vector3.Distance(nearest, gObject.Transform.Position) > 0.1f)
+            if (Vector2.Distance(new Vector2(nearest.X, nearest.Z), new Vector2(gObject.Transform.Position.X, gObject.Transform.Position.Z)) > 0.1f)
             {
                 direction = nearest - gObject.Transform.Position;
                 angle = (float)(Math.Atan2(direction.X, direction.Z));
@@ -976,17 +965,17 @@ namespace Insight.Engine
                 float dist = 9999.0f;
                 foreach (PathNode node in currentNode.neighbours)
                 {
-                    if (Vector3.Distance(node.rootPoint, targetDestination) < dist)
+                    if (Vector2.Distance(new Vector2(node.rootPoint.X, node.rootPoint.Z), new Vector2(targetDestination.X,targetDestination.Z)) < dist)
                     {
-                        dist = Vector3.Distance(node.rootPoint, targetDestination);
+                        dist = Vector2.Distance(new Vector2(node.rootPoint.X, node.rootPoint.Z), new Vector2(targetDestination.X, targetDestination.Z));
                         nearest = node;
                     }
                 }
-                distance += Vector3.Distance(currentNode.rootPoint, nearest.rootPoint);
+                distance += Vector2.Distance(new Vector2(currentNode.rootPoint.X, currentNode.rootPoint.Z), new Vector2(nearest.rootPoint.X, nearest.rootPoint.Z));
                 currentNode = nearest;
                 maxNodes++;
 
-                if (maxNodes > 20)
+                if (maxNodes > 15)
                     return 9999.0f;
             }
             return distance;

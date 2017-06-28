@@ -95,8 +95,11 @@ namespace Insight
         public Model enemyParalysis{ get; set; }
         public Model enemyMarker { get; set; }
         public Model enemyShooting { get; set; }
+        public Model enemyDancing { get; set; }
         public Model bigMachineCollider { get; set; }
         public Model ceilingBogRoom { get; set; }
+        public Model newWall { get; set; }
+        public Model newWallSmaller { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -116,6 +119,7 @@ namespace Insight
             enemyParalysis = content.Load<Model>("Models/Enemy/enemy_paralysis");
             enemyMarker = content.Load<Model>("Models/Enemy/enemy_marker");
             enemyShooting = content.Load<Model>("Models/Enemy/shooting");
+            enemyDancing = content.Load<Model>("Models/Enemy/flair");
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
@@ -176,6 +180,8 @@ namespace Insight
             bigMachine = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom");
             bigMachineCollider = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom_collider");
             ceilingBogRoom = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojZMaszyna");
+            newWall = content.Load<Model>("Models/Konrads/Enviroment/w-5x5-new");
+            newWallSmaller = content.Load<Model>("Models/Konrads/Enviroment/w-3x5-new");
         }
     }
 }
