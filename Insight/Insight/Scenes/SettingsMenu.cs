@@ -40,7 +40,28 @@ namespace Insight.Scenes
 
             base.Initialize(graphicsDevice);
 
+            if (SceneManager.Instance.useShadows)
+                shadowOption = 1;
+            else
+                shadowOption = 0;
 
+            if (SceneManager.Instance.isFullscreen)
+                fullscreenOption = 1;
+            else
+                fullscreenOption = 0;
+
+            if (SceneManager.Instance.brightnessLevel == 1.0f)
+                brightnessOption = 5;
+            if (SceneManager.Instance.brightnessLevel == 0.9f)
+                brightnessOption = 4;
+            if (SceneManager.Instance.brightnessLevel == 0.8f)
+                brightnessOption = 3;
+            if (SceneManager.Instance.brightnessLevel == 0.7f)
+                brightnessOption = 2;
+            if (SceneManager.Instance.brightnessLevel == 0.6f)
+                brightnessOption = 1;
+            if (SceneManager.Instance.brightnessLevel == 0.5f)
+                brightnessOption = 0;
         }
 
         public override void LoadContent()
@@ -272,10 +293,17 @@ namespace Insight.Scenes
                 graphics.IsFullScreen = true;
                 graphics.ApplyChanges();
             }
+            else
+            {
+                graphics.IsFullScreen = false;
+                graphics.ApplyChanges();
+            }
             if (shadowOption == 1)
                 SceneManager.Instance.useShadows = true;
+            else
+                SceneManager.Instance.useShadows = false;
 
-            if(brightnessOption == 0)
+            if (brightnessOption == 0)
                 SceneManager.Instance.brightnessLevel = 0.5f;
             if (brightnessOption == 1)
                 SceneManager.Instance.brightnessLevel = 0.6f;

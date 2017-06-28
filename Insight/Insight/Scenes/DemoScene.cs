@@ -1211,7 +1211,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/Menu/menuNav", "menuNav", new Vector2(590, 800), Color.White, 0);
             ui.AddSprite("Sprites/Pause/pasek", "pausePasek", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
-            
+
 
             #region Dialogi
             //Dialogs
@@ -1274,15 +1274,6 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
-            if (keyState.IsKeyDown(Keys.F4) && shadowKeyState == ShadowKeyState.Free)
-            {
-                lightRenderer.DoShadowMapping = !lightRenderer.DoShadowMapping;
-                shadowKeyState = ShadowKeyState.Pressed;
-            }
-            if (keyState.IsKeyUp(Keys.F4) && shadowKeyState == ShadowKeyState.Pressed)
-            {
-                shadowKeyState = ShadowKeyState.Free;
-            }
             if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free && !playFirstDialog && !playSecondDialog && !playThirdDialog)
             {
                 isGamePaused = !isGamePaused;
@@ -1312,7 +1303,6 @@ namespace Insight.Scenes
                 //float lerped = MathHelper.Lerp(postEffect.Parameters["colorPercentage"].GetValueSingle(),
                 //    1 - ((float)player.GetComponent<PlayerManager>().health / 100), Time.deltaTime);
                 postEffect.Parameters["colorPercentage"]?.SetValue(0.75f - ((float)player.GetComponent<PlayerManager>().health / 100) / 1.3333333333333f);
-                postEffect.Parameters["brightness"]?.SetValue(brightness);
                 //mui.ChangeText("generalFont", string.Format("FPS={0}", _fps));
 
                 // Update
@@ -1463,7 +1453,8 @@ namespace Insight.Scenes
             {
                 ui.ChangeSpriteOpacity("d1-08" , 0);
             }
-
+            lightRenderer.DoShadowMapping = SceneManager.Instance.useShadows;
+            postEffect.Parameters["brightness"]?.SetValue(SceneManager.Instance.brightnessLevel);
             if (playSecondDialog && canPlaySecondDialog)
             {
                 ui.ChangeSpriteOpacity("dialogNav", 1);
