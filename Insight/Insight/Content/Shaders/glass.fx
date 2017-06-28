@@ -63,7 +63,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	//return saturate(input.Color + AmbientColor * AmbientIntensity + specular);
 }
 
-technique Specular
+technique Basic
 {
 	pass Pass1
 	{
