@@ -52,7 +52,7 @@ namespace Insight.Scripts
         {
             gameObject.Transform = enemy.Transform;
 
-            if (!isOnTrigger && detectionLevel > 0 && !enemy.GetComponent<EnemyAI>().detect)
+            if ((!isOnTrigger && detectionLevel > 0) || !enemy.GetComponent<EnemyAI>().detect)
                 detectionLevel -= Time.deltaTime * 0.1f;
 
             base.Update();
@@ -94,6 +94,18 @@ namespace Insight.Scripts
                         detectionLevel += Time.deltaTime * 0.25f * (1 + (1 - distance / radius));
                     //isPlayerHeard = true;
                     lastHeardPosition = player.Transform.Position;
+                }
+                else if (distance < radius / 2)
+                {
+                    if (detectionLevel < 1)
+                        detectionLevel += Time.deltaTime * 0.25f * (1 + (1 - distance / radius));
+                    //isPlayerHeard = true;
+                    lastHeardPosition = player.Transform.Position;
+                }
+                else
+                {
+                    if (detectionLevel > 0)
+                        detectionLevel -= Time.deltaTime * 0.1f;
                 }
                 if (!isOnTrigger)
                     isOnTrigger = true;
