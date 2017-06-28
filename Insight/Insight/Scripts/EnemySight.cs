@@ -52,7 +52,7 @@ namespace Insight.Scripts
         {
             gameObject.Transform = enemy.Transform;
 
-            if (!isOnTrigger && detectionLevel > 0)
+            if (!isOnTrigger && detectionLevel > 0 && !enemy.GetComponent<EnemyAI>().detect)
                 detectionLevel -= Time.deltaTime * 0.1f;
 
             base.Update();

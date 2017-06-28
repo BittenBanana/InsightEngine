@@ -27,6 +27,7 @@ namespace Insight.Scripts.EnemyStates
             if (timer >= enemy.gameObject.GetComponent<AnimationRender>().GetAnimationPlayer().CurrentClip.Duration.Seconds)
             {
                 enemy.gameObject.GetComponent<Collider>().IsTrigger = true;
+                enemy.gameObject.GetComponent<Collider>().IsTrigger = true;
             }
             timer += Time.deltaTime;
         }

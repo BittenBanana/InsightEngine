@@ -227,32 +227,32 @@ namespace Insight.Scenes
 
             windowWidth = SceneManager.Instance.Dimensions.X;
             windowHeight = SceneManager.Instance.Dimensions.Y;
-            pointLight1 = new GameObject(new Vector3(18.5f, 3f, 5), false);
+            pointLight1 = new GameObject(new Vector3(18.5f, 2f, 5), false);
             pointLight1.AddNewComponent<Light>();
             pointLight1.GetComponent<Light>().Color = Color.LightYellow;
             pointLight1.GetComponent<Light>().Attenuation = 7.5f;
 
-            pointLight2 = new GameObject(new Vector3(2.5f, 3f, 2.5f), false);
+            pointLight2 = new GameObject(new Vector3(2.5f, 2f, 2.5f), false);
             pointLight2.AddNewComponent<Light>();
             pointLight2.GetComponent<Light>().Color = Color.LightYellow;
             pointLight2.GetComponent<Light>().Attenuation = 7.5f;
 
-            pointLight3 = new GameObject(new Vector3(2.5f, 3f, 12.5f), false);
+            pointLight3 = new GameObject(new Vector3(2.5f, 2f, 12.5f), false);
             pointLight3.AddNewComponent<Light>();
             pointLight3.GetComponent<Light>().Color = Color.LightYellow;
             pointLight3.GetComponent<Light>().Attenuation = 7.5f;
 
-            pointLight4 = new GameObject(new Vector3(12.5f, 3f, 13.5f), false);
+            pointLight4 = new GameObject(new Vector3(12.5f, 2f, 13.5f), false);
             pointLight4.AddNewComponent<Light>();
             pointLight4.GetComponent<Light>().Color = Color.LightYellow;
             pointLight4.GetComponent<Light>().Attenuation = 7.5f;
 
-            pointLight5 = new GameObject(new Vector3(22.5f, 3f, 13.5f), false);
+            pointLight5 = new GameObject(new Vector3(22.5f, 2f, 13.5f), false);
             pointLight5.AddNewComponent<Light>();
             pointLight5.GetComponent<Light>().Color = Color.LightYellow;
             pointLight5.GetComponent<Light>().Attenuation = 7.5f;
 
-            pointLight6 = new GameObject(new Vector3(32.5f, 3f, 13.5f), false);
+            pointLight6 = new GameObject(new Vector3(32.5f, 2f, 13.5f), false);
             pointLight6.AddNewComponent<Light>();
             pointLight6.GetComponent<Light>().Color = Color.LightYellow;
             pointLight6.GetComponent<Light>().Attenuation = 7.5f;
@@ -1053,6 +1053,15 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
+            if (keyState.IsKeyDown(Keys.F4) && keyPress == KeyPress.Free)
+            {
+                lightRenderer.DoShadowMapping = !lightRenderer.DoShadowMapping;
+                keyPress = KeyPress.Pressed;
+            }
+            if (keyState.IsKeyUp(Keys.F4) && keyPress == KeyPress.Pressed)
+            {
+                keyPress = KeyPress.Free;
+            }
 
             if (!gameOver)
             {
@@ -1165,10 +1174,10 @@ namespace Insight.Scenes
                 }
                 
             }
-            
-            //SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
-            //sprite.Begin(SpriteSortMode.Immediate,BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
-            //sprite.Draw(lightRenderer.depthTarg, new Rectangle(0,0,300,300),Color.White);
+
+            SpriteBatch sprite = new SpriteBatch(graphics.GraphicsDevice);
+            sprite.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default);
+            sprite.Draw(lightRenderer.shadowDepthTarget, new Rectangle(0, 0, 300, 300), Color.White);
 
             //EnemyWalkingSpots.getInstance().Draw();
             if (postEffect != null)

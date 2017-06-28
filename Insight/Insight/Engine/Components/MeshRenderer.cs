@@ -18,7 +18,7 @@ namespace Insight.Engine.Components
 
 
         //float scale;
-        public bool IsVisible { get; set; }
+        
 
         public MeshRenderer(GameObject gameObject) : base(gameObject)
         {

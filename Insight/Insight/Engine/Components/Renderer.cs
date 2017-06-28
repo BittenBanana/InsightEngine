@@ -24,6 +24,8 @@ namespace Insight.Engine.Components
 
         protected Matrix World;
 
+        public bool IsVisible { get; set; }
+
         public Renderer(GameObject gameObject) : base(gameObject)
         {
         }

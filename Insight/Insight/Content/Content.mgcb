@@ -2880,3 +2880,9 @@
 /processorParam:Quality=Best
 /build:Audio/detect.wav
 
+#begin Shaders/ShadowDepth.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/ShadowDepth.fx
+

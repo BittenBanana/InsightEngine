@@ -25,7 +25,7 @@ namespace Insight.Engine.Components
         //float scale;
         public AnimationRender(GameObject gameObject) : base(gameObject)
         {
-
+            IsVisible = true;
             scale = 1.0f;
         }
 
