@@ -11,7 +11,7 @@ namespace Insight.Engine.Prefabs
 {
     class NewWall : Prefab
     {
-        GameObject wallModel;
+        public GameObject wallModel;
 
         public override void Initialize(Vector3 position)
         {

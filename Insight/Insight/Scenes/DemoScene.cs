@@ -232,13 +232,7 @@ namespace Insight.Scenes
         NewWall newWall15;
         NewWall newWall16;
         NewWall newWall17;
-        NewWall newWall18;
-        NewWall newWall19;
-        NewWall newWall20;
-        NewWall newWall21;
-        NewWall newWall22;
-        NewWall newWall23;
-        NewWall newWall24;
+        
 
         //GameObject enemy;
         private EnemyPrefab enemy1;

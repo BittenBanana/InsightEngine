@@ -27,6 +27,15 @@ namespace Insight.Engine.Prefabs
         RoomFloor roomFloor28;
         RoomFloor roomFloor29;
 
+        NewWall newWall18;
+        NewWall newWall19;
+        NewWall newWall20;
+        NewWall newWall21;
+        NewWall newWall22;
+        NewWall newWall23;
+        NewWall newWall24;
+        NewWall newWall25;
+
         TransparencyMaterial glassMaterial;
 
         public override void Initialize(Vector3 position)
@@ -36,26 +45,50 @@ namespace Insight.Engine.Prefabs
             wall48 = new WallVisible();
             wall48.Initialize(new Vector3(28, -4, 90), new Vector3(0));
 
+            newWall18 = new NewWall();
+            newWall18.Initialize(new Vector3(28, -4, 90), new Vector3(0));
+
             wall55 = new WallVisible();
             wall55.Initialize(new Vector3(23, -4, 90), new Vector3(0));
+
+            newWall19 = new NewWall();
+            newWall19.Initialize(new Vector3(23, -4, 90), new Vector3(0));
 
             wall49 = new WallVisible();
             wall49.Initialize(new Vector3(28, -4, 100), new Vector3(0));
 
+            newWall20 = new NewWall();
+            newWall20.Initialize(new Vector3(33, -4, 100), new Vector3(0, 3.142f, 0));
+
             wall50 = new WallVisible();
             wall50.Initialize(new Vector3(23, -4, 100), new Vector3(0));
+
+            newWall21 = new NewWall();
+            newWall21.Initialize(new Vector3(28, -4, 100), new Vector3(0, 3.142f, 0));
 
             wall51 = new WallVisible();
             wall51.Initialize(new Vector3(33, -4, 90), new Vector3(0, 4.713f, 0));
 
+            newWall22 = new NewWall();
+            newWall22.Initialize(new Vector3(33, -4, 90), new Vector3(0, 4.713f, 0));
+
             wall52 = new WallVisible();
             wall52.Initialize(new Vector3(33, -4, 95), new Vector3(0, 4.713f, 0));
+
+            newWall23 = new NewWall();
+            newWall23.Initialize(new Vector3(33, -4, 95), new Vector3(0, 4.713f, 0));
 
             wall54 = new WallVisible();
             wall54.Initialize(new Vector3(23, -4, 95), new Vector3(0, 4.713f, 0));
 
+            newWall24 = new NewWall();
+            newWall24.Initialize(new Vector3(23, -4, 100), new Vector3(0, 1.571f, 0));
+
             wall56 = new WallVisible();
             wall56.Initialize(new Vector3(27, -4, 95), new Vector3(0, 4.713f, 0));
+
+            //newWall25 = new NewWall();
+            //newWall25.Initialize(new Vector3(27, -4, 95), new Vector3(0, 1.571f, 0));
 
             roomFloor26 = new RoomFloor();
             roomFloor26.Initialize(new Vector3(23, -4, 90));
@@ -87,6 +120,15 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(roomFloor27.corridorModel);
             prefabGameObjects.Add(roomFloor28.corridorModel);
             prefabGameObjects.Add(roomFloor29.corridorModel);
+
+            prefabGameObjects.Add(newWall18.wallModel);
+            prefabGameObjects.Add(newWall19.wallModel);
+            prefabGameObjects.Add(newWall20.wallModel);
+            prefabGameObjects.Add(newWall21.wallModel);
+            prefabGameObjects.Add(newWall22.wallModel);
+            prefabGameObjects.Add(newWall23.wallModel);
+            prefabGameObjects.Add(newWall24.wallModel);
+            //prefabGameObjects.Add(newWall25.wallModel);
             base.Initialize(position);
         }
 
@@ -105,6 +147,15 @@ namespace Insight.Engine.Prefabs
             roomFloor27.LoadContent(content);
             roomFloor28.LoadContent(content);
             roomFloor29.LoadContent(content);
+
+            newWall18.LoadContent(content);
+            newWall19.LoadContent(content);
+            newWall20.LoadContent(content);
+            newWall21.LoadContent(content);
+            newWall22.LoadContent(content);
+            newWall23.LoadContent(content);
+            newWall24.LoadContent(content);
+            //newWall25.LoadContent(content);
 
             //Effect transparency = content.Load<Effect>("Shaders/glass");
             //glassMaterial = new TransparencyMaterial(transparency);
