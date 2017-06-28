@@ -536,7 +536,7 @@ namespace Insight.Scenes
             cornerRight2.Initialize(new Vector3(22, 0, 47), new Vector3(0, 4.713f, 0));
 
             corridor8 = new Corridor();
-            corridor8.Initialize(new Vector3(16, 0, 53), new Vector3(0));
+            corridor8.Initialize(new Vector3(21, 0, 58), new Vector3(0, 3.142f, 0));
 
             roomFloor11 = new RoomFloor();
             roomFloor11.Initialize(new Vector3(16, 0, 58));
