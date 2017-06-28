@@ -210,6 +210,30 @@ namespace Insight.Scenes
         LowerStairsTrigger lowerStairsTrigger;
         LastRoom lastRoom;
         CeilingBigRoom ceilingBigRoom;
+        NewWall newWall1;
+        NewWall newWall2;
+        NewWall newWall3;
+        NewWall newWall4;
+        NewWall newWall5;
+        NewWallSmaller newWall6;
+        NewWall newWall7;
+        NewWall newWall8;
+        NewWall newWall9;
+        NewWall newWall10;
+        NewWall newWall11;
+        NewWallSmaller newWall12;
+        NewWall newWall13;
+        NewWall newWall14;
+        NewWall newWall15;
+        NewWall newWall16;
+        NewWall newWall17;
+        NewWall newWall18;
+        NewWall newWall19;
+        NewWall newWall20;
+        NewWall newWall21;
+        NewWall newWall22;
+        NewWall newWall23;
+        NewWall newWall24;
 
         //GameObject enemy;
         private EnemyPrefab enemy1;
@@ -414,43 +438,79 @@ namespace Insight.Scenes
             door2.Initialize(new Vector3(32f, 0, 22));
 
             ceilingBigRoom = new CeilingBigRoom();
-            ceilingBigRoom.Initialize(new Vector3(45, 0, 37), new Vector3(0, 1.571f, 0));
+            ceilingBigRoom.Initialize(new Vector3(45, -0.1f, 37), new Vector3(0, 1.571f, 0));
 
             wall = new Wall();
             wall.Initialize(new Vector3(37, 0, 22));
 
+            newWall1 = new NewWall();
+            newWall1.Initialize(new Vector3(37, 0, 22));
+
             wall2 = new Wall();
             wall2.Initialize(new Vector3(27, 0, 22));
+
+            newWall2 = new NewWall();
+            newWall2.Initialize(new Vector3(27, 0, 22));
 
             wall3 = new WallRotated();
             wall3.Initialize(new Vector3(42, 0, 22), new Vector3(0, 4.713f, 0));
 
+            newWall3 = new NewWall();
+            newWall3.Initialize(new Vector3(42, 0, 22), new Vector3(0, 4.713f, 0));
+
             wall4 = new WallRotated();
             wall4.Initialize(new Vector3(45, 0, 27), new Vector3(0, 4.713f, 0));
+
+            newWall4 = new NewWall();
+            newWall4.Initialize(new Vector3(45, 0, 27), new Vector3(0, 4.713f, 0));
 
             wall5 = new WallRotated();
             wall5.Initialize(new Vector3(42, 0, 32), new Vector3(0, 4.713f, 0));
 
+            newWall5 = new NewWall();
+            newWall5.Initialize(new Vector3(42, 0, 32), new Vector3(0, 4.713f, 0));
+
             wall6 = new WallSmaller();
             wall6.Initialize(new Vector3(42, 0, 27));
+
+            newWall6 = new NewWallSmaller();
+            newWall6.Initialize(new Vector3(42, 0, 27), new Vector3(0, 0, 0));
 
             wall12 = new WallSmaller();
             wall12.Initialize(new Vector3(42, 0, 32));
 
+            newWall12 = new NewWallSmaller();
+            newWall12.Initialize(new Vector3(45, 0, 32), new Vector3(0, 3.142f, 0));
+
             wall7 = new WallVisible();
-            wall7.Initialize(new Vector3(37, 0, 37), new Vector3(0));
+            wall7.Initialize(new Vector3(37, 0, 37), new Vector3(0, 1.571f, 0));
+
+            newWall7 = new NewWall();
+            newWall7.Initialize(new Vector3(42, 0, 37), new Vector3(0, 3.142f, 0));
 
             wall8 = new WallVisible();
             wall8.Initialize(new Vector3(32, 0, 37), new Vector3(0));
 
+            newWall8 = new NewWall();
+            newWall8.Initialize(new Vector3(37, 0, 37), new Vector3(0, 3.142f, 0));
+
             wall9 = new WallVisible();
             wall9.Initialize(new Vector3(27, 0, 22), new Vector3(0, 4.713f, 0));
+
+            newWall9 = new NewWall();
+            newWall9.Initialize(new Vector3(27, 0, 27), new Vector3(0, 1.571f, 0));
 
             wall10 = new WallVisible();
             wall10.Initialize(new Vector3(27, 0, 27), new Vector3(0, 4.713f, 0));
 
+            newWall10 = new NewWall();
+            newWall10.Initialize(new Vector3(27, 0, 32), new Vector3(0, 1.571f, 0));
+
             wall11 = new WallVisible();
             wall11.Initialize(new Vector3(27, 0, 32), new Vector3(0, 4.713f, 0));
+
+            newWall11 = new NewWall();
+            newWall11.Initialize(new Vector3(27, 0, 37), new Vector3(0, 1.571f, 0));
 
             door3 = new AnimatedDoor();
             door3.Initialize(new Vector3(27f, 0, 37));
@@ -1040,6 +1100,19 @@ namespace Insight.Scenes
             door3.wallModel.GetComponent<DoorAnimation>().canOpen = false;
             intercom.SetDoorsToTrigger(door3.wallModel);
             ceilingBigRoom.LoadContent(content);
+
+            newWall1.LoadContent(content);
+            newWall2.LoadContent(content);
+            newWall3.LoadContent(content);
+            newWall4.LoadContent(content);
+            newWall5.LoadContent(content);
+            newWall6.LoadContent(content);
+            newWall7.LoadContent(content);
+            newWall8.LoadContent(content);
+            newWall9.LoadContent(content);
+            newWall10.LoadContent(content);
+            newWall11.LoadContent(content);
+            newWall12.LoadContent(content);
 
             //stairs.LoadContent(content);
             //stairs2.LoadContent(content);

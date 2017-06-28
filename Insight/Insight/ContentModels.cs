@@ -97,6 +97,8 @@ namespace Insight
         public Model enemyShooting { get; set; }
         public Model bigMachineCollider { get; set; }
         public Model ceilingBogRoom { get; set; }
+        public Model newWall { get; set; }
+        public Model newWallSmaller { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -176,6 +178,8 @@ namespace Insight
             bigMachine = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom");
             bigMachineCollider = content.Load<Model>("Models/Konrads/Enviroment/bigMachine_1stRoom_collider");
             ceilingBogRoom = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojZMaszyna");
+            newWall = content.Load<Model>("Models/Konrads/Enviroment/w-5x5-new");
+            newWallSmaller = content.Load<Model>("Models/Konrads/Enviroment/w-3x5-new");
         }
     }
 }
