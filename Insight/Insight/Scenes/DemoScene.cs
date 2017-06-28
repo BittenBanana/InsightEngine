@@ -34,6 +34,12 @@ namespace Insight.Scenes
         }
         PauseKeyState pauseKeyState = PauseKeyState.Free;
         private bool isGamePaused = false;
+
+        private bool playFirstDialog, playSecondDialog, playThirdDialog;
+        private bool canPlayFirstDialog, canPlaySecondDialog, canPlayThirdDialog;
+        private float firstDialogTimer = 0f, secondDialogTimer = 0f, thirdDialogTimer = 0f, dialogDuration = 6.0f;
+        private int firstDialogCount = 9;
+        private int firstDialogIndex = 0;
         private PrelightingRenderer lightRenderer;
 
         private PostProcessRenderer postProcessRenderer;
@@ -236,7 +242,12 @@ namespace Insight.Scenes
             base.Initialize(graphicsDevice);
 
 
-
+            playFirstDialog = false;
+            playSecondDialog = false;
+            playThirdDialog = false;
+            canPlayFirstDialog = true;
+            canPlaySecondDialog = true;
+            canPlayThirdDialog = true;
             gameOver = false;
             sceneRenderTarget2D = new RenderTarget2D(graphics.GraphicsDevice, graphics.GraphicsDevice.Viewport.Width,
                     graphics.GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
@@ -1069,6 +1080,18 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/Pause/text", "pauseTekst", new Vector2(0, 0), Color.White, 0);
             ui.AddSprite("Sprites/Pause/pasek", "pausePasek", new Vector2(0, 0), Color.White, 0);
 
+            #region Dialogi
+            //Dialogs
+            ui.AddSprite("Sprites/DialogOne/00", "d1-00", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/01", "d1-01", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/02", "d1-02", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/03", "d1-03", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/04", "d1-04", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/05", "d1-05", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/06", "d1-06", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/07", "d1-07", new Vector2(0, 0), Color.White, 0);
+            ui.AddSprite("Sprites/DialogOne/08", "d1-08", new Vector2(0, 0), Color.White, 0);
+            #endregion
 
         }
 
@@ -1110,7 +1133,7 @@ namespace Insight.Scenes
             {
                 escapeKeyPress = EscapeKeyPress.Free;
             }
-            if (!gameOver && !isGamePaused)
+            if (!gameOver && !isGamePaused && !playFirstDialog && !playSecondDialog && !playThirdDialog)
             {
                 foreach (GameObject go in gameObjects)
                 {
@@ -1181,7 +1204,7 @@ namespace Insight.Scenes
                 }
             }
 
-            if (isGamePaused)
+            if (isGamePaused && !playFirstDialog && !playSecondDialog && !playThirdDialog)
             {
                 ui.ChangeSpriteOpacity("pauseBg", 1);
                 ui.ChangeSpriteOpacity("pauseTekst", 1);
@@ -1235,6 +1258,35 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("pauseTekst", 0);
                 ui.ChangeSpriteOpacity("pausePasek", 0);
             }
+
+            #region Dialogs
+            if (playFirstDialog && canPlayFirstDialog)
+            {
+                Mouse.SetPosition((int)windowWidth / 2, (int)windowHeight / 2);
+                ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 1);
+                firstDialogTimer += Time.deltaTime; 
+                if(firstDialogTimer >= dialogDuration)
+                {
+                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    firstDialogIndex++;
+                    firstDialogTimer = 0f;
+                }
+                if (firstDialogIndex >= firstDialogCount || keyState.IsKeyDown(Keys.Enter))
+                {
+                    ui.ChangeSpriteOpacity("d1-0" + firstDialogIndex.ToString(), 0);
+                    playFirstDialog = false;
+                    canPlayFirstDialog = false;
+                }
+
+            }
+            if (playSecondDialog && canPlaySecondDialog)
+            {
+            }
+            if (playThirdDialog && canPlayThirdDialog)
+            {
+            }
+
+            #endregion
         }
 
         public override void Draw()
@@ -1296,5 +1348,12 @@ namespace Insight.Scenes
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
         }
+
+        public void PlayDialogOne()
+        {
+            if (canPlayFirstDialog)
+                playFirstDialog = true;
+        }
+        
     }
 }
