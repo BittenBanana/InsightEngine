@@ -20,7 +20,7 @@ namespace Insight.Engine.Prefabs
             wallModel = new GameObject(new Vector3(0, 0, 0), false);
 
             wallModel.AddNewComponent<MeshRenderer>();
-
+            wallModel.GetComponent<MeshRenderer>().IsVisible = false;
 
 
             prefabGameObjects.Add(wallModel);
