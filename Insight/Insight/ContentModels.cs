@@ -100,6 +100,7 @@ namespace Insight
         public Model ceilingBogRoom { get; set; }
         public Model newWall { get; set; }
         public Model newWallSmaller { get; set; }
+        public Model straightCollider { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -182,6 +183,7 @@ namespace Insight
             ceilingBogRoom = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojZMaszyna");
             newWall = content.Load<Model>("Models/Konrads/Enviroment/w-5x5-new");
             newWallSmaller = content.Load<Model>("Models/Konrads/Enviroment/w-3x5-new");
+            straightCollider = content.Load<Model>("Models/Konrads/Enviroment/collider-cor-str");
         }
     }
 }
