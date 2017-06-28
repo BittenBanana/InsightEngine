@@ -92,7 +92,7 @@ namespace Insight.Scenes
             {
                 ui.ChangeSpritePosition("pasek", 0, 740);
             }
-            if (keyState.IsKeyDown(Keys.Enter))
+            if (keyState.IsKeyDown(Keys.Enter) || keyState.IsKeyDown(Keys.Space))
             {
                 if (currentlySelected == 1)
                 {
