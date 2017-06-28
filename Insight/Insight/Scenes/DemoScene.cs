@@ -482,7 +482,7 @@ namespace Insight.Scenes
             newWall12.Initialize(new Vector3(45, 0, 32), new Vector3(0, 3.142f, 0));
 
             wall7 = new WallVisible();
-            wall7.Initialize(new Vector3(37, 0, 37), new Vector3(0, 1.571f, 0));
+            wall7.Initialize(new Vector3(37, 0, 37), new Vector3(0, 0, 0));
 
             newWall7 = new NewWall();
             newWall7.Initialize(new Vector3(42, 0, 37), new Vector3(0, 3.142f, 0));
@@ -806,7 +806,7 @@ namespace Insight.Scenes
             desk2Monitors4.Initialize(new Vector3(19, 0, 15.5f), new Vector3(0, 3.142f, 0));
 
             intercom = new Intercom();
-            intercom.Initialize(new Vector3(39, -0.5f, 36.9f), new Vector3(0, 3.142f, 0));
+            intercom.Initialize(new Vector3(39, -0.5f, 37f), new Vector3(0, 3.142f, 0));
             //crate2 = new Crate();
             //crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 

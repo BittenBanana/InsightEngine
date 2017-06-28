@@ -28,6 +28,10 @@ namespace Insight.Engine.Prefabs
         {
 
             deskModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.desk2Monitors, 0.5f);
+            deskModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/desk-2monitors_DefaultMaterial_AlbedoTransparency");
+            deskModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/desk-2monitors_DefaultMaterial_AO");
+            deskModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/desk-2monitors_DefaultMaterial_MetallicSmoothness");
+            deskModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/desk-2monitors_DefaultMaterial_Normal");
             deskModel.AddNewComponent<BoxCollider>();
 
         }
