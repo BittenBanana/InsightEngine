@@ -34,7 +34,7 @@ namespace Insight.Engine
         int shadowFarPlane = 10000;
 
         // Shadow light view and projection
-        Matrix shadowView, shadowProjection, shadowWorld;
+        private Matrix shadowView, shadowProjection;
 
 
         // Depth/normal effect and light mapping effect
@@ -63,13 +63,12 @@ namespace Insight.Engine
 
             // Create the three render targets
             depthTarg = new RenderTarget2D(graphicsDevice, viewWidth,
-                viewHeight, false, SurfaceFormat.Single, DepthFormat.Depth24);
+                viewHeight, false, SurfaceFormat.Single, DepthFormat.Depth24Stencil8);
             normalTarg = new RenderTarget2D(graphicsDevice, viewWidth,
-                viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);
+                viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8);
             lightTarg = new RenderTarget2D(graphicsDevice, viewWidth,
-                viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);
-            shadowDepthTarget = new RenderTarget2D(graphicsDevice, shadowMapSize,
-                shadowMapSize, false, SurfaceFormat.Single, DepthFormat.Depth24);
+                viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8);
+            shadowDepthTarget = new RenderTarget2D(graphicsDevice, shadowMapSize, shadowMapSize, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8);
 
             // Load effects
             depthNormalEffect = content.Load<Effect>("Shaders/PPDepthNormal");
@@ -83,7 +82,7 @@ namespace Insight.Engine
 
             shadowCamera = new Camera(new GameObject(new Vector3(100, 100, 50), false));
 
-            DoShadowMapping = false;
+            DoShadowMapping = true;
 
             // Set effect parameters to light mapping effect
             lightingEffect.Parameters["viewportWidth"].SetValue((float)viewWidth);
@@ -193,26 +192,22 @@ namespace Insight.Engine
             graphicsDevice.SetRenderTarget(shadowDepthTarget);
             // Clear the render target to 1 (infinite depth)
             graphicsDevice.Clear(Color.White);
-
-            ShadowLightPosition = Lights[2].gameObject.Transform.Position;
-
-            shadowWorld = Matrix.CreateWorld(ShadowLightPosition,
-                Vector3.Forward, Vector3.Up);
+            ShadowLightPosition = Lights[7].gameObject.Transform.Position;
 
             // Draw each model with the ShadowDepth effect
             Material mat;
             foreach (Renderer model in Models)
             {
                 if(!model.IsVisible) continue;
-                if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= Lights[2].Attenuation) continue;
-                ShadowLightTarget = Vector3.Down;
+                //if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= Lights[7].Attenuation) continue;
+                ShadowLightTarget = Vector3.Down * shadowFarPlane;
 
                 shadowView = Matrix.CreateLookAt(ShadowLightPosition,
                     ShadowLightTarget,
                     Vector3.Up);
                 
                 shadowProjection = Matrix.CreatePerspectiveFieldOfView(
-                    MathHelper.Pi, 1, 1f, shadowFarPlane);
+                    MathHelper.PiOver2, 1, 1f, shadowFarPlane);
 
                 shadowCamera.Position = ShadowLightPosition;
                 shadowCamera.view = shadowView;
@@ -226,6 +221,7 @@ namespace Insight.Engine
 
             // Un-set the render targets
             graphicsDevice.SetRenderTargets(null);
+
         }
 
         void prepareMainPass()
@@ -239,7 +235,6 @@ namespace Insight.Engine
                 model.Material.GetEffect().Parameters["ShadowMap"]?.SetValue(shadowDepthTarget);
                 model.Material.GetEffect().Parameters["ShadowView"]?.SetValue(shadowView);
                 model.Material.GetEffect().Parameters["ShadowProjection"]?.SetValue(shadowProjection);
-                model.Material.GetEffect().Parameters["ShadowWorld"]?.SetValue(shadowWorld);
 
                 model.Material.GetEffect().Parameters["ShadowLightPosition"]?.SetValue(ShadowLightPosition);
                 model.Material.GetEffect().Parameters["ShadowFarPlane"]?.SetValue((float)shadowFarPlane);
