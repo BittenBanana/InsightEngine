@@ -293,7 +293,8 @@ namespace Insight.Engine
                     Matrix trans = model1Transforms[mesh.ParentBone.Index] * world1;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
                     model1Spheres[i] = transSphere;
-                    model1Spheres[i].Radius = 0.1f;
+                    if(object1.physicLayer != Layer.DispenserTrigger)
+                        model1Spheres[i].Radius = 0.1f;
                 }
 
 
@@ -308,7 +309,8 @@ namespace Insight.Engine
                     Matrix trans = model2Transforms[mesh.ParentBone.Index] * world2;
                     BoundingSphere transSphere = Collider.TransformBoundingSphere(origSphere, trans);
                     model2Spheres[i] = transSphere;
-                    model2Spheres[i].Radius = 0.1f;
+                    if (object2.physicLayer != Layer.DispenserTrigger)
+                        model2Spheres[i].Radius = 0.1f;
                 }
 
                 bool collision = false;
