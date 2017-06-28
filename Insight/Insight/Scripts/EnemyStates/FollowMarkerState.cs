@@ -57,8 +57,8 @@ namespace Insight.Scripts.EnemyStates
                 }
                 else
                 {
-                    if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 0)
-                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(0,true);
+                    if (enemy.gameObject.GetComponent<AnimationRender>().animationId != 8)
+                        enemy.gameObject.GetComponent<AnimationRender>().ChangeAnimation(8,true);
                     if (timer >= wait)
                     {
                         enemy.ChangeState(enemy.defaultState);

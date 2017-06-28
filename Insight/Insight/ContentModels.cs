@@ -95,6 +95,7 @@ namespace Insight
         public Model enemyParalysis{ get; set; }
         public Model enemyMarker { get; set; }
         public Model enemyShooting { get; set; }
+        public Model enemyDancing { get; set; }
         public Model bigMachineCollider { get; set; }
         public Model ceilingBogRoom { get; set; }
         public Model newWall { get; set; }
@@ -118,6 +119,7 @@ namespace Insight
             enemyParalysis = content.Load<Model>("Models/Enemy/enemy_paralysis");
             enemyMarker = content.Load<Model>("Models/Enemy/enemy_marker");
             enemyShooting = content.Load<Model>("Models/Enemy/shooting");
+            enemyDancing = content.Load<Model>("Models/Enemy/flair");
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
