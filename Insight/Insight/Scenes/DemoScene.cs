@@ -33,6 +33,12 @@ namespace Insight.Scenes
             Free, Pressed
         }
         PauseKeyState pauseKeyState = PauseKeyState.Free;
+
+        enum ShadowKeyState
+        {
+            Free, Pressed
+        }
+        ShadowKeyState shadowKeyState = ShadowKeyState.Free;
         private bool isGamePaused = false;
 
         private bool playFirstDialog, playSecondDialog, playThirdDialog;
@@ -1115,14 +1121,14 @@ namespace Insight.Scenes
             {
                 keyPress = KeyPress.Free;
             }
-            if (keyState.IsKeyDown(Keys.F4) && keyPress == KeyPress.Free)
+            if (keyState.IsKeyDown(Keys.F4) && shadowKeyState == ShadowKeyState.Free)
             {
                 lightRenderer.DoShadowMapping = !lightRenderer.DoShadowMapping;
-                keyPress = KeyPress.Pressed;
+                shadowKeyState = ShadowKeyState.Pressed;
             }
-            if (keyState.IsKeyUp(Keys.F4) && keyPress == KeyPress.Pressed)
+            if (keyState.IsKeyUp(Keys.F4) && shadowKeyState == ShadowKeyState.Pressed)
             {
-                keyPress = KeyPress.Free;
+                shadowKeyState = ShadowKeyState.Free;
             }
             if (keyState.IsKeyDown(Keys.Escape) && escapeKeyPress == EscapeKeyPress.Free)
             {
