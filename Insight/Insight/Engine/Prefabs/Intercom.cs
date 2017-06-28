@@ -35,13 +35,14 @@ namespace Insight.Engine.Prefabs
         {
 
             intercomModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.intercom, 1.0f);
+            intercomModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/intercom_DefaultMaterial_AlbedoTransparency");
+            intercomModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/intercom_DefaultMaterial_AO");
+            intercomModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/intercom_DefaultMaterial_MetallicSmoothness");
+            intercomModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/intercom_DefaultMaterial_Normal");
             intercomModel.AddNewComponent<BoxCollider>();
 
             trigger.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.dispensertrigger, 1.0f);
-            trigger.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/intercom_DefaultMaterial_AlbedoTransparency");
-            trigger.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/intercom_DefaultMaterial_AO");
-            trigger.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/intercom_DefaultMaterial_MetallicSmoothness");
-            trigger.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/intercom_DefaultMaterial_Normal");
+            
             trigger.AddNewComponent<BoxCollider>();
             trigger.GetComponent<BoxCollider>().IsTrigger = true;
             trigger.Transform.Rotation = new Vector3(0);

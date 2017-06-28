@@ -199,7 +199,7 @@ namespace Insight.Engine
             foreach (Renderer model in Models)
             {
                 if(!model.IsVisible) continue;
-                //if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= Lights[7].Attenuation) continue;
+                if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= Lights[7].Attenuation) continue;
                 ShadowLightTarget = Vector3.Down * shadowFarPlane;
 
                 shadowView = Matrix.CreateLookAt(ShadowLightPosition,

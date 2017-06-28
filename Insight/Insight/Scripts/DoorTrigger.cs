@@ -21,7 +21,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerEnter(object source, CollisionEventArgs args)
         {
-            if (args.GameObject.physicLayer == Layer.Player)
+            if (args.GameObject.physicLayer == Layer.Player || args.GameObject.physicLayer == Layer.Enemy)
             {
                 if (targetAnimation != null)
                     targetAnimation.OpenDoor();
@@ -30,7 +30,7 @@ namespace Insight.Scripts
 
         public override void OnTriggerExit(object source, CollisionEventArgs args)
         {
-            if (args.GameObject.physicLayer == Layer.Player)
+            if (args.GameObject.physicLayer == Layer.Player || args.GameObject.physicLayer == Layer.Enemy)
             {
                 if(targetAnimation != null)
                     targetAnimation.CloseDoor();
