@@ -28,6 +28,10 @@ namespace Insight.Engine.Prefabs
         {
 
             columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.glassBaseModel, 1.0f);
+            columnModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/szybaDol_DefaultMaterial_AlbedoTransparency");
+            columnModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/szybaDol_DefaultMaterial_Normal");
+            columnModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/szybaDol_DefaultMaterial_AO");
+            columnModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/szybaDol_DefaultMaterial_MetallicSmoothness");
             columnModel.AddNewComponent<BoxCollider>();
 
         }
