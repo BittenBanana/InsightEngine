@@ -45,6 +45,8 @@ namespace Insight.Engine.Prefabs
         GlassModel glassModel;
         GlassBaseModel glassBaseModel;
 
+        SleepingDude dude;
+
         public override void Initialize(Vector3 position)
         {
             prefabGameObjects = new List<GameObject>();
@@ -124,6 +126,9 @@ namespace Insight.Engine.Prefabs
             glassBaseModel = new GlassBaseModel();
             glassBaseModel.Initialize(new Vector3(28, -4, 100), new Vector3(0, 1.571f, 0));
 
+            dude = new SleepingDude();
+            dude.Initialize(new Vector3(28, -4, 120), new Vector3(0, 0, 0));
+
             prefabGameObjects.Add(wall58.wallModel);
             prefabGameObjects.Add(wall57.wallModel);
             prefabGameObjects.Add(wall56.wallModel);
@@ -155,6 +160,7 @@ namespace Insight.Engine.Prefabs
             prefabGameObjects.Add(lastRoomCeiling.wallModel);
             prefabGameObjects.Add(glassModel.columnModel);
             prefabGameObjects.Add(glassBaseModel.columnModel);
+            prefabGameObjects.Add(dude.wallModel);
             base.Initialize(position);
         }
 
@@ -185,6 +191,7 @@ namespace Insight.Engine.Prefabs
             lastRoomCeiling.LoadContent(content);
             glassModel.LoadContent(content);
             glassBaseModel.LoadContent(content);
+            dude.LoadContent(content);
             //newWall25.LoadContent(content);
 
             Effect transparency = content.Load<Effect>("Shaders/glass");
