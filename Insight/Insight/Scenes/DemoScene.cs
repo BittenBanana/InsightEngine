@@ -357,15 +357,15 @@ namespace Insight.Scenes
             standingEnemyNearPcInRoom2.Initialize(new Vector3(28.5f, 0, 34f));
 
             List<Vector3> walkingEnemyEndGamePatrolPositions = new List<Vector3>();
-            walkingEnemyEndGamePatrolPositions.Add(new Vector3(26.5f, 0, 59f));//144
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(36f, 0, 56.8f));//144
             //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
             walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
-            //walkingEnemyEndGamePatrolPositions.Add(new Vector3(28.5f, 0, 48f));//109
+            walkingEnemyEndGamePatrolPositions.Add(new Vector3(30f, 0, 48f));//109
             //walkingEnemyEndGamePatrolPositions.Add(new Vector3(30f, 0, 50f));//112
             //walkingEnemyEndGamePatrolPositions.Add(new Vector3(34.5f, 0, 51f));//133
             //walkingEnemyEndGamePatrolPositions.Add(new Vector3(36.5f, 0, 54f));//137
             walkingEnemyEndGame = new EnemyPrefab(walkingEnemyEndGamePatrolPositions);
-            walkingEnemyEndGame.Initialize(new Vector3(26.5f, 0, 59f));
+            walkingEnemyEndGame.Initialize(new Vector3(36f, 0, 56.8f));
 
             standingEnemyEndGame = new StandingEnemy();
             standingEnemyEndGame.Initialize(new Vector3(36.5f, 0, 60f));//145
