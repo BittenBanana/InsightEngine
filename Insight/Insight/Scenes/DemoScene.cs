@@ -252,14 +252,20 @@ namespace Insight.Scenes
         private StandingEnemy standingEnemyNearPcInRoom2;
         private StandingEnemy standingEnemyEndGame;
         private EnemyPrefab walkingEnemyEndGame;
+
+        // first corridor
         private GameObject pointLight1;
         private GameObject pointLight2;
         private GameObject pointLight3;
         private GameObject pointLight4;
         private GameObject pointLight5;
         private GameObject pointLight6;
-        private GameObject pointLight7;
-        private GameObject pointLight8;
+
+        // second corridor
+        private GameObject pointLight9;
+        private GameObject pointLight10;
+        private GameObject pointLight11;
+        private GameObject pointLight12;
 
         int _total_frames = 0;
         float _elapsed_time = 0.0f;
@@ -324,6 +330,25 @@ namespace Insight.Scenes
             pointLight6.AddNewComponent<Light>();
             pointLight6.GetComponent<Light>().Color = Color.LightYellow;
             pointLight6.GetComponent<Light>().Attenuation = 7.5f;
+
+
+            pointLight9  = new GameObject(new Vector3(30f, 2f, 41f), false);
+            pointLight10 = new GameObject(new Vector3(30f, 2f, 48.5f), false);
+            pointLight11 = new GameObject(new Vector3(20f, 2f, 53.5f),false);
+            pointLight12 = new GameObject(new Vector3(35f, 2f, 55f),false);
+
+            pointLight9.AddNewComponent<Light>();
+            pointLight9.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight9.GetComponent<Light>().Attenuation = 7.5f;
+            pointLight10.AddNewComponent<Light>();
+            pointLight10.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight10.GetComponent<Light>().Attenuation = 7.5f;
+            pointLight11.AddNewComponent<Light>();
+            pointLight11.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight11.GetComponent<Light>().Attenuation = 7.5f;
+            pointLight12.AddNewComponent<Light>();
+            pointLight12.GetComponent<Light>().Color = Color.LightYellow;
+            pointLight12.GetComponent<Light>().Attenuation = 7.5f;
 
             player = new GameObject(new Vector3(2, 0.1f, 7), true);
             player.AddNewComponent<AnimationRender>();
@@ -911,6 +936,10 @@ namespace Insight.Scenes
             gameObjects.Add(pointLight4);
             gameObjects.Add(pointLight5);
             gameObjects.Add(pointLight6);
+            gameObjects.Add(pointLight9);
+            gameObjects.Add(pointLight10);
+            gameObjects.Add(pointLight11);
+            gameObjects.Add(pointLight12);
             gameObjects.Add(player);
             gameObjects.Add(directionalLight);
             gameObjects.Add(cameraPivot);

@@ -12,6 +12,7 @@ namespace Insight.Engine.Prefabs
     class CeilingBigRoom : Prefab
     {
         GameObject wallModel;
+        private GameObject light;
 
         public override void Initialize(Vector3 position, Vector3 rotation)
         {
@@ -21,8 +22,12 @@ namespace Insight.Engine.Prefabs
 
             wallModel.AddNewComponent<MeshRenderer>();
 
+            light = new GameObject(new Vector3(-10,5,-8), false);
+            light.AddNewComponent<Light>();
+            light.GetComponent<Light>().Color = Color.LightYellow;
+            light.GetComponent<Light>().Attenuation = 12.5f;
 
-
+            prefabGameObjects.Add(light);
             prefabGameObjects.Add(wallModel);
             base.Initialize(position, rotation);
         }

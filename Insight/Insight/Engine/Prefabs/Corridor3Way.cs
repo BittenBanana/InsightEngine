@@ -39,7 +39,7 @@ namespace Insight.Engine.Prefabs
 
             corridorModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.cor_str_3way_nt_g, 1.0f);
             corridorModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/cor-str-3way-nt-g_DefaultMaterial_AlbedoTransparency");
-            corridorModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/cor-str-3way-nt-g_DefaultMaterial_Normal");
+            //corridorModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/cor-str-3way-nt-g_DefaultMaterial_Normal");
             corridorModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/cor-str-3way-nt-g_DefaultMaterial_AO");
             corridorModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/cor-str-3way-nt-g_DefaultMaterial_MetallicSmoothness");
             floor.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.floorPlane, 1.0f);
