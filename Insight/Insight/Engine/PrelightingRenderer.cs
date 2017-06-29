@@ -192,14 +192,16 @@ namespace Insight.Engine
             graphicsDevice.SetRenderTarget(shadowDepthTarget);
             // Clear the render target to 1 (infinite depth)
             graphicsDevice.Clear(Color.White);
-            ShadowLightPosition = Lights[7].gameObject.Transform.Position;
+            ShadowLightPosition = new Vector3(SceneManager.Instance.currentScene.player.Transform.Position.X + 0.5f,
+                SceneManager.Instance.currentScene.player.Transform.Position.Y + 2,
+                SceneManager.Instance.currentScene.player.Transform.Position.Z + 0.5f);
 
             // Draw each model with the ShadowDepth effect
             Material mat;
             foreach (Renderer model in Models)
             {
                 if(!model.IsVisible) continue;
-                if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= Lights[7].Attenuation) continue;
+                if(Vector3.Distance(model.gameObject.Transform.Position, ShadowLightPosition) >= 7.5f) continue;
                 ShadowLightTarget = Vector3.Down * shadowFarPlane;
 
                 shadowView = Matrix.CreateLookAt(ShadowLightPosition,
