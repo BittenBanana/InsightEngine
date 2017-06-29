@@ -102,6 +102,7 @@
     <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
     <Compile Include="Engine\Prefabs\EndGameTrigger.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
+    <Compile Include="Engine\Prefabs\GlassBaseModel.cs" />
     <Compile Include="Engine\Prefabs\GlassModel.cs" />
     <Compile Include="Engine\Prefabs\Intercom.cs" />
     <Compile Include="Engine\Prefabs\LastRoom.cs" />

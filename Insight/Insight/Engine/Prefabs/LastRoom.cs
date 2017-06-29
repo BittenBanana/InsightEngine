@@ -21,6 +21,8 @@ namespace Insight.Engine.Prefabs
         WallVisible wall54;
         WallVisible wall55;
         WallVisible wall56;
+        WallVisible wall57;
+        WallVisible wall58;
 
         RoomFloor roomFloor26;
         RoomFloor roomFloor27;
@@ -41,6 +43,7 @@ namespace Insight.Engine.Prefabs
         CeilingLastRoom lastRoomCeiling;
 
         GlassModel glassModel;
+        GlassBaseModel glassBaseModel;
 
         public override void Initialize(Vector3 position)
         {
@@ -63,6 +66,12 @@ namespace Insight.Engine.Prefabs
 
             wall49 = new WallVisible();
             wall49.Initialize(new Vector3(28, -4, 100), new Vector3(0));
+
+            wall57 = new WallVisible();
+            wall57.Initialize(new Vector3(27.7f, -4, 90), new Vector3(0, 4.713f, 0));
+
+            wall58 = new WallVisible();
+            wall58.Initialize(new Vector3(27.7f, -4, 95), new Vector3(0, 4.713f, 0));
 
             newWall20 = new NewWall();
             newWall20.Initialize(new Vector3(33, -4, 100), new Vector3(0, 3.142f, 0));
@@ -110,9 +119,13 @@ namespace Insight.Engine.Prefabs
             roomFloor29.Initialize(new Vector3(28, -4, 95));
 
             glassModel = new GlassModel();
-            glassModel.Initialize(new Vector3(28, -4, 90));
+            glassModel.Initialize(new Vector3(28, -4, 100), new Vector3(0, 1.571f, 0));
 
+            glassBaseModel = new GlassBaseModel();
+            glassBaseModel.Initialize(new Vector3(28, -4, 100), new Vector3(0, 1.571f, 0));
 
+            prefabGameObjects.Add(wall58.wallModel);
+            prefabGameObjects.Add(wall57.wallModel);
             prefabGameObjects.Add(wall56.wallModel);
             prefabGameObjects.Add(wall55.wallModel);
             prefabGameObjects.Add(wall48.wallModel);
@@ -141,6 +154,7 @@ namespace Insight.Engine.Prefabs
             //prefabGameObjects.Add(newWall25.wallModel);
             prefabGameObjects.Add(lastRoomCeiling.wallModel);
             prefabGameObjects.Add(glassModel.columnModel);
+            prefabGameObjects.Add(glassBaseModel.columnModel);
             base.Initialize(position);
         }
 
@@ -153,7 +167,8 @@ namespace Insight.Engine.Prefabs
             wall52.LoadContent(content);
             wall54.LoadContent(content);
             wall55.LoadContent(content);
-            
+            wall57.LoadContent(content);
+            wall58.LoadContent(content);
 
             roomFloor26.LoadContent(content);
             roomFloor27.LoadContent(content);
@@ -169,6 +184,7 @@ namespace Insight.Engine.Prefabs
             newWall24.LoadContent(content);
             lastRoomCeiling.LoadContent(content);
             glassModel.LoadContent(content);
+            glassBaseModel.LoadContent(content);
             //newWall25.LoadContent(content);
 
             Effect transparency = content.Load<Effect>("Shaders/glass");
