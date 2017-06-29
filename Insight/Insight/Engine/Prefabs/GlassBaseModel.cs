@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Insight.Engine.Prefabs
 {
-    class GlassModel : Prefab
+    class GlassBaseModel : Prefab
     {
         public GameObject columnModel;
 
@@ -27,7 +27,7 @@ namespace Insight.Engine.Prefabs
         public override void LoadContent(ContentManager content)
         {
 
-            columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.glassModel, 1.0f);
+            columnModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.glassBaseModel, 1.0f);
             columnModel.AddNewComponent<BoxCollider>();
 
         }

@@ -104,6 +104,7 @@ namespace Insight
         public Model smallRoomCeiling { get; set; }
         public Model lastRoomCeiling { get; set; }
         public Model glassModel { get; set; }
+        public Model glassBaseModel { get; set; }
 
         public void LoadContent(ContentManager content)
         {
@@ -190,6 +191,7 @@ namespace Insight
             smallRoomCeiling = content.Load<Model>("Models/Konrads/Enviroment/sufit_malyPokoj");
             lastRoomCeiling = content.Load<Model>("Models/Konrads/Enviroment/sufit_pokojKoncowy");
             glassModel = content.Load<Model>("Models/Konrads/Enviroment/szybaGora");
+            glassBaseModel = content.Load<Model>("Models/Konrads/Enviroment/szybaDol");
         }
     }
 }
