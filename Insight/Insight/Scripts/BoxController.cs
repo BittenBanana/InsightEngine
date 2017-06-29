@@ -89,8 +89,8 @@ namespace Insight.Scripts
             {
                 //gameObject.Transform.Position.X += gameObject.velocityX;
                 //gameObject.Transform.Position.Z += gameObject.velocityZ;
-                gameObject.Transform.Move(Vector3.UnitX, gameObject.velocityX);
-                gameObject.Transform.Move(Vector3.UnitZ, gameObject.velocityZ);
+                gameObject.Transform.Move(Vector3.UnitX, 10*gameObject.velocityX);
+                gameObject.Transform.Move(Vector3.UnitZ, 10*gameObject.velocityZ);
                 gameObject.Forward = true;
                 gameObject.IsMoving = true; 
                 
