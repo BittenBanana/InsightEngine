@@ -125,7 +125,7 @@ namespace Insight
             enemyParalysis = content.Load<Model>("Models/Enemy/enemy_paralysis");
             enemyMarker = content.Load<Model>("Models/Enemy/enemy_marker");
             enemyShooting = content.Load<Model>("Models/Enemy/shooting");
-            enemyDancing = content.Load<Model>("Models/Enemy/flair");
+            enemyDancing = content.Load<Model>("Models/Enemy/nervously_look_around");
 
             ammo_pc = content.Load<Model>("Models/Konrads/Enviroment/ammo-pc");
             column = content.Load<Model>("Models/Konrads/Enviroment/column");
