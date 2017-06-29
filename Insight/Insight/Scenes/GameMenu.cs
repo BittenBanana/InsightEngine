@@ -41,6 +41,7 @@ namespace Insight.Scenes
             ui.AddSprite("Sprites/Menu/menuNav", "menuNav", new Vector2(590, 800), Color.White, 1);
             ui.AddSprite("Sprites/Menu/pasek", "pasek", new Vector2(0, 0), Color.White, 1);
             ui.AddSprite("Sprites/Menu/tekst", "tekst", new Vector2(0, 0), Color.White, 1);
+            ui.AddSprite("Sprites/Menu/About", "about", new Vector2(0, 0), Color.White, 0);
             
             //ui.ChangeTextColor(currentlySelected.ToString(), Color.Red);
 
@@ -107,12 +108,18 @@ namespace Insight.Scenes
                 {
                     SceneManager.Instance.LoadSettings();
                 }
+                if (currentlySelected == 3)
+                {
+                    ui.ChangeSpriteOpacity("about", 1);
+                    
+                }
                 if (currentlySelected == 4)
                 {
                     SceneManager.Instance.gameApp.Quit();
                 }
             }
-            Debug.WriteLine(currentlySelected);
+            if (keyState.IsKeyDown(Keys.Escape))
+                SceneManager.Instance.LoadMenu();
         }
 
         public override void Draw()
