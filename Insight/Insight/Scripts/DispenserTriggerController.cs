@@ -19,6 +19,8 @@ namespace Insight.Scripts
         public GameObject dispenser { get; set; }
         public GameObject light { get; set; }
         public ContentManager content { get; set; }
+        private float cooldown = 30.0f;
+        private float timer = 0;
 
         private int pickupCueNumber;
 
@@ -33,6 +35,17 @@ namespace Insight.Scripts
         public override void Update()
         {
             base.Update();
+            timer += Time.deltaTime;
+            if (timer >= cooldown)
+            {
+                isEmpty = false;
+                dispenser.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_AO");
+                dispenser.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_MetallicSmoothness");
+                dispenser.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_Normal");
+                dispenser.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/zieloneSwiatelko/ammo-pc_DefaultMaterial_AlbedoTransparency");
+                light.GetComponent<Light>().Color = Color.Green;
+            }
+
         }
 
         public override void OnTriggerEnter(object source, CollisionEventArgs args)
@@ -52,6 +65,7 @@ namespace Insight.Scripts
                 KeyboardState keyState = Keyboard.GetState();
                 if (keyState.IsKeyDown(Keys.E) && isEmpty == false)
                 {
+                    timer = 0;
                     DemoScene demo = (DemoScene)SceneManager.Instance.currentScene;
                     demo.PlayDialogOne();
                     SceneManager.Instance.currentScene.audioManager.PlayCue(pickupCueNumber);
