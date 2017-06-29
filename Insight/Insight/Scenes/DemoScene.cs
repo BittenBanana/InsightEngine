@@ -1529,6 +1529,14 @@ namespace Insight.Scenes
                 ui.ChangeSpriteOpacity("dialogNav", 0);
             #endregion
 
+            if(!canPlayThirdDialog)
+            {
+                SceneManager.Instance.brightnessLevel += Time.deltaTime;
+                postEffect.Parameters["brightness"]?.SetValue(SceneManager.Instance.brightnessLevel);
+
+                if (SceneManager.Instance.brightnessLevel > 5.0f)
+                    SceneManager.Instance.LoadMenu();
+            }
 
             Debug.WriteLine(player.Transform.Position);
         }
