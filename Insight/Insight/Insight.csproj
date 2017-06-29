@@ -100,6 +100,7 @@
     <Compile Include="Engine\Prefabs\Desk2Monitors.cs" />
     <Compile Include="Engine\Prefabs\Door.cs" />
     <Compile Include="Engine\Prefabs\DoorSmaller.cs" />
+    <Compile Include="Engine\Prefabs\EndGameTrigger.cs" />
     <Compile Include="Engine\Prefabs\EnemyPrefab.cs" />
     <Compile Include="Engine\Prefabs\GlassBaseModel.cs" />
     <Compile Include="Engine\Prefabs\GlassModel.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Scripts\DispenserTriggerControllerParalysis.cs" />
     <Compile Include="Scripts\DoorAnimation.cs" />
     <Compile Include="Scripts\DoorTrigger.cs" />
+    <Compile Include="Scripts\EndGameController.cs" />
     <Compile Include="Scripts\EnemyAI.cs" />
     <Compile Include="Scripts\EnemyAIState.cs" />
     <Compile Include="Scripts\EnemySight.cs" />

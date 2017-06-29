@@ -217,6 +217,7 @@ namespace Insight.Scenes
         Desk2Monitors desk2Monitors3;
         Desk2Monitors desk2Monitors4;
         Intercom intercom;
+        EndGameTrigger endGame;
         BigMachine bigMachine;
         UpperStairsTrigger upperStairsTrigger;
         LowerStairsTrigger lowerStairsTrigger;
@@ -835,6 +836,8 @@ namespace Insight.Scenes
 
             intercom = new Intercom();
             intercom.Initialize(new Vector3(39, -0.5f, 37f), new Vector3(0, 3.142f, 0));
+            endGame = new EndGameTrigger();
+            endGame.Initialize(new Vector3(41, 0, 61), new Vector3(0,0,0));
             //crate2 = new Crate();
             //crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 
@@ -1142,7 +1145,7 @@ namespace Insight.Scenes
             door3.wallModel.GetComponent<DoorAnimation>().canOpen = false;
             intercom.SetDoorsToTrigger(door3.wallModel);
             ceilingBigRoom.LoadContent(content);
-
+            endGame.LoadContent(content);
             newWall1.LoadContent(content);
             newWall2.LoadContent(content);
             newWall3.LoadContent(content);
@@ -1525,6 +1528,9 @@ namespace Insight.Scenes
             if(!playFirstDialog && !playSecondDialog && !playThirdDialog)
                 ui.ChangeSpriteOpacity("dialogNav", 0);
             #endregion
+
+
+            Debug.WriteLine(player.Transform.Position);
         }
 
         public override void Draw()
