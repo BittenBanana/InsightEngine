@@ -837,7 +837,7 @@ namespace Insight.Scenes
             intercom = new Intercom();
             intercom.Initialize(new Vector3(39, -0.5f, 37f), new Vector3(0, 3.142f, 0));
             endGame = new EndGameTrigger();
-            endGame.Initialize(new Vector3(41, 0, 61), new Vector3(0,0,0));
+            endGame.Initialize(new Vector3(44, 0, 61), new Vector3(0,0,0));
             //crate2 = new Crate();
             //crate2.Initialize(new Vector3(42, 0, 62f), new Vector3(0));
 
