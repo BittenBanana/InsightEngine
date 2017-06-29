@@ -31,6 +31,10 @@ namespace Insight.Engine.Prefabs
         {
 
             wallModel.GetComponent<MeshRenderer>().Load(content, ContentModels.Instance.lastRoomCeiling, 1.0f);
+            wallModel.GetComponent<MeshRenderer>().LoadTexture(content, "Materials/sufit_pokojKoncowy_DefaultMaterial_AlbedoTransparency");
+            wallModel.GetComponent<MeshRenderer>().LoadNormalMap(content, "Materials/sufit_pokojKoncowy_DefaultMaterial_Normal");
+            wallModel.GetComponent<MeshRenderer>().LoadAmbientOcclusionMap(content, "Materials/sufit_pokojKoncowy_DefaultMaterial_AO");
+            wallModel.GetComponent<MeshRenderer>().LoadMetalnessMap(content, "Materials/sufit_pokojKoncowy_DefaultMaterial_MetallicSmoothness");
 
             wallModel.AddNewComponent<BoxCollider>();
 
