@@ -112,6 +112,7 @@
     <Compile Include="Engine\Prefabs\Prefab.cs" />
     <Compile Include="Engine\Prefabs\RoomFloor.cs" />
     <Compile Include="Engine\Prefabs\RoomFloorSmallerRotated.cs" />
+    <Compile Include="Engine\Prefabs\SleepingDude.cs" />
     <Compile Include="Engine\Prefabs\Stairs.cs" />
     <Compile Include="Engine\Prefabs\StandingEnemy.cs" />
     <Compile Include="Engine\Prefabs\TestPrefab.cs" />
